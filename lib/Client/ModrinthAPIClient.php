@@ -113,4 +113,16 @@ class ModrinthAPIClient
             return new Project($this, $project);
         }, $this->projects->getProjects($ids));
     }
+
+    /**
+     * @param int $count
+     * @return Project[]
+     * @throws ApiException
+     */
+    public function getRandomProjects(int $count): array
+    {
+        return array_map(function (ProjectModel $project): Project {
+            return new Project($this, $project);
+        }, $this->projects->randomProjects($count));
+    }
 }
