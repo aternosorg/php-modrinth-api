@@ -7,6 +7,7 @@ use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Configuration;
+use Aternos\ModrinthApi\Model\Project as ProjectModel;
 
 /**
  * Class ModrinthAPIClient
@@ -99,5 +100,17 @@ class ModrinthAPIClient
     public function getProject(string $idOrSlug): Project
     {
         return new Project($this, $this->projects->getProject($idOrSlug));
+    }
+
+    /**
+     * @param string[] $ids
+     * @return Project[]
+     * @throws ApiException
+     */
+    public function getProjects(array $ids): array
+    {
+        return array_map(function (ProjectModel $project): Project {
+            return new Project($this, $project);
+        }, $this->projects->getProjects($ids));
     }
 }

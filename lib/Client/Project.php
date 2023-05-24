@@ -2,19 +2,21 @@
 
 namespace Aternos\ModrinthApi\Client;
 
+use Aternos\ModrinthApi\Model\Project as ProjectModel;
+
 class Project
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected \Aternos\ModrinthApi\Model\Project $data
+        protected ProjectModel $data
     )
     {
     }
 
     /**
-     * @return \Aternos\ModrinthApi\Model\Project
+     * @return ProjectModel
      */
-    public function getData(): \Aternos\ModrinthApi\Model\Project
+    public function getData(): ProjectModel
     {
         return $this->data;
     }
