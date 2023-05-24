@@ -104,6 +104,7 @@ class ModrinthAPIClient
     }
 
     /**
+     * Get multiple projects by ID
      * @param string[] $ids
      * @return Project[]
      * @throws ApiException
@@ -116,6 +117,7 @@ class ModrinthAPIClient
     }
 
     /**
+     * Get a list of random projects
      * @param int $count
      * @return Project[]
      * @throws ApiException
