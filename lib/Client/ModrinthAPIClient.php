@@ -7,6 +7,7 @@ use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Configuration;
+use Aternos\ModrinthApi\Model\CheckProjectValidity200Response as ProjectValidity;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
 
 /**
@@ -124,5 +125,24 @@ class ModrinthAPIClient
         return array_map(function (ProjectModel $project): Project {
             return new Project($this, $project);
         }, $this->projects->randomProjects($count));
+    }
+
+    /**
+     * Check if a project or
+     * @param string $idOrSlug slug or id to check
+     * @return string|null Project ID if the project is valid, null if not
+     * @throws ApiException
+     */
+    public function checkProjectValidity(string $idOrSlug): ?string
+    {
+        try {
+            return $this->projects->checkProjectValidity($idOrSlug)->getId();
+        }
+        catch (ApiException $exception) {
+            if ($exception->getCode() === 404) {
+                return null;
+            }
+            throw $exception;
+        }
     }
 }
