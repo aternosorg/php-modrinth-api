@@ -9,6 +9,7 @@ use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\CheckProjectValidity200Response as ProjectValidity;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
+use Aternos\ModrinthApi\Model\ProjectDependencyList;
 
 /**
  * Class ModrinthAPIClient
@@ -146,5 +147,16 @@ class ModrinthAPIClient
             }
             throw $exception;
         }
+    }
+
+    /**
+     * Get a project's dependencies
+     * @param string $idOrSlug
+     * @return ProjectDependencies
+     * @throws ApiException
+     */
+    public function getProjectDependencies(string $idOrSlug): ProjectDependencies
+    {
+        return new ProjectDependencies($this, $this->projects->getDependencies($idOrSlug));
     }
 }

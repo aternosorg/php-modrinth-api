@@ -2,6 +2,7 @@
 
 namespace Aternos\ModrinthApi\Client;
 
+use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
 
 class Project
@@ -19,5 +20,14 @@ class Project
     public function getData(): ProjectModel
     {
         return $this->data;
+    }
+
+    /**
+     * @return ProjectDependencies
+     * @throws ApiException
+     */
+    public function getDependencies(): ProjectDependencies
+    {
+        return $this->client->getProjectDependencies($this->data->getId());
     }
 }
