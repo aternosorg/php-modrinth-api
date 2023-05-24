@@ -57,16 +57,16 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'mixed',
-        'version_number' => 'mixed',
-        'changelog' => 'mixed',
-        'dependencies' => 'mixed',
-        'game_versions' => 'mixed',
-        'version_type' => 'mixed',
-        'loaders' => 'mixed',
-        'featured' => 'mixed',
-        'status' => 'mixed',
-        'requested_status' => 'mixed'
+        'name' => 'string',
+        'version_number' => 'string',
+        'changelog' => 'string',
+        'dependencies' => '\Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]',
+        'game_versions' => 'string[]',
+        'version_type' => 'string',
+        'loaders' => 'string[]',
+        'featured' => 'bool',
+        'status' => 'string',
+        'requested_status' => 'string'
     ];
 
     /**
@@ -95,15 +95,15 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => true,
-		'version_number' => true,
+        'name' => false,
+		'version_number' => false,
 		'changelog' => true,
-		'dependencies' => true,
-		'game_versions' => true,
-		'version_type' => true,
-		'loaders' => true,
-		'featured' => true,
-		'status' => true,
+		'dependencies' => false,
+		'game_versions' => false,
+		'version_type' => false,
+		'loaders' => false,
+		'featured' => false,
+		'status' => false,
 		'requested_status' => true
     ];
 
@@ -441,7 +441,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getName()
     {
@@ -451,21 +451,14 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param mixed|null $name The name of this version
+     * @param string|null $name The name of this version
      *
      * @return self
      */
     public function setName($name)
     {
         if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -475,7 +468,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets version_number
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getVersionNumber()
     {
@@ -485,21 +478,14 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets version_number
      *
-     * @param mixed|null $version_number The version number. Ideally will follow semantic versioning
+     * @param string|null $version_number The version number. Ideally will follow semantic versioning
      *
      * @return self
      */
     public function setVersionNumber($version_number)
     {
         if (is_null($version_number)) {
-            array_push($this->openAPINullablesSetToNull, 'version_number');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('version_number', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable version_number cannot be null');
         }
         $this->container['version_number'] = $version_number;
 
@@ -509,7 +495,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets changelog
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getChangelog()
     {
@@ -519,7 +505,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets changelog
      *
-     * @param mixed|null $changelog The changelog for this version
+     * @param string|null $changelog The changelog for this version
      *
      * @return self
      */
@@ -543,7 +529,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets dependencies
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null
      */
     public function getDependencies()
     {
@@ -553,21 +539,14 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets dependencies
      *
-     * @param mixed|null $dependencies A list of specific versions of projects that this version depends on
+     * @param \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null $dependencies A list of specific versions of projects that this version depends on
      *
      * @return self
      */
     public function setDependencies($dependencies)
     {
         if (is_null($dependencies)) {
-            array_push($this->openAPINullablesSetToNull, 'dependencies');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('dependencies', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable dependencies cannot be null');
         }
         $this->container['dependencies'] = $dependencies;
 
@@ -577,7 +556,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets game_versions
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getGameVersions()
     {
@@ -587,21 +566,14 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets game_versions
      *
-     * @param mixed|null $game_versions A list of versions of Minecraft that this version supports
+     * @param string[]|null $game_versions A list of versions of Minecraft that this version supports
      *
      * @return self
      */
     public function setGameVersions($game_versions)
     {
         if (is_null($game_versions)) {
-            array_push($this->openAPINullablesSetToNull, 'game_versions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('game_versions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable game_versions cannot be null');
         }
         $this->container['game_versions'] = $game_versions;
 
@@ -611,7 +583,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets version_type
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getVersionType()
     {
@@ -621,24 +593,17 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets version_type
      *
-     * @param mixed|null $version_type The release channel for this version
+     * @param string|null $version_type The release channel for this version
      *
      * @return self
      */
     public function setVersionType($version_type)
     {
         if (is_null($version_type)) {
-            array_push($this->openAPINullablesSetToNull, 'version_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('version_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable version_type cannot be null');
         }
         $allowedValues = $this->getVersionTypeAllowableValues();
-        if (!is_null($version_type) && !in_array($version_type, $allowedValues, true)) {
+        if (!in_array($version_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'version_type', must be one of '%s'",
@@ -655,7 +620,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets loaders
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getLoaders()
     {
@@ -665,21 +630,14 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets loaders
      *
-     * @param mixed|null $loaders The mod loaders that this version supports
+     * @param string[]|null $loaders The mod loaders that this version supports
      *
      * @return self
      */
     public function setLoaders($loaders)
     {
         if (is_null($loaders)) {
-            array_push($this->openAPINullablesSetToNull, 'loaders');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('loaders', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable loaders cannot be null');
         }
         $this->container['loaders'] = $loaders;
 
@@ -689,7 +647,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets featured
      *
-     * @return mixed|null
+     * @return bool|null
      */
     public function getFeatured()
     {
@@ -699,21 +657,14 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets featured
      *
-     * @param mixed|null $featured Whether the version is featured or not
+     * @param bool|null $featured Whether the version is featured or not
      *
      * @return self
      */
     public function setFeatured($featured)
     {
         if (is_null($featured)) {
-            array_push($this->openAPINullablesSetToNull, 'featured');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('featured', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable featured cannot be null');
         }
         $this->container['featured'] = $featured;
 
@@ -723,7 +674,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getStatus()
     {
@@ -733,24 +684,17 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param mixed|null $status status
+     * @param string|null $status status
      *
      * @return self
      */
     public function setStatus($status)
     {
         if (is_null($status)) {
-            array_push($this->openAPINullablesSetToNull, 'status');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('status', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
+        if (!in_array($status, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -767,7 +711,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets requested_status
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getRequestedStatus()
     {
@@ -777,7 +721,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets requested_status
      *
-     * @param mixed|null $requested_status requested_status
+     * @param string|null $requested_status requested_status
      *
      * @return self
      */

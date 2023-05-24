@@ -57,10 +57,10 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'role' => 'mixed',
-        'permissions' => 'mixed',
-        'payouts_split' => 'mixed',
-        'ordering' => 'mixed'
+        'role' => 'string',
+        'permissions' => 'int',
+        'payouts_split' => 'int',
+        'ordering' => 'int'
     ];
 
     /**
@@ -83,10 +83,10 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'role' => true,
-		'permissions' => true,
-		'payouts_split' => true,
-		'ordering' => true
+        'role' => false,
+		'permissions' => false,
+		'payouts_split' => false,
+		'ordering' => false
     ];
 
     /**
@@ -313,7 +313,7 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets role
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getRole()
     {
@@ -323,21 +323,14 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets role
      *
-     * @param mixed|null $role role
+     * @param string|null $role role
      *
      * @return self
      */
     public function setRole($role)
     {
         if (is_null($role)) {
-            array_push($this->openAPINullablesSetToNull, 'role');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('role', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
         }
         $this->container['role'] = $role;
 
@@ -347,7 +340,7 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets permissions
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getPermissions()
     {
@@ -357,21 +350,14 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets permissions
      *
-     * @param mixed|null $permissions The user's permissions in bitfield format  In order from first to tenth bit, the bits are: - UPLOAD_VERSION - DELETE_VERSION - EDIT_DETAILS - EDIT_BODY - MANAGE_INVITES - REMOVE_MEMBER - EDIT_MEMBER - DELETE_PROJECT - VIEW_ANALYTICS - VIEW_PAYOUTS
+     * @param int|null $permissions The user's permissions in bitfield format  In order from first to tenth bit, the bits are: - UPLOAD_VERSION - DELETE_VERSION - EDIT_DETAILS - EDIT_BODY - MANAGE_INVITES - REMOVE_MEMBER - EDIT_MEMBER - DELETE_PROJECT - VIEW_ANALYTICS - VIEW_PAYOUTS
      *
      * @return self
      */
     public function setPermissions($permissions)
     {
         if (is_null($permissions)) {
-            array_push($this->openAPINullablesSetToNull, 'permissions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('permissions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
         }
         $this->container['permissions'] = $permissions;
 
@@ -381,7 +367,7 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets payouts_split
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getPayoutsSplit()
     {
@@ -391,21 +377,14 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets payouts_split
      *
-     * @param mixed|null $payouts_split The split of payouts going to this user. The proportion of payouts they get is their split divided by the sum of the splits of all members.
+     * @param int|null $payouts_split The split of payouts going to this user. The proportion of payouts they get is their split divided by the sum of the splits of all members.
      *
      * @return self
      */
     public function setPayoutsSplit($payouts_split)
     {
         if (is_null($payouts_split)) {
-            array_push($this->openAPINullablesSetToNull, 'payouts_split');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payouts_split', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payouts_split cannot be null');
         }
         $this->container['payouts_split'] = $payouts_split;
 
@@ -415,7 +394,7 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets ordering
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getOrdering()
     {
@@ -425,21 +404,14 @@ class ModifyTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets ordering
      *
-     * @param mixed|null $ordering The order of the team member.
+     * @param int|null $ordering The order of the team member.
      *
      * @return self
      */
     public function setOrdering($ordering)
     {
         if (is_null($ordering)) {
-            array_push($this->openAPINullablesSetToNull, 'ordering');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('ordering', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable ordering cannot be null');
         }
         $this->container['ordering'] = $ordering;
 

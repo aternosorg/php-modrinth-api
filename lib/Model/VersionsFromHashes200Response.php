@@ -57,7 +57,7 @@ class VersionsFromHashes200Response implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'your_hash_here' => 'mixed'
+        'your_hash_here' => '\Aternos\ModrinthApi\Model\Version'
     ];
 
     /**
@@ -77,7 +77,7 @@ class VersionsFromHashes200Response implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'your_hash_here' => true
+        'your_hash_here' => false
     ];
 
     /**
@@ -292,7 +292,7 @@ class VersionsFromHashes200Response implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets your_hash_here
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\Version|null
      */
     public function getYourHashHere()
     {
@@ -302,21 +302,14 @@ class VersionsFromHashes200Response implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets your_hash_here
      *
-     * @param mixed|null $your_hash_here your_hash_here
+     * @param \Aternos\ModrinthApi\Model\Version|null $your_hash_here your_hash_here
      *
      * @return self
      */
     public function setYourHashHere($your_hash_here)
     {
         if (is_null($your_hash_here)) {
-            array_push($this->openAPINullablesSetToNull, 'your_hash_here');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('your_hash_here', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable your_hash_here cannot be null');
         }
         $this->container['your_hash_here'] = $your_hash_here;
 

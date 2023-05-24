@@ -148,7 +148,7 @@ class TeamsApi
      *
      * Add a user to a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
@@ -166,7 +166,7 @@ class TeamsApi
      *
      * Add a user to a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
@@ -235,7 +235,7 @@ class TeamsApi
      *
      * Add a user to a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
@@ -257,7 +257,7 @@ class TeamsApi
      *
      * Add a user to a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
@@ -295,7 +295,7 @@ class TeamsApi
     /**
      * Create request for operation 'addTeamMember'
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
@@ -403,8 +403,8 @@ class TeamsApi
      *
      * Remove a member from a team
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamMember'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -421,8 +421,8 @@ class TeamsApi
      *
      * Remove a member from a team
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamMember'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -490,8 +490,8 @@ class TeamsApi
      *
      * Remove a member from a team
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -512,8 +512,8 @@ class TeamsApi
      *
      * Remove a member from a team
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -550,8 +550,8 @@ class TeamsApi
     /**
      * Create request for operation 'deleteTeamMember'
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -665,12 +665,12 @@ class TeamsApi
      *
      * Get a project&#39;s team members
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectTeamMembers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\TeamMember[]
      */
     public function getProjectTeamMembers($id_slug, string $contentType = self::contentTypes['getProjectTeamMembers'][0])
     {
@@ -683,12 +683,12 @@ class TeamsApi
      *
      * Get a project&#39;s team members
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectTeamMembers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\TeamMember[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getProjectTeamMembersWithHttpInfo($id_slug, string $contentType = self::contentTypes['getProjectTeamMembers'][0])
     {
@@ -731,23 +731,23 @@ class TeamsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\TeamMember[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\TeamMember[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\TeamMember[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\TeamMember[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -768,7 +768,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\TeamMember[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -783,7 +783,7 @@ class TeamsApi
      *
      * Get a project&#39;s team members
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectTeamMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -804,7 +804,7 @@ class TeamsApi
      *
      * Get a project&#39;s team members
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectTeamMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -812,7 +812,7 @@ class TeamsApi
      */
     public function getProjectTeamMembersAsyncWithHttpInfo($id_slug, string $contentType = self::contentTypes['getProjectTeamMembers'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\TeamMember[]';
         $request = $this->getProjectTeamMembersRequest($id_slug, $contentType);
 
         return $this->client
@@ -854,7 +854,7 @@ class TeamsApi
     /**
      * Create request for operation 'getProjectTeamMembers'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectTeamMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -948,12 +948,12 @@ class TeamsApi
      *
      * Get a team&#39;s members
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamMembers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\TeamMember[]
      */
     public function getTeamMembers($id, string $contentType = self::contentTypes['getTeamMembers'][0])
     {
@@ -966,12 +966,12 @@ class TeamsApi
      *
      * Get a team&#39;s members
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamMembers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\TeamMember[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getTeamMembersWithHttpInfo($id, string $contentType = self::contentTypes['getTeamMembers'][0])
     {
@@ -1014,23 +1014,23 @@ class TeamsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\TeamMember[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\TeamMember[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\TeamMember[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\TeamMember[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1051,7 +1051,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\TeamMember[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1066,7 +1066,7 @@ class TeamsApi
      *
      * Get a team&#39;s members
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1087,7 +1087,7 @@ class TeamsApi
      *
      * Get a team&#39;s members
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1095,7 +1095,7 @@ class TeamsApi
      */
     public function getTeamMembersAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getTeamMembers'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\TeamMember[]';
         $request = $this->getTeamMembersRequest($id, $contentType);
 
         return $this->client
@@ -1137,7 +1137,7 @@ class TeamsApi
     /**
      * Create request for operation 'getTeamMembers'
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1236,12 +1236,12 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  mixed $ids The IDs of the teams (required)
+     * @param  string[] $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\TeamMember[][]
      */
     public function getTeams($ids, string $contentType = self::contentTypes['getTeams'][0])
     {
@@ -1254,12 +1254,12 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  mixed $ids The IDs of the teams (required)
+     * @param  string[] $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\TeamMember[][], HTTP status code, HTTP response headers (array of strings)
      */
     public function getTeamsWithHttpInfo($ids, string $contentType = self::contentTypes['getTeams'][0])
     {
@@ -1302,23 +1302,23 @@ class TeamsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\TeamMember[][]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\TeamMember[][]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\TeamMember[][]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\TeamMember[][]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1339,7 +1339,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\TeamMember[][]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1354,7 +1354,7 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  mixed $ids The IDs of the teams (required)
+     * @param  string[] $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1375,7 +1375,7 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  mixed $ids The IDs of the teams (required)
+     * @param  string[] $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1383,7 +1383,7 @@ class TeamsApi
      */
     public function getTeamsAsyncWithHttpInfo($ids, string $contentType = self::contentTypes['getTeams'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\TeamMember[][]';
         $request = $this->getTeamsRequest($ids, $contentType);
 
         return $this->client
@@ -1425,7 +1425,7 @@ class TeamsApi
     /**
      * Create request for operation 'getTeams'
      *
-     * @param  mixed $ids The IDs of the teams (required)
+     * @param  string[] $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1453,7 +1453,7 @@ class TeamsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -1520,7 +1520,7 @@ class TeamsApi
      *
      * Join a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['joinTeam'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1537,7 +1537,7 @@ class TeamsApi
      *
      * Join a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['joinTeam'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1605,7 +1605,7 @@ class TeamsApi
      *
      * Join a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['joinTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1626,7 +1626,7 @@ class TeamsApi
      *
      * Join a team
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['joinTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1663,7 +1663,7 @@ class TeamsApi
     /**
      * Create request for operation 'joinTeam'
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['joinTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1762,8 +1762,8 @@ class TeamsApi
      *
      * Modify a team member&#39;s information
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $user_id The ID of the user to modify (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $user_id The ID of the user to modify (required)
      * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
@@ -1781,8 +1781,8 @@ class TeamsApi
      *
      * Modify a team member&#39;s information
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $user_id The ID of the user to modify (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $user_id The ID of the user to modify (required)
      * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
@@ -1851,8 +1851,8 @@ class TeamsApi
      *
      * Modify a team member&#39;s information
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $user_id The ID of the user to modify (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $user_id The ID of the user to modify (required)
      * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
@@ -1874,8 +1874,8 @@ class TeamsApi
      *
      * Modify a team member&#39;s information
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $user_id The ID of the user to modify (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $user_id The ID of the user to modify (required)
      * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
@@ -1913,8 +1913,8 @@ class TeamsApi
     /**
      * Create request for operation 'modifyTeamMember'
      *
-     * @param  mixed $id The ID of the team (required)
-     * @param  mixed $user_id The ID of the user to modify (required)
+     * @param  string $id The ID of the team (required)
+     * @param  string $user_id The ID of the user to modify (required)
      * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
@@ -2037,7 +2037,7 @@ class TeamsApi
      *
      * Transfer team&#39;s ownership to another user
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
@@ -2055,7 +2055,7 @@ class TeamsApi
      *
      * Transfer team&#39;s ownership to another user
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
@@ -2124,7 +2124,7 @@ class TeamsApi
      *
      * Transfer team&#39;s ownership to another user
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
@@ -2146,7 +2146,7 @@ class TeamsApi
      *
      * Transfer team&#39;s ownership to another user
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
@@ -2184,7 +2184,7 @@ class TeamsApi
     /**
      * Create request for operation 'transferTeamOwnership'
      *
-     * @param  mixed $id The ID of the team (required)
+     * @param  string $id The ID of the team (required)
      * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *

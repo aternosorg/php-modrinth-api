@@ -57,13 +57,13 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'team_id' => 'mixed',
-        'user' => 'mixed',
-        'role' => 'mixed',
-        'permissions' => 'mixed',
-        'accepted' => 'mixed',
-        'payouts_split' => 'mixed',
-        'ordering' => 'mixed'
+        'team_id' => 'string',
+        'user' => '\Aternos\ModrinthApi\Model\User',
+        'role' => 'string',
+        'permissions' => 'int',
+        'accepted' => 'bool',
+        'payouts_split' => 'int',
+        'ordering' => 'int'
     ];
 
     /**
@@ -89,13 +89,13 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'team_id' => true,
-		'user' => true,
-		'role' => true,
-		'permissions' => true,
-		'accepted' => true,
-		'payouts_split' => true,
-		'ordering' => true
+        'team_id' => false,
+		'user' => false,
+		'role' => false,
+		'permissions' => false,
+		'accepted' => false,
+		'payouts_split' => false,
+		'ordering' => false
     ];
 
     /**
@@ -346,7 +346,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets team_id
      *
-     * @return mixed
+     * @return string
      */
     public function getTeamId()
     {
@@ -356,21 +356,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets team_id
      *
-     * @param mixed $team_id The ID of the team this team member is a member of
+     * @param string $team_id The ID of the team this team member is a member of
      *
      * @return self
      */
     public function setTeamId($team_id)
     {
         if (is_null($team_id)) {
-            array_push($this->openAPINullablesSetToNull, 'team_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('team_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable team_id cannot be null');
         }
         $this->container['team_id'] = $team_id;
 
@@ -380,7 +373,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets user
      *
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\User
      */
     public function getUser()
     {
@@ -390,21 +383,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets user
      *
-     * @param mixed $user user
+     * @param \Aternos\ModrinthApi\Model\User $user user
      *
      * @return self
      */
     public function setUser($user)
     {
         if (is_null($user)) {
-            array_push($this->openAPINullablesSetToNull, 'user');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('user', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable user cannot be null');
         }
         $this->container['user'] = $user;
 
@@ -414,7 +400,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets role
      *
-     * @return mixed
+     * @return string
      */
     public function getRole()
     {
@@ -424,21 +410,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets role
      *
-     * @param mixed $role The user's role on the team
+     * @param string $role The user's role on the team
      *
      * @return self
      */
     public function setRole($role)
     {
         if (is_null($role)) {
-            array_push($this->openAPINullablesSetToNull, 'role');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('role', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
         }
         $this->container['role'] = $role;
 
@@ -448,7 +427,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets permissions
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getPermissions()
     {
@@ -458,21 +437,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets permissions
      *
-     * @param mixed|null $permissions The user's permissions in bitfield format (requires authorization to view)  In order from first to tenth bit, the bits are: - UPLOAD_VERSION - DELETE_VERSION - EDIT_DETAILS - EDIT_BODY - MANAGE_INVITES - REMOVE_MEMBER - EDIT_MEMBER - DELETE_PROJECT - VIEW_ANALYTICS - VIEW_PAYOUTS
+     * @param int|null $permissions The user's permissions in bitfield format (requires authorization to view)  In order from first to tenth bit, the bits are: - UPLOAD_VERSION - DELETE_VERSION - EDIT_DETAILS - EDIT_BODY - MANAGE_INVITES - REMOVE_MEMBER - EDIT_MEMBER - DELETE_PROJECT - VIEW_ANALYTICS - VIEW_PAYOUTS
      *
      * @return self
      */
     public function setPermissions($permissions)
     {
         if (is_null($permissions)) {
-            array_push($this->openAPINullablesSetToNull, 'permissions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('permissions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
         }
         $this->container['permissions'] = $permissions;
 
@@ -482,7 +454,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets accepted
      *
-     * @return mixed
+     * @return bool
      */
     public function getAccepted()
     {
@@ -492,21 +464,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets accepted
      *
-     * @param mixed $accepted Whether or not the user has accepted to be on the team (requires authorization to view)
+     * @param bool $accepted Whether or not the user has accepted to be on the team (requires authorization to view)
      *
      * @return self
      */
     public function setAccepted($accepted)
     {
         if (is_null($accepted)) {
-            array_push($this->openAPINullablesSetToNull, 'accepted');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('accepted', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable accepted cannot be null');
         }
         $this->container['accepted'] = $accepted;
 
@@ -516,7 +481,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets payouts_split
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getPayoutsSplit()
     {
@@ -526,21 +491,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payouts_split
      *
-     * @param mixed|null $payouts_split The split of payouts going to this user. The proportion of payouts they get is their split divided by the sum of the splits of all members.
+     * @param int|null $payouts_split The split of payouts going to this user. The proportion of payouts they get is their split divided by the sum of the splits of all members.
      *
      * @return self
      */
     public function setPayoutsSplit($payouts_split)
     {
         if (is_null($payouts_split)) {
-            array_push($this->openAPINullablesSetToNull, 'payouts_split');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payouts_split', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payouts_split cannot be null');
         }
         $this->container['payouts_split'] = $payouts_split;
 
@@ -550,7 +508,7 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets ordering
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getOrdering()
     {
@@ -560,21 +518,14 @@ class TeamMember implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ordering
      *
-     * @param mixed|null $ordering The order of the team member.
+     * @param int|null $ordering The order of the team member.
      *
      * @return self
      */
     public function setOrdering($ordering)
     {
         if (is_null($ordering)) {
-            array_push($this->openAPINullablesSetToNull, 'ordering');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('ordering', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable ordering cannot be null');
         }
         $this->container['ordering'] = $ordering;
 

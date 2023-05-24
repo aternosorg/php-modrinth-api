@@ -57,8 +57,8 @@ class InvalidInputError implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'error' => 'mixed',
-        'description' => 'mixed'
+        'error' => 'string',
+        'description' => 'string'
     ];
 
     /**
@@ -79,8 +79,8 @@ class InvalidInputError implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'error' => true,
-		'description' => true
+        'error' => false,
+		'description' => false
     ];
 
     /**
@@ -305,7 +305,7 @@ class InvalidInputError implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets error
      *
-     * @return mixed
+     * @return string
      */
     public function getError()
     {
@@ -315,21 +315,14 @@ class InvalidInputError implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets error
      *
-     * @param mixed $error The name of the error
+     * @param string $error The name of the error
      *
      * @return self
      */
     public function setError($error)
     {
         if (is_null($error)) {
-            array_push($this->openAPINullablesSetToNull, 'error');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('error', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
         $this->container['error'] = $error;
 
@@ -339,7 +332,7 @@ class InvalidInputError implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets description
      *
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -349,21 +342,14 @@ class InvalidInputError implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets description
      *
-     * @param mixed $description The contents of the error
+     * @param string $description The contents of the error
      *
      * @return self
      */
     public function setDescription($description)
     {
         if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 

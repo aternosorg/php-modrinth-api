@@ -146,7 +146,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\CategoryTag[]
      */
     public function categoryList(string $contentType = self::contentTypes['categoryList'][0])
     {
@@ -163,7 +163,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\CategoryTag[], HTTP status code, HTTP response headers (array of strings)
      */
     public function categoryListWithHttpInfo(string $contentType = self::contentTypes['categoryList'][0])
     {
@@ -206,23 +206,23 @@ class TagsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\CategoryTag[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\CategoryTag[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\CategoryTag[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\CategoryTag[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -243,7 +243,7 @@ class TagsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\CategoryTag[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -285,7 +285,7 @@ class TagsApi
      */
     public function categoryListAsyncWithHttpInfo(string $contentType = self::contentTypes['categoryList'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\CategoryTag[]';
         $request = $this->categoryListRequest($contentType);
 
         return $this->client
@@ -409,7 +409,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\DonationPlatformTag[]
      */
     public function donationPlatformList(string $contentType = self::contentTypes['donationPlatformList'][0])
     {
@@ -426,7 +426,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\DonationPlatformTag[], HTTP status code, HTTP response headers (array of strings)
      */
     public function donationPlatformListWithHttpInfo(string $contentType = self::contentTypes['donationPlatformList'][0])
     {
@@ -469,23 +469,23 @@ class TagsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\DonationPlatformTag[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\DonationPlatformTag[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\DonationPlatformTag[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\DonationPlatformTag[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -506,7 +506,7 @@ class TagsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\DonationPlatformTag[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -548,7 +548,7 @@ class TagsApi
      */
     public function donationPlatformListAsyncWithHttpInfo(string $contentType = self::contentTypes['donationPlatformList'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\DonationPlatformTag[]';
         $request = $this->donationPlatformListRequest($contentType);
 
         return $this->client
@@ -672,7 +672,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\LicenseTag[]
      */
     public function licenseList(string $contentType = self::contentTypes['licenseList'][0])
     {
@@ -689,7 +689,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\LicenseTag[], HTTP status code, HTTP response headers (array of strings)
      */
     public function licenseListWithHttpInfo(string $contentType = self::contentTypes['licenseList'][0])
     {
@@ -732,23 +732,23 @@ class TagsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\LicenseTag[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\LicenseTag[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\LicenseTag[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\LicenseTag[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -769,7 +769,7 @@ class TagsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\LicenseTag[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -811,7 +811,7 @@ class TagsApi
      */
     public function licenseListAsyncWithHttpInfo(string $contentType = self::contentTypes['licenseList'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\LicenseTag[]';
         $request = $this->licenseListRequest($contentType);
 
         return $this->client
@@ -935,7 +935,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\LoaderTag[]
      */
     public function loaderList(string $contentType = self::contentTypes['loaderList'][0])
     {
@@ -952,7 +952,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\LoaderTag[], HTTP status code, HTTP response headers (array of strings)
      */
     public function loaderListWithHttpInfo(string $contentType = self::contentTypes['loaderList'][0])
     {
@@ -995,23 +995,23 @@ class TagsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\LoaderTag[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\LoaderTag[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\LoaderTag[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\LoaderTag[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1032,7 +1032,7 @@ class TagsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\LoaderTag[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1074,7 +1074,7 @@ class TagsApi
      */
     public function loaderListAsyncWithHttpInfo(string $contentType = self::contentTypes['loaderList'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\LoaderTag[]';
         $request = $this->loaderListRequest($contentType);
 
         return $this->client
@@ -1198,7 +1198,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return string[]
      */
     public function reportTypeList(string $contentType = self::contentTypes['reportTypeList'][0])
     {
@@ -1215,7 +1215,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of string[], HTTP status code, HTTP response headers (array of strings)
      */
     public function reportTypeListWithHttpInfo(string $contentType = self::contentTypes['reportTypeList'][0])
     {
@@ -1258,23 +1258,23 @@ class TagsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('string[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('string[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, 'string[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = 'string[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1295,7 +1295,7 @@ class TagsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        'string[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1337,7 +1337,7 @@ class TagsApi
      */
     public function reportTypeListAsyncWithHttpInfo(string $contentType = self::contentTypes['reportTypeList'][0])
     {
-        $returnType = 'mixed';
+        $returnType = 'string[]';
         $request = $this->reportTypeListRequest($contentType);
 
         return $this->client
@@ -1461,7 +1461,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\GameVersionTag[]
      */
     public function versionList(string $contentType = self::contentTypes['versionList'][0])
     {
@@ -1478,7 +1478,7 @@ class TagsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\GameVersionTag[], HTTP status code, HTTP response headers (array of strings)
      */
     public function versionListWithHttpInfo(string $contentType = self::contentTypes['versionList'][0])
     {
@@ -1521,23 +1521,23 @@ class TagsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\GameVersionTag[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\GameVersionTag[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\GameVersionTag[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\GameVersionTag[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1558,7 +1558,7 @@ class TagsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\GameVersionTag[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1600,7 +1600,7 @@ class TagsApi
      */
     public function versionListAsyncWithHttpInfo(string $contentType = self::contentTypes['versionList'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\GameVersionTag[]';
         $request = $this->versionListRequest($contentType);
 
         return $this->client

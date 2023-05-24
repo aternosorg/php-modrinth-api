@@ -57,12 +57,12 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'slug' => 'mixed',
-        'title' => 'mixed',
-        'description' => 'mixed',
-        'categories' => 'mixed',
-        'client_side' => 'mixed',
-        'server_side' => 'mixed'
+        'slug' => 'string',
+        'title' => 'string',
+        'description' => 'string',
+        'categories' => 'string[]',
+        'client_side' => 'string',
+        'server_side' => 'string'
     ];
 
     /**
@@ -87,12 +87,12 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'slug' => true,
-		'title' => true,
-		'description' => true,
-		'categories' => true,
-		'client_side' => true,
-		'server_side' => true
+        'slug' => false,
+		'title' => false,
+		'description' => false,
+		'categories' => false,
+		'client_side' => false,
+		'server_side' => false
     ];
 
     /**
@@ -379,7 +379,7 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets slug
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getSlug()
     {
@@ -389,21 +389,14 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets slug
      *
-     * @param mixed|null $slug The slug of a project, used for vanity URLs. Regex: ```^[\\w!@$()`.+,\"\\-']{3,64}$```
+     * @param string|null $slug The slug of a project, used for vanity URLs. Regex: ```^[\\w!@$()`.+,\"\\-']{3,64}$```
      *
      * @return self
      */
     public function setSlug($slug)
     {
         if (is_null($slug)) {
-            array_push($this->openAPINullablesSetToNull, 'slug');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('slug', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable slug cannot be null');
         }
         $this->container['slug'] = $slug;
 
@@ -413,7 +406,7 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets title
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getTitle()
     {
@@ -423,21 +416,14 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param mixed|null $title The title or name of the project
+     * @param string|null $title The title or name of the project
      *
      * @return self
      */
     public function setTitle($title)
     {
         if (is_null($title)) {
-            array_push($this->openAPINullablesSetToNull, 'title');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('title', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
 
@@ -447,7 +433,7 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets description
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getDescription()
     {
@@ -457,21 +443,14 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param mixed|null $description A short description of the project
+     * @param string|null $description A short description of the project
      *
      * @return self
      */
     public function setDescription($description)
     {
         if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 
@@ -481,7 +460,7 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getCategories()
     {
@@ -491,21 +470,14 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets categories
      *
-     * @param mixed|null $categories A list of the categories that the project has
+     * @param string[]|null $categories A list of the categories that the project has
      *
      * @return self
      */
     public function setCategories($categories)
     {
         if (is_null($categories)) {
-            array_push($this->openAPINullablesSetToNull, 'categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable categories cannot be null');
         }
         $this->container['categories'] = $categories;
 
@@ -515,7 +487,7 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets client_side
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getClientSide()
     {
@@ -525,24 +497,17 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets client_side
      *
-     * @param mixed|null $client_side The client side support of the project
+     * @param string|null $client_side The client side support of the project
      *
      * @return self
      */
     public function setClientSide($client_side)
     {
         if (is_null($client_side)) {
-            array_push($this->openAPINullablesSetToNull, 'client_side');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('client_side', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable client_side cannot be null');
         }
         $allowedValues = $this->getClientSideAllowableValues();
-        if (!is_null($client_side) && !in_array($client_side, $allowedValues, true)) {
+        if (!in_array($client_side, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'client_side', must be one of '%s'",
@@ -559,7 +524,7 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets server_side
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getServerSide()
     {
@@ -569,24 +534,17 @@ class BaseProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets server_side
      *
-     * @param mixed|null $server_side The server side support of the project
+     * @param string|null $server_side The server side support of the project
      *
      * @return self
      */
     public function setServerSide($server_side)
     {
         if (is_null($server_side)) {
-            array_push($this->openAPINullablesSetToNull, 'server_side');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('server_side', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable server_side cannot be null');
         }
         $allowedValues = $this->getServerSideAllowableValues();
-        if (!is_null($server_side) && !in_array($server_side, $allowedValues, true)) {
+        if (!in_array($server_side, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'server_side', must be one of '%s'",

@@ -148,8 +148,8 @@ class VersionsApi
      *
      * Add files to version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $data data (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  object $data data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addFilesToVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -166,8 +166,8 @@ class VersionsApi
      *
      * Add files to version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $data (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  object $data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addFilesToVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -235,8 +235,8 @@ class VersionsApi
      *
      * Add files to version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $data (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  object $data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addFilesToVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -257,8 +257,8 @@ class VersionsApi
      *
      * Add files to version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $data (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  object $data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addFilesToVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -295,8 +295,8 @@ class VersionsApi
     /**
      * Create request for operation 'addFilesToVersion'
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $data (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  object $data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addFilesToVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -400,12 +400,12 @@ class VersionsApi
      *
      * Create a version
      *
-     * @param  mixed $data data (required)
+     * @param  \Aternos\ModrinthApi\Model\CreatableVersion $data data (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError
+     * @return \Aternos\ModrinthApi\Model\Version|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError
      */
     public function createVersion($data, string $contentType = self::contentTypes['createVersion'][0])
     {
@@ -418,12 +418,12 @@ class VersionsApi
      *
      * Create a version
      *
-     * @param  mixed $data (required)
+     * @param  \Aternos\ModrinthApi\Model\CreatableVersion $data (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Version|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
      */
     public function createVersionWithHttpInfo($data, string $contentType = self::contentTypes['createVersion'][0])
     {
@@ -466,17 +466,17 @@ class VersionsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Version' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Version' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Version', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -512,7 +512,7 @@ class VersionsApi
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Version';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -533,7 +533,7 @@ class VersionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Version',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -564,7 +564,7 @@ class VersionsApi
      *
      * Create a version
      *
-     * @param  mixed $data (required)
+     * @param  \Aternos\ModrinthApi\Model\CreatableVersion $data (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -585,7 +585,7 @@ class VersionsApi
      *
      * Create a version
      *
-     * @param  mixed $data (required)
+     * @param  \Aternos\ModrinthApi\Model\CreatableVersion $data (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -593,7 +593,7 @@ class VersionsApi
      */
     public function createVersionAsyncWithHttpInfo($data, string $contentType = self::contentTypes['createVersion'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Version';
         $request = $this->createVersionRequest($data, $contentType);
 
         return $this->client
@@ -635,7 +635,7 @@ class VersionsApi
     /**
      * Create request for operation 'createVersion'
      *
-     * @param  mixed $data (required)
+     * @param  \Aternos\ModrinthApi\Model\CreatableVersion $data (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -730,7 +730,7 @@ class VersionsApi
      *
      * Delete a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -747,7 +747,7 @@ class VersionsApi
      *
      * Delete a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -815,7 +815,7 @@ class VersionsApi
      *
      * Delete a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -836,7 +836,7 @@ class VersionsApi
      *
      * Delete a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -873,7 +873,7 @@ class VersionsApi
     /**
      * Create request for operation 'deleteVersion'
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -972,15 +972,15 @@ class VersionsApi
      *
      * List project&#39;s versions
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $loaders The types of loaders to filter for (optional)
-     * @param  mixed $game_versions The game versions to filter for (optional)
-     * @param  mixed $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string[] $loaders The types of loaders to filter for (optional)
+     * @param  string[] $game_versions The game versions to filter for (optional)
+     * @param  bool $featured Allows to filter for featured or non-featured versions only (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Version[]
      */
     public function getProjectVersions($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
@@ -993,15 +993,15 @@ class VersionsApi
      *
      * List project&#39;s versions
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $loaders The types of loaders to filter for (optional)
-     * @param  mixed $game_versions The game versions to filter for (optional)
-     * @param  mixed $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string[] $loaders The types of loaders to filter for (optional)
+     * @param  string[] $game_versions The game versions to filter for (optional)
+     * @param  bool $featured Allows to filter for featured or non-featured versions only (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Version[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getProjectVersionsWithHttpInfo($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
@@ -1044,23 +1044,23 @@ class VersionsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Version[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Version[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Version[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Version[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1081,7 +1081,7 @@ class VersionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Version[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1096,10 +1096,10 @@ class VersionsApi
      *
      * List project&#39;s versions
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $loaders The types of loaders to filter for (optional)
-     * @param  mixed $game_versions The game versions to filter for (optional)
-     * @param  mixed $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string[] $loaders The types of loaders to filter for (optional)
+     * @param  string[] $game_versions The game versions to filter for (optional)
+     * @param  bool $featured Allows to filter for featured or non-featured versions only (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1120,10 +1120,10 @@ class VersionsApi
      *
      * List project&#39;s versions
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $loaders The types of loaders to filter for (optional)
-     * @param  mixed $game_versions The game versions to filter for (optional)
-     * @param  mixed $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string[] $loaders The types of loaders to filter for (optional)
+     * @param  string[] $game_versions The game versions to filter for (optional)
+     * @param  bool $featured Allows to filter for featured or non-featured versions only (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1131,7 +1131,7 @@ class VersionsApi
      */
     public function getProjectVersionsAsyncWithHttpInfo($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Version[]';
         $request = $this->getProjectVersionsRequest($id_slug, $loaders, $game_versions, $featured, $contentType);
 
         return $this->client
@@ -1173,10 +1173,10 @@ class VersionsApi
     /**
      * Create request for operation 'getProjectVersions'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $loaders The types of loaders to filter for (optional)
-     * @param  mixed $game_versions The game versions to filter for (optional)
-     * @param  mixed $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string[] $loaders The types of loaders to filter for (optional)
+     * @param  string[] $game_versions The game versions to filter for (optional)
+     * @param  bool $featured Allows to filter for featured or non-featured versions only (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1207,7 +1207,7 @@ class VersionsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $loaders,
             'loaders', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1216,7 +1216,7 @@ class VersionsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $game_versions,
             'game_versions', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1225,7 +1225,7 @@ class VersionsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $featured,
             'featured', // param base name
-            'mixed', // openApiType
+            'boolean', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1300,12 +1300,12 @@ class VersionsApi
      *
      * Get a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Version
      */
     public function getVersion($id, string $contentType = self::contentTypes['getVersion'][0])
     {
@@ -1318,12 +1318,12 @@ class VersionsApi
      *
      * Get a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Version, HTTP status code, HTTP response headers (array of strings)
      */
     public function getVersionWithHttpInfo($id, string $contentType = self::contentTypes['getVersion'][0])
     {
@@ -1366,23 +1366,23 @@ class VersionsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Version' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Version' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Version', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Version';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1403,7 +1403,7 @@ class VersionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Version',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1418,7 +1418,7 @@ class VersionsApi
      *
      * Get a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1439,7 +1439,7 @@ class VersionsApi
      *
      * Get a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1447,7 +1447,7 @@ class VersionsApi
      */
     public function getVersionAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getVersion'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Version';
         $request = $this->getVersionRequest($id, $contentType);
 
         return $this->client
@@ -1489,7 +1489,7 @@ class VersionsApi
     /**
      * Create request for operation 'getVersion'
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1583,12 +1583,12 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  mixed $ids The IDs of the versions (required)
+     * @param  string[] $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Version[]
      */
     public function getVersions($ids, string $contentType = self::contentTypes['getVersions'][0])
     {
@@ -1601,12 +1601,12 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  mixed $ids The IDs of the versions (required)
+     * @param  string[] $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Version[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getVersionsWithHttpInfo($ids, string $contentType = self::contentTypes['getVersions'][0])
     {
@@ -1649,23 +1649,23 @@ class VersionsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Version[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Version[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Version[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Version[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1686,7 +1686,7 @@ class VersionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Version[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1701,7 +1701,7 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  mixed $ids The IDs of the versions (required)
+     * @param  string[] $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1722,7 +1722,7 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  mixed $ids The IDs of the versions (required)
+     * @param  string[] $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1730,7 +1730,7 @@ class VersionsApi
      */
     public function getVersionsAsyncWithHttpInfo($ids, string $contentType = self::contentTypes['getVersions'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Version[]';
         $request = $this->getVersionsRequest($ids, $contentType);
 
         return $this->client
@@ -1772,7 +1772,7 @@ class VersionsApi
     /**
      * Create request for operation 'getVersions'
      *
-     * @param  mixed $ids The IDs of the versions (required)
+     * @param  string[] $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1800,7 +1800,7 @@ class VersionsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -1867,17 +1867,17 @@ class VersionsApi
      *
      * Modify a version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $body Modified version fields (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableVersion $editable_version Modified version fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function modifyVersion($id, $body = null, string $contentType = self::contentTypes['modifyVersion'][0])
+    public function modifyVersion($id, $editable_version = null, string $contentType = self::contentTypes['modifyVersion'][0])
     {
-        $this->modifyVersionWithHttpInfo($id, $body, $contentType);
+        $this->modifyVersionWithHttpInfo($id, $editable_version, $contentType);
     }
 
     /**
@@ -1885,17 +1885,17 @@ class VersionsApi
      *
      * Modify a version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $body Modified version fields (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableVersion $editable_version Modified version fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function modifyVersionWithHttpInfo($id, $body = null, string $contentType = self::contentTypes['modifyVersion'][0])
+    public function modifyVersionWithHttpInfo($id, $editable_version = null, string $contentType = self::contentTypes['modifyVersion'][0])
     {
-        $request = $this->modifyVersionRequest($id, $body, $contentType);
+        $request = $this->modifyVersionRequest($id, $editable_version, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1954,16 +1954,16 @@ class VersionsApi
      *
      * Modify a version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $body Modified version fields (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableVersion $editable_version Modified version fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyVersionAsync($id, $body = null, string $contentType = self::contentTypes['modifyVersion'][0])
+    public function modifyVersionAsync($id, $editable_version = null, string $contentType = self::contentTypes['modifyVersion'][0])
     {
-        return $this->modifyVersionAsyncWithHttpInfo($id, $body, $contentType)
+        return $this->modifyVersionAsyncWithHttpInfo($id, $editable_version, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1976,17 +1976,17 @@ class VersionsApi
      *
      * Modify a version
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $body Modified version fields (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableVersion $editable_version Modified version fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyVersionAsyncWithHttpInfo($id, $body = null, string $contentType = self::contentTypes['modifyVersion'][0])
+    public function modifyVersionAsyncWithHttpInfo($id, $editable_version = null, string $contentType = self::contentTypes['modifyVersion'][0])
     {
         $returnType = '';
-        $request = $this->modifyVersionRequest($id, $body, $contentType);
+        $request = $this->modifyVersionRequest($id, $editable_version, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2014,14 +2014,14 @@ class VersionsApi
     /**
      * Create request for operation 'modifyVersion'
      *
-     * @param  mixed $id The ID of the version (required)
-     * @param  mixed $body Modified version fields (optional)
+     * @param  string $id The ID of the version (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableVersion $editable_version Modified version fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function modifyVersionRequest($id, $body = null, string $contentType = self::contentTypes['modifyVersion'][0])
+    public function modifyVersionRequest($id, $editable_version = null, string $contentType = self::contentTypes['modifyVersion'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -2059,12 +2059,12 @@ class VersionsApi
         );
 
         // for model (json/xml)
-        if (isset($body)) {
+        if (isset($editable_version)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($editable_version));
             } else {
-                $httpBody = $body;
+                $httpBody = $editable_version;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2122,7 +2122,7 @@ class VersionsApi
      *
      * Schedule a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
@@ -2140,7 +2140,7 @@ class VersionsApi
      *
      * Schedule a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
@@ -2217,7 +2217,7 @@ class VersionsApi
      *
      * Schedule a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
@@ -2239,7 +2239,7 @@ class VersionsApi
      *
      * Schedule a version
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
@@ -2277,7 +2277,7 @@ class VersionsApi
     /**
      * Create request for operation 'scheduleVersion'
      *
-     * @param  mixed $id The ID of the version (required)
+     * @param  string $id The ID of the version (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *

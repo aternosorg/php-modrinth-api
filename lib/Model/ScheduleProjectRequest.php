@@ -57,8 +57,8 @@ class ScheduleProjectRequest implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'time' => 'mixed',
-        'requested_status' => 'mixed'
+        'time' => 'string',
+        'requested_status' => 'string'
     ];
 
     /**
@@ -79,8 +79,8 @@ class ScheduleProjectRequest implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'time' => true,
-		'requested_status' => true
+        'time' => false,
+		'requested_status' => false
     ];
 
     /**
@@ -335,7 +335,7 @@ class ScheduleProjectRequest implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets time
      *
-     * @return mixed
+     * @return string
      */
     public function getTime()
     {
@@ -345,21 +345,14 @@ class ScheduleProjectRequest implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets time
      *
-     * @param mixed $time time
+     * @param string $time time
      *
      * @return self
      */
     public function setTime($time)
     {
         if (is_null($time)) {
-            array_push($this->openAPINullablesSetToNull, 'time');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('time', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable time cannot be null');
         }
         $this->container['time'] = $time;
 
@@ -369,7 +362,7 @@ class ScheduleProjectRequest implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets requested_status
      *
-     * @return mixed
+     * @return string
      */
     public function getRequestedStatus()
     {
@@ -379,24 +372,17 @@ class ScheduleProjectRequest implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets requested_status
      *
-     * @param mixed $requested_status The requested status when scheduling the project for release
+     * @param string $requested_status The requested status when scheduling the project for release
      *
      * @return self
      */
     public function setRequestedStatus($requested_status)
     {
         if (is_null($requested_status)) {
-            array_push($this->openAPINullablesSetToNull, 'requested_status');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('requested_status', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable requested_status cannot be null');
         }
         $allowedValues = $this->getRequestedStatusAllowableValues();
-        if (!is_null($requested_status) && !in_array($requested_status, $allowedValues, true)) {
+        if (!in_array($requested_status, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'requested_status', must be one of '%s'",

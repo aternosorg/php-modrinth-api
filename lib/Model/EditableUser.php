@@ -57,10 +57,10 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'username' => 'mixed',
-        'name' => 'mixed',
-        'email' => 'mixed',
-        'bio' => 'mixed',
+        'username' => 'string',
+        'name' => 'string',
+        'email' => 'string',
+        'bio' => 'string',
         'payout_data' => '\Aternos\ModrinthApi\Model\EditableUserPayoutData'
     ];
 
@@ -85,11 +85,11 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'username' => true,
+        'username' => false,
 		'name' => true,
 		'email' => true,
-		'bio' => true,
-		'payout_data' => false
+		'bio' => false,
+		'payout_data' => true
     ];
 
     /**
@@ -323,7 +323,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets username
      *
-     * @return mixed
+     * @return string
      */
     public function getUsername()
     {
@@ -333,21 +333,14 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets username
      *
-     * @param mixed $username The user's username
+     * @param string $username The user's username
      *
      * @return self
      */
     public function setUsername($username)
     {
         if (is_null($username)) {
-            array_push($this->openAPINullablesSetToNull, 'username');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('username', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable username cannot be null');
         }
         $this->container['username'] = $username;
 
@@ -357,7 +350,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getName()
     {
@@ -367,7 +360,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param mixed|null $name The user's display name
+     * @param string|null $name The user's display name
      *
      * @return self
      */
@@ -391,7 +384,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets email
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getEmail()
     {
@@ -401,7 +394,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets email
      *
-     * @param mixed|null $email The user's email (only your own is ever displayed)
+     * @param string|null $email The user's email (only your own is ever displayed)
      *
      * @return self
      */
@@ -425,7 +418,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets bio
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getBio()
     {
@@ -435,21 +428,14 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets bio
      *
-     * @param mixed|null $bio A description of the user
+     * @param string|null $bio A description of the user
      *
      * @return self
      */
     public function setBio($bio)
     {
         if (is_null($bio)) {
-            array_push($this->openAPINullablesSetToNull, 'bio');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('bio', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable bio cannot be null');
         }
         $this->container['bio'] = $bio;
 
@@ -476,7 +462,14 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPayoutData($payout_data)
     {
         if (is_null($payout_data)) {
-            throw new \InvalidArgumentException('non-nullable payout_data cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'payout_data');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payout_data', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['payout_data'] = $payout_data;
 

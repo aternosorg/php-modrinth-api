@@ -72,10 +72,24 @@ class ProjectsApi
     /** @var string[] $contentTypes **/
     public const contentTypes = [
         'addGalleryImage' => [
-            'image/*',
+            'image/png',
+            'image/jpeg',
+            'image/bmp',
+            'image/gif',
+            'image/webp',
+            'image/svg',
+            'image/svgz',
+            'image/rgb',
         ],
         'changeProjectIcon' => [
-            'image/*',
+            'image/png',
+            'image/jpeg',
+            'image/bmp',
+            'image/gif',
+            'image/webp',
+            'image/svg',
+            'image/svgz',
+            'image/rgb',
         ],
         'checkProjectValidity' => [
             'application/json',
@@ -178,13 +192,13 @@ class ProjectsApi
      *
      * Add a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $featured Whether an image is featured (required)
-     * @param  mixed $title Title of the image (optional)
-     * @param  mixed $description Description of the image (optional)
-     * @param  mixed $ordering Ordering of the image (optional)
-     * @param  mixed $body New gallery image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  bool $featured Whether an image is featured (required)
+     * @param  string $title Title of the image (optional)
+     * @param  string $description Description of the image (optional)
+     * @param  int $ordering Ordering of the image (optional)
+     * @param  \SplFileObject $body body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGalleryImage'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -201,13 +215,13 @@ class ProjectsApi
      *
      * Add a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $featured Whether an image is featured (required)
-     * @param  mixed $title Title of the image (optional)
-     * @param  mixed $description Description of the image (optional)
-     * @param  mixed $ordering Ordering of the image (optional)
-     * @param  mixed $body New gallery image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  bool $featured Whether an image is featured (required)
+     * @param  string $title Title of the image (optional)
+     * @param  string $description Description of the image (optional)
+     * @param  int $ordering Ordering of the image (optional)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGalleryImage'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -283,13 +297,13 @@ class ProjectsApi
      *
      * Add a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $featured Whether an image is featured (required)
-     * @param  mixed $title Title of the image (optional)
-     * @param  mixed $description Description of the image (optional)
-     * @param  mixed $ordering Ordering of the image (optional)
-     * @param  mixed $body New gallery image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  bool $featured Whether an image is featured (required)
+     * @param  string $title Title of the image (optional)
+     * @param  string $description Description of the image (optional)
+     * @param  int $ordering Ordering of the image (optional)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -310,13 +324,13 @@ class ProjectsApi
      *
      * Add a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $featured Whether an image is featured (required)
-     * @param  mixed $title Title of the image (optional)
-     * @param  mixed $description Description of the image (optional)
-     * @param  mixed $ordering Ordering of the image (optional)
-     * @param  mixed $body New gallery image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  bool $featured Whether an image is featured (required)
+     * @param  string $title Title of the image (optional)
+     * @param  string $description Description of the image (optional)
+     * @param  int $ordering Ordering of the image (optional)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -353,13 +367,13 @@ class ProjectsApi
     /**
      * Create request for operation 'addGalleryImage'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $featured Whether an image is featured (required)
-     * @param  mixed $title Title of the image (optional)
-     * @param  mixed $description Description of the image (optional)
-     * @param  mixed $ordering Ordering of the image (optional)
-     * @param  mixed $body New gallery image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  bool $featured Whether an image is featured (required)
+     * @param  string $title Title of the image (optional)
+     * @param  string $description Description of the image (optional)
+     * @param  int $ordering Ordering of the image (optional)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -405,7 +419,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ext,
             'ext', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -414,7 +428,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $featured,
             'featured', // param base name
-            'mixed', // openApiType
+            'boolean', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -423,7 +437,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $title,
             'title', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -432,7 +446,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $description,
             'description', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -441,7 +455,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ordering,
             'ordering', // param base name
-            'mixed', // openApiType
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -528,9 +542,9 @@ class ProjectsApi
      *
      * Change project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $body body (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  \SplFileObject $body body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeProjectIcon'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -547,9 +561,9 @@ class ProjectsApi
      *
      * Change project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeProjectIcon'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -617,9 +631,9 @@ class ProjectsApi
      *
      * Change project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeProjectIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -640,9 +654,9 @@ class ProjectsApi
      *
      * Change project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeProjectIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -679,9 +693,9 @@ class ProjectsApi
     /**
      * Create request for operation 'changeProjectIcon'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $ext Image extension (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $ext Image extension (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeProjectIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -717,7 +731,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ext,
             'ext', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -804,7 +818,7 @@ class ProjectsApi
      *
      * Check project slug/ID validity
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkProjectValidity'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -822,7 +836,7 @@ class ProjectsApi
      *
      * Check project slug/ID validity
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkProjectValidity'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -922,7 +936,7 @@ class ProjectsApi
      *
      * Check project slug/ID validity
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkProjectValidity'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -943,7 +957,7 @@ class ProjectsApi
      *
      * Check project slug/ID validity
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkProjectValidity'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -993,7 +1007,7 @@ class ProjectsApi
     /**
      * Create request for operation 'checkProjectValidity'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkProjectValidity'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1087,13 +1101,13 @@ class ProjectsApi
      *
      * Create a project
      *
-     * @param  mixed $data data (required)
-     * @param  mixed $icon Project icon file (optional)
+     * @param  \Aternos\ModrinthApi\Model\CreatableProject $data data (required)
+     * @param  \SplFileObject $icon Project icon file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError
+     * @return \Aternos\ModrinthApi\Model\Project|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError
      */
     public function createProject($data, $icon = null, string $contentType = self::contentTypes['createProject'][0])
     {
@@ -1106,13 +1120,13 @@ class ProjectsApi
      *
      * Create a project
      *
-     * @param  mixed $data (required)
-     * @param  mixed $icon Project icon file (optional)
+     * @param  \Aternos\ModrinthApi\Model\CreatableProject $data (required)
+     * @param  \SplFileObject $icon Project icon file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Project|\Aternos\ModrinthApi\Model\InvalidInputError|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
      */
     public function createProjectWithHttpInfo($data, $icon = null, string $contentType = self::contentTypes['createProject'][0])
     {
@@ -1155,17 +1169,17 @@ class ProjectsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Project' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Project' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Project', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1201,7 +1215,7 @@ class ProjectsApi
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Project';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1222,7 +1236,7 @@ class ProjectsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Project',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1253,8 +1267,8 @@ class ProjectsApi
      *
      * Create a project
      *
-     * @param  mixed $data (required)
-     * @param  mixed $icon Project icon file (optional)
+     * @param  \Aternos\ModrinthApi\Model\CreatableProject $data (required)
+     * @param  \SplFileObject $icon Project icon file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1275,8 +1289,8 @@ class ProjectsApi
      *
      * Create a project
      *
-     * @param  mixed $data (required)
-     * @param  mixed $icon Project icon file (optional)
+     * @param  \Aternos\ModrinthApi\Model\CreatableProject $data (required)
+     * @param  \SplFileObject $icon Project icon file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1284,7 +1298,7 @@ class ProjectsApi
      */
     public function createProjectAsyncWithHttpInfo($data, $icon = null, string $contentType = self::contentTypes['createProject'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Project';
         $request = $this->createProjectRequest($data, $icon, $contentType);
 
         return $this->client
@@ -1326,8 +1340,8 @@ class ProjectsApi
     /**
      * Create request for operation 'createProject'
      *
-     * @param  mixed $data (required)
-     * @param  mixed $icon Project icon file (optional)
+     * @param  \Aternos\ModrinthApi\Model\CreatableProject $data (required)
+     * @param  \SplFileObject $icon Project icon file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1361,7 +1375,15 @@ class ProjectsApi
         }
         // form params
         if ($icon !== null) {
-            $formParams['icon'] = ObjectSerializer::toFormValue($icon);
+            $multipart = true;
+            $formParams['icon'] = [];
+            $paramFiles = is_array($icon) ? $icon : [$icon];
+            foreach ($paramFiles as $paramFile) {
+                $formParams['icon'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
+                    ObjectSerializer::toFormValue($paramFile),
+                    'rb'
+                );
+            }
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1427,8 +1449,8 @@ class ProjectsApi
      *
      * Delete a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to delete (required)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to delete (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGalleryImage'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1445,8 +1467,8 @@ class ProjectsApi
      *
      * Delete a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to delete (required)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to delete (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGalleryImage'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1522,8 +1544,8 @@ class ProjectsApi
      *
      * Delete a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to delete (required)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to delete (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1544,8 +1566,8 @@ class ProjectsApi
      *
      * Delete a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to delete (required)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to delete (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1582,8 +1604,8 @@ class ProjectsApi
     /**
      * Create request for operation 'deleteGalleryImage'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to delete (required)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to delete (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1618,7 +1640,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $url,
             'url', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -1698,7 +1720,7 @@ class ProjectsApi
      *
      * Delete a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1715,7 +1737,7 @@ class ProjectsApi
      *
      * Delete a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1791,7 +1813,7 @@ class ProjectsApi
      *
      * Delete a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1812,7 +1834,7 @@ class ProjectsApi
      *
      * Delete a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1849,7 +1871,7 @@ class ProjectsApi
     /**
      * Create request for operation 'deleteProject'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1948,7 +1970,7 @@ class ProjectsApi
      *
      * Delete project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProjectIcon'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1965,7 +1987,7 @@ class ProjectsApi
      *
      * Delete project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProjectIcon'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2041,7 +2063,7 @@ class ProjectsApi
      *
      * Delete project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProjectIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2062,7 +2084,7 @@ class ProjectsApi
      *
      * Delete project&#39;s icon
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProjectIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2099,7 +2121,7 @@ class ProjectsApi
     /**
      * Create request for operation 'deleteProjectIcon'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProjectIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2198,7 +2220,7 @@ class ProjectsApi
      *
      * Follow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['followProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2215,7 +2237,7 @@ class ProjectsApi
      *
      * Follow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['followProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2291,7 +2313,7 @@ class ProjectsApi
      *
      * Follow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['followProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2312,7 +2334,7 @@ class ProjectsApi
      *
      * Follow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['followProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2349,7 +2371,7 @@ class ProjectsApi
     /**
      * Create request for operation 'followProject'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['followProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2448,7 +2470,7 @@ class ProjectsApi
      *
      * Get all of a project&#39;s dependencies
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDependencies'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2466,7 +2488,7 @@ class ProjectsApi
      *
      * Get all of a project&#39;s dependencies
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDependencies'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2566,7 +2588,7 @@ class ProjectsApi
      *
      * Get all of a project&#39;s dependencies
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDependencies'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2587,7 +2609,7 @@ class ProjectsApi
      *
      * Get all of a project&#39;s dependencies
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDependencies'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2637,7 +2659,7 @@ class ProjectsApi
     /**
      * Create request for operation 'getDependencies'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDependencies'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2731,12 +2753,12 @@ class ProjectsApi
      *
      * Get a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Project
      */
     public function getProject($id_slug, string $contentType = self::contentTypes['getProject'][0])
     {
@@ -2749,12 +2771,12 @@ class ProjectsApi
      *
      * Get a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Project, HTTP status code, HTTP response headers (array of strings)
      */
     public function getProjectWithHttpInfo($id_slug, string $contentType = self::contentTypes['getProject'][0])
     {
@@ -2797,23 +2819,23 @@ class ProjectsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Project' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Project' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Project', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Project';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2834,7 +2856,7 @@ class ProjectsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Project',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2849,7 +2871,7 @@ class ProjectsApi
      *
      * Get a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2870,7 +2892,7 @@ class ProjectsApi
      *
      * Get a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2878,7 +2900,7 @@ class ProjectsApi
      */
     public function getProjectAsyncWithHttpInfo($id_slug, string $contentType = self::contentTypes['getProject'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Project';
         $request = $this->getProjectRequest($id_slug, $contentType);
 
         return $this->client
@@ -2920,7 +2942,7 @@ class ProjectsApi
     /**
      * Create request for operation 'getProject'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3014,12 +3036,12 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Project[]
      */
     public function getProjects($ids, string $contentType = self::contentTypes['getProjects'][0])
     {
@@ -3032,12 +3054,12 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Project[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getProjectsWithHttpInfo($ids, string $contentType = self::contentTypes['getProjects'][0])
     {
@@ -3080,23 +3102,23 @@ class ProjectsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Project[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Project[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Project[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Project[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -3117,7 +3139,7 @@ class ProjectsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Project[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3132,7 +3154,7 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3153,7 +3175,7 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3161,7 +3183,7 @@ class ProjectsApi
      */
     public function getProjectsAsyncWithHttpInfo($ids, string $contentType = self::contentTypes['getProjects'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Project[]';
         $request = $this->getProjectsRequest($ids, $contentType);
 
         return $this->client
@@ -3203,7 +3225,7 @@ class ProjectsApi
     /**
      * Create request for operation 'getProjects'
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3231,7 +3253,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -3298,12 +3320,12 @@ class ProjectsApi
      *
      * Modify a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to modify (required)
-     * @param  mixed $featured Whether the image is featured (optional)
-     * @param  mixed $title New title of the image (optional)
-     * @param  mixed $description New description of the image (optional)
-     * @param  mixed $ordering New ordering of the image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to modify (required)
+     * @param  bool $featured Whether the image is featured (optional)
+     * @param  string $title New title of the image (optional)
+     * @param  string $description New description of the image (optional)
+     * @param  int $ordering New ordering of the image (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyGalleryImage'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -3320,12 +3342,12 @@ class ProjectsApi
      *
      * Modify a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to modify (required)
-     * @param  mixed $featured Whether the image is featured (optional)
-     * @param  mixed $title New title of the image (optional)
-     * @param  mixed $description New description of the image (optional)
-     * @param  mixed $ordering New ordering of the image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to modify (required)
+     * @param  bool $featured Whether the image is featured (optional)
+     * @param  string $title New title of the image (optional)
+     * @param  string $description New description of the image (optional)
+     * @param  int $ordering New ordering of the image (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyGalleryImage'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -3393,12 +3415,12 @@ class ProjectsApi
      *
      * Modify a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to modify (required)
-     * @param  mixed $featured Whether the image is featured (optional)
-     * @param  mixed $title New title of the image (optional)
-     * @param  mixed $description New description of the image (optional)
-     * @param  mixed $ordering New ordering of the image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to modify (required)
+     * @param  bool $featured Whether the image is featured (optional)
+     * @param  string $title New title of the image (optional)
+     * @param  string $description New description of the image (optional)
+     * @param  int $ordering New ordering of the image (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3419,12 +3441,12 @@ class ProjectsApi
      *
      * Modify a gallery image
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to modify (required)
-     * @param  mixed $featured Whether the image is featured (optional)
-     * @param  mixed $title New title of the image (optional)
-     * @param  mixed $description New description of the image (optional)
-     * @param  mixed $ordering New ordering of the image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to modify (required)
+     * @param  bool $featured Whether the image is featured (optional)
+     * @param  string $title New title of the image (optional)
+     * @param  string $description New description of the image (optional)
+     * @param  int $ordering New ordering of the image (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3461,12 +3483,12 @@ class ProjectsApi
     /**
      * Create request for operation 'modifyGalleryImage'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $url URL link of the image to modify (required)
-     * @param  mixed $featured Whether the image is featured (optional)
-     * @param  mixed $title New title of the image (optional)
-     * @param  mixed $description New description of the image (optional)
-     * @param  mixed $ordering New ordering of the image (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  string $url URL link of the image to modify (required)
+     * @param  bool $featured Whether the image is featured (optional)
+     * @param  string $title New title of the image (optional)
+     * @param  string $description New description of the image (optional)
+     * @param  int $ordering New ordering of the image (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyGalleryImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3505,7 +3527,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $url,
             'url', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -3514,7 +3536,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $featured,
             'featured', // param base name
-            'mixed', // openApiType
+            'boolean', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -3523,7 +3545,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $title,
             'title', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -3532,7 +3554,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $description,
             'description', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -3541,7 +3563,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ordering,
             'ordering', // param base name
-            'mixed', // openApiType
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -3621,17 +3643,17 @@ class ProjectsApi
      *
      * Modify a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $body Modified project fields (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableProject $editable_project Modified project fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function modifyProject($id_slug, $body = null, string $contentType = self::contentTypes['modifyProject'][0])
+    public function modifyProject($id_slug, $editable_project = null, string $contentType = self::contentTypes['modifyProject'][0])
     {
-        $this->modifyProjectWithHttpInfo($id_slug, $body, $contentType);
+        $this->modifyProjectWithHttpInfo($id_slug, $editable_project, $contentType);
     }
 
     /**
@@ -3639,17 +3661,17 @@ class ProjectsApi
      *
      * Modify a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $body Modified project fields (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableProject $editable_project Modified project fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function modifyProjectWithHttpInfo($id_slug, $body = null, string $contentType = self::contentTypes['modifyProject'][0])
+    public function modifyProjectWithHttpInfo($id_slug, $editable_project = null, string $contentType = self::contentTypes['modifyProject'][0])
     {
-        $request = $this->modifyProjectRequest($id_slug, $body, $contentType);
+        $request = $this->modifyProjectRequest($id_slug, $editable_project, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3708,16 +3730,16 @@ class ProjectsApi
      *
      * Modify a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $body Modified project fields (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableProject $editable_project Modified project fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyProjectAsync($id_slug, $body = null, string $contentType = self::contentTypes['modifyProject'][0])
+    public function modifyProjectAsync($id_slug, $editable_project = null, string $contentType = self::contentTypes['modifyProject'][0])
     {
-        return $this->modifyProjectAsyncWithHttpInfo($id_slug, $body, $contentType)
+        return $this->modifyProjectAsyncWithHttpInfo($id_slug, $editable_project, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3730,17 +3752,17 @@ class ProjectsApi
      *
      * Modify a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $body Modified project fields (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableProject $editable_project Modified project fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyProjectAsyncWithHttpInfo($id_slug, $body = null, string $contentType = self::contentTypes['modifyProject'][0])
+    public function modifyProjectAsyncWithHttpInfo($id_slug, $editable_project = null, string $contentType = self::contentTypes['modifyProject'][0])
     {
         $returnType = '';
-        $request = $this->modifyProjectRequest($id_slug, $body, $contentType);
+        $request = $this->modifyProjectRequest($id_slug, $editable_project, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3768,14 +3790,14 @@ class ProjectsApi
     /**
      * Create request for operation 'modifyProject'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
-     * @param  mixed $body Modified project fields (optional)
+     * @param  string $id_slug The ID or slug of the project (required)
+     * @param  \Aternos\ModrinthApi\Model\EditableProject $editable_project Modified project fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function modifyProjectRequest($id_slug, $body = null, string $contentType = self::contentTypes['modifyProject'][0])
+    public function modifyProjectRequest($id_slug, $editable_project = null, string $contentType = self::contentTypes['modifyProject'][0])
     {
 
         // verify the required parameter 'id_slug' is set
@@ -3813,12 +3835,12 @@ class ProjectsApi
         );
 
         // for model (json/xml)
-        if (isset($body)) {
+        if (isset($editable_project)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($editable_project));
             } else {
-                $httpBody = $body;
+                $httpBody = $editable_project;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3876,7 +3898,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -3894,7 +3916,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -3971,7 +3993,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -3993,7 +4015,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -4031,7 +4053,7 @@ class ProjectsApi
     /**
      * Create request for operation 'patchProjects'
      *
-     * @param  mixed $ids The IDs of the projects (required)
+     * @param  string[] $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -4061,7 +4083,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -4135,12 +4157,12 @@ class ProjectsApi
      *
      * Get a list of random projects
      *
-     * @param  mixed $count The number of random projects to return (required)
+     * @param  int $count The number of random projects to return (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['randomProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed|\Aternos\ModrinthApi\Model\InvalidInputError
+     * @return \Aternos\ModrinthApi\Model\Project[]|\Aternos\ModrinthApi\Model\InvalidInputError
      */
     public function randomProjects($count, string $contentType = self::contentTypes['randomProjects'][0])
     {
@@ -4153,12 +4175,12 @@ class ProjectsApi
      *
      * Get a list of random projects
      *
-     * @param  mixed $count The number of random projects to return (required)
+     * @param  int $count The number of random projects to return (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['randomProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed|\Aternos\ModrinthApi\Model\InvalidInputError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Project[]|\Aternos\ModrinthApi\Model\InvalidInputError, HTTP status code, HTTP response headers (array of strings)
      */
     public function randomProjectsWithHttpInfo($count, string $contentType = self::contentTypes['randomProjects'][0])
     {
@@ -4201,17 +4223,17 @@ class ProjectsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Project[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Project[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Project[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4232,7 +4254,7 @@ class ProjectsApi
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Project[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -4253,7 +4275,7 @@ class ProjectsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Project[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4276,7 +4298,7 @@ class ProjectsApi
      *
      * Get a list of random projects
      *
-     * @param  mixed $count The number of random projects to return (required)
+     * @param  int $count The number of random projects to return (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['randomProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4297,7 +4319,7 @@ class ProjectsApi
      *
      * Get a list of random projects
      *
-     * @param  mixed $count The number of random projects to return (required)
+     * @param  int $count The number of random projects to return (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['randomProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4305,7 +4327,7 @@ class ProjectsApi
      */
     public function randomProjectsAsyncWithHttpInfo($count, string $contentType = self::contentTypes['randomProjects'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Project[]';
         $request = $this->randomProjectsRequest($count, $contentType);
 
         return $this->client
@@ -4347,7 +4369,7 @@ class ProjectsApi
     /**
      * Create request for operation 'randomProjects'
      *
-     * @param  mixed $count The number of random projects to return (required)
+     * @param  int $count The number of random projects to return (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['randomProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4375,7 +4397,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $count,
             'count', // param base name
-            'mixed', // openApiType
+            'integer', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -4442,7 +4464,7 @@ class ProjectsApi
      *
      * Schedule a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
@@ -4460,7 +4482,7 @@ class ProjectsApi
      *
      * Schedule a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
@@ -4537,7 +4559,7 @@ class ProjectsApi
      *
      * Schedule a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
@@ -4559,7 +4581,7 @@ class ProjectsApi
      *
      * Schedule a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
@@ -4597,7 +4619,7 @@ class ProjectsApi
     /**
      * Create request for operation 'scheduleProject'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
@@ -4705,20 +4727,20 @@ class ProjectsApi
      *
      * Search projects
      *
-     * @param  mixed $query The query to search for (optional)
-     * @param  mixed $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
-     * @param  mixed $index The sorting method used for sorting search results (optional)
-     * @param  mixed $offset The offset into the search. Skips this number of results (optional)
-     * @param  mixed $limit The number of results returned by the search (optional)
-     * @param  mixed $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
-     * @param  mixed $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
+     * @param  string $query The query to search for (optional)
+     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
+     * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
+     * @param  int $limit The number of results returned by the search (optional, default to 10)
+     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Aternos\ModrinthApi\Model\SearchResults|\Aternos\ModrinthApi\Model\InvalidInputError
      */
-    public function searchProjects($query = null, $facets = null, $index = null, $offset = null, $limit = null, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
+    public function searchProjects($query = null, $facets = null, $index = 'relevance', $offset = 0, $limit = 10, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
     {
         list($response) = $this->searchProjectsWithHttpInfo($query, $facets, $index, $offset, $limit, $filters, $version, $contentType);
         return $response;
@@ -4729,20 +4751,20 @@ class ProjectsApi
      *
      * Search projects
      *
-     * @param  mixed $query The query to search for (optional)
-     * @param  mixed $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
-     * @param  mixed $index The sorting method used for sorting search results (optional)
-     * @param  mixed $offset The offset into the search. Skips this number of results (optional)
-     * @param  mixed $limit The number of results returned by the search (optional)
-     * @param  mixed $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
-     * @param  mixed $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
+     * @param  string $query The query to search for (optional)
+     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
+     * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
+     * @param  int $limit The number of results returned by the search (optional, default to 10)
+     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Aternos\ModrinthApi\Model\SearchResults|\Aternos\ModrinthApi\Model\InvalidInputError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function searchProjectsWithHttpInfo($query = null, $facets = null, $index = null, $offset = null, $limit = null, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
+    public function searchProjectsWithHttpInfo($query = null, $facets = null, $index = 'relevance', $offset = 0, $limit = 10, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
     {
         $request = $this->searchProjectsRequest($query, $facets, $index, $offset, $limit, $filters, $version, $contentType);
 
@@ -4858,19 +4880,19 @@ class ProjectsApi
      *
      * Search projects
      *
-     * @param  mixed $query The query to search for (optional)
-     * @param  mixed $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
-     * @param  mixed $index The sorting method used for sorting search results (optional)
-     * @param  mixed $offset The offset into the search. Skips this number of results (optional)
-     * @param  mixed $limit The number of results returned by the search (optional)
-     * @param  mixed $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
-     * @param  mixed $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
+     * @param  string $query The query to search for (optional)
+     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
+     * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
+     * @param  int $limit The number of results returned by the search (optional, default to 10)
+     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchProjectsAsync($query = null, $facets = null, $index = null, $offset = null, $limit = null, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
+    public function searchProjectsAsync($query = null, $facets = null, $index = 'relevance', $offset = 0, $limit = 10, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
     {
         return $this->searchProjectsAsyncWithHttpInfo($query, $facets, $index, $offset, $limit, $filters, $version, $contentType)
             ->then(
@@ -4885,19 +4907,19 @@ class ProjectsApi
      *
      * Search projects
      *
-     * @param  mixed $query The query to search for (optional)
-     * @param  mixed $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
-     * @param  mixed $index The sorting method used for sorting search results (optional)
-     * @param  mixed $offset The offset into the search. Skips this number of results (optional)
-     * @param  mixed $limit The number of results returned by the search (optional)
-     * @param  mixed $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
-     * @param  mixed $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
+     * @param  string $query The query to search for (optional)
+     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
+     * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
+     * @param  int $limit The number of results returned by the search (optional, default to 10)
+     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchProjectsAsyncWithHttpInfo($query = null, $facets = null, $index = null, $offset = null, $limit = null, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
+    public function searchProjectsAsyncWithHttpInfo($query = null, $facets = null, $index = 'relevance', $offset = 0, $limit = 10, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
     {
         $returnType = '\Aternos\ModrinthApi\Model\SearchResults';
         $request = $this->searchProjectsRequest($query, $facets, $index, $offset, $limit, $filters, $version, $contentType);
@@ -4941,19 +4963,19 @@ class ProjectsApi
     /**
      * Create request for operation 'searchProjects'
      *
-     * @param  mixed $query The query to search for (optional)
-     * @param  mixed $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
-     * @param  mixed $index The sorting method used for sorting search results (optional)
-     * @param  mixed $offset The offset into the search. Skips this number of results (optional)
-     * @param  mixed $limit The number of results returned by the search (optional)
-     * @param  mixed $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
-     * @param  mixed $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
+     * @param  string $query The query to search for (optional)
+     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
+     * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
+     * @param  int $limit The number of results returned by the search (optional, default to 10)
+     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function searchProjectsRequest($query = null, $facets = null, $index = null, $offset = null, $limit = null, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
+    public function searchProjectsRequest($query = null, $facets = null, $index = 'relevance', $offset = 0, $limit = 10, $filters = null, $version = null, string $contentType = self::contentTypes['searchProjects'][0])
     {
 
 
@@ -4975,7 +4997,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $query,
             'query', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -4984,7 +5006,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $facets,
             'facets', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -4993,7 +5015,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $index,
             'index', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -5002,7 +5024,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $offset,
             'offset', // param base name
-            'mixed', // openApiType
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -5011,7 +5033,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $limit,
             'limit', // param base name
-            'mixed', // openApiType
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -5020,7 +5042,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $filters,
             'filters', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -5029,7 +5051,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $version,
             'version', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -5096,7 +5118,7 @@ class ProjectsApi
      *
      * Unfollow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unfollowProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -5113,7 +5135,7 @@ class ProjectsApi
      *
      * Unfollow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unfollowProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -5189,7 +5211,7 @@ class ProjectsApi
      *
      * Unfollow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unfollowProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5210,7 +5232,7 @@ class ProjectsApi
      *
      * Unfollow a project
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unfollowProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5247,7 +5269,7 @@ class ProjectsApi
     /**
      * Create request for operation 'unfollowProject'
      *
-     * @param  mixed $id_slug The ID or slug of the project (required)
+     * @param  string $id_slug The ID or slug of the project (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unfollowProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

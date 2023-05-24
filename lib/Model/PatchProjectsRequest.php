@@ -57,19 +57,19 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'categories' => 'mixed',
-        'add_categories' => 'mixed',
-        'remove_categories' => 'mixed',
-        'additional_categories' => 'mixed',
-        'add_additional_categories' => 'mixed',
-        'remove_additional_categories' => 'mixed',
-        'donation_urls' => 'mixed',
-        'add_donation_urls' => 'mixed',
-        'remove_donation_urls' => 'mixed',
-        'issues_url' => 'mixed',
-        'source_url' => 'mixed',
-        'wiki_url' => 'mixed',
-        'discord_url' => 'mixed'
+        'categories' => 'string[]',
+        'add_categories' => 'string[]',
+        'remove_categories' => 'string[]',
+        'additional_categories' => 'string[]',
+        'add_additional_categories' => 'string[]',
+        'remove_additional_categories' => 'string[]',
+        'donation_urls' => '\Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]',
+        'add_donation_urls' => '\Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]',
+        'remove_donation_urls' => '\Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]',
+        'issues_url' => 'string',
+        'source_url' => 'string',
+        'wiki_url' => 'string',
+        'discord_url' => 'string'
     ];
 
     /**
@@ -101,15 +101,15 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'categories' => true,
-		'add_categories' => true,
-		'remove_categories' => true,
-		'additional_categories' => true,
-		'add_additional_categories' => true,
-		'remove_additional_categories' => true,
-		'donation_urls' => true,
-		'add_donation_urls' => true,
-		'remove_donation_urls' => true,
+        'categories' => false,
+		'add_categories' => false,
+		'remove_categories' => false,
+		'additional_categories' => false,
+		'add_additional_categories' => false,
+		'remove_additional_categories' => false,
+		'donation_urls' => false,
+		'add_donation_urls' => false,
+		'remove_donation_urls' => false,
 		'issues_url' => true,
 		'source_url' => true,
 		'wiki_url' => true,
@@ -376,7 +376,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getCategories()
     {
@@ -386,21 +386,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets categories
      *
-     * @param mixed|null $categories Set all of the categories to the categories specified here
+     * @param string[]|null $categories Set all of the categories to the categories specified here
      *
      * @return self
      */
     public function setCategories($categories)
     {
         if (is_null($categories)) {
-            array_push($this->openAPINullablesSetToNull, 'categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable categories cannot be null');
         }
         $this->container['categories'] = $categories;
 
@@ -410,7 +403,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets add_categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getAddCategories()
     {
@@ -420,21 +413,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets add_categories
      *
-     * @param mixed|null $add_categories Add all of the categories specified here
+     * @param string[]|null $add_categories Add all of the categories specified here
      *
      * @return self
      */
     public function setAddCategories($add_categories)
     {
         if (is_null($add_categories)) {
-            array_push($this->openAPINullablesSetToNull, 'add_categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('add_categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable add_categories cannot be null');
         }
         $this->container['add_categories'] = $add_categories;
 
@@ -444,7 +430,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets remove_categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getRemoveCategories()
     {
@@ -454,21 +440,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets remove_categories
      *
-     * @param mixed|null $remove_categories Remove all of the categories specified here
+     * @param string[]|null $remove_categories Remove all of the categories specified here
      *
      * @return self
      */
     public function setRemoveCategories($remove_categories)
     {
         if (is_null($remove_categories)) {
-            array_push($this->openAPINullablesSetToNull, 'remove_categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('remove_categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable remove_categories cannot be null');
         }
         $this->container['remove_categories'] = $remove_categories;
 
@@ -478,7 +457,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets additional_categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getAdditionalCategories()
     {
@@ -488,21 +467,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets additional_categories
      *
-     * @param mixed|null $additional_categories Set all of the additional categories to the categories specified here
+     * @param string[]|null $additional_categories Set all of the additional categories to the categories specified here
      *
      * @return self
      */
     public function setAdditionalCategories($additional_categories)
     {
         if (is_null($additional_categories)) {
-            array_push($this->openAPINullablesSetToNull, 'additional_categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('additional_categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable additional_categories cannot be null');
         }
         $this->container['additional_categories'] = $additional_categories;
 
@@ -512,7 +484,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets add_additional_categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getAddAdditionalCategories()
     {
@@ -522,21 +494,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets add_additional_categories
      *
-     * @param mixed|null $add_additional_categories Add all of the additional categories specified here
+     * @param string[]|null $add_additional_categories Add all of the additional categories specified here
      *
      * @return self
      */
     public function setAddAdditionalCategories($add_additional_categories)
     {
         if (is_null($add_additional_categories)) {
-            array_push($this->openAPINullablesSetToNull, 'add_additional_categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('add_additional_categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable add_additional_categories cannot be null');
         }
         $this->container['add_additional_categories'] = $add_additional_categories;
 
@@ -546,7 +511,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets remove_additional_categories
      *
-     * @return mixed|null
+     * @return string[]|null
      */
     public function getRemoveAdditionalCategories()
     {
@@ -556,21 +521,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets remove_additional_categories
      *
-     * @param mixed|null $remove_additional_categories Remove all of the additional categories specified here
+     * @param string[]|null $remove_additional_categories Remove all of the additional categories specified here
      *
      * @return self
      */
     public function setRemoveAdditionalCategories($remove_additional_categories)
     {
         if (is_null($remove_additional_categories)) {
-            array_push($this->openAPINullablesSetToNull, 'remove_additional_categories');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('remove_additional_categories', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable remove_additional_categories cannot be null');
         }
         $this->container['remove_additional_categories'] = $remove_additional_categories;
 
@@ -580,7 +538,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets donation_urls
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]|null
      */
     public function getDonationUrls()
     {
@@ -590,21 +548,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets donation_urls
      *
-     * @param mixed|null $donation_urls Set all of the donation links to the donation links specified here
+     * @param \Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]|null $donation_urls Set all of the donation links to the donation links specified here
      *
      * @return self
      */
     public function setDonationUrls($donation_urls)
     {
         if (is_null($donation_urls)) {
-            array_push($this->openAPINullablesSetToNull, 'donation_urls');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('donation_urls', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable donation_urls cannot be null');
         }
         $this->container['donation_urls'] = $donation_urls;
 
@@ -614,7 +565,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets add_donation_urls
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]|null
      */
     public function getAddDonationUrls()
     {
@@ -624,21 +575,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets add_donation_urls
      *
-     * @param mixed|null $add_donation_urls Add all of the donation links specified here
+     * @param \Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]|null $add_donation_urls Add all of the donation links specified here
      *
      * @return self
      */
     public function setAddDonationUrls($add_donation_urls)
     {
         if (is_null($add_donation_urls)) {
-            array_push($this->openAPINullablesSetToNull, 'add_donation_urls');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('add_donation_urls', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable add_donation_urls cannot be null');
         }
         $this->container['add_donation_urls'] = $add_donation_urls;
 
@@ -648,7 +592,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets remove_donation_urls
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]|null
      */
     public function getRemoveDonationUrls()
     {
@@ -658,21 +602,14 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets remove_donation_urls
      *
-     * @param mixed|null $remove_donation_urls Remove all of the donation links specified here
+     * @param \Aternos\ModrinthApi\Model\PatchProjectsRequestDonationUrlsInner[]|null $remove_donation_urls Remove all of the donation links specified here
      *
      * @return self
      */
     public function setRemoveDonationUrls($remove_donation_urls)
     {
         if (is_null($remove_donation_urls)) {
-            array_push($this->openAPINullablesSetToNull, 'remove_donation_urls');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('remove_donation_urls', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable remove_donation_urls cannot be null');
         }
         $this->container['remove_donation_urls'] = $remove_donation_urls;
 
@@ -682,7 +619,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets issues_url
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getIssuesUrl()
     {
@@ -692,7 +629,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets issues_url
      *
-     * @param mixed|null $issues_url An optional link to where to submit bugs or issues with the projects
+     * @param string|null $issues_url An optional link to where to submit bugs or issues with the projects
      *
      * @return self
      */
@@ -716,7 +653,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets source_url
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getSourceUrl()
     {
@@ -726,7 +663,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets source_url
      *
-     * @param mixed|null $source_url An optional link to the source code of the projects
+     * @param string|null $source_url An optional link to the source code of the projects
      *
      * @return self
      */
@@ -750,7 +687,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets wiki_url
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getWikiUrl()
     {
@@ -760,7 +697,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets wiki_url
      *
-     * @param mixed|null $wiki_url An optional link to the projects' wiki page or other relevant information
+     * @param string|null $wiki_url An optional link to the projects' wiki page or other relevant information
      *
      * @return self
      */
@@ -784,7 +721,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets discord_url
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getDiscordUrl()
     {
@@ -794,7 +731,7 @@ class PatchProjectsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets discord_url
      *
-     * @param mixed|null $discord_url An optional invite link to the projects' discord
+     * @param string|null $discord_url An optional invite link to the projects' discord
      *
      * @return self
      */

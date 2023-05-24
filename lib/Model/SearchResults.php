@@ -57,10 +57,10 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'hits' => 'mixed',
-        'offset' => 'mixed',
-        'limit' => 'mixed',
-        'total_hits' => 'mixed'
+        'hits' => '\Aternos\ModrinthApi\Model\ProjectResult[]',
+        'offset' => 'int',
+        'limit' => 'int',
+        'total_hits' => 'int'
     ];
 
     /**
@@ -83,10 +83,10 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'hits' => true,
-		'offset' => true,
-		'limit' => true,
-		'total_hits' => true
+        'hits' => false,
+		'offset' => false,
+		'limit' => false,
+		'total_hits' => false
     ];
 
     /**
@@ -325,7 +325,7 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets hits
      *
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\ProjectResult[]
      */
     public function getHits()
     {
@@ -335,21 +335,14 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets hits
      *
-     * @param mixed $hits The list of results
+     * @param \Aternos\ModrinthApi\Model\ProjectResult[] $hits The list of results
      *
      * @return self
      */
     public function setHits($hits)
     {
         if (is_null($hits)) {
-            array_push($this->openAPINullablesSetToNull, 'hits');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('hits', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable hits cannot be null');
         }
         $this->container['hits'] = $hits;
 
@@ -359,7 +352,7 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets offset
      *
-     * @return mixed
+     * @return int
      */
     public function getOffset()
     {
@@ -369,21 +362,14 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets offset
      *
-     * @param mixed $offset The number of results that were skipped by the query
+     * @param int $offset The number of results that were skipped by the query
      *
      * @return self
      */
     public function setOffset($offset)
     {
         if (is_null($offset)) {
-            array_push($this->openAPINullablesSetToNull, 'offset');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('offset', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
         }
         $this->container['offset'] = $offset;
 
@@ -393,7 +379,7 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets limit
      *
-     * @return mixed
+     * @return int
      */
     public function getLimit()
     {
@@ -403,21 +389,14 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets limit
      *
-     * @param mixed $limit The number of results that were returned by the query
+     * @param int $limit The number of results that were returned by the query
      *
      * @return self
      */
     public function setLimit($limit)
     {
         if (is_null($limit)) {
-            array_push($this->openAPINullablesSetToNull, 'limit');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('limit', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
         $this->container['limit'] = $limit;
 
@@ -427,7 +406,7 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets total_hits
      *
-     * @return mixed
+     * @return int
      */
     public function getTotalHits()
     {
@@ -437,21 +416,14 @@ class SearchResults implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets total_hits
      *
-     * @param mixed $total_hits The total number of results that match the query
+     * @param int $total_hits The total number of results that match the query
      *
      * @return self
      */
     public function setTotalHits($total_hits)
     {
         if (is_null($total_hits)) {
-            array_push($this->openAPINullablesSetToNull, 'total_hits');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('total_hits', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable total_hits cannot be null');
         }
         $this->container['total_hits'] = $total_hits;
 

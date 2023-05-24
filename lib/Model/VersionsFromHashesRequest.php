@@ -57,8 +57,8 @@ class VersionsFromHashesRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'hashes' => 'mixed',
-        'algorithm' => 'mixed'
+        'hashes' => 'string[]',
+        'algorithm' => 'string'
     ];
 
     /**
@@ -79,8 +79,8 @@ class VersionsFromHashesRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'hashes' => true,
-		'algorithm' => true
+        'hashes' => false,
+		'algorithm' => false
     ];
 
     /**
@@ -329,7 +329,7 @@ class VersionsFromHashesRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets hashes
      *
-     * @return mixed
+     * @return string[]
      */
     public function getHashes()
     {
@@ -339,21 +339,14 @@ class VersionsFromHashesRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets hashes
      *
-     * @param mixed $hashes hashes
+     * @param string[] $hashes hashes
      *
      * @return self
      */
     public function setHashes($hashes)
     {
         if (is_null($hashes)) {
-            array_push($this->openAPINullablesSetToNull, 'hashes');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('hashes', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable hashes cannot be null');
         }
         $this->container['hashes'] = $hashes;
 
@@ -363,7 +356,7 @@ class VersionsFromHashesRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets algorithm
      *
-     * @return mixed
+     * @return string
      */
     public function getAlgorithm()
     {
@@ -373,24 +366,17 @@ class VersionsFromHashesRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets algorithm
      *
-     * @param mixed $algorithm algorithm
+     * @param string $algorithm algorithm
      *
      * @return self
      */
     public function setAlgorithm($algorithm)
     {
         if (is_null($algorithm)) {
-            array_push($this->openAPINullablesSetToNull, 'algorithm');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('algorithm', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
         }
         $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!is_null($algorithm) && !in_array($algorithm, $allowedValues, true)) {
+        if (!in_array($algorithm, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'algorithm', must be one of '%s'",

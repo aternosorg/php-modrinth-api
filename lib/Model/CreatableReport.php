@@ -57,10 +57,10 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'report_type' => 'mixed',
-        'item_id' => 'mixed',
-        'item_type' => 'mixed',
-        'body' => 'mixed'
+        'report_type' => 'string',
+        'item_id' => 'string',
+        'item_type' => 'string',
+        'body' => 'string'
     ];
 
     /**
@@ -83,10 +83,10 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'report_type' => true,
-		'item_id' => true,
-		'item_type' => true,
-		'body' => true
+        'report_type' => false,
+		'item_id' => false,
+		'item_type' => false,
+		'body' => false
     ];
 
     /**
@@ -351,7 +351,7 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets report_type
      *
-     * @return mixed
+     * @return string
      */
     public function getReportType()
     {
@@ -361,21 +361,14 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets report_type
      *
-     * @param mixed $report_type The type of the report being sent
+     * @param string $report_type The type of the report being sent
      *
      * @return self
      */
     public function setReportType($report_type)
     {
         if (is_null($report_type)) {
-            array_push($this->openAPINullablesSetToNull, 'report_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('report_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable report_type cannot be null');
         }
         $this->container['report_type'] = $report_type;
 
@@ -385,7 +378,7 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets item_id
      *
-     * @return mixed
+     * @return string
      */
     public function getItemId()
     {
@@ -395,21 +388,14 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets item_id
      *
-     * @param mixed $item_id The ID of the item (project, version, or user) being reported
+     * @param string $item_id The ID of the item (project, version, or user) being reported
      *
      * @return self
      */
     public function setItemId($item_id)
     {
         if (is_null($item_id)) {
-            array_push($this->openAPINullablesSetToNull, 'item_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('item_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable item_id cannot be null');
         }
         $this->container['item_id'] = $item_id;
 
@@ -419,7 +405,7 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets item_type
      *
-     * @return mixed
+     * @return string
      */
     public function getItemType()
     {
@@ -429,24 +415,17 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets item_type
      *
-     * @param mixed $item_type The type of the item being reported
+     * @param string $item_type The type of the item being reported
      *
      * @return self
      */
     public function setItemType($item_type)
     {
         if (is_null($item_type)) {
-            array_push($this->openAPINullablesSetToNull, 'item_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('item_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable item_type cannot be null');
         }
         $allowedValues = $this->getItemTypeAllowableValues();
-        if (!is_null($item_type) && !in_array($item_type, $allowedValues, true)) {
+        if (!in_array($item_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'item_type', must be one of '%s'",
@@ -463,7 +442,7 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets body
      *
-     * @return mixed
+     * @return string
      */
     public function getBody()
     {
@@ -473,21 +452,14 @@ class CreatableReport implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets body
      *
-     * @param mixed $body The extended explanation of the report
+     * @param string $body The extended explanation of the report
      *
      * @return self
      */
     public function setBody($body)
     {
         if (is_null($body)) {
-            array_push($this->openAPINullablesSetToNull, 'body');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('body', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable body cannot be null');
         }
         $this->container['body'] = $body;
 

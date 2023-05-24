@@ -72,7 +72,14 @@ class UsersApi
     /** @var string[] $contentTypes **/
     public const contentTypes = [
         'changeUserIcon' => [
-            'image/*',
+            'image/png',
+            'image/jpeg',
+            'image/bmp',
+            'image/gif',
+            'image/webp',
+            'image/svg',
+            'image/svgz',
+            'image/rgb',
         ],
         'deleteUser' => [
             'application/json',
@@ -157,8 +164,8 @@ class UsersApi
      *
      * Change user&#39;s avatar
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $body body (optional)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  \SplFileObject $body body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeUserIcon'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -175,8 +182,8 @@ class UsersApi
      *
      * Change user&#39;s avatar
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeUserIcon'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -244,8 +251,8 @@ class UsersApi
      *
      * Change user&#39;s avatar
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeUserIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -266,8 +273,8 @@ class UsersApi
      *
      * Change user&#39;s avatar
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeUserIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -304,8 +311,8 @@ class UsersApi
     /**
      * Create request for operation 'changeUserIcon'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $body (optional)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  \SplFileObject $body (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeUserIcon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -412,7 +419,7 @@ class UsersApi
      *
      * Delete a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -429,7 +436,7 @@ class UsersApi
      *
      * Delete a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -497,7 +504,7 @@ class UsersApi
      *
      * Delete a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -518,7 +525,7 @@ class UsersApi
      *
      * Delete a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -555,7 +562,7 @@ class UsersApi
     /**
      * Create request for operation 'deleteUser'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -654,12 +661,12 @@ class UsersApi
      *
      * Get user&#39;s followed projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFollowedProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed|\Aternos\ModrinthApi\Model\AuthError
+     * @return \Aternos\ModrinthApi\Model\Project[]|\Aternos\ModrinthApi\Model\AuthError
      */
     public function getFollowedProjects($id_username, string $contentType = self::contentTypes['getFollowedProjects'][0])
     {
@@ -672,12 +679,12 @@ class UsersApi
      *
      * Get user&#39;s followed projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFollowedProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Project[]|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getFollowedProjectsWithHttpInfo($id_username, string $contentType = self::contentTypes['getFollowedProjects'][0])
     {
@@ -720,17 +727,17 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Project[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Project[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Project[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -751,7 +758,7 @@ class UsersApi
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Project[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -772,7 +779,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Project[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -795,7 +802,7 @@ class UsersApi
      *
      * Get user&#39;s followed projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFollowedProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -816,7 +823,7 @@ class UsersApi
      *
      * Get user&#39;s followed projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFollowedProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -824,7 +831,7 @@ class UsersApi
      */
     public function getFollowedProjectsAsyncWithHttpInfo($id_username, string $contentType = self::contentTypes['getFollowedProjects'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Project[]';
         $request = $this->getFollowedProjectsRequest($id_username, $contentType);
 
         return $this->client
@@ -866,7 +873,7 @@ class UsersApi
     /**
      * Create request for operation 'getFollowedProjects'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFollowedProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -965,12 +972,12 @@ class UsersApi
      *
      * Get user&#39;s notifications
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed|\Aternos\ModrinthApi\Model\AuthError
+     * @return \Aternos\ModrinthApi\Model\Notification[]|\Aternos\ModrinthApi\Model\AuthError
      */
     public function getNotifications($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
@@ -983,12 +990,12 @@ class UsersApi
      *
      * Get user&#39;s notifications
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Notification[]|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getNotificationsWithHttpInfo($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
@@ -1031,17 +1038,17 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Notification[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Notification[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Notification[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1062,7 +1069,7 @@ class UsersApi
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Notification[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1083,7 +1090,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Notification[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1106,7 +1113,7 @@ class UsersApi
      *
      * Get user&#39;s notifications
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1127,7 +1134,7 @@ class UsersApi
      *
      * Get user&#39;s notifications
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1135,7 +1142,7 @@ class UsersApi
      */
     public function getNotificationsAsyncWithHttpInfo($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Notification[]';
         $request = $this->getNotificationsRequest($id_username, $contentType);
 
         return $this->client
@@ -1177,7 +1184,7 @@ class UsersApi
     /**
      * Create request for operation 'getNotifications'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1276,7 +1283,7 @@ class UsersApi
      *
      * Get user&#39;s payout history
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPayoutHistory'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1294,7 +1301,7 @@ class UsersApi
      *
      * Get user&#39;s payout history
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPayoutHistory'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1417,7 +1424,7 @@ class UsersApi
      *
      * Get user&#39;s payout history
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPayoutHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1438,7 +1445,7 @@ class UsersApi
      *
      * Get user&#39;s payout history
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPayoutHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1488,7 +1495,7 @@ class UsersApi
     /**
      * Create request for operation 'getPayoutHistory'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPayoutHistory'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1587,12 +1594,12 @@ class UsersApi
      *
      * Get a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUser'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\User
      */
     public function getUser($id_username, string $contentType = self::contentTypes['getUser'][0])
     {
@@ -1605,12 +1612,12 @@ class UsersApi
      *
      * Get a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUser'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\User, HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserWithHttpInfo($id_username, string $contentType = self::contentTypes['getUser'][0])
     {
@@ -1653,23 +1660,23 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\User' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\User' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\User', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\User';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1690,7 +1697,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\User',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1705,7 +1712,7 @@ class UsersApi
      *
      * Get a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1726,7 +1733,7 @@ class UsersApi
      *
      * Get a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1734,7 +1741,7 @@ class UsersApi
      */
     public function getUserAsyncWithHttpInfo($id_username, string $contentType = self::contentTypes['getUser'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\User';
         $request = $this->getUserRequest($id_username, $contentType);
 
         return $this->client
@@ -1776,7 +1783,7 @@ class UsersApi
     /**
      * Create request for operation 'getUser'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1874,7 +1881,7 @@ class UsersApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed|\Aternos\ModrinthApi\Model\AuthError
+     * @return \Aternos\ModrinthApi\Model\User|\Aternos\ModrinthApi\Model\AuthError
      */
     public function getUserFromAuth(string $contentType = self::contentTypes['getUserFromAuth'][0])
     {
@@ -1891,7 +1898,7 @@ class UsersApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\User|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserFromAuthWithHttpInfo(string $contentType = self::contentTypes['getUserFromAuth'][0])
     {
@@ -1934,17 +1941,17 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\User' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\User' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\User', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1965,7 +1972,7 @@ class UsersApi
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\User';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1986,7 +1993,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\User',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2036,7 +2043,7 @@ class UsersApi
      */
     public function getUserFromAuthAsyncWithHttpInfo(string $contentType = self::contentTypes['getUserFromAuth'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\User';
         $request = $this->getUserFromAuthRequest($contentType);
 
         return $this->client
@@ -2161,12 +2168,12 @@ class UsersApi
      *
      * Get user&#39;s projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Project[]
      */
     public function getUserProjects($id_username, string $contentType = self::contentTypes['getUserProjects'][0])
     {
@@ -2179,12 +2186,12 @@ class UsersApi
      *
      * Get user&#39;s projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Project[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserProjectsWithHttpInfo($id_username, string $contentType = self::contentTypes['getUserProjects'][0])
     {
@@ -2227,23 +2234,23 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Project[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Project[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Project[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Project[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2264,7 +2271,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Project[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2279,7 +2286,7 @@ class UsersApi
      *
      * Get user&#39;s projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2300,7 +2307,7 @@ class UsersApi
      *
      * Get user&#39;s projects
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2308,7 +2315,7 @@ class UsersApi
      */
     public function getUserProjectsAsyncWithHttpInfo($id_username, string $contentType = self::contentTypes['getUserProjects'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Project[]';
         $request = $this->getUserProjectsRequest($id_username, $contentType);
 
         return $this->client
@@ -2350,7 +2357,7 @@ class UsersApi
     /**
      * Create request for operation 'getUserProjects'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUserProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2444,12 +2451,12 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  mixed $ids The IDs of the users (required)
+     * @param  string[] $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\User[]
      */
     public function getUsers($ids, string $contentType = self::contentTypes['getUsers'][0])
     {
@@ -2462,12 +2469,12 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  mixed $ids The IDs of the users (required)
+     * @param  string[] $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\User[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getUsersWithHttpInfo($ids, string $contentType = self::contentTypes['getUsers'][0])
     {
@@ -2510,23 +2517,23 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\User[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\User[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\User[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\User[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2547,7 +2554,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\User[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2562,7 +2569,7 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  mixed $ids The IDs of the users (required)
+     * @param  string[] $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2583,7 +2590,7 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  mixed $ids The IDs of the users (required)
+     * @param  string[] $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2591,7 +2598,7 @@ class UsersApi
      */
     public function getUsersAsyncWithHttpInfo($ids, string $contentType = self::contentTypes['getUsers'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\User[]';
         $request = $this->getUsersRequest($ids, $contentType);
 
         return $this->client
@@ -2633,7 +2640,7 @@ class UsersApi
     /**
      * Create request for operation 'getUsers'
      *
-     * @param  mixed $ids The IDs of the users (required)
+     * @param  string[] $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2661,7 +2668,7 @@ class UsersApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'mixed', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -2728,7 +2735,7 @@ class UsersApi
      *
      * Modify a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  \Aternos\ModrinthApi\Model\EditableUser $editable_user Modified user fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyUser'] to see the possible values for this operation
      *
@@ -2746,7 +2753,7 @@ class UsersApi
      *
      * Modify a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  \Aternos\ModrinthApi\Model\EditableUser $editable_user Modified user fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyUser'] to see the possible values for this operation
      *
@@ -2815,7 +2822,7 @@ class UsersApi
      *
      * Modify a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  \Aternos\ModrinthApi\Model\EditableUser $editable_user Modified user fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyUser'] to see the possible values for this operation
      *
@@ -2837,7 +2844,7 @@ class UsersApi
      *
      * Modify a user
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  \Aternos\ModrinthApi\Model\EditableUser $editable_user Modified user fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyUser'] to see the possible values for this operation
      *
@@ -2875,7 +2882,7 @@ class UsersApi
     /**
      * Create request for operation 'modifyUser'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
+     * @param  string $id_username The ID or username of the user (required)
      * @param  \Aternos\ModrinthApi\Model\EditableUser $editable_user Modified user fields (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyUser'] to see the possible values for this operation
      *
@@ -2983,8 +2990,8 @@ class UsersApi
      *
      * Withdraw payout balance to PayPal or Venmo
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $amount Amount to withdraw (required)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  int $amount Amount to withdraw (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['withdrawPayout'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -3001,8 +3008,8 @@ class UsersApi
      *
      * Withdraw payout balance to PayPal or Venmo
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $amount Amount to withdraw (required)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  int $amount Amount to withdraw (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['withdrawPayout'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -3070,8 +3077,8 @@ class UsersApi
      *
      * Withdraw payout balance to PayPal or Venmo
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $amount Amount to withdraw (required)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  int $amount Amount to withdraw (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['withdrawPayout'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3092,8 +3099,8 @@ class UsersApi
      *
      * Withdraw payout balance to PayPal or Venmo
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $amount Amount to withdraw (required)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  int $amount Amount to withdraw (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['withdrawPayout'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3130,8 +3137,8 @@ class UsersApi
     /**
      * Create request for operation 'withdrawPayout'
      *
-     * @param  mixed $id_username The ID or username of the user (required)
-     * @param  mixed $amount Amount to withdraw (required)
+     * @param  string $id_username The ID or username of the user (required)
+     * @param  int $amount Amount to withdraw (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['withdrawPayout'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3166,7 +3173,7 @@ class UsersApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $amount,
             'amount', // param base name
-            'mixed', // openApiType
+            'integer', // openApiType
             'form', // style
             true, // explode
             true // required

@@ -57,10 +57,10 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'projects' => 'mixed',
-        'versions' => 'mixed',
-        'files' => 'mixed',
-        'authors' => 'mixed'
+        'projects' => 'int',
+        'versions' => 'int',
+        'files' => 'int',
+        'authors' => 'int'
     ];
 
     /**
@@ -83,10 +83,10 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'projects' => true,
-		'versions' => true,
-		'files' => true,
-		'authors' => true
+        'projects' => false,
+		'versions' => false,
+		'files' => false,
+		'authors' => false
     ];
 
     /**
@@ -313,7 +313,7 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets projects
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getProjects()
     {
@@ -323,21 +323,14 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets projects
      *
-     * @param mixed|null $projects Number of projects on Modrinth
+     * @param int|null $projects Number of projects on Modrinth
      *
      * @return self
      */
     public function setProjects($projects)
     {
         if (is_null($projects)) {
-            array_push($this->openAPINullablesSetToNull, 'projects');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('projects', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable projects cannot be null');
         }
         $this->container['projects'] = $projects;
 
@@ -347,7 +340,7 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets versions
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getVersions()
     {
@@ -357,21 +350,14 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets versions
      *
-     * @param mixed|null $versions Number of projects on Modrinth
+     * @param int|null $versions Number of projects on Modrinth
      *
      * @return self
      */
     public function setVersions($versions)
     {
         if (is_null($versions)) {
-            array_push($this->openAPINullablesSetToNull, 'versions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('versions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable versions cannot be null');
         }
         $this->container['versions'] = $versions;
 
@@ -381,7 +367,7 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets files
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getFiles()
     {
@@ -391,21 +377,14 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets files
      *
-     * @param mixed|null $files Number of version files on Modrinth
+     * @param int|null $files Number of version files on Modrinth
      *
      * @return self
      */
     public function setFiles($files)
     {
         if (is_null($files)) {
-            array_push($this->openAPINullablesSetToNull, 'files');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('files', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable files cannot be null');
         }
         $this->container['files'] = $files;
 
@@ -415,7 +394,7 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets authors
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getAuthors()
     {
@@ -425,21 +404,14 @@ class Statistics200Response implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets authors
      *
-     * @param mixed|null $authors Number of authors (users with projects) on Modrinth
+     * @param int|null $authors Number of authors (users with projects) on Modrinth
      *
      * @return self
      */
     public function setAuthors($authors)
     {
         if (is_null($authors)) {
-            array_push($this->openAPINullablesSetToNull, 'authors');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('authors', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable authors cannot be null');
         }
         $this->container['authors'] = $authors;
 

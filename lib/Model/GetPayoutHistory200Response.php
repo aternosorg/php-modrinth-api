@@ -57,9 +57,9 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'all_time' => 'mixed',
-        'last_month' => 'mixed',
-        'payouts' => 'mixed'
+        'all_time' => 'int',
+        'last_month' => 'int',
+        'payouts' => '\Aternos\ModrinthApi\Model\GetPayoutHistory200ResponsePayoutsInner[]'
     ];
 
     /**
@@ -81,9 +81,9 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'all_time' => true,
-		'last_month' => true,
-		'payouts' => true
+        'all_time' => false,
+		'last_month' => false,
+		'payouts' => false
     ];
 
     /**
@@ -306,7 +306,7 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets all_time
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getAllTime()
     {
@@ -316,21 +316,14 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets all_time
      *
-     * @param mixed|null $all_time The all-time balance accrued by this user
+     * @param int|null $all_time The all-time balance accrued by this user
      *
      * @return self
      */
     public function setAllTime($all_time)
     {
         if (is_null($all_time)) {
-            array_push($this->openAPINullablesSetToNull, 'all_time');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('all_time', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable all_time cannot be null');
         }
         $this->container['all_time'] = $all_time;
 
@@ -340,7 +333,7 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets last_month
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getLastMonth()
     {
@@ -350,21 +343,14 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets last_month
      *
-     * @param mixed|null $last_month The amount made by the user in the previous 30 days
+     * @param int|null $last_month The amount made by the user in the previous 30 days
      *
      * @return self
      */
     public function setLastMonth($last_month)
     {
         if (is_null($last_month)) {
-            array_push($this->openAPINullablesSetToNull, 'last_month');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('last_month', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable last_month cannot be null');
         }
         $this->container['last_month'] = $last_month;
 
@@ -374,7 +360,7 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets payouts
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\GetPayoutHistory200ResponsePayoutsInner[]|null
      */
     public function getPayouts()
     {
@@ -384,21 +370,14 @@ class GetPayoutHistory200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets payouts
      *
-     * @param mixed|null $payouts A history of all of the user's past transactions
+     * @param \Aternos\ModrinthApi\Model\GetPayoutHistory200ResponsePayoutsInner[]|null $payouts A history of all of the user's past transactions
      *
      * @return self
      */
     public function setPayouts($payouts)
     {
         if (is_null($payouts)) {
-            array_push($this->openAPINullablesSetToNull, 'payouts');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payouts', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payouts cannot be null');
         }
         $this->container['payouts'] = $payouts;
 

@@ -58,10 +58,10 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'balance' => 'mixed',
-        'payout_wallet' => 'mixed',
-        'payout_wallet_type' => 'mixed',
-        'payout_address' => 'mixed'
+        'balance' => 'int',
+        'payout_wallet' => 'string',
+        'payout_wallet_type' => 'string',
+        'payout_address' => 'string'
     ];
 
     /**
@@ -84,10 +84,10 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'balance' => true,
-		'payout_wallet' => true,
-		'payout_wallet_type' => true,
-		'payout_address' => true
+        'balance' => false,
+		'payout_wallet' => false,
+		'payout_wallet_type' => false,
+		'payout_address' => false
     ];
 
     /**
@@ -364,7 +364,7 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets balance
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getBalance()
     {
@@ -374,21 +374,14 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets balance
      *
-     * @param mixed|null $balance The payout balance available for the user to withdraw (note, you cannot modify this in a PATCH request)
+     * @param int|null $balance The payout balance available for the user to withdraw (note, you cannot modify this in a PATCH request)
      *
      * @return self
      */
     public function setBalance($balance)
     {
         if (is_null($balance)) {
-            array_push($this->openAPINullablesSetToNull, 'balance');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('balance', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable balance cannot be null');
         }
         $this->container['balance'] = $balance;
 
@@ -398,7 +391,7 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets payout_wallet
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getPayoutWallet()
     {
@@ -408,24 +401,17 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets payout_wallet
      *
-     * @param mixed|null $payout_wallet The wallet that the user has selected
+     * @param string|null $payout_wallet The wallet that the user has selected
      *
      * @return self
      */
     public function setPayoutWallet($payout_wallet)
     {
         if (is_null($payout_wallet)) {
-            array_push($this->openAPINullablesSetToNull, 'payout_wallet');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payout_wallet', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payout_wallet cannot be null');
         }
         $allowedValues = $this->getPayoutWalletAllowableValues();
-        if (!is_null($payout_wallet) && !in_array($payout_wallet, $allowedValues, true)) {
+        if (!in_array($payout_wallet, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'payout_wallet', must be one of '%s'",
@@ -442,7 +428,7 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets payout_wallet_type
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getPayoutWalletType()
     {
@@ -452,24 +438,17 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets payout_wallet_type
      *
-     * @param mixed|null $payout_wallet_type The type of the user's wallet
+     * @param string|null $payout_wallet_type The type of the user's wallet
      *
      * @return self
      */
     public function setPayoutWalletType($payout_wallet_type)
     {
         if (is_null($payout_wallet_type)) {
-            array_push($this->openAPINullablesSetToNull, 'payout_wallet_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payout_wallet_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payout_wallet_type cannot be null');
         }
         $allowedValues = $this->getPayoutWalletTypeAllowableValues();
-        if (!is_null($payout_wallet_type) && !in_array($payout_wallet_type, $allowedValues, true)) {
+        if (!in_array($payout_wallet_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'payout_wallet_type', must be one of '%s'",
@@ -486,7 +465,7 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets payout_address
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getPayoutAddress()
     {
@@ -496,21 +475,14 @@ class EditableUserPayoutData implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets payout_address
      *
-     * @param mixed|null $payout_address The user's payout address
+     * @param string|null $payout_address The user's payout address
      *
      * @return self
      */
     public function setPayoutAddress($payout_address)
     {
         if (is_null($payout_address)) {
-            array_push($this->openAPINullablesSetToNull, 'payout_address');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payout_address', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable payout_address cannot be null');
         }
         $this->container['payout_address'] = $payout_address;
 

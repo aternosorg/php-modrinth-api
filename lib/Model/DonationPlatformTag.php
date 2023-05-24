@@ -57,8 +57,8 @@ class DonationPlatformTag implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'short' => 'mixed',
-        'name' => 'mixed'
+        'short' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -79,8 +79,8 @@ class DonationPlatformTag implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'short' => true,
-		'name' => true
+        'short' => false,
+		'name' => false
     ];
 
     /**
@@ -305,7 +305,7 @@ class DonationPlatformTag implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets short
      *
-     * @return mixed
+     * @return string
      */
     public function getShort()
     {
@@ -315,21 +315,14 @@ class DonationPlatformTag implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets short
      *
-     * @param mixed $short The short identifier of the donation platform
+     * @param string $short The short identifier of the donation platform
      *
      * @return self
      */
     public function setShort($short)
     {
         if (is_null($short)) {
-            array_push($this->openAPINullablesSetToNull, 'short');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('short', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable short cannot be null');
         }
         $this->container['short'] = $short;
 
@@ -339,7 +332,7 @@ class DonationPlatformTag implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets name
      *
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -349,21 +342,14 @@ class DonationPlatformTag implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets name
      *
-     * @param mixed $name The full name of the donation platform
+     * @param string $name The full name of the donation platform
      *
      * @return self
      */
     public function setName($name)
     {
         if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 

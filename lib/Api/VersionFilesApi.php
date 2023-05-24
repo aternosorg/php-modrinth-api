@@ -139,16 +139,16 @@ class VersionFilesApi
      *
      * Delete a file from its hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  string $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFileFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteFileFromHash($hash, $algorithm = null, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
+    public function deleteFileFromHash($hash, $algorithm, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
     {
         $this->deleteFileFromHashWithHttpInfo($hash, $algorithm, $version_id, $contentType);
     }
@@ -158,16 +158,16 @@ class VersionFilesApi
      *
      * Delete a file from its hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  string $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFileFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteFileFromHashWithHttpInfo($hash, $algorithm = null, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
+    public function deleteFileFromHashWithHttpInfo($hash, $algorithm, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
     {
         $request = $this->deleteFileFromHashRequest($hash, $algorithm, $version_id, $contentType);
 
@@ -228,15 +228,15 @@ class VersionFilesApi
      *
      * Delete a file from its hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  string $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFileFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteFileFromHashAsync($hash, $algorithm = null, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
+    public function deleteFileFromHashAsync($hash, $algorithm, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
     {
         return $this->deleteFileFromHashAsyncWithHttpInfo($hash, $algorithm, $version_id, $contentType)
             ->then(
@@ -251,15 +251,15 @@ class VersionFilesApi
      *
      * Delete a file from its hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  string $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFileFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteFileFromHashAsyncWithHttpInfo($hash, $algorithm = null, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
+    public function deleteFileFromHashAsyncWithHttpInfo($hash, $algorithm, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
     {
         $returnType = '';
         $request = $this->deleteFileFromHashRequest($hash, $algorithm, $version_id, $contentType);
@@ -290,15 +290,15 @@ class VersionFilesApi
     /**
      * Create request for operation 'deleteFileFromHash'
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  string $version_id Version ID to delete the version from, if multiple files of the same hash exist (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFileFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteFileFromHashRequest($hash, $algorithm = null, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
+    public function deleteFileFromHashRequest($hash, $algorithm, $version_id = null, string $contentType = self::contentTypes['deleteFileFromHash'][0])
     {
 
         // verify the required parameter 'hash' is set
@@ -308,6 +308,12 @@ class VersionFilesApi
             );
         }
 
+        // verify the required parameter 'algorithm' is set
+        if ($algorithm === null || (is_array($algorithm) && count($algorithm) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $algorithm when calling deleteFileFromHash'
+            );
+        }
 
 
 
@@ -322,16 +328,16 @@ class VersionFilesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $algorithm,
             'algorithm', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
-            false // required
+            true // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $version_id,
             'version_id', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -411,16 +417,16 @@ class VersionFilesApi
      *
      * Latest version of a project from a hash, loader(s), and game version(s)
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
      * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Version
      */
-    public function getLatestVersionFromHash($hash, $algorithm = null, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
         list($response) = $this->getLatestVersionFromHashWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request, $contentType);
         return $response;
@@ -431,16 +437,16 @@ class VersionFilesApi
      *
      * Latest version of a project from a hash, loader(s), and game version(s)
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
      * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Version, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getLatestVersionFromHashWithHttpInfo($hash, $algorithm = null, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
         $request = $this->getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_request, $contentType);
 
@@ -481,23 +487,23 @@ class VersionFilesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Version' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Version' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Version', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Version';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -518,7 +524,7 @@ class VersionFilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Version',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -533,15 +539,15 @@ class VersionFilesApi
      *
      * Latest version of a project from a hash, loader(s), and game version(s)
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
      * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLatestVersionFromHashAsync($hash, $algorithm = null, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashAsync($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
         return $this->getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request, $contentType)
             ->then(
@@ -556,17 +562,17 @@ class VersionFilesApi
      *
      * Latest version of a project from a hash, loader(s), and game version(s)
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
      * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm = null, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Version';
         $request = $this->getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_request, $contentType);
 
         return $this->client
@@ -608,15 +614,15 @@ class VersionFilesApi
     /**
      * Create request for operation 'getLatestVersionFromHash'
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
      * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getLatestVersionFromHashRequest($hash, $algorithm = null, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
 
         // verify the required parameter 'hash' is set
@@ -626,6 +632,12 @@ class VersionFilesApi
             );
         }
 
+        // verify the required parameter 'algorithm' is set
+        if ($algorithm === null || (is_array($algorithm) && count($algorithm) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $algorithm when calling getLatestVersionFromHash'
+            );
+        }
 
 
 
@@ -640,10 +652,10 @@ class VersionFilesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $algorithm,
             'algorithm', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
-            false // required
+            true // required
         ) ?? []);
 
 
@@ -998,16 +1010,16 @@ class VersionFilesApi
      *
      * Get version from hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $multiple Whether to return multiple results when looking for this hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  bool $multiple Whether to return multiple results when looking for this hash (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return mixed
+     * @return \Aternos\ModrinthApi\Model\Version
      */
-    public function versionFromHash($hash, $algorithm = null, $multiple = null, string $contentType = self::contentTypes['versionFromHash'][0])
+    public function versionFromHash($hash, $algorithm, $multiple = false, string $contentType = self::contentTypes['versionFromHash'][0])
     {
         list($response) = $this->versionFromHashWithHttpInfo($hash, $algorithm, $multiple, $contentType);
         return $response;
@@ -1018,16 +1030,16 @@ class VersionFilesApi
      *
      * Get version from hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $multiple Whether to return multiple results when looking for this hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  bool $multiple Whether to return multiple results when looking for this hash (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of mixed, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Version, HTTP status code, HTTP response headers (array of strings)
      */
-    public function versionFromHashWithHttpInfo($hash, $algorithm = null, $multiple = null, string $contentType = self::contentTypes['versionFromHash'][0])
+    public function versionFromHashWithHttpInfo($hash, $algorithm, $multiple = false, string $contentType = self::contentTypes['versionFromHash'][0])
     {
         $request = $this->versionFromHashRequest($hash, $algorithm, $multiple, $contentType);
 
@@ -1068,23 +1080,23 @@ class VersionFilesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('mixed' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Version' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('mixed' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Version' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'mixed', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Version', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'mixed';
+            $returnType = '\Aternos\ModrinthApi\Model\Version';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1105,7 +1117,7 @@ class VersionFilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'mixed',
+                        '\Aternos\ModrinthApi\Model\Version',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1120,15 +1132,15 @@ class VersionFilesApi
      *
      * Get version from hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $multiple Whether to return multiple results when looking for this hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  bool $multiple Whether to return multiple results when looking for this hash (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function versionFromHashAsync($hash, $algorithm = null, $multiple = null, string $contentType = self::contentTypes['versionFromHash'][0])
+    public function versionFromHashAsync($hash, $algorithm, $multiple = false, string $contentType = self::contentTypes['versionFromHash'][0])
     {
         return $this->versionFromHashAsyncWithHttpInfo($hash, $algorithm, $multiple, $contentType)
             ->then(
@@ -1143,17 +1155,17 @@ class VersionFilesApi
      *
      * Get version from hash
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $multiple Whether to return multiple results when looking for this hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  bool $multiple Whether to return multiple results when looking for this hash (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function versionFromHashAsyncWithHttpInfo($hash, $algorithm = null, $multiple = null, string $contentType = self::contentTypes['versionFromHash'][0])
+    public function versionFromHashAsyncWithHttpInfo($hash, $algorithm, $multiple = false, string $contentType = self::contentTypes['versionFromHash'][0])
     {
-        $returnType = 'mixed';
+        $returnType = '\Aternos\ModrinthApi\Model\Version';
         $request = $this->versionFromHashRequest($hash, $algorithm, $multiple, $contentType);
 
         return $this->client
@@ -1195,15 +1207,15 @@ class VersionFilesApi
     /**
      * Create request for operation 'versionFromHash'
      *
-     * @param  mixed $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
-     * @param  mixed $algorithm The algorithm of the hash (optional)
-     * @param  mixed $multiple Whether to return multiple results when looking for this hash (optional)
+     * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
+     * @param  string $algorithm The algorithm of the hash (required)
+     * @param  bool $multiple Whether to return multiple results when looking for this hash (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function versionFromHashRequest($hash, $algorithm = null, $multiple = null, string $contentType = self::contentTypes['versionFromHash'][0])
+    public function versionFromHashRequest($hash, $algorithm, $multiple = false, string $contentType = self::contentTypes['versionFromHash'][0])
     {
 
         // verify the required parameter 'hash' is set
@@ -1213,6 +1225,12 @@ class VersionFilesApi
             );
         }
 
+        // verify the required parameter 'algorithm' is set
+        if ($algorithm === null || (is_array($algorithm) && count($algorithm) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $algorithm when calling versionFromHash'
+            );
+        }
 
 
 
@@ -1227,16 +1245,16 @@ class VersionFilesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $algorithm,
             'algorithm', // param base name
-            'mixed', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
-            false // required
+            true // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $multiple,
             'multiple', // param base name
-            'mixed', // openApiType
+            'boolean', // openApiType
             'form', // style
             true, // explode
             false // required

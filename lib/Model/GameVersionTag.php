@@ -57,10 +57,10 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'version' => 'mixed',
-        'version_type' => 'mixed',
-        'date' => 'mixed',
-        'major' => 'mixed'
+        'version' => 'string',
+        'version_type' => 'string',
+        'date' => 'string',
+        'major' => 'bool'
     ];
 
     /**
@@ -83,10 +83,10 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'version' => true,
-		'version_type' => true,
-		'date' => true,
-		'major' => true
+        'version' => false,
+		'version_type' => false,
+		'date' => false,
+		'major' => false
     ];
 
     /**
@@ -353,7 +353,7 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets version
      *
-     * @return mixed
+     * @return string
      */
     public function getVersion()
     {
@@ -363,21 +363,14 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets version
      *
-     * @param mixed $version The name/number of the game version
+     * @param string $version The name/number of the game version
      *
      * @return self
      */
     public function setVersion($version)
     {
         if (is_null($version)) {
-            array_push($this->openAPINullablesSetToNull, 'version');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('version', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
         $this->container['version'] = $version;
 
@@ -387,7 +380,7 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets version_type
      *
-     * @return mixed
+     * @return string
      */
     public function getVersionType()
     {
@@ -397,24 +390,17 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets version_type
      *
-     * @param mixed $version_type The type of the game version
+     * @param string $version_type The type of the game version
      *
      * @return self
      */
     public function setVersionType($version_type)
     {
         if (is_null($version_type)) {
-            array_push($this->openAPINullablesSetToNull, 'version_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('version_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable version_type cannot be null');
         }
         $allowedValues = $this->getVersionTypeAllowableValues();
-        if (!is_null($version_type) && !in_array($version_type, $allowedValues, true)) {
+        if (!in_array($version_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'version_type', must be one of '%s'",
@@ -431,7 +417,7 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets date
      *
-     * @return mixed
+     * @return string
      */
     public function getDate()
     {
@@ -441,21 +427,14 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets date
      *
-     * @param mixed $date The date of the game version release
+     * @param string $date The date of the game version release
      *
      * @return self
      */
     public function setDate($date)
     {
         if (is_null($date)) {
-            array_push($this->openAPINullablesSetToNull, 'date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable date cannot be null');
         }
         $this->container['date'] = $date;
 
@@ -465,7 +444,7 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets major
      *
-     * @return mixed
+     * @return bool
      */
     public function getMajor()
     {
@@ -475,21 +454,14 @@ class GameVersionTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets major
      *
-     * @param mixed $major Whether or not this is a major version, used for Featured Versions
+     * @param bool $major Whether or not this is a major version, used for Featured Versions
      *
      * @return self
      */
     public function setMajor($major)
     {
         if (is_null($major)) {
-            array_push($this->openAPINullablesSetToNull, 'major');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('major', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable major cannot be null');
         }
         $this->container['major'] = $major;
 

@@ -57,7 +57,7 @@ class CheckProjectValidity200Response implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'mixed'
+        'id' => 'string'
     ];
 
     /**
@@ -77,7 +77,7 @@ class CheckProjectValidity200Response implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true
+        'id' => false
     ];
 
     /**
@@ -292,7 +292,7 @@ class CheckProjectValidity200Response implements ModelInterface, ArrayAccess, \J
     /**
      * Gets id
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getId()
     {
@@ -302,21 +302,14 @@ class CheckProjectValidity200Response implements ModelInterface, ArrayAccess, \J
     /**
      * Sets id
      *
-     * @param mixed|null $id id
+     * @param string|null $id id
      *
      * @return self
      */
     public function setId($id)
     {
         if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 

@@ -57,7 +57,7 @@ class AddTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_id' => 'mixed'
+        'user_id' => 'string'
     ];
 
     /**
@@ -77,7 +77,7 @@ class AddTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'user_id' => true
+        'user_id' => false
     ];
 
     /**
@@ -295,7 +295,7 @@ class AddTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets user_id
      *
-     * @return mixed
+     * @return string
      */
     public function getUserId()
     {
@@ -305,21 +305,14 @@ class AddTeamMemberRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets user_id
      *
-     * @param mixed $user_id user_id
+     * @param string $user_id user_id
      *
      * @return self
      */
     public function setUserId($user_id)
     {
         if (is_null($user_id)) {
-            array_push($this->openAPINullablesSetToNull, 'user_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('user_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
         }
         $this->container['user_id'] = $user_id;
 

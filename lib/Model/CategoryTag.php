@@ -57,10 +57,10 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'icon' => 'mixed',
-        'name' => 'mixed',
-        'project_type' => 'mixed',
-        'header' => 'mixed'
+        'icon' => 'string',
+        'name' => 'string',
+        'project_type' => 'string',
+        'header' => 'string'
     ];
 
     /**
@@ -83,10 +83,10 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'icon' => true,
-		'name' => true,
-		'project_type' => true,
-		'header' => true
+        'icon' => false,
+		'name' => false,
+		'project_type' => false,
+		'header' => false
     ];
 
     /**
@@ -325,7 +325,7 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets icon
      *
-     * @return mixed
+     * @return string
      */
     public function getIcon()
     {
@@ -335,21 +335,14 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets icon
      *
-     * @param mixed $icon The SVG icon of a category
+     * @param string $icon The SVG icon of a category
      *
      * @return self
      */
     public function setIcon($icon)
     {
         if (is_null($icon)) {
-            array_push($this->openAPINullablesSetToNull, 'icon');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('icon', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable icon cannot be null');
         }
         $this->container['icon'] = $icon;
 
@@ -359,7 +352,7 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -369,21 +362,14 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param mixed $name The name of the category
+     * @param string $name The name of the category
      *
      * @return self
      */
     public function setName($name)
     {
         if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -393,7 +379,7 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets project_type
      *
-     * @return mixed
+     * @return string
      */
     public function getProjectType()
     {
@@ -403,21 +389,14 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets project_type
      *
-     * @param mixed $project_type The project type this category is applicable to
+     * @param string $project_type The project type this category is applicable to
      *
      * @return self
      */
     public function setProjectType($project_type)
     {
         if (is_null($project_type)) {
-            array_push($this->openAPINullablesSetToNull, 'project_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('project_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable project_type cannot be null');
         }
         $this->container['project_type'] = $project_type;
 
@@ -427,7 +406,7 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets header
      *
-     * @return mixed
+     * @return string
      */
     public function getHeader()
     {
@@ -437,21 +416,14 @@ class CategoryTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets header
      *
-     * @param mixed $header The header under which the category should go
+     * @param string $header The header under which the category should go
      *
      * @return self
      */
     public function setHeader($header)
     {
         if (is_null($header)) {
-            array_push($this->openAPINullablesSetToNull, 'header');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('header', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable header cannot be null');
         }
         $this->container['header'] = $header;
 

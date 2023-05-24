@@ -57,10 +57,10 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'hashes' => 'mixed',
-        'algorithm' => 'mixed',
-        'loaders' => 'mixed',
-        'game_versions' => 'mixed'
+        'hashes' => 'string[]',
+        'algorithm' => 'string',
+        'loaders' => 'string[]',
+        'game_versions' => 'string[]'
     ];
 
     /**
@@ -83,10 +83,10 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'hashes' => true,
-		'algorithm' => true,
-		'loaders' => true,
-		'game_versions' => true
+        'hashes' => false,
+		'algorithm' => false,
+		'loaders' => false,
+		'game_versions' => false
     ];
 
     /**
@@ -349,7 +349,7 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Gets hashes
      *
-     * @return mixed
+     * @return string[]
      */
     public function getHashes()
     {
@@ -359,21 +359,14 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Sets hashes
      *
-     * @param mixed $hashes hashes
+     * @param string[] $hashes hashes
      *
      * @return self
      */
     public function setHashes($hashes)
     {
         if (is_null($hashes)) {
-            array_push($this->openAPINullablesSetToNull, 'hashes');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('hashes', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable hashes cannot be null');
         }
         $this->container['hashes'] = $hashes;
 
@@ -383,7 +376,7 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Gets algorithm
      *
-     * @return mixed
+     * @return string
      */
     public function getAlgorithm()
     {
@@ -393,24 +386,17 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Sets algorithm
      *
-     * @param mixed $algorithm algorithm
+     * @param string $algorithm algorithm
      *
      * @return self
      */
     public function setAlgorithm($algorithm)
     {
         if (is_null($algorithm)) {
-            array_push($this->openAPINullablesSetToNull, 'algorithm');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('algorithm', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
         }
         $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!is_null($algorithm) && !in_array($algorithm, $allowedValues, true)) {
+        if (!in_array($algorithm, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'algorithm', must be one of '%s'",
@@ -427,7 +413,7 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Gets loaders
      *
-     * @return mixed
+     * @return string[]
      */
     public function getLoaders()
     {
@@ -437,21 +423,14 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Sets loaders
      *
-     * @param mixed $loaders loaders
+     * @param string[] $loaders loaders
      *
      * @return self
      */
     public function setLoaders($loaders)
     {
         if (is_null($loaders)) {
-            array_push($this->openAPINullablesSetToNull, 'loaders');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('loaders', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable loaders cannot be null');
         }
         $this->container['loaders'] = $loaders;
 
@@ -461,7 +440,7 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Gets game_versions
      *
-     * @return mixed
+     * @return string[]
      */
     public function getGameVersions()
     {
@@ -471,21 +450,14 @@ class GetLatestVersionsFromHashesRequest implements ModelInterface, ArrayAccess,
     /**
      * Sets game_versions
      *
-     * @param mixed $game_versions game_versions
+     * @param string[] $game_versions game_versions
      *
      * @return self
      */
     public function setGameVersions($game_versions)
     {
         if (is_null($game_versions)) {
-            array_push($this->openAPINullablesSetToNull, 'game_versions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('game_versions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable game_versions cannot be null');
         }
         $this->container['game_versions'] = $game_versions;
 

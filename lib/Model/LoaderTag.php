@@ -57,9 +57,9 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'icon' => 'mixed',
-        'name' => 'mixed',
-        'supported_project_types' => 'mixed'
+        'icon' => 'string',
+        'name' => 'string',
+        'supported_project_types' => 'string[]'
     ];
 
     /**
@@ -81,9 +81,9 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'icon' => true,
-		'name' => true,
-		'supported_project_types' => true
+        'icon' => false,
+		'name' => false,
+		'supported_project_types' => false
     ];
 
     /**
@@ -315,7 +315,7 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets icon
      *
-     * @return mixed
+     * @return string
      */
     public function getIcon()
     {
@@ -325,21 +325,14 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets icon
      *
-     * @param mixed $icon The SVG icon of a loader
+     * @param string $icon The SVG icon of a loader
      *
      * @return self
      */
     public function setIcon($icon)
     {
         if (is_null($icon)) {
-            array_push($this->openAPINullablesSetToNull, 'icon');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('icon', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable icon cannot be null');
         }
         $this->container['icon'] = $icon;
 
@@ -349,7 +342,7 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -359,21 +352,14 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param mixed $name The name of the loader
+     * @param string $name The name of the loader
      *
      * @return self
      */
     public function setName($name)
     {
         if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -383,7 +369,7 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets supported_project_types
      *
-     * @return mixed
+     * @return string[]
      */
     public function getSupportedProjectTypes()
     {
@@ -393,21 +379,14 @@ class LoaderTag implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets supported_project_types
      *
-     * @param mixed $supported_project_types The project types that this loader is applicable to
+     * @param string[] $supported_project_types The project types that this loader is applicable to
      *
      * @return self
      */
     public function setSupportedProjectTypes($supported_project_types)
     {
         if (is_null($supported_project_types)) {
-            array_push($this->openAPINullablesSetToNull, 'supported_project_types');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('supported_project_types', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable supported_project_types cannot be null');
         }
         $this->container['supported_project_types'] = $supported_project_types;
 

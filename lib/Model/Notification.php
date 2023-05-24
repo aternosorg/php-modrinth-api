@@ -57,15 +57,15 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'mixed',
-        'user_id' => 'mixed',
-        'type' => 'mixed',
-        'title' => 'mixed',
-        'text' => 'mixed',
-        'link' => 'mixed',
-        'read' => 'mixed',
-        'created' => 'mixed',
-        'actions' => 'mixed'
+        'id' => 'string',
+        'user_id' => 'string',
+        'type' => 'string',
+        'title' => 'string',
+        'text' => 'string',
+        'link' => 'string',
+        'read' => 'bool',
+        'created' => 'string',
+        'actions' => 'object[]'
     ];
 
     /**
@@ -93,15 +93,15 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-		'user_id' => true,
-		'type' => true,
-		'title' => true,
-		'text' => true,
-		'link' => true,
-		'read' => true,
-		'created' => true,
-		'actions' => true
+        'id' => false,
+		'user_id' => false,
+		'type' => false,
+		'title' => false,
+		'text' => false,
+		'link' => false,
+		'read' => false,
+		'created' => false,
+		'actions' => false
     ];
 
     /**
@@ -398,7 +398,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets id
      *
-     * @return mixed
+     * @return string
      */
     public function getId()
     {
@@ -408,21 +408,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param mixed $id The id of the notification
+     * @param string $id The id of the notification
      *
      * @return self
      */
     public function setId($id)
     {
         if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -432,7 +425,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets user_id
      *
-     * @return mixed
+     * @return string
      */
     public function getUserId()
     {
@@ -442,21 +435,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets user_id
      *
-     * @param mixed $user_id The id of the user who received the notification
+     * @param string $user_id The id of the user who received the notification
      *
      * @return self
      */
     public function setUserId($user_id)
     {
         if (is_null($user_id)) {
-            array_push($this->openAPINullablesSetToNull, 'user_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('user_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
         }
         $this->container['user_id'] = $user_id;
 
@@ -466,7 +452,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets type
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getType()
     {
@@ -476,24 +462,17 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param mixed|null $type The type of notification
+     * @param string|null $type The type of notification
      *
      * @return self
      */
     public function setType($type)
     {
         if (is_null($type)) {
-            array_push($this->openAPINullablesSetToNull, 'type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
         $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
+        if (!in_array($type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'type', must be one of '%s'",
@@ -510,7 +489,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets title
      *
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -520,21 +499,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param mixed $title The title of the notification
+     * @param string $title The title of the notification
      *
      * @return self
      */
     public function setTitle($title)
     {
         if (is_null($title)) {
-            array_push($this->openAPINullablesSetToNull, 'title');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('title', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
 
@@ -544,7 +516,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets text
      *
-     * @return mixed
+     * @return string
      */
     public function getText()
     {
@@ -554,21 +526,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets text
      *
-     * @param mixed $text The body text of the notification
+     * @param string $text The body text of the notification
      *
      * @return self
      */
     public function setText($text)
     {
         if (is_null($text)) {
-            array_push($this->openAPINullablesSetToNull, 'text');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('text', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable text cannot be null');
         }
         $this->container['text'] = $text;
 
@@ -578,7 +543,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets link
      *
-     * @return mixed
+     * @return string
      */
     public function getLink()
     {
@@ -588,21 +553,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets link
      *
-     * @param mixed $link A link to the related project or version
+     * @param string $link A link to the related project or version
      *
      * @return self
      */
     public function setLink($link)
     {
         if (is_null($link)) {
-            array_push($this->openAPINullablesSetToNull, 'link');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('link', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable link cannot be null');
         }
         $this->container['link'] = $link;
 
@@ -612,7 +570,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets read
      *
-     * @return mixed
+     * @return bool
      */
     public function getRead()
     {
@@ -622,21 +580,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets read
      *
-     * @param mixed $read Whether the notification has been read or not
+     * @param bool $read Whether the notification has been read or not
      *
      * @return self
      */
     public function setRead($read)
     {
         if (is_null($read)) {
-            array_push($this->openAPINullablesSetToNull, 'read');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('read', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable read cannot be null');
         }
         $this->container['read'] = $read;
 
@@ -646,7 +597,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets created
      *
-     * @return mixed
+     * @return string
      */
     public function getCreated()
     {
@@ -656,21 +607,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created
      *
-     * @param mixed $created The time at which the notification was created
+     * @param string $created The time at which the notification was created
      *
      * @return self
      */
     public function setCreated($created)
     {
         if (is_null($created)) {
-            array_push($this->openAPINullablesSetToNull, 'created');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('created', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable created cannot be null');
         }
         $this->container['created'] = $created;
 
@@ -680,7 +624,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets actions
      *
-     * @return mixed
+     * @return object[]
      */
     public function getActions()
     {
@@ -690,21 +634,14 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets actions
      *
-     * @param mixed $actions A list of actions that can be performed
+     * @param object[] $actions A list of actions that can be performed
      *
      * @return self
      */
     public function setActions($actions)
     {
         if (is_null($actions)) {
-            array_push($this->openAPINullablesSetToNull, 'actions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('actions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable actions cannot be null');
         }
         $this->container['actions'] = $actions;
 

@@ -57,8 +57,8 @@ class ProjectDependencyList implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'projects' => 'mixed',
-        'versions' => 'mixed'
+        'projects' => '\Aternos\ModrinthApi\Model\Project[]',
+        'versions' => '\Aternos\ModrinthApi\Model\Version[]'
     ];
 
     /**
@@ -79,8 +79,8 @@ class ProjectDependencyList implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'projects' => true,
-		'versions' => true
+        'projects' => false,
+		'versions' => false
     ];
 
     /**
@@ -299,7 +299,7 @@ class ProjectDependencyList implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets projects
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\Project[]|null
      */
     public function getProjects()
     {
@@ -309,21 +309,14 @@ class ProjectDependencyList implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets projects
      *
-     * @param mixed|null $projects Projects that the project depends upon
+     * @param \Aternos\ModrinthApi\Model\Project[]|null $projects Projects that the project depends upon
      *
      * @return self
      */
     public function setProjects($projects)
     {
         if (is_null($projects)) {
-            array_push($this->openAPINullablesSetToNull, 'projects');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('projects', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable projects cannot be null');
         }
         $this->container['projects'] = $projects;
 
@@ -333,7 +326,7 @@ class ProjectDependencyList implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets versions
      *
-     * @return mixed|null
+     * @return \Aternos\ModrinthApi\Model\Version[]|null
      */
     public function getVersions()
     {
@@ -343,21 +336,14 @@ class ProjectDependencyList implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets versions
      *
-     * @param mixed|null $versions Versions that the project depends upon
+     * @param \Aternos\ModrinthApi\Model\Version[]|null $versions Versions that the project depends upon
      *
      * @return self
      */
     public function setVersions($versions)
     {
         if (is_null($versions)) {
-            array_push($this->openAPINullablesSetToNull, 'versions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('versions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable versions cannot be null');
         }
         $this->container['versions'] = $versions;
 
