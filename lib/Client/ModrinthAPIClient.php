@@ -89,4 +89,15 @@ class ModrinthAPIClient
 
         return new PaginatedProjectSearchList($this, $options, $projects);
     }
+
+    /**
+     * Get a project by ID or slug
+     * @param string $idOrSlug Project ID or slug
+     * @return Project
+     * @throws ApiException
+     */
+    public function getProject(string $idOrSlug): Project
+    {
+        return new Project($this, $this->projects->getProject($idOrSlug));
+    }
 }
