@@ -13,6 +13,8 @@ use Aternos\ModrinthApi\Model\ProjectResult;
  */
 class SearchProject
 {
+    use ProjectTrait;
+
     public function __construct(
         protected ModrinthAPIClient $client,
         protected ProjectResult $data,
@@ -36,5 +38,15 @@ class SearchProject
     public function getFullProject(): Project
     {
         return $this->client->getProject($this->data->getProjectId());
+    }
+
+    protected function getId(): string
+    {
+        return $this->data->getProjectId();
+    }
+
+    protected function getClient(): ModrinthAPIClient
+    {
+        return $this->client;
     }
 }

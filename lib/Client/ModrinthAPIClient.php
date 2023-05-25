@@ -3,6 +3,7 @@
 namespace Aternos\ModrinthApi\Client;
 
 use Aternos\ModrinthApi\Api\ProjectsApi;
+use Aternos\ModrinthApi\Api\VersionsApi;
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
@@ -10,6 +11,7 @@ use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\CheckProjectValidity200Response as ProjectValidity;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
 use Aternos\ModrinthApi\Model\ProjectDependencyList;
+use Aternos\ModrinthApi\Model\Version as VersionModel;
 
 /**
  * Class ModrinthAPIClient
@@ -24,6 +26,8 @@ class ModrinthAPIClient
     protected ?string $apiToken = null;
 
     protected ProjectsApi $projects;
+
+    protected VersionsApi $versions;
 
     /**
      * ModrinthAPIClient constructor.
@@ -46,6 +50,7 @@ class ModrinthAPIClient
         $this->configuration = $configuration;
 
         $this->projects = new ProjectsApi(null, $this->configuration);
+        $this->versions = new VersionsApi(null, $this->configuration);
         return $this;
     }
 
@@ -158,5 +163,26 @@ class ModrinthAPIClient
     public function getProjectDependencies(string $idOrSlug): ProjectDependencies
     {
         return new ProjectDependencies($this, $this->projects->getDependencies($idOrSlug));
+    }
+
+    /**
+     * Get all versions of a project
+     * @param string $idOrSlug Project ID or slug
+     * @param string[]|null $loaders only show versions for any of these loaders // TODO: enum??
+     * @param string[]|null $gameVersions
+     * @param bool|null $featured
+     * @return Version[]
+     * @throws ApiException
+     */
+    public function getProjectVersions(
+        string $idOrSlug,
+        ?array $loaders = null,
+        ?array $gameVersions = null,
+        ?bool  $featured = null
+    ): array
+    {
+        return array_map(function (VersionModel $version): Version {
+            return new Version($this, $version);
+        }, $this->versions->getProjectVersions($idOrSlug, $loaders, $gameVersions, $featured));
     }
 }

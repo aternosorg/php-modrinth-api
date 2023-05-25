@@ -7,6 +7,8 @@ use Aternos\ModrinthApi\Model\Project as ProjectModel;
 
 class Project
 {
+    use ProjectTrait;
+
     public function __construct(
         protected ModrinthAPIClient $client,
         protected ProjectModel $data
@@ -22,12 +24,13 @@ class Project
         return $this->data;
     }
 
-    /**
-     * @return ProjectDependencies
-     * @throws ApiException
-     */
-    public function getDependencies(): ProjectDependencies
+    protected function getId(): string
     {
-        return $this->client->getProjectDependencies($this->data->getId());
+        return $this->data->getId();
+    }
+
+    protected function getClient(): ModrinthAPIClient
+    {
+        return $this->client;
     }
 }
