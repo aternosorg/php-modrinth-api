@@ -185,4 +185,15 @@ class ModrinthAPIClient
             return new Version($this, $version);
         }, $this->versions->getProjectVersions($idOrSlug, $loaders, $gameVersions, $featured));
     }
+
+    /**
+     * Get a project version by ID
+     * @param string $id
+     * @return Version
+     * @throws ApiException
+     */
+    public function getVersion(string $id): Version
+    {
+        return new Version($this, $this->versions->getVersion($id));
+    }
 }
