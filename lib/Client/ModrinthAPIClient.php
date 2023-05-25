@@ -196,4 +196,17 @@ class ModrinthAPIClient
     {
         return new Version($this, $this->versions->getVersion($id));
     }
+
+    /**
+     * Get multiple versions by ID
+     * @param string[] $ids
+     * @return Version[]
+     * @throws ApiException
+     */
+    public function getVersions(array $ids): array
+    {
+        return array_map(function (VersionModel $version): Version {
+            return new Version($this, $version);
+        }, $this->versions->getVersions($ids));
+    }
 }
