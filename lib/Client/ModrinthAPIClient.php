@@ -2,16 +2,24 @@
 
 namespace Aternos\ModrinthApi\Client;
 
+use Aternos\ModrinthApi\Api\MiscApi;
 use Aternos\ModrinthApi\Api\ProjectsApi;
+use Aternos\ModrinthApi\Api\TagsApi;
+use Aternos\ModrinthApi\Api\TeamsApi;
+use Aternos\ModrinthApi\Api\UsersApi;
+use Aternos\ModrinthApi\Api\VersionFilesApi;
 use Aternos\ModrinthApi\Api\VersionsApi;
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Configuration;
-use Aternos\ModrinthApi\Model\CheckProjectValidity200Response as ProjectValidity;
+use Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody;
+use Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
-use Aternos\ModrinthApi\Model\ProjectDependencyList;
+use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
+use Aternos\ModrinthApi\Model\User as UserModel;
+use Aternos\ModrinthApi\Model\Notification as NotificationModel;
 
 /**
  * Class ModrinthAPIClient
@@ -28,6 +36,16 @@ class ModrinthAPIClient
     protected ProjectsApi $projects;
 
     protected VersionsApi $versions;
+
+    protected VersionFilesApi $versionFiles;
+
+    protected UsersApi $users;
+
+    protected TeamsApi $teams;
+
+    protected TagsApi $tags;
+
+    protected MiscApi $misc;
 
     /**
      * ModrinthAPIClient constructor.
@@ -51,6 +69,12 @@ class ModrinthAPIClient
 
         $this->projects = new ProjectsApi(null, $this->configuration);
         $this->versions = new VersionsApi(null, $this->configuration);
+        $this->versionFiles = new VersionFilesApi(null, $this->configuration);
+        $this->users = new UsersApi(null, $this->configuration);
+        $this->teams = new TeamsApi(null, $this->configuration);
+        $this->tags = new TagsApi(null, $this->configuration);
+        $this->misc = new MiscApi(null, $this->configuration);
+
         return $this;
     }
 
@@ -208,5 +232,179 @@ class ModrinthAPIClient
         return array_map(function (VersionModel $version): Version {
             return new Version($this, $version);
         }, $this->versions->getVersions($ids));
+    }
+
+    /**
+     * Get a version by its hash
+     * @param string $hash
+     * @param HashAlgorithm $algorithm
+     * @return Version
+     * @throws ApiException
+     */
+    public function getVersionFromHash(string $hash, HashAlgorithm $algorithm = HashAlgorithm::SHA1): Version
+    {
+        return new Version($this, $this->versionFiles->versionFromHash($hash, $algorithm->value));
+    }
+
+    /**
+     * Get multiple versions by their hashes
+     * @param string[] $hashes
+     * @param HashAlgorithm $algorithm
+     * @return array
+     * @throws ApiException
+     */
+    public function getVersionsFromHashes(array $hashes, HashAlgorithm $algorithm = HashAlgorithm::SHA1): array
+    {
+        return array_map(function (VersionModel $version): Version {
+            return new Version($this, $version);
+        }, $this->versionFiles->versionsFromHashes($hashes, $algorithm->value));
+    }
+
+    /**
+     * @param string $hash
+     * @param string[] $loaders
+     * @param string[] $gameVersions
+     * @param HashAlgorithm $algorithm
+     * @return Version
+     * @throws ApiException
+     */
+    public function getLatestVersionFromHash(
+        string        $hash,
+        array         $loaders,
+        array         $gameVersions,
+        HashAlgorithm $algorithm = HashAlgorithm::SHA1
+    ): Version
+    {
+        $body = new GetLatestVersionFromHashBody();
+        $body->setGameVersions($gameVersions);
+        $body->setLoaders($loaders);
+        return new Version($this, $this->versionFiles->getLatestVersionFromHash($hash, $algorithm->value, $body));
+    }
+
+    /**
+     * Get the latest version of multiple hashes
+     * @param string[] $hashes
+     * @param string[] $loaders
+     * @param string[] $gameVersions
+     * @param HashAlgorithm $algorithm
+     * @return Version[]
+     * @throws ApiException
+     */
+    public function getLatestVersionsFromHashes(
+        array $hashes,
+        array $loaders,
+        array $gameVersions,
+        HashAlgorithm $algorithm = HashAlgorithm::SHA1
+    ): array
+    {
+        $body = new GetLatestVersionsFromHashesBody();
+        $body->setHashes($hashes);
+        $body->setAlgorithm($algorithm->value);
+        $body->setLoaders($loaders);
+        $body->setGameVersions($gameVersions);
+        $body->setLoaders($loaders);
+        return array_map(function (VersionModel $version): Version {
+            return new Version($this, $version);
+        }, $this->versionFiles->getLatestVersionsFromHashes($body));
+    }
+
+    /**
+     * Get a user by ID or name
+     * @param string $idOrName
+     * @return User
+     * @throws ApiException
+     */
+    public function getUser(string $idOrName): User
+    {
+        return new User($this, $this->users->getUser($idOrName));
+    }
+
+    /**
+     * Get the user from the API token (requires authentication)
+     * @return User
+     * @throws ApiException
+     */
+    public function getCurrentUser(): User
+    {
+        if ($this->apiToken === null) {
+            throw new ApiException("No API token set");
+        }
+
+        return new User($this, $this->users->getUserFromAuth());
+    }
+
+    /**
+     * Get multiple users by ID
+     * @param array $ids
+     * @return array
+     * @throws ApiException
+     */
+    public function getUsers(array $ids): array
+    {
+        return array_map(function (UserModel $user): User {
+            return new User($this, $user);
+        }, $this->users->getUsers($ids));
+    }
+
+    /**
+     * Get a user's projects
+     * @param string $idOrName
+     * @return Project[]
+     * @throws ApiException
+     */
+    public function getUserProjects(string $idOrName): array
+    {
+        return array_map(function (ProjectModel $project): Project {
+            return new Project($this, $project);
+        }, $this->users->getUserProjects($idOrName));
+    }
+
+    /**
+     * Get a user's notifications (project updates or team invites) (requires authentication)
+     * @param string $idOrUsername
+     * @return Notification[]
+     * @throws ApiException
+     */
+    public function getUserNotifications(string $idOrUsername): array
+    {
+        if ($this->apiToken === null) {
+            throw new ApiException("No API token set");
+        }
+
+        return array_map(function (NotificationModel $notification): Notification {
+            return new Notification($this, $notification);
+        }, $this->users->getNotifications($idOrUsername));
+    }
+
+    /**
+     * Get a user's followed projects (requires authentication)
+     * @param string $idOrUsername
+     * @return Project[]
+     * @throws ApiException
+     */
+    public function getFollowedProjects(string $idOrUsername): array
+    {
+        if ($this->apiToken === null) {
+            throw new ApiException("No API token set");
+        }
+
+        return array_map(function (ProjectModel $data): Project {
+            return new Project($this, $data);
+        }, $this->users->getFollowedProjects($idOrUsername));
+    }
+
+    /**
+     * Get a user's payout history (requires authentication)
+     * @param string $idOrUsername
+     * @return UserPayoutHistory
+     * @throws ApiException
+     */
+    public function getPayoutHistory(string $idOrUsername): UserPayoutHistory
+    {
+        if ($this->apiToken === null) {
+            throw new ApiException("No API token set");
+        }
+
+        return $this->users->getPayoutHistory($idOrUsername);
     }
 }
