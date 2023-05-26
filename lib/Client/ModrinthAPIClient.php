@@ -16,6 +16,7 @@ use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody;
 use Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
+use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
 use Aternos\ModrinthApi\Model\User as UserModel;
@@ -406,5 +407,49 @@ class ModrinthAPIClient
         }
 
         return $this->users->getPayoutHistory($idOrUsername);
+    }
+
+    /**
+     * Get members of a project
+     * @param string $idOrSlug
+     * @return array
+     * @throws ApiException
+     */
+    public function getProjectMembers(string $idOrSlug): array
+    {
+        return array_map(function (TeamMemberModel $member): TeamMember {
+            return new TeamMember($this, $member);
+        }, $this->teams->getProjectTeamMembers($idOrSlug));
+    }
+
+    /**
+     * Get members of a team
+     * @param string $id
+     * @return array
+     * @throws ApiException
+     */
+    public function getTeamMembers(string $id): array
+    {
+        return array_map(function (TeamMemberModel $member): TeamMember {
+            return new TeamMember($this, $member);
+        }, $this->teams->getTeamMembers($id));
+    }
+
+    /**
+     * Get the members of multiple teams at once
+     * @param array $ids
+     * @return array
+     * @throws ApiException
+     */
+    public function getTeams(array $ids): array
+    {
+        $result = [];
+        foreach ($this->teams->getTeams($ids) as $members) {
+            $result[] = array_map(function (TeamMemberModel $member): TeamMember {
+                return new TeamMember($this, $member);
+            }, $members);
+        }
+
+        return $result;
     }
 }
