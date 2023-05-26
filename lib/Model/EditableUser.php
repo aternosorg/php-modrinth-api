@@ -61,7 +61,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'email' => 'string',
         'bio' => 'string',
-        'payout_data' => '\Aternos\ModrinthApi\Model\EditableUserPayoutData'
+        'payout_data' => '\Aternos\ModrinthApi\Model\UserPayoutData'
     ];
 
     /**
@@ -445,7 +445,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets payout_data
      *
-     * @return \Aternos\ModrinthApi\Model\EditableUserPayoutData|null
+     * @return \Aternos\ModrinthApi\Model\UserPayoutData|null
      */
     public function getPayoutData()
     {
@@ -455,7 +455,7 @@ class EditableUser implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payout_data
      *
-     * @param \Aternos\ModrinthApi\Model\EditableUserPayoutData|null $payout_data payout_data
+     * @param \Aternos\ModrinthApi\Model\UserPayoutData|null $payout_data payout_data
      *
      * @return self
      */

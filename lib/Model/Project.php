@@ -69,7 +69,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_url' => 'string',
         'wiki_url' => 'string',
         'discord_url' => 'string',
-        'donation_urls' => '\Aternos\ModrinthApi\Model\NonSearchProjectAllOfDonationUrls[]',
+        'donation_urls' => '\Aternos\ModrinthApi\Model\ProjectDonationURL[]',
         'project_type' => 'string',
         'downloads' => 'int',
         'icon_url' => 'string',
@@ -77,17 +77,17 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'team' => 'string',
         'body_url' => 'string',
-        'moderator_message' => '\Aternos\ModrinthApi\Model\ProjectAllOfModeratorMessage',
+        'moderator_message' => '\Aternos\ModrinthApi\Model\ModeratorMessage',
         'published' => 'string',
         'updated' => 'string',
         'approved' => 'string',
         'followers' => 'int',
         'status' => 'string',
-        'license' => '\Aternos\ModrinthApi\Model\ProjectAllOfLicense',
+        'license' => '\Aternos\ModrinthApi\Model\ProjectLicense',
         'versions' => 'string[]',
         'game_versions' => 'string[]',
         'loaders' => 'string[]',
-        'gallery' => '\Aternos\ModrinthApi\Model\ProjectAllOfGallery[]'
+        'gallery' => '\Aternos\ModrinthApi\Model\GalleryImage[]'
     ];
 
     /**
@@ -1033,7 +1033,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets donation_urls
      *
-     * @return \Aternos\ModrinthApi\Model\NonSearchProjectAllOfDonationUrls[]|null
+     * @return \Aternos\ModrinthApi\Model\ProjectDonationURL[]|null
      */
     public function getDonationUrls()
     {
@@ -1043,7 +1043,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets donation_urls
      *
-     * @param \Aternos\ModrinthApi\Model\NonSearchProjectAllOfDonationUrls[]|null $donation_urls A list of donation links for the project
+     * @param \Aternos\ModrinthApi\Model\ProjectDonationURL[]|null $donation_urls A list of donation links for the project
      *
      * @return self
      */
@@ -1282,7 +1282,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets moderator_message
      *
-     * @return \Aternos\ModrinthApi\Model\ProjectAllOfModeratorMessage|null
+     * @return \Aternos\ModrinthApi\Model\ModeratorMessage|null
      */
     public function getModeratorMessage()
     {
@@ -1292,7 +1292,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets moderator_message
      *
-     * @param \Aternos\ModrinthApi\Model\ProjectAllOfModeratorMessage|null $moderator_message moderator_message
+     * @param \Aternos\ModrinthApi\Model\ModeratorMessage|null $moderator_message moderator_message
      *
      * @return self
      */
@@ -1468,7 +1468,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets license
      *
-     * @return \Aternos\ModrinthApi\Model\ProjectAllOfLicense|null
+     * @return \Aternos\ModrinthApi\Model\ProjectLicense|null
      */
     public function getLicense()
     {
@@ -1478,7 +1478,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets license
      *
-     * @param \Aternos\ModrinthApi\Model\ProjectAllOfLicense|null $license license
+     * @param \Aternos\ModrinthApi\Model\ProjectLicense|null $license license
      *
      * @return self
      */
@@ -1576,7 +1576,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets gallery
      *
-     * @return \Aternos\ModrinthApi\Model\ProjectAllOfGallery[]|null
+     * @return \Aternos\ModrinthApi\Model\GalleryImage[]|null
      */
     public function getGallery()
     {
@@ -1586,7 +1586,7 @@ class Project implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets gallery
      *
-     * @param \Aternos\ModrinthApi\Model\ProjectAllOfGallery[]|null $gallery A list of images that have been uploaded to the project's gallery
+     * @param \Aternos\ModrinthApi\Model\GalleryImage[]|null $gallery A list of images that have been uploaded to the project's gallery
      *
      * @return self
      */

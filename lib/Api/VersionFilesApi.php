@@ -419,16 +419,16 @@ class VersionFilesApi
      *
      * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
      * @param  string $algorithm The algorithm of the hash (required)
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody $get_latest_version_from_hash_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Aternos\ModrinthApi\Model\Version
      */
-    public function getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_body = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
-        list($response) = $this->getLatestVersionFromHashWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request, $contentType);
+        list($response) = $this->getLatestVersionFromHashWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_body, $contentType);
         return $response;
     }
 
@@ -439,16 +439,16 @@ class VersionFilesApi
      *
      * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
      * @param  string $algorithm The algorithm of the hash (required)
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody $get_latest_version_from_hash_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Aternos\ModrinthApi\Model\Version, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getLatestVersionFromHashWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_body = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
-        $request = $this->getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_request, $contentType);
+        $request = $this->getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -541,15 +541,15 @@ class VersionFilesApi
      *
      * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
      * @param  string $algorithm The algorithm of the hash (required)
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody $get_latest_version_from_hash_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLatestVersionFromHashAsync($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashAsync($hash, $algorithm, $get_latest_version_from_hash_body = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
-        return $this->getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request, $contentType)
+        return $this->getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -564,16 +564,16 @@ class VersionFilesApi
      *
      * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
      * @param  string $algorithm The algorithm of the hash (required)
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody $get_latest_version_from_hash_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashAsyncWithHttpInfo($hash, $algorithm, $get_latest_version_from_hash_body = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
         $returnType = '\Aternos\ModrinthApi\Model\Version';
-        $request = $this->getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_request, $contentType);
+        $request = $this->getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -616,13 +616,13 @@ class VersionFilesApi
      *
      * @param  string $hash The hash of the file, considering its byte content, and encoded in hexadecimal (required)
      * @param  string $algorithm The algorithm of the hash (required)
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest $get_latest_version_from_hash_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody $get_latest_version_from_hash_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionFromHash'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_request = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
+    public function getLatestVersionFromHashRequest($hash, $algorithm, $get_latest_version_from_hash_body = null, string $contentType = self::contentTypes['getLatestVersionFromHash'][0])
     {
 
         // verify the required parameter 'hash' is set
@@ -676,12 +676,12 @@ class VersionFilesApi
         );
 
         // for model (json/xml)
-        if (isset($get_latest_version_from_hash_request)) {
+        if (isset($get_latest_version_from_hash_body)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($get_latest_version_from_hash_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($get_latest_version_from_hash_body));
             } else {
-                $httpBody = $get_latest_version_from_hash_request;
+                $httpBody = $get_latest_version_from_hash_body;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -734,16 +734,16 @@ class VersionFilesApi
      *
      * Latest versions of multiple project from hashes, loader(s), and game version(s)
      *
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest $get_latest_versions_from_hashes_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody $get_latest_versions_from_hashes_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionsFromHashes'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aternos\ModrinthApi\Model\VersionsFromHashes200Response
+     * @return array<string,\Aternos\ModrinthApi\Model\Version>
      */
-    public function getLatestVersionsFromHashes($get_latest_versions_from_hashes_request = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
+    public function getLatestVersionsFromHashes($get_latest_versions_from_hashes_body = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
     {
-        list($response) = $this->getLatestVersionsFromHashesWithHttpInfo($get_latest_versions_from_hashes_request, $contentType);
+        list($response) = $this->getLatestVersionsFromHashesWithHttpInfo($get_latest_versions_from_hashes_body, $contentType);
         return $response;
     }
 
@@ -752,16 +752,16 @@ class VersionFilesApi
      *
      * Latest versions of multiple project from hashes, loader(s), and game version(s)
      *
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest $get_latest_versions_from_hashes_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody $get_latest_versions_from_hashes_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionsFromHashes'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aternos\ModrinthApi\Model\VersionsFromHashes200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of array<string,\Aternos\ModrinthApi\Model\Version>, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getLatestVersionsFromHashesWithHttpInfo($get_latest_versions_from_hashes_request = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
+    public function getLatestVersionsFromHashesWithHttpInfo($get_latest_versions_from_hashes_body = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
     {
-        $request = $this->getLatestVersionsFromHashesRequest($get_latest_versions_from_hashes_request, $contentType);
+        $request = $this->getLatestVersionsFromHashesRequest($get_latest_versions_from_hashes_body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -800,23 +800,23 @@ class VersionFilesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Aternos\ModrinthApi\Model\VersionsFromHashes200Response' === '\SplFileObject') {
+                    if ('array<string,\Aternos\ModrinthApi\Model\Version>' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Aternos\ModrinthApi\Model\VersionsFromHashes200Response' !== 'string') {
+                        if ('array<string,\Aternos\ModrinthApi\Model\Version>' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response', []),
+                        ObjectSerializer::deserialize($content, 'array<string,\Aternos\ModrinthApi\Model\Version>', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response';
+            $returnType = 'array<string,\Aternos\ModrinthApi\Model\Version>';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -837,7 +837,7 @@ class VersionFilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response',
+                        'array<string,\Aternos\ModrinthApi\Model\Version>',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -852,15 +852,15 @@ class VersionFilesApi
      *
      * Latest versions of multiple project from hashes, loader(s), and game version(s)
      *
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest $get_latest_versions_from_hashes_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody $get_latest_versions_from_hashes_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionsFromHashes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLatestVersionsFromHashesAsync($get_latest_versions_from_hashes_request = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
+    public function getLatestVersionsFromHashesAsync($get_latest_versions_from_hashes_body = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
     {
-        return $this->getLatestVersionsFromHashesAsyncWithHttpInfo($get_latest_versions_from_hashes_request, $contentType)
+        return $this->getLatestVersionsFromHashesAsyncWithHttpInfo($get_latest_versions_from_hashes_body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -873,16 +873,16 @@ class VersionFilesApi
      *
      * Latest versions of multiple project from hashes, loader(s), and game version(s)
      *
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest $get_latest_versions_from_hashes_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody $get_latest_versions_from_hashes_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionsFromHashes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLatestVersionsFromHashesAsyncWithHttpInfo($get_latest_versions_from_hashes_request = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
+    public function getLatestVersionsFromHashesAsyncWithHttpInfo($get_latest_versions_from_hashes_body = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
     {
-        $returnType = '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response';
-        $request = $this->getLatestVersionsFromHashesRequest($get_latest_versions_from_hashes_request, $contentType);
+        $returnType = 'array<string,\Aternos\ModrinthApi\Model\Version>';
+        $request = $this->getLatestVersionsFromHashesRequest($get_latest_versions_from_hashes_body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -923,13 +923,13 @@ class VersionFilesApi
     /**
      * Create request for operation 'getLatestVersionsFromHashes'
      *
-     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest $get_latest_versions_from_hashes_request Parameters of the updated version requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody $get_latest_versions_from_hashes_body Parameters of the updated version requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLatestVersionsFromHashes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getLatestVersionsFromHashesRequest($get_latest_versions_from_hashes_request = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
+    public function getLatestVersionsFromHashesRequest($get_latest_versions_from_hashes_body = null, string $contentType = self::contentTypes['getLatestVersionsFromHashes'][0])
     {
 
 
@@ -952,12 +952,12 @@ class VersionFilesApi
         );
 
         // for model (json/xml)
-        if (isset($get_latest_versions_from_hashes_request)) {
+        if (isset($get_latest_versions_from_hashes_body)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($get_latest_versions_from_hashes_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($get_latest_versions_from_hashes_body));
             } else {
-                $httpBody = $get_latest_versions_from_hashes_request;
+                $httpBody = $get_latest_versions_from_hashes_body;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1329,16 +1329,16 @@ class VersionFilesApi
      *
      * Get versions from hashes
      *
-     * @param  \Aternos\ModrinthApi\Model\VersionsFromHashesRequest $versions_from_hashes_request Hashes and algorithm of the versions requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\HashList $hash_list Hashes and algorithm of the versions requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionsFromHashes'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aternos\ModrinthApi\Model\VersionsFromHashes200Response
+     * @return array<string,\Aternos\ModrinthApi\Model\Version>
      */
-    public function versionsFromHashes($versions_from_hashes_request = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
+    public function versionsFromHashes($hash_list = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
     {
-        list($response) = $this->versionsFromHashesWithHttpInfo($versions_from_hashes_request, $contentType);
+        list($response) = $this->versionsFromHashesWithHttpInfo($hash_list, $contentType);
         return $response;
     }
 
@@ -1347,16 +1347,16 @@ class VersionFilesApi
      *
      * Get versions from hashes
      *
-     * @param  \Aternos\ModrinthApi\Model\VersionsFromHashesRequest $versions_from_hashes_request Hashes and algorithm of the versions requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\HashList $hash_list Hashes and algorithm of the versions requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionsFromHashes'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aternos\ModrinthApi\Model\VersionsFromHashes200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of array<string,\Aternos\ModrinthApi\Model\Version>, HTTP status code, HTTP response headers (array of strings)
      */
-    public function versionsFromHashesWithHttpInfo($versions_from_hashes_request = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
+    public function versionsFromHashesWithHttpInfo($hash_list = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
     {
-        $request = $this->versionsFromHashesRequest($versions_from_hashes_request, $contentType);
+        $request = $this->versionsFromHashesRequest($hash_list, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1395,23 +1395,23 @@ class VersionFilesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Aternos\ModrinthApi\Model\VersionsFromHashes200Response' === '\SplFileObject') {
+                    if ('array<string,\Aternos\ModrinthApi\Model\Version>' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Aternos\ModrinthApi\Model\VersionsFromHashes200Response' !== 'string') {
+                        if ('array<string,\Aternos\ModrinthApi\Model\Version>' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response', []),
+                        ObjectSerializer::deserialize($content, 'array<string,\Aternos\ModrinthApi\Model\Version>', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response';
+            $returnType = 'array<string,\Aternos\ModrinthApi\Model\Version>';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1432,7 +1432,7 @@ class VersionFilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response',
+                        'array<string,\Aternos\ModrinthApi\Model\Version>',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1447,15 +1447,15 @@ class VersionFilesApi
      *
      * Get versions from hashes
      *
-     * @param  \Aternos\ModrinthApi\Model\VersionsFromHashesRequest $versions_from_hashes_request Hashes and algorithm of the versions requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\HashList $hash_list Hashes and algorithm of the versions requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionsFromHashes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function versionsFromHashesAsync($versions_from_hashes_request = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
+    public function versionsFromHashesAsync($hash_list = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
     {
-        return $this->versionsFromHashesAsyncWithHttpInfo($versions_from_hashes_request, $contentType)
+        return $this->versionsFromHashesAsyncWithHttpInfo($hash_list, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1468,16 +1468,16 @@ class VersionFilesApi
      *
      * Get versions from hashes
      *
-     * @param  \Aternos\ModrinthApi\Model\VersionsFromHashesRequest $versions_from_hashes_request Hashes and algorithm of the versions requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\HashList $hash_list Hashes and algorithm of the versions requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionsFromHashes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function versionsFromHashesAsyncWithHttpInfo($versions_from_hashes_request = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
+    public function versionsFromHashesAsyncWithHttpInfo($hash_list = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
     {
-        $returnType = '\Aternos\ModrinthApi\Model\VersionsFromHashes200Response';
-        $request = $this->versionsFromHashesRequest($versions_from_hashes_request, $contentType);
+        $returnType = 'array<string,\Aternos\ModrinthApi\Model\Version>';
+        $request = $this->versionsFromHashesRequest($hash_list, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1518,13 +1518,13 @@ class VersionFilesApi
     /**
      * Create request for operation 'versionsFromHashes'
      *
-     * @param  \Aternos\ModrinthApi\Model\VersionsFromHashesRequest $versions_from_hashes_request Hashes and algorithm of the versions requested (optional)
+     * @param  \Aternos\ModrinthApi\Model\HashList $hash_list Hashes and algorithm of the versions requested (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['versionsFromHashes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function versionsFromHashesRequest($versions_from_hashes_request = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
+    public function versionsFromHashesRequest($hash_list = null, string $contentType = self::contentTypes['versionsFromHashes'][0])
     {
 
 
@@ -1547,12 +1547,12 @@ class VersionFilesApi
         );
 
         // for model (json/xml)
-        if (isset($versions_from_hashes_request)) {
+        if (isset($hash_list)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($versions_from_hashes_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($hash_list));
             } else {
-                $httpBody = $versions_from_hashes_request;
+                $httpBody = $hash_list;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

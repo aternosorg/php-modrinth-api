@@ -823,7 +823,7 @@ class ProjectsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aternos\ModrinthApi\Model\CheckProjectValidity200Response
+     * @return \Aternos\ModrinthApi\Model\ProjectIdentifier
      */
     public function checkProjectValidity($id_slug, string $contentType = self::contentTypes['checkProjectValidity'][0])
     {
@@ -841,7 +841,7 @@ class ProjectsApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aternos\ModrinthApi\Model\CheckProjectValidity200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\ProjectIdentifier, HTTP status code, HTTP response headers (array of strings)
      */
     public function checkProjectValidityWithHttpInfo($id_slug, string $contentType = self::contentTypes['checkProjectValidity'][0])
     {
@@ -884,23 +884,23 @@ class ProjectsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Aternos\ModrinthApi\Model\CheckProjectValidity200Response' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\ProjectIdentifier' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Aternos\ModrinthApi\Model\CheckProjectValidity200Response' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\ProjectIdentifier' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\CheckProjectValidity200Response', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\ProjectIdentifier', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Aternos\ModrinthApi\Model\CheckProjectValidity200Response';
+            $returnType = '\Aternos\ModrinthApi\Model\ProjectIdentifier';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -921,7 +921,7 @@ class ProjectsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aternos\ModrinthApi\Model\CheckProjectValidity200Response',
+                        '\Aternos\ModrinthApi\Model\ProjectIdentifier',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -965,7 +965,7 @@ class ProjectsApi
      */
     public function checkProjectValidityAsyncWithHttpInfo($id_slug, string $contentType = self::contentTypes['checkProjectValidity'][0])
     {
-        $returnType = '\Aternos\ModrinthApi\Model\CheckProjectValidity200Response';
+        $returnType = '\Aternos\ModrinthApi\Model\ProjectIdentifier';
         $request = $this->checkProjectValidityRequest($id_slug, $contentType);
 
         return $this->client
@@ -3899,16 +3899,16 @@ class ProjectsApi
      * Edit multiple projects
      *
      * @param  string[] $ids The IDs of the projects (required)
-     * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
+     * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function patchProjects($ids, $patch_projects_request = null, string $contentType = self::contentTypes['patchProjects'][0])
+    public function patchProjects($ids, $patch_projects_body = null, string $contentType = self::contentTypes['patchProjects'][0])
     {
-        $this->patchProjectsWithHttpInfo($ids, $patch_projects_request, $contentType);
+        $this->patchProjectsWithHttpInfo($ids, $patch_projects_body, $contentType);
     }
 
     /**
@@ -3917,16 +3917,16 @@ class ProjectsApi
      * Edit multiple projects
      *
      * @param  string[] $ids The IDs of the projects (required)
-     * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
+     * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function patchProjectsWithHttpInfo($ids, $patch_projects_request = null, string $contentType = self::contentTypes['patchProjects'][0])
+    public function patchProjectsWithHttpInfo($ids, $patch_projects_body = null, string $contentType = self::contentTypes['patchProjects'][0])
     {
-        $request = $this->patchProjectsRequest($ids, $patch_projects_request, $contentType);
+        $request = $this->patchProjectsRequest($ids, $patch_projects_body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3994,15 +3994,15 @@ class ProjectsApi
      * Edit multiple projects
      *
      * @param  string[] $ids The IDs of the projects (required)
-     * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
+     * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function patchProjectsAsync($ids, $patch_projects_request = null, string $contentType = self::contentTypes['patchProjects'][0])
+    public function patchProjectsAsync($ids, $patch_projects_body = null, string $contentType = self::contentTypes['patchProjects'][0])
     {
-        return $this->patchProjectsAsyncWithHttpInfo($ids, $patch_projects_request, $contentType)
+        return $this->patchProjectsAsyncWithHttpInfo($ids, $patch_projects_body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4016,16 +4016,16 @@ class ProjectsApi
      * Edit multiple projects
      *
      * @param  string[] $ids The IDs of the projects (required)
-     * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
+     * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function patchProjectsAsyncWithHttpInfo($ids, $patch_projects_request = null, string $contentType = self::contentTypes['patchProjects'][0])
+    public function patchProjectsAsyncWithHttpInfo($ids, $patch_projects_body = null, string $contentType = self::contentTypes['patchProjects'][0])
     {
         $returnType = '';
-        $request = $this->patchProjectsRequest($ids, $patch_projects_request, $contentType);
+        $request = $this->patchProjectsRequest($ids, $patch_projects_body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4054,13 +4054,13 @@ class ProjectsApi
      * Create request for operation 'patchProjects'
      *
      * @param  string[] $ids The IDs of the projects (required)
-     * @param  \Aternos\ModrinthApi\Model\PatchProjectsRequest $patch_projects_request Fields to edit on all projects specified (optional)
+     * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function patchProjectsRequest($ids, $patch_projects_request = null, string $contentType = self::contentTypes['patchProjects'][0])
+    public function patchProjectsRequest($ids, $patch_projects_body = null, string $contentType = self::contentTypes['patchProjects'][0])
     {
 
         // verify the required parameter 'ids' is set
@@ -4099,12 +4099,12 @@ class ProjectsApi
         );
 
         // for model (json/xml)
-        if (isset($patch_projects_request)) {
+        if (isset($patch_projects_body)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($patch_projects_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($patch_projects_body));
             } else {
-                $httpBody = $patch_projects_request;
+                $httpBody = $patch_projects_body;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4465,16 +4465,16 @@ class ProjectsApi
      * Schedule a project
      *
      * @param  string $id_slug The ID or slug of the project (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function scheduleProject($id_slug, $schedule_project_request = null, string $contentType = self::contentTypes['scheduleProject'][0])
+    public function scheduleProject($id_slug, $schedule = null, string $contentType = self::contentTypes['scheduleProject'][0])
     {
-        $this->scheduleProjectWithHttpInfo($id_slug, $schedule_project_request, $contentType);
+        $this->scheduleProjectWithHttpInfo($id_slug, $schedule, $contentType);
     }
 
     /**
@@ -4483,16 +4483,16 @@ class ProjectsApi
      * Schedule a project
      *
      * @param  string $id_slug The ID or slug of the project (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function scheduleProjectWithHttpInfo($id_slug, $schedule_project_request = null, string $contentType = self::contentTypes['scheduleProject'][0])
+    public function scheduleProjectWithHttpInfo($id_slug, $schedule = null, string $contentType = self::contentTypes['scheduleProject'][0])
     {
-        $request = $this->scheduleProjectRequest($id_slug, $schedule_project_request, $contentType);
+        $request = $this->scheduleProjectRequest($id_slug, $schedule, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4560,15 +4560,15 @@ class ProjectsApi
      * Schedule a project
      *
      * @param  string $id_slug The ID or slug of the project (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function scheduleProjectAsync($id_slug, $schedule_project_request = null, string $contentType = self::contentTypes['scheduleProject'][0])
+    public function scheduleProjectAsync($id_slug, $schedule = null, string $contentType = self::contentTypes['scheduleProject'][0])
     {
-        return $this->scheduleProjectAsyncWithHttpInfo($id_slug, $schedule_project_request, $contentType)
+        return $this->scheduleProjectAsyncWithHttpInfo($id_slug, $schedule, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4582,16 +4582,16 @@ class ProjectsApi
      * Schedule a project
      *
      * @param  string $id_slug The ID or slug of the project (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function scheduleProjectAsyncWithHttpInfo($id_slug, $schedule_project_request = null, string $contentType = self::contentTypes['scheduleProject'][0])
+    public function scheduleProjectAsyncWithHttpInfo($id_slug, $schedule = null, string $contentType = self::contentTypes['scheduleProject'][0])
     {
         $returnType = '';
-        $request = $this->scheduleProjectRequest($id_slug, $schedule_project_request, $contentType);
+        $request = $this->scheduleProjectRequest($id_slug, $schedule, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4620,13 +4620,13 @@ class ProjectsApi
      * Create request for operation 'scheduleProject'
      *
      * @param  string $id_slug The ID or slug of the project (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleProjectRequest $schedule_project_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function scheduleProjectRequest($id_slug, $schedule_project_request = null, string $contentType = self::contentTypes['scheduleProject'][0])
+    public function scheduleProjectRequest($id_slug, $schedule = null, string $contentType = self::contentTypes['scheduleProject'][0])
     {
 
         // verify the required parameter 'id_slug' is set
@@ -4664,12 +4664,12 @@ class ProjectsApi
         );
 
         // for model (json/xml)
-        if (isset($schedule_project_request)) {
+        if (isset($schedule)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($schedule_project_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($schedule));
             } else {
-                $httpBody = $schedule_project_request;
+                $httpBody = $schedule;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

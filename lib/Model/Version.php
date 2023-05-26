@@ -60,7 +60,7 @@ class Version implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'version_number' => 'string',
         'changelog' => 'string',
-        'dependencies' => '\Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]',
+        'dependencies' => '\Aternos\ModrinthApi\Model\VersionDependency[]',
         'game_versions' => 'string[]',
         'version_type' => 'string',
         'loaders' => 'string[]',
@@ -73,7 +73,7 @@ class Version implements ModelInterface, ArrayAccess, \JsonSerializable
         'date_published' => 'string',
         'downloads' => 'int',
         'changelog_url' => 'string',
-        'files' => '\Aternos\ModrinthApi\Model\VersionAllOfFiles[]'
+        'files' => '\Aternos\ModrinthApi\Model\VersionFile[]'
     ];
 
     /**
@@ -614,7 +614,7 @@ class Version implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets dependencies
      *
-     * @return \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null
+     * @return \Aternos\ModrinthApi\Model\VersionDependency[]|null
      */
     public function getDependencies()
     {
@@ -624,7 +624,7 @@ class Version implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets dependencies
      *
-     * @param \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null $dependencies A list of specific versions of projects that this version depends on
+     * @param \Aternos\ModrinthApi\Model\VersionDependency[]|null $dependencies A list of specific versions of projects that this version depends on
      *
      * @return self
      */
@@ -1011,7 +1011,7 @@ class Version implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets files
      *
-     * @return \Aternos\ModrinthApi\Model\VersionAllOfFiles[]
+     * @return \Aternos\ModrinthApi\Model\VersionFile[]
      */
     public function getFiles()
     {
@@ -1021,7 +1021,7 @@ class Version implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets files
      *
-     * @param \Aternos\ModrinthApi\Model\VersionAllOfFiles[] $files A list of files available for download for this version
+     * @param \Aternos\ModrinthApi\Model\VersionFile[] $files A list of files available for download for this version
      *
      * @return self
      */

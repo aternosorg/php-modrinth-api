@@ -69,7 +69,7 @@ class EditableProject implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_url' => 'string',
         'wiki_url' => 'string',
         'discord_url' => 'string',
-        'donation_urls' => '\Aternos\ModrinthApi\Model\NonSearchProjectAllOfDonationUrls[]',
+        'donation_urls' => '\Aternos\ModrinthApi\Model\ProjectDonationURL[]',
         'license_id' => 'string',
         'license_url' => 'string',
         'status' => 'string',
@@ -912,7 +912,7 @@ class EditableProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets donation_urls
      *
-     * @return \Aternos\ModrinthApi\Model\NonSearchProjectAllOfDonationUrls[]|null
+     * @return \Aternos\ModrinthApi\Model\ProjectDonationURL[]|null
      */
     public function getDonationUrls()
     {
@@ -922,7 +922,7 @@ class EditableProject implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets donation_urls
      *
-     * @param \Aternos\ModrinthApi\Model\NonSearchProjectAllOfDonationUrls[]|null $donation_urls A list of donation links for the project
+     * @param \Aternos\ModrinthApi\Model\ProjectDonationURL[]|null $donation_urls A list of donation links for the project
      *
      * @return self
      */

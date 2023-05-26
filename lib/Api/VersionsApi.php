@@ -2123,16 +2123,16 @@ class VersionsApi
      * Schedule a version
      *
      * @param  string $id The ID of the version (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function scheduleVersion($id, $schedule_version_request = null, string $contentType = self::contentTypes['scheduleVersion'][0])
+    public function scheduleVersion($id, $schedule = null, string $contentType = self::contentTypes['scheduleVersion'][0])
     {
-        $this->scheduleVersionWithHttpInfo($id, $schedule_version_request, $contentType);
+        $this->scheduleVersionWithHttpInfo($id, $schedule, $contentType);
     }
 
     /**
@@ -2141,16 +2141,16 @@ class VersionsApi
      * Schedule a version
      *
      * @param  string $id The ID of the version (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function scheduleVersionWithHttpInfo($id, $schedule_version_request = null, string $contentType = self::contentTypes['scheduleVersion'][0])
+    public function scheduleVersionWithHttpInfo($id, $schedule = null, string $contentType = self::contentTypes['scheduleVersion'][0])
     {
-        $request = $this->scheduleVersionRequest($id, $schedule_version_request, $contentType);
+        $request = $this->scheduleVersionRequest($id, $schedule, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2218,15 +2218,15 @@ class VersionsApi
      * Schedule a version
      *
      * @param  string $id The ID of the version (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function scheduleVersionAsync($id, $schedule_version_request = null, string $contentType = self::contentTypes['scheduleVersion'][0])
+    public function scheduleVersionAsync($id, $schedule = null, string $contentType = self::contentTypes['scheduleVersion'][0])
     {
-        return $this->scheduleVersionAsyncWithHttpInfo($id, $schedule_version_request, $contentType)
+        return $this->scheduleVersionAsyncWithHttpInfo($id, $schedule, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2240,16 +2240,16 @@ class VersionsApi
      * Schedule a version
      *
      * @param  string $id The ID of the version (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function scheduleVersionAsyncWithHttpInfo($id, $schedule_version_request = null, string $contentType = self::contentTypes['scheduleVersion'][0])
+    public function scheduleVersionAsyncWithHttpInfo($id, $schedule = null, string $contentType = self::contentTypes['scheduleVersion'][0])
     {
         $returnType = '';
-        $request = $this->scheduleVersionRequest($id, $schedule_version_request, $contentType);
+        $request = $this->scheduleVersionRequest($id, $schedule, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2278,13 +2278,13 @@ class VersionsApi
      * Create request for operation 'scheduleVersion'
      *
      * @param  string $id The ID of the version (required)
-     * @param  \Aternos\ModrinthApi\Model\ScheduleVersionRequest $schedule_version_request Information about date and requested status (optional)
+     * @param  \Aternos\ModrinthApi\Model\Schedule $schedule Information about date and requested status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scheduleVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function scheduleVersionRequest($id, $schedule_version_request = null, string $contentType = self::contentTypes['scheduleVersion'][0])
+    public function scheduleVersionRequest($id, $schedule = null, string $contentType = self::contentTypes['scheduleVersion'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -2322,12 +2322,12 @@ class VersionsApi
         );
 
         // for model (json/xml)
-        if (isset($schedule_version_request)) {
+        if (isset($schedule)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($schedule_version_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($schedule));
             } else {
-                $httpBody = $schedule_version_request;
+                $httpBody = $schedule;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

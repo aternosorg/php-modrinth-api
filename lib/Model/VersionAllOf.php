@@ -63,7 +63,7 @@ class VersionAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'date_published' => 'string',
         'downloads' => 'int',
         'changelog_url' => 'string',
-        'files' => '\Aternos\ModrinthApi\Model\VersionAllOfFiles[]'
+        'files' => '\Aternos\ModrinthApi\Model\VersionFile[]'
     ];
 
     /**
@@ -523,7 +523,7 @@ class VersionAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets files
      *
-     * @return \Aternos\ModrinthApi\Model\VersionAllOfFiles[]
+     * @return \Aternos\ModrinthApi\Model\VersionFile[]
      */
     public function getFiles()
     {
@@ -533,7 +533,7 @@ class VersionAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets files
      *
-     * @param \Aternos\ModrinthApi\Model\VersionAllOfFiles[] $files A list of files available for download for this version
+     * @param \Aternos\ModrinthApi\Model\VersionFile[] $files A list of files available for download for this version
      *
      * @return self
      */

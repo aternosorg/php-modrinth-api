@@ -1288,7 +1288,7 @@ class UsersApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aternos\ModrinthApi\Model\GetPayoutHistory200Response|\Aternos\ModrinthApi\Model\AuthError
+     * @return \Aternos\ModrinthApi\Model\UserPayoutHistory|\Aternos\ModrinthApi\Model\AuthError
      */
     public function getPayoutHistory($id_username, string $contentType = self::contentTypes['getPayoutHistory'][0])
     {
@@ -1306,7 +1306,7 @@ class UsersApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aternos\ModrinthApi\Model\GetPayoutHistory200Response|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\UserPayoutHistory|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPayoutHistoryWithHttpInfo($id_username, string $contentType = self::contentTypes['getPayoutHistory'][0])
     {
@@ -1349,17 +1349,17 @@ class UsersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Aternos\ModrinthApi\Model\GetPayoutHistory200Response' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\UserPayoutHistory' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Aternos\ModrinthApi\Model\GetPayoutHistory200Response' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\UserPayoutHistory' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\GetPayoutHistory200Response', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\UserPayoutHistory', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1380,7 +1380,7 @@ class UsersApi
                     ];
             }
 
-            $returnType = '\Aternos\ModrinthApi\Model\GetPayoutHistory200Response';
+            $returnType = '\Aternos\ModrinthApi\Model\UserPayoutHistory';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1401,7 +1401,7 @@ class UsersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aternos\ModrinthApi\Model\GetPayoutHistory200Response',
+                        '\Aternos\ModrinthApi\Model\UserPayoutHistory',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1453,7 +1453,7 @@ class UsersApi
      */
     public function getPayoutHistoryAsyncWithHttpInfo($id_username, string $contentType = self::contentTypes['getPayoutHistory'][0])
     {
-        $returnType = '\Aternos\ModrinthApi\Model\GetPayoutHistory200Response';
+        $returnType = '\Aternos\ModrinthApi\Model\UserPayoutHistory';
         $request = $this->getPayoutHistoryRequest($id_username, $contentType);
 
         return $this->client

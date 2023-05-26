@@ -60,7 +60,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'version_number' => 'string',
         'changelog' => 'string',
-        'dependencies' => '\Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]',
+        'dependencies' => '\Aternos\ModrinthApi\Model\VersionDependency[]',
         'game_versions' => 'string[]',
         'version_type' => 'string',
         'loaders' => 'string[]',
@@ -529,7 +529,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets dependencies
      *
-     * @return \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null
+     * @return \Aternos\ModrinthApi\Model\VersionDependency[]|null
      */
     public function getDependencies()
     {
@@ -539,7 +539,7 @@ class BaseVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets dependencies
      *
-     * @param \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null $dependencies A list of specific versions of projects that this version depends on
+     * @param \Aternos\ModrinthApi\Model\VersionDependency[]|null $dependencies A list of specific versions of projects that this version depends on
      *
      * @return self
      */

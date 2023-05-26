@@ -134,7 +134,7 @@ class MiscApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aternos\ModrinthApi\Model\Statistics200Response
+     * @return \Aternos\ModrinthApi\Model\Statistics
      */
     public function statistics(string $contentType = self::contentTypes['statistics'][0])
     {
@@ -151,7 +151,7 @@ class MiscApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aternos\ModrinthApi\Model\Statistics200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\Statistics, HTTP status code, HTTP response headers (array of strings)
      */
     public function statisticsWithHttpInfo(string $contentType = self::contentTypes['statistics'][0])
     {
@@ -194,23 +194,23 @@ class MiscApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Aternos\ModrinthApi\Model\Statistics200Response' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\Statistics' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Aternos\ModrinthApi\Model\Statistics200Response' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\Statistics' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Statistics200Response', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\Statistics', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Aternos\ModrinthApi\Model\Statistics200Response';
+            $returnType = '\Aternos\ModrinthApi\Model\Statistics';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -231,7 +231,7 @@ class MiscApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aternos\ModrinthApi\Model\Statistics200Response',
+                        '\Aternos\ModrinthApi\Model\Statistics',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -273,7 +273,7 @@ class MiscApi
      */
     public function statisticsAsyncWithHttpInfo(string $contentType = self::contentTypes['statistics'][0])
     {
-        $returnType = '\Aternos\ModrinthApi\Model\Statistics200Response';
+        $returnType = '\Aternos\ModrinthApi\Model\Statistics';
         $request = $this->statisticsRequest($contentType);
 
         return $this->client

@@ -149,16 +149,16 @@ class TeamsApi
      * Add a user to a team
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function addTeamMember($id, $add_team_member_request = null, string $contentType = self::contentTypes['addTeamMember'][0])
+    public function addTeamMember($id, $user_identifier = null, string $contentType = self::contentTypes['addTeamMember'][0])
     {
-        $this->addTeamMemberWithHttpInfo($id, $add_team_member_request, $contentType);
+        $this->addTeamMemberWithHttpInfo($id, $user_identifier, $contentType);
     }
 
     /**
@@ -167,16 +167,16 @@ class TeamsApi
      * Add a user to a team
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function addTeamMemberWithHttpInfo($id, $add_team_member_request = null, string $contentType = self::contentTypes['addTeamMember'][0])
+    public function addTeamMemberWithHttpInfo($id, $user_identifier = null, string $contentType = self::contentTypes['addTeamMember'][0])
     {
-        $request = $this->addTeamMemberRequest($id, $add_team_member_request, $contentType);
+        $request = $this->addTeamMemberRequest($id, $user_identifier, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -236,15 +236,15 @@ class TeamsApi
      * Add a user to a team
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addTeamMemberAsync($id, $add_team_member_request = null, string $contentType = self::contentTypes['addTeamMember'][0])
+    public function addTeamMemberAsync($id, $user_identifier = null, string $contentType = self::contentTypes['addTeamMember'][0])
     {
-        return $this->addTeamMemberAsyncWithHttpInfo($id, $add_team_member_request, $contentType)
+        return $this->addTeamMemberAsyncWithHttpInfo($id, $user_identifier, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -258,16 +258,16 @@ class TeamsApi
      * Add a user to a team
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addTeamMemberAsyncWithHttpInfo($id, $add_team_member_request = null, string $contentType = self::contentTypes['addTeamMember'][0])
+    public function addTeamMemberAsyncWithHttpInfo($id, $user_identifier = null, string $contentType = self::contentTypes['addTeamMember'][0])
     {
         $returnType = '';
-        $request = $this->addTeamMemberRequest($id, $add_team_member_request, $contentType);
+        $request = $this->addTeamMemberRequest($id, $user_identifier, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -296,13 +296,13 @@ class TeamsApi
      * Create request for operation 'addTeamMember'
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request User to be added (must be the ID, usernames cannot be used here) (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier User to be added (must be the ID, usernames cannot be used here) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addTeamMemberRequest($id, $add_team_member_request = null, string $contentType = self::contentTypes['addTeamMember'][0])
+    public function addTeamMemberRequest($id, $user_identifier = null, string $contentType = self::contentTypes['addTeamMember'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -340,12 +340,12 @@ class TeamsApi
         );
 
         // for model (json/xml)
-        if (isset($add_team_member_request)) {
+        if (isset($user_identifier)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($add_team_member_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($user_identifier));
             } else {
-                $httpBody = $add_team_member_request;
+                $httpBody = $user_identifier;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1764,16 +1764,16 @@ class TeamsApi
      *
      * @param  string $id The ID of the team (required)
      * @param  string $user_id The ID of the user to modify (required)
-     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
+     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberBody $modify_team_member_body Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function modifyTeamMember($id, $user_id, $modify_team_member_request = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
+    public function modifyTeamMember($id, $user_id, $modify_team_member_body = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
     {
-        $this->modifyTeamMemberWithHttpInfo($id, $user_id, $modify_team_member_request, $contentType);
+        $this->modifyTeamMemberWithHttpInfo($id, $user_id, $modify_team_member_body, $contentType);
     }
 
     /**
@@ -1783,16 +1783,16 @@ class TeamsApi
      *
      * @param  string $id The ID of the team (required)
      * @param  string $user_id The ID of the user to modify (required)
-     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
+     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberBody $modify_team_member_body Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function modifyTeamMemberWithHttpInfo($id, $user_id, $modify_team_member_request = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
+    public function modifyTeamMemberWithHttpInfo($id, $user_id, $modify_team_member_body = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
     {
-        $request = $this->modifyTeamMemberRequest($id, $user_id, $modify_team_member_request, $contentType);
+        $request = $this->modifyTeamMemberRequest($id, $user_id, $modify_team_member_body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1853,15 +1853,15 @@ class TeamsApi
      *
      * @param  string $id The ID of the team (required)
      * @param  string $user_id The ID of the user to modify (required)
-     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
+     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberBody $modify_team_member_body Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyTeamMemberAsync($id, $user_id, $modify_team_member_request = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
+    public function modifyTeamMemberAsync($id, $user_id, $modify_team_member_body = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
     {
-        return $this->modifyTeamMemberAsyncWithHttpInfo($id, $user_id, $modify_team_member_request, $contentType)
+        return $this->modifyTeamMemberAsyncWithHttpInfo($id, $user_id, $modify_team_member_body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1876,16 +1876,16 @@ class TeamsApi
      *
      * @param  string $id The ID of the team (required)
      * @param  string $user_id The ID of the user to modify (required)
-     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
+     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberBody $modify_team_member_body Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function modifyTeamMemberAsyncWithHttpInfo($id, $user_id, $modify_team_member_request = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
+    public function modifyTeamMemberAsyncWithHttpInfo($id, $user_id, $modify_team_member_body = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
     {
         $returnType = '';
-        $request = $this->modifyTeamMemberRequest($id, $user_id, $modify_team_member_request, $contentType);
+        $request = $this->modifyTeamMemberRequest($id, $user_id, $modify_team_member_body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1915,13 +1915,13 @@ class TeamsApi
      *
      * @param  string $id The ID of the team (required)
      * @param  string $user_id The ID of the user to modify (required)
-     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest $modify_team_member_request Contents to be modified (optional)
+     * @param  \Aternos\ModrinthApi\Model\ModifyTeamMemberBody $modify_team_member_body Contents to be modified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyTeamMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function modifyTeamMemberRequest($id, $user_id, $modify_team_member_request = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
+    public function modifyTeamMemberRequest($id, $user_id, $modify_team_member_body = null, string $contentType = self::contentTypes['modifyTeamMember'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -1974,12 +1974,12 @@ class TeamsApi
         );
 
         // for model (json/xml)
-        if (isset($modify_team_member_request)) {
+        if (isset($modify_team_member_body)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($modify_team_member_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($modify_team_member_body));
             } else {
-                $httpBody = $modify_team_member_request;
+                $httpBody = $modify_team_member_body;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2038,16 +2038,16 @@ class TeamsApi
      * Transfer team&#39;s ownership to another user
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function transferTeamOwnership($id, $add_team_member_request = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
+    public function transferTeamOwnership($id, $user_identifier = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
     {
-        $this->transferTeamOwnershipWithHttpInfo($id, $add_team_member_request, $contentType);
+        $this->transferTeamOwnershipWithHttpInfo($id, $user_identifier, $contentType);
     }
 
     /**
@@ -2056,16 +2056,16 @@ class TeamsApi
      * Transfer team&#39;s ownership to another user
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function transferTeamOwnershipWithHttpInfo($id, $add_team_member_request = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
+    public function transferTeamOwnershipWithHttpInfo($id, $user_identifier = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
     {
-        $request = $this->transferTeamOwnershipRequest($id, $add_team_member_request, $contentType);
+        $request = $this->transferTeamOwnershipRequest($id, $user_identifier, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2125,15 +2125,15 @@ class TeamsApi
      * Transfer team&#39;s ownership to another user
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function transferTeamOwnershipAsync($id, $add_team_member_request = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
+    public function transferTeamOwnershipAsync($id, $user_identifier = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
     {
-        return $this->transferTeamOwnershipAsyncWithHttpInfo($id, $add_team_member_request, $contentType)
+        return $this->transferTeamOwnershipAsyncWithHttpInfo($id, $user_identifier, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2147,16 +2147,16 @@ class TeamsApi
      * Transfer team&#39;s ownership to another user
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function transferTeamOwnershipAsyncWithHttpInfo($id, $add_team_member_request = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
+    public function transferTeamOwnershipAsyncWithHttpInfo($id, $user_identifier = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
     {
         $returnType = '';
-        $request = $this->transferTeamOwnershipRequest($id, $add_team_member_request, $contentType);
+        $request = $this->transferTeamOwnershipRequest($id, $user_identifier, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2185,13 +2185,13 @@ class TeamsApi
      * Create request for operation 'transferTeamOwnership'
      *
      * @param  string $id The ID of the team (required)
-     * @param  \Aternos\ModrinthApi\Model\AddTeamMemberRequest $add_team_member_request New owner&#39;s ID (optional)
+     * @param  \Aternos\ModrinthApi\Model\UserIdentifier $user_identifier New owner&#39;s ID (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferTeamOwnership'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function transferTeamOwnershipRequest($id, $add_team_member_request = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
+    public function transferTeamOwnershipRequest($id, $user_identifier = null, string $contentType = self::contentTypes['transferTeamOwnership'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -2229,12 +2229,12 @@ class TeamsApi
         );
 
         // for model (json/xml)
-        if (isset($add_team_member_request)) {
+        if (isset($user_identifier)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($add_team_member_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($user_identifier));
             } else {
-                $httpBody = $add_team_member_request;
+                $httpBody = $user_identifier;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

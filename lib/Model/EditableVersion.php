@@ -60,7 +60,7 @@ class EditableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'version_number' => 'string',
         'changelog' => 'string',
-        'dependencies' => '\Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]',
+        'dependencies' => '\Aternos\ModrinthApi\Model\VersionDependency[]',
         'game_versions' => 'string[]',
         'version_type' => 'string',
         'loaders' => 'string[]',
@@ -68,7 +68,7 @@ class EditableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'requested_status' => 'string',
         'primary_file' => 'string[]',
-        'file_types' => '\Aternos\ModrinthApi\Model\EditableVersionAllOfFileTypes[]'
+        'file_types' => '\Aternos\ModrinthApi\Model\EditableFileType[]'
     ];
 
     /**
@@ -543,7 +543,7 @@ class EditableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets dependencies
      *
-     * @return \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null
+     * @return \Aternos\ModrinthApi\Model\VersionDependency[]|null
      */
     public function getDependencies()
     {
@@ -553,7 +553,7 @@ class EditableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets dependencies
      *
-     * @param \Aternos\ModrinthApi\Model\BaseVersionDependenciesInner[]|null $dependencies A list of specific versions of projects that this version depends on
+     * @param \Aternos\ModrinthApi\Model\VersionDependency[]|null $dependencies A list of specific versions of projects that this version depends on
      *
      * @return self
      */
@@ -796,7 +796,7 @@ class EditableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_types
      *
-     * @return \Aternos\ModrinthApi\Model\EditableVersionAllOfFileTypes[]|null
+     * @return \Aternos\ModrinthApi\Model\EditableFileType[]|null
      */
     public function getFileTypes()
     {
@@ -806,7 +806,7 @@ class EditableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_types
      *
-     * @param \Aternos\ModrinthApi\Model\EditableVersionAllOfFileTypes[]|null $file_types file_types
+     * @param \Aternos\ModrinthApi\Model\EditableFileType[]|null $file_types A list of file_types to edit
      *
      * @return self
      */
