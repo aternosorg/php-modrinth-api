@@ -4,6 +4,7 @@ namespace Aternos\ModrinthApi\Client;
 
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
+use Aternos\ModrinthApi\Model\VersionDependency as VersionDependencyModel;
 
 class Version
 {
@@ -30,5 +31,17 @@ class Version
     public function getProject(): Project
     {
         return $this->client->getProject($this->data->getProjectId());
+    }
+
+
+    /**
+     * Get the dependencies of this version
+     * @return VersionDependency[]
+     */
+    public function getDependencies(): array
+    {
+        return array_map(function (VersionDependencyModel $dependency) {
+            return new VersionDependency($this->client, $dependency);
+        }, $this->data->getDependencies() ?? []);
     }
 }
