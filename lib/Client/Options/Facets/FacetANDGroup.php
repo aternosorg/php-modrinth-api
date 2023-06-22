@@ -44,7 +44,7 @@ class FacetANDGroup
     }
 
     /**
-     * @return array
+     * @return FacetORGroup[]
      */
     public function getORGroups(): array
     {
@@ -52,19 +52,35 @@ class FacetANDGroup
     }
 
     /**
-     * @param array $orGroups
+     * @param FacetORGroup[] $orGroups
+     * @return $this
      */
-    public function setORGroups(array $orGroups): void
+    public function setORGroups(array $orGroups): self
     {
         $this->orGroups = $orGroups;
+        return $this;
     }
 
     /**
-     * @param Facet $facet
+     * @param FacetORGroup $facet
+     * @return $this
      */
-    public function addORGroup(Facet $facet): void
+    public function addORGroup(FacetORGroup $facet): self
     {
         $this->orGroups[] = $facet;
+        return $this;
+    }
+
+    /**
+     * @param FacetORGroup ...$groups
+     * @return $this
+     */
+    public function addORGroups(FacetORGroup ...$groups): self
+    {
+        foreach ($groups as $group) {
+            $this->orGroups[] = $group;
+        }
+        return $this;
     }
 
     /**

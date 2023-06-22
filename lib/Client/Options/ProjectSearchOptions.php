@@ -3,6 +3,7 @@
 namespace Aternos\ModrinthApi\Client\Options;
 
 use Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;
+use Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;
 
 /**
  * Class ProjectSearchOptions
@@ -12,9 +13,11 @@ use Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;
  */
 class ProjectSearchOptions
 {
+    protected ?FacetANDGroup $facets = null;
+
     /**
      * @param string|null $query The query to search for.
-     * @param FacetANDGroup|null $facets The recommended way of filtering search results.
+     * @param FacetANDGroup|FacetORGroup|null $facets The recommended way of filtering search results.
      * @param SearchIndex $index The sorting method used for sorting search results.
      * @param string|null $filters A list of filters relating to the properties of a project. Use filters when there isn't an available facet for your needs.
      * @param int $offset The offset into the search. Skips this number of results.
@@ -22,13 +25,17 @@ class ProjectSearchOptions
      */
     public function __construct(
         protected ?string $query = null,
-        protected ?FacetANDGroup $facets = null,
+        FacetANDGroup|FacetORGroup|null $facets = null,
         protected SearchIndex $index = SearchIndex::RELEVANCE,
         protected ?string $filters = null,
         protected int $offset = 0,
         protected int $limit = 50,
     )
     {
+        if ($facets instanceof FacetORGroup) {
+            $facets = $facets->toANDGroup();
+        }
+        $this->facets = $facets;
     }
 
     /**
