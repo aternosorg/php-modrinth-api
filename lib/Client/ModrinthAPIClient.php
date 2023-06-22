@@ -12,15 +12,23 @@ use Aternos\ModrinthApi\Api\VersionsApi;
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
+use Aternos\ModrinthApi\Client\Tags\Category;
+use Aternos\ModrinthApi\Client\Tags\GameVersion;
+use Aternos\ModrinthApi\Client\Tags\License;
+use Aternos\ModrinthApi\Client\Tags\Loader;
 use Aternos\ModrinthApi\Configuration;
+use Aternos\ModrinthApi\Model\CategoryTag;
+use Aternos\ModrinthApi\Model\GameVersionTag;
 use Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody;
 use Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody;
+use Aternos\ModrinthApi\Model\LicenseTag;
+use Aternos\ModrinthApi\Model\LoaderTag;
+use Aternos\ModrinthApi\Model\Notification as NotificationModel;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
 use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
+use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
-use Aternos\ModrinthApi\Model\User as UserModel;
-use Aternos\ModrinthApi\Model\Notification as NotificationModel;
 
 /**
  * Class ModrinthAPIClient
@@ -451,5 +459,63 @@ class ModrinthAPIClient
         }
 
         return $result;
+    }
+
+    /**
+     * Get all categories
+     * @return Category[]
+     * @throws ApiException
+     */
+    public function getCategories(): array
+    {
+        return array_map(function (CategoryTag $category): Category {
+            return new Category($this, $category);
+        }, $this->tags->categoryList());
+    }
+
+    /**
+     * Get all loaders
+     * @return Loader[]
+     * @throws ApiException
+     */
+    public function getLoaders(): array
+    {
+        return array_map(function (LoaderTag $loader): Loader {
+            return new Loader($this, $loader);
+        }, $this->tags->loaderList());
+    }
+
+    /**
+     * Get all game versions
+     * @return GameVersion[]
+     * @throws ApiException
+     */
+    public function getGameVersions(): array
+    {
+        return array_map(function (GameVersionTag $loader): GameVersion {
+            return new GameVersion($this, $loader);
+        }, $this->tags->versionList());
+    }
+
+    /**
+     * Get all licenses
+     * @return License[]
+     * @throws ApiException
+     */
+    public function getLicenses(): array
+    {
+        return array_map(function (LicenseTag $license): License {
+            return new License($this, $license);
+        }, $this->tags->licenseList());
+    }
+
+    /**
+     * Get all report reasons
+     * @return string[]
+     * @throws ApiException
+     */
+    public function getReportTypes(): array
+    {
+        return $this->tags->reportTypeList();
     }
 }
