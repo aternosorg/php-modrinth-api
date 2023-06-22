@@ -3036,7 +3036,7 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -3054,7 +3054,7 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -3154,7 +3154,7 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3175,7 +3175,7 @@ class ProjectsApi
      *
      * Get multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3225,7 +3225,7 @@ class ProjectsApi
     /**
      * Create request for operation 'getProjects'
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3253,7 +3253,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -3898,7 +3898,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -3916,7 +3916,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -3993,7 +3993,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -4015,7 +4015,7 @@ class ProjectsApi
      *
      * Edit multiple projects
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -4053,7 +4053,7 @@ class ProjectsApi
     /**
      * Create request for operation 'patchProjects'
      *
-     * @param  string[] $ids The IDs of the projects (required)
+     * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchProjects'] to see the possible values for this operation
      *
@@ -4083,7 +4083,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -5006,7 +5006,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $facets,
             'facets', // param base name
-            'string', // ATERNOS: this was changed to string because otherwise openapi will try to flatten it
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required

@@ -1583,7 +1583,7 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  string[] $ids The IDs of the versions (required)
+     * @param  string $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1601,7 +1601,7 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  string[] $ids The IDs of the versions (required)
+     * @param  string $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1701,7 +1701,7 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  string[] $ids The IDs of the versions (required)
+     * @param  string $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1722,7 +1722,7 @@ class VersionsApi
      *
      * Get multiple versions
      *
-     * @param  string[] $ids The IDs of the versions (required)
+     * @param  string $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1772,7 +1772,7 @@ class VersionsApi
     /**
      * Create request for operation 'getVersions'
      *
-     * @param  string[] $ids The IDs of the versions (required)
+     * @param  string $ids The IDs of the versions (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1800,7 +1800,7 @@ class VersionsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required

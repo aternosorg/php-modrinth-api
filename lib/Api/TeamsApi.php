@@ -1236,7 +1236,7 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  string[] $ids The IDs of the teams (required)
+     * @param  string $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1254,7 +1254,7 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  string[] $ids The IDs of the teams (required)
+     * @param  string $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1354,7 +1354,7 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  string[] $ids The IDs of the teams (required)
+     * @param  string $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1375,7 +1375,7 @@ class TeamsApi
      *
      * Get the members of multiple teams
      *
-     * @param  string[] $ids The IDs of the teams (required)
+     * @param  string $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1425,7 +1425,7 @@ class TeamsApi
     /**
      * Create request for operation 'getTeams'
      *
-     * @param  string[] $ids The IDs of the teams (required)
+     * @param  string $ids The IDs of the teams (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeams'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1453,7 +1453,7 @@ class TeamsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required

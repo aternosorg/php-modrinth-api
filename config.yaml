@@ -3,4 +3,4 @@ artifactVersion: 1.0.0
 generatorName: php
 outputDir: .
 # This points to a downgraded Open API 3.0.0 spec for now. The official spec can be found at https://docs.modrinth.com/redocusaurus/plugin-redoc-0.yaml
-inputSpec: https://raw.githubusercontent.com/JulianVennen/modrinth-docs/no-inner-objects/static/openapi.yaml
+inputSpec: https://raw.githubusercontent.com/JulianVennen/modrinth-docs/php-modrinth-api/static/openapi.yaml

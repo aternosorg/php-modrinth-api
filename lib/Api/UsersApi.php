@@ -2451,7 +2451,7 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  string[] $ids The IDs of the users (required)
+     * @param  string $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2469,7 +2469,7 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  string[] $ids The IDs of the users (required)
+     * @param  string $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -2569,7 +2569,7 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  string[] $ids The IDs of the users (required)
+     * @param  string $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2590,7 +2590,7 @@ class UsersApi
      *
      * Get multiple users
      *
-     * @param  string[] $ids The IDs of the users (required)
+     * @param  string $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2640,7 +2640,7 @@ class UsersApi
     /**
      * Create request for operation 'getUsers'
      *
-     * @param  string[] $ids The IDs of the users (required)
+     * @param  string $ids The IDs of the users (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2668,7 +2668,7 @@ class UsersApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required

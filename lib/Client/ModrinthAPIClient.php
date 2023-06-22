@@ -21,6 +21,7 @@ use Aternos\ModrinthApi\Model\CategoryTag;
 use Aternos\ModrinthApi\Model\GameVersionTag;
 use Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody;
 use Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody;
+use Aternos\ModrinthApi\Model\HashList;
 use Aternos\ModrinthApi\Model\LicenseTag;
 use Aternos\ModrinthApi\Model\LoaderTag;
 use Aternos\ModrinthApi\Model\Notification as NotificationModel;
@@ -76,6 +77,7 @@ class ModrinthAPIClient
     public function setConfiguration(Configuration $configuration): static
     {
         $this->configuration = $configuration;
+        $this->configuration->setBooleanFormatForQueryString(Configuration::BOOLEAN_FORMAT_STRING);
 
         $this->projects = new ProjectsApi(null, $this->configuration);
         $this->versions = new VersionsApi(null, $this->configuration);
@@ -153,7 +155,7 @@ class ModrinthAPIClient
     {
         return array_map(function (ProjectModel $project): Project {
             return new Project($this, $project);
-        }, $this->projects->getProjects($ids));
+        }, $this->projects->getProjects(json_encode($ids)));
     }
 
     /**
@@ -241,7 +243,7 @@ class ModrinthAPIClient
     {
         return array_map(function (VersionModel $version): Version {
             return new Version($this, $version);
-        }, $this->versions->getVersions($ids));
+        }, $this->versions->getVersions(json_encode($ids)));
     }
 
     /**
@@ -260,14 +262,18 @@ class ModrinthAPIClient
      * Get multiple versions by their hashes
      * @param string[] $hashes
      * @param HashAlgorithm $algorithm
-     * @return array
+     * @return Version[]
      * @throws ApiException
      */
     public function getVersionsFromHashes(array $hashes, HashAlgorithm $algorithm = HashAlgorithm::SHA1): array
     {
+        $hashList = new HashList();
+        $hashList->setHashes($hashes);
+        $hashList->setAlgorithm($algorithm->value);
+
         return array_map(function (VersionModel $version): Version {
             return new Version($this, $version);
-        }, $this->versionFiles->versionsFromHashes($hashes, $algorithm->value));
+        }, $this->versionFiles->versionsFromHashes($hashList));
     }
 
     /**
@@ -353,7 +359,7 @@ class ModrinthAPIClient
     {
         return array_map(function (UserModel $user): User {
             return new User($this, $user);
-        }, $this->users->getUsers($ids));
+        }, $this->users->getUsers(json_encode($ids)));
     }
 
     /**
@@ -421,7 +427,7 @@ class ModrinthAPIClient
     /**
      * Get members of a project
      * @param string $idOrSlug
-     * @return array
+     * @return TeamMember[]
      * @throws ApiException
      */
     public function getProjectMembers(string $idOrSlug): array
@@ -453,7 +459,7 @@ class ModrinthAPIClient
     public function getTeams(array $ids): array
     {
         $result = [];
-        foreach ($this->teams->getTeams($ids) as $members) {
+        foreach ($this->teams->getTeams(json_encode($ids)) as $members) {
             $result[] = array_map(function (TeamMemberModel $member): TeamMember {
                 return new TeamMember($this, $member);
             }, $members);
