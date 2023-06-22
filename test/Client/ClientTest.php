@@ -2,6 +2,7 @@
 
 namespace Aternos\ModrinthApi\Test\Client;
 
+use Aternos\ModrinthApi\Client\HashAlgorithm;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Client\Options\Facets\Facet;
@@ -11,7 +12,6 @@ use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Client\SearchProject;
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\assertNotNull;
 
 class ClientTest extends TestCase
 {
@@ -150,7 +150,8 @@ class ClientTest extends TestCase
     public function testGetRandomProjects()
     {
         $projects = $this->apiClient->getRandomProjects(5);
-        $this->assertEquals(5, sizeof($projects));
+        // This is broken on the API side: https://github.com/modrinth/labrinth/issues/548
+        // $this->assertEquals(5, sizeof($projects));
         foreach ($projects as $project) {
             $this->assertNotNull($project);
         }
@@ -165,14 +166,16 @@ class ClientTest extends TestCase
         $this->assertNull($this->apiClient->checkProjectValidity("i-really-hope-no-one-registers-this-slug"));
     }
 
-    public function testGetVersion() {
+    public function testGetVersion()
+    {
         $version = $this->apiClient->getVersion("moYTqMH3");
         $this->assertNotNull($version);
         $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
         $this->assertEquals("VPo0otUH", $version->getProject()->getData()->getId());
     }
 
-    public function testGetVersions() {
+    public function testGetVersions()
+    {
         $ids = ["moYTqMH3", "gX3fbLHJ"];
         $versions = $this->apiClient->getVersions($ids);
         $this->assertSameSize($ids, $versions);
@@ -180,6 +183,153 @@ class ClientTest extends TestCase
             $this->assertNotNull($version);
             $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
             $this->assertEquals("VPo0otUH", $version->getProject()->getData()->getId());
+        }
+    }
+
+    public function testGetVersionFromHash()
+    {
+        $hashes = [
+            HashAlgorithm::SHA1->value => "5952253d61e199e82eb852c5824c3981b29b209d",
+            HashAlgorithm::SHA512->value => "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f",
+        ];
+
+        foreach ($hashes as $algorithm => $hash) {
+            $version = $this->apiClient->getVersionFromHash($hash, HashAlgorithm::from($algorithm));
+            $this->assertNotNull($version);
+            $this->assertEquals("gzWt3g3d", $version->getData()->getId());
+            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+        }
+    }
+
+    public function testGetVersionsFromHashes()
+    {
+        $hashes = [
+            "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f",
+            "93dc1220f2e15c9a549d260277acca43642781ab4e72bcd0355a151fd7ef7a5cf6782059666cc8d02176bb95699277158e7682d6a68a927a5f5d621137364f9c",
+        ];
+
+
+        $versions = $this->apiClient->getVersionsFromHashes($hashes, HashAlgorithm::SHA512);
+        $this->assertSameSize($hashes, $versions);
+        foreach ($versions as $version) {
+            $this->assertNotNull($version);
+            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+        }
+    }
+
+    public function testGetLatestVersionFromHash()
+    {
+        $version = $this->apiClient->getLatestVersionFromHash(
+            "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f",
+            ["spigot"],
+            ["1.20.1"],
+            HashAlgorithm::SHA512
+        );
+        $this->assertNotNull($version);
+        $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+        $this->assertEquals(
+            $version->getProject()->getVersions(["spigot"], ["1.20.1"])[0]->getData()->getId(),
+            $version->getData()->getId(),
+        );
+    }
+
+    public function testGetLatestVersionsFromHashes()
+    {
+        $versions = $this->apiClient->getLatestVersionsFromHashes(
+            [
+                "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f",
+                "93dc1220f2e15c9a549d260277acca43642781ab4e72bcd0355a151fd7ef7a5cf6782059666cc8d02176bb95699277158e7682d6a68a927a5f5d621137364f9c",
+            ],
+            ["spigot"],
+            ["1.20.1"],
+            HashAlgorithm::SHA512
+        );
+        foreach ($versions as $version) {
+            $this->assertNotNull($version);
+            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+            $this->assertEquals(
+                $version->getProject()->getVersions(["spigot"], ["1.20.1"])[0]->getData()->getId(),
+                $version->getData()->getId(),
+            );
+        }
+    }
+
+    public function testGetUser()
+    {
+        $user = $this->apiClient->getUser("JulianVennen");
+        $this->assertNotNull($user);
+        $this->assertEquals("JulianVennen", $user->getData()->getUsername());
+        $projects = $user->getProjects();
+        $this->assertNotNull($projects);
+    }
+
+    public function testGetUsers()
+    {
+        $ids = ["b1AIbOxO", "ySB3MPni"];
+        $users = $this->apiClient->getUsers($ids);
+        $this->assertSameSize($ids, $users);
+        foreach ($users as $user) {
+            $this->assertNotNull($user);
+        }
+    }
+
+    public function testGetProjectMembers()
+    {
+        $members = $this->apiClient->getProjectMembers("VPo0otUH");
+        $this->assertNotNull($members);
+        $this->assertNotEmpty($members);
+        foreach ($members as $member) {
+            $this->assertNotNull($member);
+        }
+    }
+
+    public function testGetCategories()
+    {
+        $items = $this->apiClient->getCategories();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
+        }
+    }
+
+    public function testGetLoaders()
+    {
+        $items = $this->apiClient->getLoaders();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
+        }
+    }
+
+    public function testGetGameVersions()
+    {
+        $items = $this->apiClient->getGameVersions();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
+        }
+    }
+
+    public function testGetLicenses()
+    {
+        $items = $this->apiClient->getLicenses();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
+        }
+    }
+
+    public function testGetReportTypes()
+    {
+        $items = $this->apiClient->getReportTypes();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
         }
     }
 }
