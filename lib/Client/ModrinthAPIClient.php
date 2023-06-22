@@ -160,6 +160,9 @@ class ModrinthAPIClient
 
     /**
      * Get a list of random projects
+     *
+     * WARNING: this endpoint is buggy and often returns a lower amount of projects than requested
+     * @link https://github.com/modrinth/labrinth/issues/548
      * @param int $count
      * @return Project[]
      * @throws ApiException
