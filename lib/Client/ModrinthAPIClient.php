@@ -122,8 +122,8 @@ class ModrinthAPIClient
         $options = $options ?? new ProjectSearchOptions();
         $projects = $this->projects->searchProjects(
             $options->getQuery(),
-            $options->getFacets(),
-            $options->getIndex(),
+            $options->getFacets()?->serialize(),
+            $options->getIndex()->value,
             $options->getOffset(),
             $options->getLimit(),
             $options->getFilters(),
@@ -170,7 +170,7 @@ class ModrinthAPIClient
     }
 
     /**
-     * Check if a project or
+     * Check if a project or slug is valid. Returns the project ID if the project is valid, null if not.
      * @param string $idOrSlug slug or id to check
      * @return string|null Project ID if the project is valid, null if not
      * @throws ApiException

@@ -68,12 +68,12 @@ class FacetANDGroup
     }
 
     /**
-     * @return string[][]
+     * @return string
      */
-    public function serialize(): array
+    public function serialize(): string
     {
-        return array_map(function (FacetORGroup $group) {
+        return json_encode(array_map(function (FacetORGroup $group) {
             return $group->serialize();
-        }, $this->orGroups);
+        }, $this->orGroups));
     }
 }

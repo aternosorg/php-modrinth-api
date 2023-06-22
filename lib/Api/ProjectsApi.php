@@ -5006,7 +5006,7 @@ class ProjectsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $facets,
             'facets', // param base name
-            'array', // openApiType
+            'string', // ATERNOS: this was changed to string because otherwise openapi will try to flatten it
             'form', // style
             true, // explode
             false // required
