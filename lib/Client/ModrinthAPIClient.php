@@ -25,6 +25,7 @@ use Aternos\ModrinthApi\Model\LicenseTag;
 use Aternos\ModrinthApi\Model\LoaderTag;
 use Aternos\ModrinthApi\Model\Notification as NotificationModel;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
+use Aternos\ModrinthApi\Model\Statistics;
 use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
 use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
@@ -517,5 +518,15 @@ class ModrinthAPIClient
     public function getReportTypes(): array
     {
         return $this->tags->reportTypeList();
+    }
+
+    /**
+     * Get statistics about modrinth
+     * @return Statistics
+     * @throws ApiException
+     */
+    public function getStatistics(): Statistics
+    {
+        return $this->misc->statistics();
     }
 }
