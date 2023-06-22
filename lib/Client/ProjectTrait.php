@@ -44,4 +44,14 @@ trait ProjectTrait
     {
         return $this->getClient()->getProjectVersions($this->getId());
     }
+
+    /**
+     * Get the members of this project
+     * @return TeamMember[]
+     * @throws ApiException
+     */
+    public function getMembers(): array
+    {
+        return $this->getClient()->getProjectMembers($this->getId());
+    }
 }
