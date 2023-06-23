@@ -6,7 +6,8 @@ use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Client\Options\Facets\Facet;
-use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
+use Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;
+use Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 
 trait SearchableTag
@@ -31,8 +32,8 @@ trait SearchableTag
      */
     public function searchProjects(ProjectSearchOptions $options = new ProjectSearchOptions()): PaginatedProjectSearchList
     {
-        $facets = $options->getFacets();
-        $facets->addORGroup($this->toFacet());
+        $facets = $options->getFacets() ?? new FacetANDGroup([]);
+        $facets->addORGroup(new FacetORGroup([$this->toFacet()]));
         $options->setFacets($facets);
         return $this->getClient()->searchProjects($options);
     }
