@@ -256,9 +256,9 @@ class ClientTest extends TestCase
 
     public function testGetUser()
     {
-        $user = $this->apiClient->getUser("JulianVennen");
+        $user = $this->apiClient->getUser("Julian");
         $this->assertNotNull($user);
-        $this->assertEquals("JulianVennen", $user->getData()->getUsername());
+        $this->assertEquals("Julian", $user->getData()->getUsername());
         $projects = $user->getProjects();
         $this->assertNotNull($projects);
     }
