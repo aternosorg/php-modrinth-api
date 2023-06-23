@@ -14,7 +14,7 @@ class FacetORGroup
      * @param Facet[] $facets
      */
     public function __construct(
-        protected array $facets
+        protected array $facets = []
     )
     {
     }

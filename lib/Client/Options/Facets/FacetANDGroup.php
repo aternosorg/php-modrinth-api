@@ -18,7 +18,7 @@ class FacetANDGroup
     /**
      * @param FacetORGroup[]|Facet[][]|Facet[] $orGroups
      */
-    public function __construct(array $orGroups)
+    public function __construct(array $orGroups = [])
     {
         $this->orGroups = array_map(function ($x) {
             if ($x instanceof FacetORGroup) {
