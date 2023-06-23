@@ -32,7 +32,7 @@ class License
      */
     public function toFacet(): Facet
     {
-        return new Facet(FacetType::LICENSE, $this->data->getName());
+        return new Facet(FacetType::LICENSE, $this->data->getShort());
     }
 
     function getClient(): ModrinthAPIClient
