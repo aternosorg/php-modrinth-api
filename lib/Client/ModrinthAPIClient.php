@@ -354,8 +354,8 @@ class ModrinthAPIClient
 
     /**
      * Get multiple users by ID
-     * @param array $ids
-     * @return array
+     * @param string[] $ids
+     * @return User[]
      * @throws ApiException
      */
     public function getUsers(array $ids): array
@@ -443,7 +443,7 @@ class ModrinthAPIClient
     /**
      * Get members of a team
      * @param string $id
-     * @return array
+     * @return TeamMember[]
      * @throws ApiException
      */
     public function getTeamMembers(string $id): array
@@ -455,8 +455,8 @@ class ModrinthAPIClient
 
     /**
      * Get the members of multiple teams at once
-     * @param array $ids
-     * @return array
+     * @param string[] $ids
+     * @return TeamMember[][]
      * @throws ApiException
      */
     public function getTeams(array $ids): array
