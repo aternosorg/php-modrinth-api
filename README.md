@@ -169,7 +169,24 @@ $versions = $modrinthClient->getVersions(["xzRGr4AC", "EwNN8uNA"]);
 ```
 
 ## Hashes
-TODO
+The modrinth API also allows you to find a version by its SHA1 or SHA512 hash:
+```php
+use \Aternos\ModrinthApi\Client\HashAlgorithm;
+
+$hash = "5952253d61e199e82eb852c5824c3981b29b209d";
+
+// returns the modrinth version for the given hash
+$version = $modrinthClient->getVersionByHash($hash, HashAlgorithm::SHA1);
+
+// fetch multiple versions at once
+$versions = $modrinthClient->getVersionsByHashes([$hash], HashAlgorithm::SHA1);
+
+// returns the latest version for a specific loader and version
+$version = $modrinthClient->getLatestVersionByHash($hash, ["spigot"], ["1.19.4"], HashAlgorithm::SHA1);
+
+// fetch multiple versions at once
+$versions = $modrinthClient->getLatestVersionsByHashes([$hash], ["spigot"], ["1.19.4"], HashAlgorithm::SHA1);
+```
 
 ## Users
 ```php
@@ -190,10 +207,34 @@ $history = $user->getPayoutHistory();
 ```
 
 ## Teams
-TODO
+```php
+// get the members of a team
+$members = $modrinthClient->getTeamMembers("ThaUQrOs");
+
+// get the members of multiple teams at once
+$teams = $modrinthClient->getTeams(["ThaUQrOs"]);
+```
 
 ## Tags
-TODO
+You can fetch all available categories, loaders, game versions and licenses from the API.
+Our library provides methods to search projects by these directly:
+```php
+$categories = $modrinthClient->getCategories();
+$categories[0]->searchProjects();
+$loaders = $modrinthClient->getLoaders();
+$loaders[0]->searchProjects();
+$gameVersions = $modrinthClient->getGameVersions();
+$gameVersions[0]->searchProjects();
+$licenses = $modrinthClient->getLicenses();
+$licenses[0]->searchProjects();
+```
+
+You can also fetch donation platforms and report types:
+```php
+$reportTypes = $modrinthClient->getReportTypes();
+$donationPlatforms = $modrinthClient->getDonationPlatforms();
+```
+
 
 ## Updating the generated code
 The generated code can be updated by installing the [openapi generator](https://openapi-generator.tech/docs/installation) running the following command:
