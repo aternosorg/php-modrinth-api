@@ -13,11 +13,13 @@ use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Client\Tags\Category;
+use Aternos\ModrinthApi\Client\Tags\DonationPlatform;
 use Aternos\ModrinthApi\Client\Tags\GameVersion;
 use Aternos\ModrinthApi\Client\Tags\License;
 use Aternos\ModrinthApi\Client\Tags\Loader;
 use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\CategoryTag;
+use Aternos\ModrinthApi\Model\DonationPlatformTag;
 use Aternos\ModrinthApi\Model\GameVersionTag;
 use Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody;
 use Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody;
@@ -517,6 +519,18 @@ class ModrinthAPIClient
         return array_map(function (LicenseTag $license): License {
             return new License($this, $license);
         }, $this->tags->licenseList());
+    }
+
+    /**
+     * Get all donation platforms
+     * @return DonationPlatform[]
+     * @throws ApiException
+     */
+    public function getDonationPlatforms(): array
+    {
+        return array_map(function (DonationPlatformTag $platform): DonationPlatform {
+            return new DonationPlatform($this, $platform);
+        }, $this->tags->donationPlatformList());
     }
 
     /**
