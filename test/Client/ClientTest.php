@@ -283,6 +283,26 @@ class ClientTest extends TestCase
         }
     }
 
+    public function testGetTeamMembers()
+    {
+        $members = $this->apiClient->getTeamMembers("ThaUQrOs");
+        $this->assertNotEmpty($members);
+        foreach ($members as $member) {
+            $this->assertNotNull($member);
+        }
+    }
+
+    public function testGetTeams()
+    {
+        $teams = $this->apiClient->getTeams(["ThaUQrOs"]);
+        $this->assertNotEmpty($teams);
+        foreach ($teams as $team) {
+            $this->assertNotNull($team);
+            $this->assertIsArray($team);
+            $this->assertNotEmpty($team);
+        }
+    }
+
     public function testGetCategories()
     {
         $items = $this->apiClient->getCategories();
@@ -290,6 +310,12 @@ class ClientTest extends TestCase
 
         foreach ($items as $item) {
             $this->assertNotNull($item);
+        }
+
+        $projects = $items[0]->searchProjects();
+        $this->assertNotEmpty($projects);
+        foreach ($projects as $project) {
+            $this->assertNotNull($project);
         }
     }
 
@@ -301,6 +327,12 @@ class ClientTest extends TestCase
         foreach ($items as $item) {
             $this->assertNotNull($item);
         }
+
+        $projects = $items[0]->searchProjects();
+        $this->assertNotEmpty($projects);
+        foreach ($projects as $project) {
+            $this->assertNotNull($project);
+        }
     }
 
     public function testGetGameVersions()
@@ -311,11 +343,33 @@ class ClientTest extends TestCase
         foreach ($items as $item) {
             $this->assertNotNull($item);
         }
+
+        $projects = $items[0]->searchProjects();
+        $this->assertNotEmpty($projects);
+        foreach ($projects as $project) {
+            $this->assertNotNull($project);
+        }
     }
 
     public function testGetLicenses()
     {
         $items = $this->apiClient->getLicenses();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
+        }
+
+        $projects = $items[0]->searchProjects();
+        $this->assertNotEmpty($projects);
+        foreach ($projects as $project) {
+            $this->assertNotNull($project);
+        }
+    }
+
+    public function testGetDonationPlatforms()
+    {
+        $items = $this->apiClient->getDonationPlatforms();
         $this->assertNotEmpty($items);
 
         foreach ($items as $item) {
