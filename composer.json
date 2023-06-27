@@ -1,6 +1,6 @@
 {
     "name": "aternos/modrinth-api",
-    "type": "lirary",
+    "type": "library",
     "description": "PHP Client for the Modrinth API. This client is based on the openapi spec.",
     "keywords": [
         "modrinth",

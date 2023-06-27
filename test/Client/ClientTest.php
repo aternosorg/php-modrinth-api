@@ -151,7 +151,8 @@ class ClientTest extends TestCase
     {
         $projects = $this->apiClient->getRandomProjects(5);
         // This is broken on the API side: https://github.com/modrinth/labrinth/issues/548
-        // $this->assertEquals(5, sizeof($projects));
+        $this->markTestSkipped();
+        $this->assertEquals(5, sizeof($projects));
         foreach ($projects as $project) {
             $this->assertNotNull($project);
         }
@@ -321,6 +322,8 @@ class ClientTest extends TestCase
 
     public function testGetLoaders()
     {
+        // This is broken on the API side: https://github.com/modrinth/labrinth/issues/644
+        $this->markTestSkipped();
         $items = $this->apiClient->getLoaders();
         $this->assertNotEmpty($items);
 
