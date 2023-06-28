@@ -1,7 +1,8 @@
 {
     "name": "aternos/modrinth-api",
-    "type": "library",
     "description": "PHP Client for the Modrinth API. This client is based on the openapi spec.",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "modrinth",
         "mods",
@@ -10,14 +11,13 @@
         "php",
         "api"
     ],
-    "homepage": "https://github.com/aternosorg/php-modrinth-api",
-    "license": "MIT",
     "authors": [
         {
             "name": "Aternos GmbH",
             "homepage": "https://aternos.gmbh"
         }
     ],
+    "homepage": "https://github.com/aternosorg/php-modrinth-api",
     "require": {
         "php": "^8.1",
         "ext-curl": "*",
@@ -27,13 +27,17 @@
         "guzzlehttp/psr7": "^1.7 || ^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0 || ^9.0",
-        "friendsofphp/php-cs-fixer": "^3.5"
+        "friendsofphp/php-cs-fixer": "^3.5",
+        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "autoload": {
-        "psr-4": { "Aternos\\ModrinthApi\\" : "lib/" }
+        "psr-4": {
+            "Aternos\\ModrinthApi\\": "lib/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Aternos\\ModrinthApi\\Test\\" : "test/" }
+        "psr-4": {
+            "Aternos\\ModrinthApi\\Test\\": "test/"
+        }
     }
 }
