@@ -20,7 +20,7 @@ class FacetORGroup
     }
 
     /**
-     * @return array
+     * @return Facet[]
      */
     public function getFacets(): array
     {
@@ -28,7 +28,7 @@ class FacetORGroup
     }
 
     /**
-     * @param array $facets
+     * @param Facet[] $facets
      * @return $this
      */
     public function setFacets(array $facets): self
