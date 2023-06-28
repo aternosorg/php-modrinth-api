@@ -20,7 +20,7 @@ class FacetORGroup
     }
 
     /**
-     * @return array
+     * @return Facet[]
      */
     public function getFacets(): array
     {
@@ -28,7 +28,7 @@ class FacetORGroup
     }
 
     /**
-     * @param array $facets
+     * @param Facet[] $facets
      * @return $this
      */
     public function setFacets(array $facets): self
@@ -48,7 +48,7 @@ class FacetORGroup
     }
 
     /**
-     * @param Facet[] $facets
+     * @param Facet ...$facets
      * @return $this
      */
     public function addFacets(Facet ...$facets): self
@@ -62,7 +62,7 @@ class FacetORGroup
     /**
      * Add multiple facets of one type (e.g. multiple Minecraft versions or loaders)
      * @param FacetType $type
-     * @param string[] $values
+     * @param string ...$values
      * @return $this
      */
     public function addMultiple(FacetType $type, ...$values): self
