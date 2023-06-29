@@ -149,13 +149,12 @@ class ClientTest extends TestCase
 
     public function testGetRandomProjects()
     {
-        $projects = $this->apiClient->getRandomProjects(5);
-        // This is broken on the API side: https://github.com/modrinth/labrinth/issues/548
-        $this->markTestSkipped();
-        $this->assertEquals(5, sizeof($projects));
-        foreach ($projects as $project) {
-            $this->assertNotNull($project);
-        }
+        $this->markTestSkipped("Known issue: https://github.com/modrinth/labrinth/issues/548");
+//        $projects = $this->apiClient->getRandomProjects(5);
+//        $this->assertEquals(5, sizeof($projects));
+//        foreach ($projects as $project) {
+//            $this->assertNotNull($project);
+//        }
     }
 
     public function testCheckProjectValidity()
@@ -322,20 +321,19 @@ class ClientTest extends TestCase
 
     public function testGetLoaders()
     {
-        // This is broken on the API side: https://github.com/modrinth/labrinth/issues/644
-        $this->markTestSkipped();
-        $items = $this->apiClient->getLoaders();
-        $this->assertNotEmpty($items);
-
-        foreach ($items as $item) {
-            $this->assertNotNull($item);
-        }
-
-        $projects = $items[0]->searchProjects();
-        $this->assertNotEmpty($projects);
-        foreach ($projects as $project) {
-            $this->assertNotNull($project);
-        }
+        $this->markTestSkipped("Known issue: https://github.com/modrinth/labrinth/issues/644");
+//        $items = $this->apiClient->getLoaders();
+//        $this->assertNotEmpty($items);
+//
+//        foreach ($items as $item) {
+//            $this->assertNotNull($item);
+//        }
+//
+//        $projects = $items[0]->searchProjects();
+//        $this->assertNotEmpty($projects);
+//        foreach ($projects as $project) {
+//            $this->assertNotNull($project);
+//        }
     }
 
     public function testGetGameVersions()
