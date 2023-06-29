@@ -4,12 +4,12 @@
          bootstrap="vendor/autoload.php"
          colors="true">
     <testsuites>
-        <testsuite name="tests">
+        <testsuite name="integration">
             <!--
-            <directory>./test/Api</directory>
-            <directory>./test/Model</directory>
+            <directory>tests/Integration/Api</directory>
+            <directory>tests/Integration/Model</directory>
             -->
-            <directory>./test/Client</directory>
+            <directory>tests/Integration/Client</directory>
         </testsuite>
     </testsuites>
     <source>
