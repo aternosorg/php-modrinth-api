@@ -321,19 +321,18 @@ class ClientTest extends TestCase
 
     public function testGetLoaders()
     {
-        $this->markTestSkipped("Known issue: https://github.com/modrinth/labrinth/issues/644");
-//        $items = $this->apiClient->getLoaders();
-//        $this->assertNotEmpty($items);
-//
-//        foreach ($items as $item) {
-//            $this->assertNotNull($item);
-//        }
-//
-//        $projects = $items[0]->searchProjects();
-//        $this->assertNotEmpty($projects);
-//        foreach ($projects as $project) {
-//            $this->assertNotNull($project);
-//        }
+        $items = $this->apiClient->getLoaders();
+        $this->assertNotEmpty($items);
+
+        foreach ($items as $item) {
+            $this->assertNotNull($item);
+        }
+
+        $projects = $items[0]->searchProjects();
+        $this->assertNotEmpty($projects);
+        foreach ($projects as $project) {
+            $this->assertNotNull($project);
+        }
     }
 
     public function testGetGameVersions()
