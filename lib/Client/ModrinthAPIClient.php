@@ -22,10 +22,12 @@ use Aternos\ModrinthApi\Client\Tags\ProjectType;
 use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\CategoryTag;
 use Aternos\ModrinthApi\Model\DonationPlatformTag;
+use Aternos\ModrinthApi\Model\ForgeUpdates;
 use Aternos\ModrinthApi\Model\GameVersionTag;
 use Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody;
 use Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody;
 use Aternos\ModrinthApi\Model\HashList;
+use Aternos\ModrinthApi\Model\InvalidInputError;
 use Aternos\ModrinthApi\Model\LicenseTag;
 use Aternos\ModrinthApi\Model\LoaderTag;
 use Aternos\ModrinthApi\Model\Notification as NotificationModel;
@@ -578,6 +580,17 @@ class ModrinthAPIClient
     public function getStatistics(): Statistics
     {
         return $this->misc->statistics();
+    }
+
+    /**
+     * Get the forge update data for a mod
+     * @param string $idOrSlug
+     * @return ForgeUpdates|InvalidInputError
+     * @throws ApiException
+     */
+    public function getForgeUpdates(string $idOrSlug): ForgeUpdates|InvalidInputError
+    {
+        return $this->misc->forgeUpdates($idOrSlug);
     }
 
     /**
