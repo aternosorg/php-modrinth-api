@@ -224,7 +224,12 @@ class ModrinthAPIClient
     {
         return array_map(function (VersionModel $version): Version {
             return new Version($this, $version);
-        }, $this->versions->getProjectVersions($idOrSlug, $loaders, $gameVersions, $featured));
+        }, $this->versions->getProjectVersions(
+            $idOrSlug,
+            $loaders ? json_encode($loaders) : null,
+            $gameVersions ? json_encode($gameVersions) : null,
+            $featured
+        ));
     }
 
     /**
