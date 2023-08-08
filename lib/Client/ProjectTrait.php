@@ -42,7 +42,7 @@ trait ProjectTrait
         ?bool  $featured = null
     ): array
     {
-        return $this->getClient()->getProjectVersions($this->getId());
+        return $this->getClient()->getProjectVersions($this->getId(), $loaders, $gameVersions, $featured);
     }
 
     /**

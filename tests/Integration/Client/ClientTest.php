@@ -7,6 +7,7 @@ use Aternos\ModrinthApi\Client\List\PaginatedProjectSearchList;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Client\Options\Facets\Facet;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;
+use Aternos\ModrinthApi\Client\Options\Facets\FacetOperation;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
