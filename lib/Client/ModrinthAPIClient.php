@@ -3,6 +3,7 @@
 namespace Aternos\ModrinthApi\Client;
 
 use Aternos\ModrinthApi\Api\MiscApi;
+use Aternos\ModrinthApi\Api\NotificationsApi;
 use Aternos\ModrinthApi\Api\ProjectsApi;
 use Aternos\ModrinthApi\Api\TagsApi;
 use Aternos\ModrinthApi\Api\TeamsApi;
@@ -60,6 +61,8 @@ class ModrinthAPIClient
 
     protected MiscApi $misc;
 
+    protected NotificationsApi $notifications;
+
     /**
      * ModrinthAPIClient constructor.
      * @param string|null $apiToken API token used for authentication
@@ -88,6 +91,7 @@ class ModrinthAPIClient
         $this->teams = new TeamsApi(null, $this->configuration);
         $this->tags = new TagsApi(null, $this->configuration);
         $this->misc = new MiscApi(null, $this->configuration);
+        $this->notifications = new NotificationsApi(null, $this->configuration);
 
         return $this;
     }
@@ -399,7 +403,7 @@ class ModrinthAPIClient
 
         return array_map(function (NotificationModel $notification): Notification {
             return new Notification($this, $notification);
-        }, $this->users->getNotifications($idOrUsername));
+        }, $this->notifications->getUserNotifications($idOrUsername));
     }
 
     /**

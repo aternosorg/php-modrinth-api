@@ -1619,7 +1619,7 @@ class UsersApi
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Aternos\ModrinthApi\Model\Notification[]|\Aternos\ModrinthApi\Model\AuthError
-     * @deprecated
+     * @deprecated Moved to {@link \Aternos\ModrinthApi\Api\NotificationsApi::getUserNotifications}
      */
     public function getNotifications($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
@@ -1638,6 +1638,7 @@ class UsersApi
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Aternos\ModrinthApi\Model\Notification[]|\Aternos\ModrinthApi\Model\AuthError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated Moved to {@link \Aternos\ModrinthApi\Api\NotificationsApi::getUserNotifications}
      */
     public function getNotificationsWithHttpInfo($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
@@ -1760,6 +1761,7 @@ class UsersApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated Moved to {@link \Aternos\ModrinthApi\Api\NotificationsApi::getUserNotifications}
      */
     public function getNotificationsAsync($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
@@ -1781,6 +1783,7 @@ class UsersApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated Moved to {@link \Aternos\ModrinthApi\Api\NotificationsApi::getUserNotifications}
      */
     public function getNotificationsAsyncWithHttpInfo($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
@@ -1831,6 +1834,7 @@ class UsersApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated Moved to {@link \Aternos\ModrinthApi\Api\NotificationsApi::getUserNotifications}
      */
     public function getNotificationsRequest($id_username, string $contentType = self::contentTypes['getNotifications'][0])
     {
