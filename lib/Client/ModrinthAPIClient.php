@@ -518,6 +518,7 @@ class ModrinthAPIClient
      * Get all licenses
      * @return License[]
      * @throws ApiException
+     * @deprecated simply use SPDX IDs
      */
     public function getLicenses(): array
     {
