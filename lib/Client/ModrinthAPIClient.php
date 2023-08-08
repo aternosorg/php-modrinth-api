@@ -18,6 +18,7 @@ use Aternos\ModrinthApi\Client\Tags\DonationPlatform;
 use Aternos\ModrinthApi\Client\Tags\GameVersion;
 use Aternos\ModrinthApi\Client\Tags\License;
 use Aternos\ModrinthApi\Client\Tags\Loader;
+use Aternos\ModrinthApi\Client\Tags\ProjectType;
 use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\CategoryTag;
 use Aternos\ModrinthApi\Model\DonationPlatformTag;
@@ -512,6 +513,39 @@ class ModrinthAPIClient
         return array_map(function (LicenseTag $license): License {
             return new License($this, $license);
         }, $this->tags->licenseList());
+    }
+
+    /**
+     * Get a license by its SPDX ID
+     * @param string $spdxId SPDX ID
+     * @return string
+     * @throws ApiException
+     */
+    public function getLicenseText(string $spdxId): string
+    {
+        return $this->tags->licenseText($spdxId);
+    }
+
+    /**
+     * Get all project types
+     * @return ProjectType[]
+     * @throws ApiException
+     */
+    public function getProjectTypes(): array
+    {
+        return array_map(function (string $type): ProjectType {
+            return new ProjectType($this, $type);
+        }, $this->tags->projectTypeList());
+    }
+
+    /**
+     * Get all side types
+     * @return string[]
+     * @throws ApiException
+     */
+    public function getSideTypes(): array
+    {
+        return $this->tags->sideTypeList();
     }
 
     /**
