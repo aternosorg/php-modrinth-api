@@ -17,7 +17,7 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 | [**getProjects()**](ProjectsApi.md#getProjects) | **GET** /projects | Get multiple projects |
 | [**modifyGalleryImage()**](ProjectsApi.md#modifyGalleryImage) | **PATCH** /project/{id|slug}/gallery | Modify a gallery image |
 | [**modifyProject()**](ProjectsApi.md#modifyProject) | **PATCH** /project/{id|slug} | Modify a project |
-| [**patchProjects()**](ProjectsApi.md#patchProjects) | **PATCH** /projects | Edit multiple projects |
+| [**patchProjects()**](ProjectsApi.md#patchProjects) | **PATCH** /projects | Bulk-edit multiple projects |
 | [**randomProjects()**](ProjectsApi.md#randomProjects) | **GET** /projects_random | Get a list of random projects |
 | [**scheduleProject()**](ProjectsApi.md#scheduleProject) | **POST** /project/{id|slug}/schedule | Schedule a project |
 | [**searchProjects()**](ProjectsApi.md#searchProjects) | **GET** /search | Search projects |
@@ -53,13 +53,13 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$ext = NULL; // mixed | Image extension
-$featured = NULL; // mixed | Whether an image is featured
-$title = NULL; // mixed | Title of the image
-$description = NULL; // mixed | Description of the image
-$ordering = NULL; // mixed | Ordering of the image
-$body = NULL; // mixed | New gallery image
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$ext = 'ext_example'; // string | Image extension
+$featured = True; // bool | Whether an image is featured
+$title = 'title_example'; // string | Title of the image
+$description = 'description_example'; // string | Description of the image
+$ordering = 56; // int | Ordering of the image
+$body = "/path/to/file.txt"; // \SplFileObject
 
 try {
     $apiInstance->addGalleryImage($id_slug, $ext, $featured, $title, $description, $ordering, $body);
@@ -72,13 +72,13 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **ext** | [**mixed**](../Model/.md)| Image extension | |
-| **featured** | [**mixed**](../Model/.md)| Whether an image is featured | |
-| **title** | [**mixed**](../Model/.md)| Title of the image | [optional] |
-| **description** | [**mixed**](../Model/.md)| Description of the image | [optional] |
-| **ordering** | [**mixed**](../Model/.md)| Ordering of the image | [optional] |
-| **body** | **mixed**| New gallery image | [optional] |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **ext** | **string**| Image extension | |
+| **featured** | **bool**| Whether an image is featured | |
+| **title** | **string**| Title of the image | [optional] |
+| **description** | **string**| Description of the image | [optional] |
+| **ordering** | **int**| Ordering of the image | [optional] |
+| **body** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 
@@ -90,7 +90,7 @@ void (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: `image/*`
+- **Content-Type**: `image/png`, `image/jpeg`, `image/bmp`, `image/gif`, `image/webp`, `image/svg`, `image/svgz`, `image/rgb`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -126,9 +126,9 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$ext = NULL; // mixed | Image extension
-$body = NULL; // mixed
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$ext = 'ext_example'; // string | Image extension
+$body = "/path/to/file.txt"; // \SplFileObject
 
 try {
     $apiInstance->changeProjectIcon($id_slug, $ext, $body);
@@ -141,9 +141,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **ext** | [**mixed**](../Model/.md)| Image extension | |
-| **body** | **mixed**|  | [optional] |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **ext** | **string**| Image extension | |
+| **body** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 
@@ -155,7 +155,7 @@ void (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: `image/*`
+- **Content-Type**: `image/png`, `image/jpeg`, `image/bmp`, `image/gif`, `image/webp`, `image/svg`, `image/svgz`, `image/rgb`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -165,7 +165,7 @@ void (empty response body)
 ## `checkProjectValidity()`
 
 ```php
-checkProjectValidity($id_slug): \Aternos\ModrinthApi\Model\CheckProjectValidity200Response
+checkProjectValidity($id_slug): \Aternos\ModrinthApi\Model\ProjectIdentifier
 ```
 
 Check project slug/ID validity
@@ -183,7 +183,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $result = $apiInstance->checkProjectValidity($id_slug);
@@ -197,11 +197,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
-[**\Aternos\ModrinthApi\Model\CheckProjectValidity200Response**](../Model/CheckProjectValidity200Response.md)
+[**\Aternos\ModrinthApi\Model\ProjectIdentifier**](../Model/ProjectIdentifier.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ No authorization required
 ## `createProject()`
 
 ```php
-createProject($data, $icon): mixed
+createProject($data, $icon): \Aternos\ModrinthApi\Model\Project
 ```
 
 Create a project
@@ -243,8 +243,8 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$data = NULL; // mixed
-$icon = NULL; // mixed | Project icon file
+$data = new \Aternos\ModrinthApi\Model\CreatableProject(); // \Aternos\ModrinthApi\Model\CreatableProject
+$icon = "/path/to/file.txt"; // \SplFileObject | Project icon file
 
 try {
     $result = $apiInstance->createProject($data, $icon);
@@ -258,12 +258,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **data** | [**mixed**](../Model/mixed.md)|  | |
-| **icon** | [**mixed**](../Model/mixed.md)| Project icon file | [optional] |
+| **data** | [**\Aternos\ModrinthApi\Model\CreatableProject**](../Model/CreatableProject.md)|  | |
+| **icon** | **\SplFileObject****\SplFileObject**| Project icon file | [optional] |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Project**](../Model/Project.md)
 
 ### Authorization
 
@@ -305,8 +305,8 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$url = NULL; // mixed | URL link of the image to delete
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$url = 'url_example'; // string | URL link of the image to delete
 
 try {
     $apiInstance->deleteGalleryImage($id_slug, $url);
@@ -319,8 +319,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **url** | [**mixed**](../Model/.md)| URL link of the image to delete | |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **url** | **string**| URL link of the image to delete | |
 
 ### Return type
 
@@ -366,7 +366,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $apiInstance->deleteProject($id_slug);
@@ -379,7 +379,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
@@ -425,7 +425,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $apiInstance->deleteProjectIcon($id_slug);
@@ -438,7 +438,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
@@ -484,7 +484,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $apiInstance->followProject($id_slug);
@@ -497,7 +497,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
@@ -537,7 +537,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $result = $apiInstance->getDependencies($id_slug);
@@ -551,7 +551,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
@@ -573,7 +573,7 @@ No authorization required
 ## `getProject()`
 
 ```php
-getProject($id_slug): mixed
+getProject($id_slug): \Aternos\ModrinthApi\Model\Project
 ```
 
 Get a project
@@ -591,7 +591,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $result = $apiInstance->getProject($id_slug);
@@ -605,11 +605,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Project**](../Model/Project.md)
 
 ### Authorization
 
@@ -627,7 +627,7 @@ No authorization required
 ## `getProjects()`
 
 ```php
-getProjects($ids): mixed
+getProjects($ids): \Aternos\ModrinthApi\Model\Project[]
 ```
 
 Get multiple projects
@@ -645,7 +645,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // mixed | The IDs of the projects
+$ids = ["AABBCCDD","EEFFGGHH"]; // string | The IDs of the projects
 
 try {
     $result = $apiInstance->getProjects($ids);
@@ -659,11 +659,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**mixed**](../Model/.md)| The IDs of the projects | |
+| **ids** | **string**| The IDs of the projects | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Project[]**](../Model/Project.md)
 
 ### Authorization
 
@@ -705,12 +705,12 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$url = NULL; // mixed | URL link of the image to modify
-$featured = NULL; // mixed | Whether the image is featured
-$title = NULL; // mixed | New title of the image
-$description = NULL; // mixed | New description of the image
-$ordering = NULL; // mixed | New ordering of the image
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$url = 'url_example'; // string | URL link of the image to modify
+$featured = True; // bool | Whether the image is featured
+$title = 'title_example'; // string | New title of the image
+$description = 'description_example'; // string | New description of the image
+$ordering = 56; // int | New ordering of the image
 
 try {
     $apiInstance->modifyGalleryImage($id_slug, $url, $featured, $title, $description, $ordering);
@@ -723,12 +723,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **url** | [**mixed**](../Model/.md)| URL link of the image to modify | |
-| **featured** | [**mixed**](../Model/.md)| Whether the image is featured | [optional] |
-| **title** | [**mixed**](../Model/.md)| New title of the image | [optional] |
-| **description** | [**mixed**](../Model/.md)| New description of the image | [optional] |
-| **ordering** | [**mixed**](../Model/.md)| New ordering of the image | [optional] |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **url** | **string**| URL link of the image to modify | |
+| **featured** | **bool**| Whether the image is featured | [optional] |
+| **title** | **string**| New title of the image | [optional] |
+| **description** | **string**| New description of the image | [optional] |
+| **ordering** | **int**| New ordering of the image | [optional] |
 
 ### Return type
 
@@ -750,7 +750,7 @@ void (empty response body)
 ## `modifyProject()`
 
 ```php
-modifyProject($id_slug, $body)
+modifyProject($id_slug, $editable_project)
 ```
 
 Modify a project
@@ -774,11 +774,11 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$body = NULL; // mixed | Modified project fields
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$editable_project = new \Aternos\ModrinthApi\Model\EditableProject(); // \Aternos\ModrinthApi\Model\EditableProject | Modified project fields
 
 try {
-    $apiInstance->modifyProject($id_slug, $body);
+    $apiInstance->modifyProject($id_slug, $editable_project);
 } catch (Exception $e) {
     echo 'Exception when calling ProjectsApi->modifyProject: ', $e->getMessage(), PHP_EOL;
 }
@@ -788,8 +788,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **body** | **mixed**| Modified project fields | [optional] |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **editable_project** | [**\Aternos\ModrinthApi\Model\EditableProject**](../Model/EditableProject.md)| Modified project fields | [optional] |
 
 ### Return type
 
@@ -811,10 +811,10 @@ void (empty response body)
 ## `patchProjects()`
 
 ```php
-patchProjects($ids, $patch_projects_request)
+patchProjects($ids, $patch_projects_body)
 ```
 
-Edit multiple projects
+Bulk-edit multiple projects
 
 ### Example
 
@@ -823,17 +823,23 @@ Edit multiple projects
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure API key authorization: TokenAuth
+$config = Aternos\ModrinthApi\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Aternos\ModrinthApi\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
 
 $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // mixed | The IDs of the projects
-$patch_projects_request = new \Aternos\ModrinthApi\Model\PatchProjectsRequest(); // \Aternos\ModrinthApi\Model\PatchProjectsRequest | Fields to edit on all projects specified
+$ids = ["AABBCCDD","EEFFGGHH"]; // string | The IDs of the projects
+$patch_projects_body = new \Aternos\ModrinthApi\Model\PatchProjectsBody(); // \Aternos\ModrinthApi\Model\PatchProjectsBody | Fields to edit on all projects specified
 
 try {
-    $apiInstance->patchProjects($ids, $patch_projects_request);
+    $apiInstance->patchProjects($ids, $patch_projects_body);
 } catch (Exception $e) {
     echo 'Exception when calling ProjectsApi->patchProjects: ', $e->getMessage(), PHP_EOL;
 }
@@ -843,8 +849,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**mixed**](../Model/.md)| The IDs of the projects | |
-| **patch_projects_request** | [**\Aternos\ModrinthApi\Model\PatchProjectsRequest**](../Model/PatchProjectsRequest.md)| Fields to edit on all projects specified | [optional] |
+| **ids** | **string**| The IDs of the projects | |
+| **patch_projects_body** | [**\Aternos\ModrinthApi\Model\PatchProjectsBody**](../Model/PatchProjectsBody.md)| Fields to edit on all projects specified | [optional] |
 
 ### Return type
 
@@ -852,7 +858,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[TokenAuth](../../README.md#TokenAuth)
 
 ### HTTP request headers
 
@@ -866,7 +872,7 @@ No authorization required
 ## `randomProjects()`
 
 ```php
-randomProjects($count): mixed
+randomProjects($count): \Aternos\ModrinthApi\Model\Project[]
 ```
 
 Get a list of random projects
@@ -884,7 +890,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$count = 70; // mixed | The number of random projects to return
+$count = 70; // int | The number of random projects to return
 
 try {
     $result = $apiInstance->randomProjects($count);
@@ -898,11 +904,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **count** | [**mixed**](../Model/.md)| The number of random projects to return | |
+| **count** | **int**| The number of random projects to return | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Project[]**](../Model/Project.md)
 
 ### Authorization
 
@@ -920,7 +926,7 @@ No authorization required
 ## `scheduleProject()`
 
 ```php
-scheduleProject($id_slug, $schedule_project_request)
+scheduleProject($id_slug, $schedule)
 ```
 
 Schedule a project
@@ -944,11 +950,11 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$schedule_project_request = new \Aternos\ModrinthApi\Model\ScheduleProjectRequest(); // \Aternos\ModrinthApi\Model\ScheduleProjectRequest | Information about date and requested status
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$schedule = new \Aternos\ModrinthApi\Model\Schedule(); // \Aternos\ModrinthApi\Model\Schedule | Information about date and requested status
 
 try {
-    $apiInstance->scheduleProject($id_slug, $schedule_project_request);
+    $apiInstance->scheduleProject($id_slug, $schedule);
 } catch (Exception $e) {
     echo 'Exception when calling ProjectsApi->scheduleProject: ', $e->getMessage(), PHP_EOL;
 }
@@ -958,8 +964,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **schedule_project_request** | [**\Aternos\ModrinthApi\Model\ScheduleProjectRequest**](../Model/ScheduleProjectRequest.md)| Information about date and requested status | [optional] |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **schedule** | [**\Aternos\ModrinthApi\Model\Schedule**](../Model/Schedule.md)| Information about date and requested status | [optional] |
 
 ### Return type
 
@@ -999,13 +1005,13 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$query = gravestones; // mixed | The query to search for
-$facets = [["categories:forge"],["versions:1.17.1"],["project_type:mod"],["license:mit"]]; // mixed | The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search)
-$index = downloads; // mixed | The sorting method used for sorting search results
-$offset = 20; // mixed | The offset into the search. Skips this number of results
-$limit = 20; // mixed | The number of results returned by the search
-$filters = categories="fabric" AND (categories="technology" OR categories="utility"); // mixed | A list of filters relating to the properties of a project. Use filters when there isn't an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html)
-$version = version="1.16.3" OR version="1.16.2" OR version="1.16.1"; // mixed | A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended
+$query = gravestones; // string | The query to search for
+$facets = [["categories:forge"],["versions:1.17.1"],["project_type:mod"],["license:mit"]]; // string[][] | Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - `project_type` - `categories` (loaders are lumped in with categories in search) - `versions` - `client_side` - `server_side` - `open_source`  Several others are also available for use, though these should not be used outside very specific use cases. - `title` - `author` - `date_modified` - `follows` - `project_id` - `license` - `date_created` - `downloads` - `color`  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is `:` (same as `=`), though you can also use `!=`, `>=`, `>`, `<=`, and `<`. Join together the type, operation, and value, and you've got your string. ``` {type} {operation} {value} ```  Examples: ``` categories = adventure versions != 1.20.1 downloads <= 100 ```  You then join these strings together in arrays to signal `AND` and `OR` operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search `[[\"versions:1.16.5\", \"versions:1.17.1\"]]` translates to `Projects that support 1.16.5 OR 1.17.1`.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search `[[\"versions:1.16.5\"], [\"project_type:modpack\"]]` translates to `Projects that support 1.16.5 AND are modpacks`.
+$index = downloads; // string | The sorting method used for sorting search results
+$offset = 20; // int | The offset into the search. Skips this number of results
+$limit = 20; // int | The number of results returned by the search
+$filters = categories="fabric" AND (categories="technology" OR categories="utility"); // string | A list of filters relating to the properties of a project. Facets are generally recommended over filters.
+$version = version="1.16.3" OR version="1.16.2" OR version="1.16.1"; // string | A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended
 
 try {
     $result = $apiInstance->searchProjects($query, $facets, $index, $offset, $limit, $filters, $version);
@@ -1019,13 +1025,13 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **query** | [**mixed**](../Model/.md)| The query to search for | [optional] |
-| **facets** | [**mixed**](../Model/.md)| The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) | [optional] |
-| **index** | [**mixed**](../Model/.md)| The sorting method used for sorting search results | [optional] |
-| **offset** | [**mixed**](../Model/.md)| The offset into the search. Skips this number of results | [optional] |
-| **limit** | [**mixed**](../Model/.md)| The number of results returned by the search | [optional] |
-| **filters** | [**mixed**](../Model/.md)| A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) | [optional] |
-| **version** | [**mixed**](../Model/.md)| A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended | [optional] |
+| **query** | **string**| The query to search for | [optional] |
+| **facets** | [**string[][]**](../Model/string[].md)| Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - &#x60;project_type&#x60; - &#x60;categories&#x60; (loaders are lumped in with categories in search) - &#x60;versions&#x60; - &#x60;client_side&#x60; - &#x60;server_side&#x60; - &#x60;open_source&#x60;  Several others are also available for use, though these should not be used outside very specific use cases. - &#x60;title&#x60; - &#x60;author&#x60; - &#x60;date_modified&#x60; - &#x60;follows&#x60; - &#x60;project_id&#x60; - &#x60;license&#x60; - &#x60;date_created&#x60; - &#x60;downloads&#x60; - &#x60;color&#x60;  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is &#x60;:&#x60; (same as &#x60;&#x3D;&#x60;), though you can also use &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&lt;&#x3D;&#x60;, and &#x60;&lt;&#x60;. Join together the type, operation, and value, and you&#39;ve got your string. &#x60;&#x60;&#x60; {type} {operation} {value} &#x60;&#x60;&#x60;  Examples: &#x60;&#x60;&#x60; categories &#x3D; adventure versions !&#x3D; 1.20.1 downloads &lt;&#x3D; 100 &#x60;&#x60;&#x60;  You then join these strings together in arrays to signal &#x60;AND&#x60; and &#x60;OR&#x60; operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;, \&quot;versions:1.17.1\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 OR 1.17.1&#x60;.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;], [\&quot;project_type:modpack\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 AND are modpacks&#x60;. | [optional] |
+| **index** | **string**| The sorting method used for sorting search results | [optional] [default to &#39;relevance&#39;] |
+| **offset** | **int**| The offset into the search. Skips this number of results | [optional] [default to 0] |
+| **limit** | **int**| The number of results returned by the search | [optional] [default to 10] |
+| **filters** | **string**| A list of filters relating to the properties of a project. Facets are generally recommended over filters. | [optional] |
+| **version** | **string**| A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended | [optional] |
 
 ### Return type
 
@@ -1071,7 +1077,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $apiInstance->unfollowProject($id_slug);
@@ -1084,7 +1090,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 

@@ -7,15 +7,18 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 | [**categoryList()**](TagsApi.md#categoryList) | **GET** /tag/category | Get a list of categories |
 | [**donationPlatformList()**](TagsApi.md#donationPlatformList) | **GET** /tag/donation_platform | Get a list of donation platforms |
 | [**licenseList()**](TagsApi.md#licenseList) | **GET** /tag/license | Get a list of licenses |
+| [**licenseText()**](TagsApi.md#licenseText) | **GET** /tag/license/{id} | Get the text and title of a license |
 | [**loaderList()**](TagsApi.md#loaderList) | **GET** /tag/loader | Get a list of loaders |
+| [**projectTypeList()**](TagsApi.md#projectTypeList) | **GET** /tag/project_type | Get a list of project types |
 | [**reportTypeList()**](TagsApi.md#reportTypeList) | **GET** /tag/report_type | Get a list of report types |
+| [**sideTypeList()**](TagsApi.md#sideTypeList) | **GET** /tag/side_type | Get a list of side types |
 | [**versionList()**](TagsApi.md#versionList) | **GET** /tag/game_version | Get a list of game versions |
 
 
 ## `categoryList()`
 
 ```php
-categoryList(): mixed
+categoryList(): \Aternos\ModrinthApi\Model\CategoryTag[]
 ```
 
 Get a list of categories
@@ -50,7 +53,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\CategoryTag[]**](../Model/CategoryTag.md)
 
 ### Authorization
 
@@ -68,7 +71,7 @@ No authorization required
 ## `donationPlatformList()`
 
 ```php
-donationPlatformList(): mixed
+donationPlatformList(): \Aternos\ModrinthApi\Model\DonationPlatformTag[]
 ```
 
 Get a list of donation platforms
@@ -103,7 +106,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\DonationPlatformTag[]**](../Model/DonationPlatformTag.md)
 
 ### Authorization
 
@@ -121,12 +124,12 @@ No authorization required
 ## `licenseList()`
 
 ```php
-licenseList(): mixed
+licenseList(): \Aternos\ModrinthApi\Model\LicenseTag[]
 ```
 
 Get a list of licenses
 
-Gets an array of licenses and information about them
+Deprecated - simply use SPDX IDs.
 
 ### Example
 
@@ -156,7 +159,61 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\LicenseTag[]**](../Model/LicenseTag.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `licenseText()`
+
+```php
+licenseText($id): \Aternos\ModrinthApi\Model\LicenseText200Response
+```
+
+Get the text and title of a license
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Aternos\ModrinthApi\Api\TagsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id = ["LGPL-3.0-or-later"]; // string | The license ID to get the text of
+
+try {
+    $result = $apiInstance->licenseText($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling TagsApi->licenseText: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The license ID to get the text of | |
+
+### Return type
+
+[**\Aternos\ModrinthApi\Model\LicenseText200Response**](../Model/LicenseText200Response.md)
 
 ### Authorization
 
@@ -174,7 +231,7 @@ No authorization required
 ## `loaderList()`
 
 ```php
-loaderList(): mixed
+loaderList(): \Aternos\ModrinthApi\Model\LoaderTag[]
 ```
 
 Get a list of loaders
@@ -209,7 +266,60 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\LoaderTag[]**](../Model/LoaderTag.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `projectTypeList()`
+
+```php
+projectTypeList(): string[]
+```
+
+Get a list of project types
+
+Gets an array of valid project types
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Aternos\ModrinthApi\Api\TagsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+
+try {
+    $result = $apiInstance->projectTypeList();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling TagsApi->projectTypeList: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**string[]**
 
 ### Authorization
 
@@ -227,7 +337,7 @@ No authorization required
 ## `reportTypeList()`
 
 ```php
-reportTypeList(): mixed
+reportTypeList(): string[]
 ```
 
 Get a list of report types
@@ -262,7 +372,60 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**mixed**
+**string[]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `sideTypeList()`
+
+```php
+sideTypeList(): string[]
+```
+
+Get a list of side types
+
+Gets an array of valid side types
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Aternos\ModrinthApi\Api\TagsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+
+try {
+    $result = $apiInstance->sideTypeList();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling TagsApi->sideTypeList: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**string[]**
 
 ### Authorization
 
@@ -280,7 +443,7 @@ No authorization required
 ## `versionList()`
 
 ```php
-versionList(): mixed
+versionList(): \Aternos\ModrinthApi\Model\GameVersionTag[]
 ```
 
 Get a list of game versions
@@ -315,7 +478,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\GameVersionTag[]**](../Model/GameVersionTag.md)
 
 ### Authorization
 

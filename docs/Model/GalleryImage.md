@@ -1,0 +1,14 @@
+# # GalleryImage
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**url** | **string** | The URL of the gallery image |
+**featured** | **bool** | Whether the image is featured in the gallery |
+**title** | **string** | The title of the gallery image | [optional]
+**description** | **string** | The description of the gallery image | [optional]
+**created** | **string** | The date and time the gallery image was created |
+**ordering** | **int** | The order of the gallery image. Gallery images are sorted by this field and then alphabetically by title. | [optional]
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

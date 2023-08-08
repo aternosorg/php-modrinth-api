@@ -27,6 +27,6 @@
 .travis.yml
 git_push.sh
 README.md
-docs/
 composer.json
 phpunit.xml.dist
+test

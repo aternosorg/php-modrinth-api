@@ -9,6 +9,7 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 | [**deleteVersion()**](VersionsApi.md#deleteVersion) | **DELETE** /version/{id} | Delete a version |
 | [**getProjectVersions()**](VersionsApi.md#getProjectVersions) | **GET** /project/{id|slug}/version | List project&#39;s versions |
 | [**getVersion()**](VersionsApi.md#getVersion) | **GET** /version/{id} | Get a version |
+| [**getVersionFromIdOrNumber()**](VersionsApi.md#getVersionFromIdOrNumber) | **GET** /project/{id|slug}/version/{id|number} | Get a version given a version number or ID |
 | [**getVersions()**](VersionsApi.md#getVersions) | **GET** /versions | Get multiple versions |
 | [**modifyVersion()**](VersionsApi.md#modifyVersion) | **PATCH** /version/{id} | Modify a version |
 | [**scheduleVersion()**](VersionsApi.md#scheduleVersion) | **POST** /version/{id}/schedule | Schedule a version |
@@ -43,8 +44,8 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [IIJJKKLL]; // mixed | The ID of the version
-$data = NULL; // mixed
+$id = ["IIJJKKLL"]; // string | The ID of the version
+$data = array('key' => new \stdClass); // object
 
 try {
     $apiInstance->addFilesToVersion($id, $data);
@@ -57,8 +58,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the version | |
-| **data** | [**mixed**](../Model/mixed.md)|  | [optional] |
+| **id** | **string**| The ID of the version | |
+| **data** | [**object**](../Model/object.md)|  | [optional] |
 
 ### Return type
 
@@ -80,7 +81,7 @@ void (empty response body)
 ## `createVersion()`
 
 ```php
-createVersion($data): mixed
+createVersion($data): \Aternos\ModrinthApi\Model\Version
 ```
 
 Create a version
@@ -106,7 +107,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$data = NULL; // mixed
+$data = new \Aternos\ModrinthApi\Model\CreatableVersion(); // \Aternos\ModrinthApi\Model\CreatableVersion
 
 try {
     $result = $apiInstance->createVersion($data);
@@ -120,11 +121,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **data** | [**mixed**](../Model/mixed.md)|  | |
+| **data** | [**\Aternos\ModrinthApi\Model\CreatableVersion**](../Model/CreatableVersion.md)|  | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Version**](../Model/Version.md)
 
 ### Authorization
 
@@ -166,7 +167,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [IIJJKKLL]; // mixed | The ID of the version
+$id = ["IIJJKKLL"]; // string | The ID of the version
 
 try {
     $apiInstance->deleteVersion($id);
@@ -179,7 +180,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the version | |
+| **id** | **string**| The ID of the version | |
 
 ### Return type
 
@@ -201,7 +202,7 @@ void (empty response body)
 ## `getProjectVersions()`
 
 ```php
-getProjectVersions($id_slug, $loaders, $game_versions, $featured): mixed
+getProjectVersions($id_slug, $loaders, $game_versions, $featured): \Aternos\ModrinthApi\Model\Version[]
 ```
 
 List project's versions
@@ -219,10 +220,10 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
-$loaders = ["fabric"]; // mixed | The types of loaders to filter for
-$game_versions = ["1.18.1"]; // mixed | The game versions to filter for
-$featured = NULL; // mixed | Allows to filter for featured or non-featured versions only
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$loaders = ["fabric"]; // string[] | The types of loaders to filter for
+$game_versions = ["1.18.1"]; // string[] | The game versions to filter for
+$featured = True; // bool | Allows to filter for featured or non-featured versions only
 
 try {
     $result = $apiInstance->getProjectVersions($id_slug, $loaders, $game_versions, $featured);
@@ -236,14 +237,14 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
-| **loaders** | [**mixed**](../Model/.md)| The types of loaders to filter for | [optional] |
-| **game_versions** | [**mixed**](../Model/.md)| The game versions to filter for | [optional] |
-| **featured** | [**mixed**](../Model/.md)| Allows to filter for featured or non-featured versions only | [optional] |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **loaders** | [**string[]**](../Model/string.md)| The types of loaders to filter for | [optional] |
+| **game_versions** | [**string[]**](../Model/string.md)| The game versions to filter for | [optional] |
+| **featured** | **bool**| Allows to filter for featured or non-featured versions only | [optional] |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Version[]**](../Model/Version.md)
 
 ### Authorization
 
@@ -261,7 +262,7 @@ No authorization required
 ## `getVersion()`
 
 ```php
-getVersion($id): mixed
+getVersion($id): \Aternos\ModrinthApi\Model\Version
 ```
 
 Get a version
@@ -279,7 +280,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id = [IIJJKKLL]; // mixed | The ID of the version
+$id = ["IIJJKKLL"]; // string | The ID of the version
 
 try {
     $result = $apiInstance->getVersion($id);
@@ -293,11 +294,69 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the version | |
+| **id** | **string**| The ID of the version | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Version**](../Model/Version.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getVersionFromIdOrNumber()`
+
+```php
+getVersionFromIdOrNumber($id_slug, $id_number): \Aternos\ModrinthApi\Model\Version
+```
+
+Get a version given a version number or ID
+
+Please note that, if the version number provided matches multiple versions, only the **oldest matching version** will be returned.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+
+$apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client()
+);
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$id_number = ["IIJJKKLL"]; // string | The version ID or version number
+
+try {
+    $result = $apiInstance->getVersionFromIdOrNumber($id_slug, $id_number);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling VersionsApi->getVersionFromIdOrNumber: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id_slug** | **string**| The ID or slug of the project | |
+| **id_number** | **string**| The version ID or version number | |
+
+### Return type
+
+[**\Aternos\ModrinthApi\Model\Version**](../Model/Version.md)
 
 ### Authorization
 
@@ -315,7 +374,7 @@ No authorization required
 ## `getVersions()`
 
 ```php
-getVersions($ids): mixed
+getVersions($ids): \Aternos\ModrinthApi\Model\Version[]
 ```
 
 Get multiple versions
@@ -333,7 +392,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // mixed | The IDs of the versions
+$ids = ["AABBCCDD","EEFFGGHH"]; // string | The IDs of the versions
 
 try {
     $result = $apiInstance->getVersions($ids);
@@ -347,11 +406,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**mixed**](../Model/.md)| The IDs of the versions | |
+| **ids** | **string**| The IDs of the versions | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Version[]**](../Model/Version.md)
 
 ### Authorization
 
@@ -369,7 +428,7 @@ No authorization required
 ## `modifyVersion()`
 
 ```php
-modifyVersion($id, $body)
+modifyVersion($id, $editable_version)
 ```
 
 Modify a version
@@ -393,11 +452,11 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [IIJJKKLL]; // mixed | The ID of the version
-$body = NULL; // mixed | Modified version fields
+$id = ["IIJJKKLL"]; // string | The ID of the version
+$editable_version = new \Aternos\ModrinthApi\Model\EditableVersion(); // \Aternos\ModrinthApi\Model\EditableVersion | Modified version fields
 
 try {
-    $apiInstance->modifyVersion($id, $body);
+    $apiInstance->modifyVersion($id, $editable_version);
 } catch (Exception $e) {
     echo 'Exception when calling VersionsApi->modifyVersion: ', $e->getMessage(), PHP_EOL;
 }
@@ -407,8 +466,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the version | |
-| **body** | **mixed**| Modified version fields | [optional] |
+| **id** | **string**| The ID of the version | |
+| **editable_version** | [**\Aternos\ModrinthApi\Model\EditableVersion**](../Model/EditableVersion.md)| Modified version fields | [optional] |
 
 ### Return type
 
@@ -430,7 +489,7 @@ void (empty response body)
 ## `scheduleVersion()`
 
 ```php
-scheduleVersion($id, $schedule_version_request)
+scheduleVersion($id, $schedule)
 ```
 
 Schedule a version
@@ -454,11 +513,11 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [IIJJKKLL]; // mixed | The ID of the version
-$schedule_version_request = new \Aternos\ModrinthApi\Model\ScheduleVersionRequest(); // \Aternos\ModrinthApi\Model\ScheduleVersionRequest | Information about date and requested status
+$id = ["IIJJKKLL"]; // string | The ID of the version
+$schedule = new \Aternos\ModrinthApi\Model\Schedule(); // \Aternos\ModrinthApi\Model\Schedule | Information about date and requested status
 
 try {
-    $apiInstance->scheduleVersion($id, $schedule_version_request);
+    $apiInstance->scheduleVersion($id, $schedule);
 } catch (Exception $e) {
     echo 'Exception when calling VersionsApi->scheduleVersion: ', $e->getMessage(), PHP_EOL;
 }
@@ -468,8 +527,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the version | |
-| **schedule_version_request** | [**\Aternos\ModrinthApi\Model\ScheduleVersionRequest**](../Model/ScheduleVersionRequest.md)| Information about date and requested status | [optional] |
+| **id** | **string**| The ID of the version | |
+| **schedule** | [**\Aternos\ModrinthApi\Model\Schedule**](../Model/Schedule.md)| Information about date and requested status | [optional] |
 
 ### Return type
 

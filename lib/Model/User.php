@@ -13,9 +13,10 @@
 /**
  * Labrinth
  *
- * **Remember to join our [Discord](https://discord.gg/EUHuJHt) if you need any support!**  ## Authentication This API uses GitHub tokens for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: gho_pJ9dGXVKpfzZp4PUHSxYEq9hjk0h288Gwj4S ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects and notifications)  Applications interacting with the authenticated API should either retrieve the Modrinth GitHub token through the site or create a personal app token for use with Modrinth. The API provides a couple routes for auth -- don't implement this flow in your application! Instead, use a personal access token or create your own GitHub OAuth2 application. This system will be revisited and allow easier interaction with the authenticated subset of the API once we roll out our own authentication system.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`
+ * ## Authentication This API uses personal access tokens tied to a user account for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: mrp_RNtLRSPmGj2pd1v1ubi52nX7TJJM9sznrmwhAuj511oe4t1jAqAQ3D6Wc8Ic ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects, notifications, emails, and payout data)  Applications interacting with the authenticated API should have the user generate a personal access token from [their user settings](https://modrinth.com/settings/account). Each request requiring authentication has a certain scope. For example, to view the email of the user being requested, the token must have the `USER_READ_EMAIL` scope. You can find the list of available scopes [on GitHub](https://github.com/modrinth/labrinth/blob/master/src/models/pats.rs#L15). Making a request with an invalid scope will return a 401 error.  Please note that certain scopes and requests cannot be completed with a personal access token. For example, deleting a user account can only be done through Modrinth's frontend.  For backwards compatibility purposes, some types of GitHub tokens also work for authenticating a user with Modrinth's API, granting all scopes. **We urge any application still using GitHub tokens to start using personal access tokens for security and reliability purposes.** GitHub tokens will cease to function to authenticate with Modrinth's API as soon as version 3 of the API is made generally available.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Identifiers The majority of items you can interact with in the API have a unique eight-digit base62 ID. Projects, versions, users, threads, teams, and reports all use this same way of identifying themselves. Version files use the sha1 or sha512 file hashes as identifiers.  Each project and user has a friendlier way of identifying them; slugs and usernames, respectively. While unique IDs are constant, slugs and usernames can change at any moment. If you want to store something in the long term, it is recommended to use the unique ID.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`  ## Versioning Modrinth follows a simple pattern for its API versioning. In the event of a breaking API change, the API version in the URL path is bumped, and migration steps will be published [on the migrations page](/docs/migrations/information).  When an API is no longer the current one, it will immediately be considered deprecated. No more support will be provided for API versions older than the current one. It will be kept for some time, but this amount of time is not certain.  We will exercise various tactics to get people to update their implementation of our API. One example is by adding something like `STOP USING THIS API` to various data returned by the API.  Once an API version is completely deprecated, it will permanently return a 410 error. Please ensure your application handles these 410 errors.
  *
- * The version of the OpenAPI document: v2.7.0/3b22f59
+ * The version of the OpenAPI document: v2.7.0/ec80c2b
+ * Contact: support@modrinth.com
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.6.0
  */
@@ -63,11 +64,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'bio' => 'string',
         'payout_data' => '\Aternos\ModrinthApi\Model\UserPayoutData',
         'id' => 'string',
-        'github_id' => 'int',
         'avatar_url' => 'string',
         'created' => 'string',
         'role' => 'string',
-        'badges' => 'int'
+        'badges' => 'int',
+        'auth_providers' => 'string[]',
+        'email_verified' => 'bool',
+        'has_password' => 'bool',
+        'has_totp' => 'bool',
+        'github_id' => 'int'
     ];
 
     /**
@@ -84,11 +89,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'bio' => null,
         'payout_data' => null,
         'id' => null,
-        'github_id' => null,
         'avatar_url' => null,
         'created' => 'ISO-8601',
         'role' => null,
-        'badges' => 'bitfield'
+        'badges' => 'bitfield',
+        'auth_providers' => null,
+        'email_verified' => null,
+        'has_password' => null,
+        'has_totp' => null,
+        'github_id' => null
     ];
 
     /**
@@ -103,11 +112,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
 		'bio' => false,
 		'payout_data' => true,
 		'id' => false,
-		'github_id' => true,
 		'avatar_url' => false,
 		'created' => false,
 		'role' => false,
-		'badges' => false
+		'badges' => false,
+		'auth_providers' => true,
+		'email_verified' => true,
+		'has_password' => true,
+		'has_totp' => true,
+		'github_id' => true
     ];
 
     /**
@@ -202,11 +215,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'bio' => 'bio',
         'payout_data' => 'payout_data',
         'id' => 'id',
-        'github_id' => 'github_id',
         'avatar_url' => 'avatar_url',
         'created' => 'created',
         'role' => 'role',
-        'badges' => 'badges'
+        'badges' => 'badges',
+        'auth_providers' => 'auth_providers',
+        'email_verified' => 'email_verified',
+        'has_password' => 'has_password',
+        'has_totp' => 'has_totp',
+        'github_id' => 'github_id'
     ];
 
     /**
@@ -221,11 +238,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'bio' => 'setBio',
         'payout_data' => 'setPayoutData',
         'id' => 'setId',
-        'github_id' => 'setGithubId',
         'avatar_url' => 'setAvatarUrl',
         'created' => 'setCreated',
         'role' => 'setRole',
-        'badges' => 'setBadges'
+        'badges' => 'setBadges',
+        'auth_providers' => 'setAuthProviders',
+        'email_verified' => 'setEmailVerified',
+        'has_password' => 'setHasPassword',
+        'has_totp' => 'setHasTotp',
+        'github_id' => 'setGithubId'
     ];
 
     /**
@@ -240,11 +261,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         'bio' => 'getBio',
         'payout_data' => 'getPayoutData',
         'id' => 'getId',
-        'github_id' => 'getGithubId',
         'avatar_url' => 'getAvatarUrl',
         'created' => 'getCreated',
         'role' => 'getRole',
-        'badges' => 'getBadges'
+        'badges' => 'getBadges',
+        'auth_providers' => 'getAuthProviders',
+        'email_verified' => 'getEmailVerified',
+        'has_password' => 'getHasPassword',
+        'has_totp' => 'getHasTotp',
+        'github_id' => 'getGithubId'
     ];
 
     /**
@@ -327,11 +352,15 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('bio', $data ?? [], null);
         $this->setIfExists('payout_data', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('github_id', $data ?? [], null);
         $this->setIfExists('avatar_url', $data ?? [], null);
         $this->setIfExists('created', $data ?? [], null);
         $this->setIfExists('role', $data ?? [], null);
         $this->setIfExists('badges', $data ?? [], null);
+        $this->setIfExists('auth_providers', $data ?? [], null);
+        $this->setIfExists('email_verified', $data ?? [], null);
+        $this->setIfExists('has_password', $data ?? [], null);
+        $this->setIfExists('has_totp', $data ?? [], null);
+        $this->setIfExists('github_id', $data ?? [], null);
     }
 
     /**
@@ -474,7 +503,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets email
      *
-     * @param string|null $email The user's email (only your own is ever displayed)
+     * @param string|null $email The user's email (only displayed if requesting your own account). Requires `USER_READ_EMAIL` PAT scope.
      *
      * @return self
      */
@@ -569,7 +598,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id The user's id
+     * @param string $id The user's ID
      *
      * @return self
      */
@@ -579,40 +608,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets github_id
-     *
-     * @return int|null
-     */
-    public function getGithubId()
-    {
-        return $this->container['github_id'];
-    }
-
-    /**
-     * Sets github_id
-     *
-     * @param int|null $github_id The user's github id
-     *
-     * @return self
-     */
-    public function setGithubId($github_id)
-    {
-        if (is_null($github_id)) {
-            array_push($this->openAPINullablesSetToNull, 'github_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('github_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['github_id'] = $github_id;
 
         return $this;
     }
@@ -731,6 +726,178 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable badges cannot be null');
         }
         $this->container['badges'] = $badges;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_providers
+     *
+     * @return string[]|null
+     */
+    public function getAuthProviders()
+    {
+        return $this->container['auth_providers'];
+    }
+
+    /**
+     * Sets auth_providers
+     *
+     * @param string[]|null $auth_providers A list of authentication providers you have signed up for (only displayed if requesting your own account)
+     *
+     * @return self
+     */
+    public function setAuthProviders($auth_providers)
+    {
+        if (is_null($auth_providers)) {
+            array_push($this->openAPINullablesSetToNull, 'auth_providers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('auth_providers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['auth_providers'] = $auth_providers;
+
+        return $this;
+    }
+
+    /**
+     * Gets email_verified
+     *
+     * @return bool|null
+     */
+    public function getEmailVerified()
+    {
+        return $this->container['email_verified'];
+    }
+
+    /**
+     * Sets email_verified
+     *
+     * @param bool|null $email_verified Whether your email is verified (only displayed if requesting your own account)
+     *
+     * @return self
+     */
+    public function setEmailVerified($email_verified)
+    {
+        if (is_null($email_verified)) {
+            array_push($this->openAPINullablesSetToNull, 'email_verified');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('email_verified', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['email_verified'] = $email_verified;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_password
+     *
+     * @return bool|null
+     */
+    public function getHasPassword()
+    {
+        return $this->container['has_password'];
+    }
+
+    /**
+     * Sets has_password
+     *
+     * @param bool|null $has_password Whether you have a password associated with your account (only displayed if requesting your own account)
+     *
+     * @return self
+     */
+    public function setHasPassword($has_password)
+    {
+        if (is_null($has_password)) {
+            array_push($this->openAPINullablesSetToNull, 'has_password');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('has_password', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['has_password'] = $has_password;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_totp
+     *
+     * @return bool|null
+     */
+    public function getHasTotp()
+    {
+        return $this->container['has_totp'];
+    }
+
+    /**
+     * Sets has_totp
+     *
+     * @param bool|null $has_totp Whether you have TOTP two-factor authentication connected to your account (only displayed if requesting your own account)
+     *
+     * @return self
+     */
+    public function setHasTotp($has_totp)
+    {
+        if (is_null($has_totp)) {
+            array_push($this->openAPINullablesSetToNull, 'has_totp');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('has_totp', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['has_totp'] = $has_totp;
+
+        return $this;
+    }
+
+    /**
+     * Gets github_id
+     *
+     * @return int|null
+     * @deprecated
+     */
+    public function getGithubId()
+    {
+        return $this->container['github_id'];
+    }
+
+    /**
+     * Sets github_id
+     *
+     * @param int|null $github_id Deprecated - this is no longer public for security reasons and is always null
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setGithubId($github_id)
+    {
+        if (is_null($github_id)) {
+            array_push($this->openAPINullablesSetToNull, 'github_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('github_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['github_id'] = $github_id;
 
         return $this;
     }

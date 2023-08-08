@@ -5,19 +5,19 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**addTeamMember()**](TeamsApi.md#addTeamMember) | **POST** /team/{id}/members | Add a user to a team |
-| [**deleteTeamMember()**](TeamsApi.md#deleteTeamMember) | **DELETE** /team/{id}/members/{user_id} | Remove a member from a team |
+| [**deleteTeamMember()**](TeamsApi.md#deleteTeamMember) | **DELETE** /team/{id}/members/{id|username} | Remove a member from a team |
 | [**getProjectTeamMembers()**](TeamsApi.md#getProjectTeamMembers) | **GET** /project/{id|slug}/members | Get a project&#39;s team members |
 | [**getTeamMembers()**](TeamsApi.md#getTeamMembers) | **GET** /team/{id}/members | Get a team&#39;s members |
 | [**getTeams()**](TeamsApi.md#getTeams) | **GET** /teams | Get the members of multiple teams |
 | [**joinTeam()**](TeamsApi.md#joinTeam) | **POST** /team/{id}/join | Join a team |
-| [**modifyTeamMember()**](TeamsApi.md#modifyTeamMember) | **PATCH** /team/{id}/members/{user_id} | Modify a team member&#39;s information |
+| [**modifyTeamMember()**](TeamsApi.md#modifyTeamMember) | **PATCH** /team/{id}/members/{id|username} | Modify a team member&#39;s information |
 | [**transferTeamOwnership()**](TeamsApi.md#transferTeamOwnership) | **PATCH** /team/{id}/owner | Transfer team&#39;s ownership to another user |
 
 
 ## `addTeamMember()`
 
 ```php
-addTeamMember($id, $add_team_member_request)
+addTeamMember($id, $user_identifier)
 ```
 
 Add a user to a team
@@ -41,11 +41,11 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [MMNNOOPP]; // mixed | The ID of the team
-$add_team_member_request = new \Aternos\ModrinthApi\Model\AddTeamMemberRequest(); // \Aternos\ModrinthApi\Model\AddTeamMemberRequest | User to be added (must be the ID, usernames cannot be used here)
+$id = ["MMNNOOPP"]; // string | The ID of the team
+$user_identifier = new \Aternos\ModrinthApi\Model\UserIdentifier(); // \Aternos\ModrinthApi\Model\UserIdentifier | User to be added (must be the ID, usernames cannot be used here)
 
 try {
-    $apiInstance->addTeamMember($id, $add_team_member_request);
+    $apiInstance->addTeamMember($id, $user_identifier);
 } catch (Exception $e) {
     echo 'Exception when calling TeamsApi->addTeamMember: ', $e->getMessage(), PHP_EOL;
 }
@@ -55,8 +55,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the team | |
-| **add_team_member_request** | [**\Aternos\ModrinthApi\Model\AddTeamMemberRequest**](../Model/AddTeamMemberRequest.md)| User to be added (must be the ID, usernames cannot be used here) | [optional] |
+| **id** | **string**| The ID of the team | |
+| **user_identifier** | [**\Aternos\ModrinthApi\Model\UserIdentifier**](../Model/UserIdentifier.md)| User to be added (must be the ID, usernames cannot be used here) | [optional] |
 
 ### Return type
 
@@ -102,8 +102,8 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [MMNNOOPP]; // mixed | The ID of the team
-$id_username = [EEFFGGHH, my_user]; // mixed | The ID or username of the user
+$id = ["MMNNOOPP"]; // string | The ID of the team
+$id_username = ["EEFFGGHH","my_user"]; // string | The ID or username of the user
 
 try {
     $apiInstance->deleteTeamMember($id, $id_username);
@@ -116,8 +116,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the team | |
-| **id_username** | [**mixed**](../Model/.md)| The ID or username of the user | |
+| **id** | **string**| The ID of the team | |
+| **id_username** | **string**| The ID or username of the user | |
 
 ### Return type
 
@@ -139,7 +139,7 @@ void (empty response body)
 ## `getProjectTeamMembers()`
 
 ```php
-getProjectTeamMembers($id_slug): mixed
+getProjectTeamMembers($id_slug): \Aternos\ModrinthApi\Model\TeamMember[]
 ```
 
 Get a project's team members
@@ -157,7 +157,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$id_slug = [AABBCCDD, my_project]; // mixed | The ID or slug of the project
+$id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 
 try {
     $result = $apiInstance->getProjectTeamMembers($id_slug);
@@ -171,11 +171,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id_slug** | [**mixed**](../Model/.md)| The ID or slug of the project | |
+| **id_slug** | **string**| The ID or slug of the project | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\TeamMember[]**](../Model/TeamMember.md)
 
 ### Authorization
 
@@ -193,7 +193,7 @@ No authorization required
 ## `getTeamMembers()`
 
 ```php
-getTeamMembers($id): mixed
+getTeamMembers($id): \Aternos\ModrinthApi\Model\TeamMember[]
 ```
 
 Get a team's members
@@ -217,7 +217,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [MMNNOOPP]; // mixed | The ID of the team
+$id = ["MMNNOOPP"]; // string | The ID of the team
 
 try {
     $result = $apiInstance->getTeamMembers($id);
@@ -231,11 +231,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the team | |
+| **id** | **string**| The ID of the team | |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\TeamMember[]**](../Model/TeamMember.md)
 
 ### Authorization
 
@@ -253,7 +253,7 @@ try {
 ## `getTeams()`
 
 ```php
-getTeams($ids): mixed
+getTeams($ids): \Aternos\ModrinthApi\Model\TeamMember[][]
 ```
 
 Get the members of multiple teams
@@ -271,7 +271,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // mixed | The IDs of the teams
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the teams
 
 try {
     $result = $apiInstance->getTeams($ids);
@@ -285,11 +285,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**mixed**](../Model/.md)| The IDs of the teams | |
+| **ids** | **string**| The IDs of the teams | |
 
 ### Return type
 
-**mixed**
+**\Aternos\ModrinthApi\Model\TeamMember[][]**
 
 ### Authorization
 
@@ -331,7 +331,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [MMNNOOPP]; // mixed | The ID of the team
+$id = ["MMNNOOPP"]; // string | The ID of the team
 
 try {
     $apiInstance->joinTeam($id);
@@ -344,7 +344,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the team | |
+| **id** | **string**| The ID of the team | |
 
 ### Return type
 
@@ -366,7 +366,7 @@ void (empty response body)
 ## `modifyTeamMember()`
 
 ```php
-modifyTeamMember($id, $user_id, $modify_team_member_request)
+modifyTeamMember($id, $id_username, $modify_team_member_body)
 ```
 
 Modify a team member's information
@@ -390,12 +390,12 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [MMNNOOPP]; // mixed | The ID of the team
-$user_id = NULL; // mixed | The ID of the user to modify
-$modify_team_member_request = new \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest(); // \Aternos\ModrinthApi\Model\ModifyTeamMemberRequest | Contents to be modified
+$id = ["MMNNOOPP"]; // string | The ID of the team
+$id_username = ["EEFFGGHH","my_user"]; // string | The ID or username of the user
+$modify_team_member_body = new \Aternos\ModrinthApi\Model\ModifyTeamMemberBody(); // \Aternos\ModrinthApi\Model\ModifyTeamMemberBody | Contents to be modified
 
 try {
-    $apiInstance->modifyTeamMember($id, $user_id, $modify_team_member_request);
+    $apiInstance->modifyTeamMember($id, $id_username, $modify_team_member_body);
 } catch (Exception $e) {
     echo 'Exception when calling TeamsApi->modifyTeamMember: ', $e->getMessage(), PHP_EOL;
 }
@@ -405,9 +405,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the team | |
-| **user_id** | [**mixed**](../Model/.md)| The ID of the user to modify | |
-| **modify_team_member_request** | [**\Aternos\ModrinthApi\Model\ModifyTeamMemberRequest**](../Model/ModifyTeamMemberRequest.md)| Contents to be modified | [optional] |
+| **id** | **string**| The ID of the team | |
+| **id_username** | **string**| The ID or username of the user | |
+| **modify_team_member_body** | [**\Aternos\ModrinthApi\Model\ModifyTeamMemberBody**](../Model/ModifyTeamMemberBody.md)| Contents to be modified | [optional] |
 
 ### Return type
 
@@ -429,7 +429,7 @@ void (empty response body)
 ## `transferTeamOwnership()`
 
 ```php
-transferTeamOwnership($id, $add_team_member_request)
+transferTeamOwnership($id, $user_identifier)
 ```
 
 Transfer team's ownership to another user
@@ -453,11 +453,11 @@ $apiInstance = new Aternos\ModrinthApi\Api\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = [MMNNOOPP]; // mixed | The ID of the team
-$add_team_member_request = new \Aternos\ModrinthApi\Model\AddTeamMemberRequest(); // \Aternos\ModrinthApi\Model\AddTeamMemberRequest | New owner's ID
+$id = ["MMNNOOPP"]; // string | The ID of the team
+$user_identifier = new \Aternos\ModrinthApi\Model\UserIdentifier(); // \Aternos\ModrinthApi\Model\UserIdentifier | New owner's ID
 
 try {
-    $apiInstance->transferTeamOwnership($id, $add_team_member_request);
+    $apiInstance->transferTeamOwnership($id, $user_identifier);
 } catch (Exception $e) {
     echo 'Exception when calling TeamsApi->transferTeamOwnership: ', $e->getMessage(), PHP_EOL;
 }
@@ -467,8 +467,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | [**mixed**](../Model/.md)| The ID of the team | |
-| **add_team_member_request** | [**\Aternos\ModrinthApi\Model\AddTeamMemberRequest**](../Model/AddTeamMemberRequest.md)| New owner&#39;s ID | [optional] |
+| **id** | **string**| The ID of the team | |
+| **user_identifier** | [**\Aternos\ModrinthApi\Model\UserIdentifier**](../Model/UserIdentifier.md)| New owner&#39;s ID | [optional] |
 
 ### Return type
 

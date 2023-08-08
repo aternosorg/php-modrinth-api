@@ -13,9 +13,10 @@
 /**
  * Labrinth
  *
- * **Remember to join our [Discord](https://discord.gg/EUHuJHt) if you need any support!**  ## Authentication This API uses GitHub tokens for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: gho_pJ9dGXVKpfzZp4PUHSxYEq9hjk0h288Gwj4S ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects and notifications)  Applications interacting with the authenticated API should either retrieve the Modrinth GitHub token through the site or create a personal app token for use with Modrinth. The API provides a couple routes for auth -- don't implement this flow in your application! Instead, use a personal access token or create your own GitHub OAuth2 application. This system will be revisited and allow easier interaction with the authenticated subset of the API once we roll out our own authentication system.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`
+ * ## Authentication This API uses personal access tokens tied to a user account for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: mrp_RNtLRSPmGj2pd1v1ubi52nX7TJJM9sznrmwhAuj511oe4t1jAqAQ3D6Wc8Ic ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects, notifications, emails, and payout data)  Applications interacting with the authenticated API should have the user generate a personal access token from [their user settings](https://modrinth.com/settings/account). Each request requiring authentication has a certain scope. For example, to view the email of the user being requested, the token must have the `USER_READ_EMAIL` scope. You can find the list of available scopes [on GitHub](https://github.com/modrinth/labrinth/blob/master/src/models/pats.rs#L15). Making a request with an invalid scope will return a 401 error.  Please note that certain scopes and requests cannot be completed with a personal access token. For example, deleting a user account can only be done through Modrinth's frontend.  For backwards compatibility purposes, some types of GitHub tokens also work for authenticating a user with Modrinth's API, granting all scopes. **We urge any application still using GitHub tokens to start using personal access tokens for security and reliability purposes.** GitHub tokens will cease to function to authenticate with Modrinth's API as soon as version 3 of the API is made generally available.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Identifiers The majority of items you can interact with in the API have a unique eight-digit base62 ID. Projects, versions, users, threads, teams, and reports all use this same way of identifying themselves. Version files use the sha1 or sha512 file hashes as identifiers.  Each project and user has a friendlier way of identifying them; slugs and usernames, respectively. While unique IDs are constant, slugs and usernames can change at any moment. If you want to store something in the long term, it is recommended to use the unique ID.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`  ## Versioning Modrinth follows a simple pattern for its API versioning. In the event of a breaking API change, the API version in the URL path is bumped, and migration steps will be published [on the migrations page](/docs/migrations/information).  When an API is no longer the current one, it will immediately be considered deprecated. No more support will be provided for API versions older than the current one. It will be kept for some time, but this amount of time is not certain.  We will exercise various tactics to get people to update their implementation of our API. One example is by adding something like `STOP USING THIS API` to various data returned by the API.  Once an API version is completely deprecated, it will permanently return a 410 error. Please ensure your application handles these 410 errors.
  *
- * The version of the OpenAPI document: v2.7.0/3b22f59
+ * The version of the OpenAPI document: v2.7.0/ec80c2b
+ * Contact: support@modrinth.com
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.6.0
  */
@@ -64,8 +65,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'published' => 'string',
         'updated' => 'string',
         'approved' => 'string',
+        'queued' => 'string',
         'followers' => 'int',
-        'status' => 'string',
         'license' => '\Aternos\ModrinthApi\Model\ProjectLicense',
         'versions' => 'string[]',
         'game_versions' => 'string[]',
@@ -88,8 +89,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'published' => 'ISO-8601',
         'updated' => 'ISO-8601',
         'approved' => 'ISO-8601',
+        'queued' => 'ISO-8601',
         'followers' => null,
-        'status' => null,
         'license' => null,
         'versions' => null,
         'game_versions' => null,
@@ -110,8 +111,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 		'published' => false,
 		'updated' => false,
 		'approved' => true,
+		'queued' => true,
 		'followers' => false,
-		'status' => false,
 		'license' => false,
 		'versions' => false,
 		'game_versions' => false,
@@ -212,8 +213,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'published' => 'published',
         'updated' => 'updated',
         'approved' => 'approved',
+        'queued' => 'queued',
         'followers' => 'followers',
-        'status' => 'status',
         'license' => 'license',
         'versions' => 'versions',
         'game_versions' => 'game_versions',
@@ -234,8 +235,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'published' => 'setPublished',
         'updated' => 'setUpdated',
         'approved' => 'setApproved',
+        'queued' => 'setQueued',
         'followers' => 'setFollowers',
-        'status' => 'setStatus',
         'license' => 'setLicense',
         'versions' => 'setVersions',
         'game_versions' => 'setGameVersions',
@@ -256,8 +257,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         'published' => 'getPublished',
         'updated' => 'getUpdated',
         'approved' => 'getApproved',
+        'queued' => 'getQueued',
         'followers' => 'getFollowers',
-        'status' => 'getStatus',
         'license' => 'getLicense',
         'versions' => 'getVersions',
         'game_versions' => 'getGameVersions',
@@ -306,31 +307,6 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const STATUS_APPROVED = 'approved';
-    public const STATUS_REJECTED = 'rejected';
-    public const STATUS_DRAFT = 'draft';
-    public const STATUS_UNLISTED = 'unlisted';
-    public const STATUS_ARCHIVED = 'archived';
-    public const STATUS_PROCESSING = 'processing';
-    public const STATUS_UNKNOWN = 'unknown';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_APPROVED,
-            self::STATUS_REJECTED,
-            self::STATUS_DRAFT,
-            self::STATUS_UNLISTED,
-            self::STATUS_ARCHIVED,
-            self::STATUS_PROCESSING,
-            self::STATUS_UNKNOWN,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -354,8 +330,8 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('published', $data ?? [], null);
         $this->setIfExists('updated', $data ?? [], null);
         $this->setIfExists('approved', $data ?? [], null);
+        $this->setIfExists('queued', $data ?? [], null);
         $this->setIfExists('followers', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('license', $data ?? [], null);
         $this->setIfExists('versions', $data ?? [], null);
         $this->setIfExists('game_versions', $data ?? [], null);
@@ -405,18 +381,6 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['followers'] === null) {
             $invalidProperties[] = "'followers' can't be null";
         }
-        if ($this->container['status'] === null) {
-            $invalidProperties[] = "'status' can't be null";
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'status', must be one of '%s'",
-                $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -526,6 +490,7 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets moderator_message
      *
      * @return \Aternos\ModrinthApi\Model\ModeratorMessage|null
+     * @deprecated
      */
     public function getModeratorMessage()
     {
@@ -538,6 +503,7 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @param \Aternos\ModrinthApi\Model\ModeratorMessage|null $moderator_message moderator_message
      *
      * @return self
+     * @deprecated
      */
     public function setModeratorMessage($moderator_message)
     {
@@ -623,7 +589,7 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets approved
      *
-     * @param string|null $approved The date the project's status was set to approved or unlisted
+     * @param string|null $approved The date the project's status was set to an approved status
      *
      * @return self
      */
@@ -640,6 +606,40 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['approved'] = $approved;
+
+        return $this;
+    }
+
+    /**
+     * Gets queued
+     *
+     * @return string|null
+     */
+    public function getQueued()
+    {
+        return $this->container['queued'];
+    }
+
+    /**
+     * Sets queued
+     *
+     * @param string|null $queued The date the project's status was submitted to moderators for review
+     *
+     * @return self
+     */
+    public function setQueued($queued)
+    {
+        if (is_null($queued)) {
+            array_push($this->openAPINullablesSetToNull, 'queued');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('queued', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['queued'] = $queued;
 
         return $this;
     }
@@ -667,43 +667,6 @@ class ProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable followers cannot be null');
         }
         $this->container['followers'] = $followers;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string $status The status of the project
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'status', must be one of '%s'",
-                    $status,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['status'] = $status;
 
         return $this;
     }

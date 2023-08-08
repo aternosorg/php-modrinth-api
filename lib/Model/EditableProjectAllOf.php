@@ -13,9 +13,10 @@
 /**
  * Labrinth
  *
- * **Remember to join our [Discord](https://discord.gg/EUHuJHt) if you need any support!**  ## Authentication This API uses GitHub tokens for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: gho_pJ9dGXVKpfzZp4PUHSxYEq9hjk0h288Gwj4S ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects and notifications)  Applications interacting with the authenticated API should either retrieve the Modrinth GitHub token through the site or create a personal app token for use with Modrinth. The API provides a couple routes for auth -- don't implement this flow in your application! Instead, use a personal access token or create your own GitHub OAuth2 application. This system will be revisited and allow easier interaction with the authenticated subset of the API once we roll out our own authentication system.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`
+ * ## Authentication This API uses personal access tokens tied to a user account for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: mrp_RNtLRSPmGj2pd1v1ubi52nX7TJJM9sznrmwhAuj511oe4t1jAqAQ3D6Wc8Ic ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects, notifications, emails, and payout data)  Applications interacting with the authenticated API should have the user generate a personal access token from [their user settings](https://modrinth.com/settings/account). Each request requiring authentication has a certain scope. For example, to view the email of the user being requested, the token must have the `USER_READ_EMAIL` scope. You can find the list of available scopes [on GitHub](https://github.com/modrinth/labrinth/blob/master/src/models/pats.rs#L15). Making a request with an invalid scope will return a 401 error.  Please note that certain scopes and requests cannot be completed with a personal access token. For example, deleting a user account can only be done through Modrinth's frontend.  For backwards compatibility purposes, some types of GitHub tokens also work for authenticating a user with Modrinth's API, granting all scopes. **We urge any application still using GitHub tokens to start using personal access tokens for security and reliability purposes.** GitHub tokens will cease to function to authenticate with Modrinth's API as soon as version 3 of the API is made generally available.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Identifiers The majority of items you can interact with in the API have a unique eight-digit base62 ID. Projects, versions, users, threads, teams, and reports all use this same way of identifying themselves. Version files use the sha1 or sha512 file hashes as identifiers.  Each project and user has a friendlier way of identifying them; slugs and usernames, respectively. While unique IDs are constant, slugs and usernames can change at any moment. If you want to store something in the long term, it is recommended to use the unique ID.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`  ## Versioning Modrinth follows a simple pattern for its API versioning. In the event of a breaking API change, the API version in the URL path is bumped, and migration steps will be published [on the migrations page](/docs/migrations/information).  When an API is no longer the current one, it will immediately be considered deprecated. No more support will be provided for API versions older than the current one. It will be kept for some time, but this amount of time is not certain.  We will exercise various tactics to get people to update their implementation of our API. One example is by adding something like `STOP USING THIS API` to various data returned by the API.  Once an API version is completely deprecated, it will permanently return a 410 error. Please ensure your application handles these 410 errors.
  *
- * The version of the OpenAPI document: v2.7.0/3b22f59
+ * The version of the OpenAPI document: v2.7.0/ec80c2b
+ * Contact: support@modrinth.com
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.6.0
  */
@@ -57,8 +58,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'status' => 'string',
-        'requested_status' => 'string',
         'moderation_message' => 'string',
         'moderation_message_body' => 'string'
     ];
@@ -71,8 +70,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'status' => null,
-        'requested_status' => null,
         'moderation_message' => null,
         'moderation_message_body' => null
     ];
@@ -83,9 +80,7 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'status' => false,
-		'requested_status' => true,
-		'moderation_message' => true,
+        'moderation_message' => true,
 		'moderation_message_body' => true
     ];
 
@@ -175,8 +170,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'status' => 'status',
-        'requested_status' => 'requested_status',
         'moderation_message' => 'moderation_message',
         'moderation_message_body' => 'moderation_message_body'
     ];
@@ -187,8 +180,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'status' => 'setStatus',
-        'requested_status' => 'setRequestedStatus',
         'moderation_message' => 'setModerationMessage',
         'moderation_message_body' => 'setModerationMessageBody'
     ];
@@ -199,8 +190,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'status' => 'getStatus',
-        'requested_status' => 'getRequestedStatus',
         'moderation_message' => 'getModerationMessage',
         'moderation_message_body' => 'getModerationMessageBody'
     ];
@@ -246,58 +235,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
-    public const STATUS_APPROVED = 'approved';
-    public const STATUS_ARCHIVED = 'archived';
-    public const STATUS_REJECTED = 'rejected';
-    public const STATUS_DRAFT = 'draft';
-    public const STATUS_UNLISTED = 'unlisted';
-    public const STATUS_PROCESSING = 'processing';
-    public const STATUS_WITHHELD = 'withheld';
-    public const STATUS_SCHEDULED = 'scheduled';
-    public const STATUS__PRIVATE = 'private';
-    public const STATUS_UNKNOWN = 'unknown';
-    public const REQUESTED_STATUS_APPROVED = 'approved';
-    public const REQUESTED_STATUS_ARCHIVED = 'archived';
-    public const REQUESTED_STATUS_UNLISTED = 'unlisted';
-    public const REQUESTED_STATUS__PRIVATE = 'private';
-    public const REQUESTED_STATUS_DRAFT = 'draft';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_APPROVED,
-            self::STATUS_ARCHIVED,
-            self::STATUS_REJECTED,
-            self::STATUS_DRAFT,
-            self::STATUS_UNLISTED,
-            self::STATUS_PROCESSING,
-            self::STATUS_WITHHELD,
-            self::STATUS_SCHEDULED,
-            self::STATUS__PRIVATE,
-            self::STATUS_UNKNOWN,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getRequestedStatusAllowableValues()
-    {
-        return [
-            self::REQUESTED_STATUS_APPROVED,
-            self::REQUESTED_STATUS_ARCHIVED,
-            self::REQUESTED_STATUS_UNLISTED,
-            self::REQUESTED_STATUS__PRIVATE,
-            self::REQUESTED_STATUS_DRAFT,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -314,8 +251,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('requested_status', $data ?? [], null);
         $this->setIfExists('moderation_message', $data ?? [], null);
         $this->setIfExists('moderation_message_body', $data ?? [], null);
     }
@@ -347,24 +282,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'status', must be one of '%s'",
-                $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getRequestedStatusAllowableValues();
-        if (!is_null($this->container['requested_status']) && !in_array($this->container['requested_status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'requested_status', must be one of '%s'",
-                $this->container['requested_status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -379,87 +296,6 @@ class EditableProjectAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets status
-     *
-     * @return string|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string|null $status The status of the project
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'status', must be one of '%s'",
-                    $status,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets requested_status
-     *
-     * @return string|null
-     */
-    public function getRequestedStatus()
-    {
-        return $this->container['requested_status'];
-    }
-
-    /**
-     * Sets requested_status
-     *
-     * @param string|null $requested_status The requested status when submitting for review or scheduling the project for release
-     *
-     * @return self
-     */
-    public function setRequestedStatus($requested_status)
-    {
-        if (is_null($requested_status)) {
-            array_push($this->openAPINullablesSetToNull, 'requested_status');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('requested_status', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $allowedValues = $this->getRequestedStatusAllowableValues();
-        if (!is_null($requested_status) && !in_array($requested_status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'requested_status', must be one of '%s'",
-                    $requested_status,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['requested_status'] = $requested_status;
-
-        return $this;
-    }
 
     /**
      * Gets moderation_message

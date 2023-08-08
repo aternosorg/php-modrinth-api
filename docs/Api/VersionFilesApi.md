@@ -38,9 +38,9 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionFilesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$hash = 619e250c133106bacc3e3b560839bd4b324dfda8; // mixed | The hash of the file, considering its byte content, and encoded in hexadecimal
-$algorithm = sha512; // mixed | The algorithm of the hash
-$version_id = [IIJJKKLL]; // mixed | Version ID to delete the version from, if multiple files of the same hash exist
+$hash = 619e250c133106bacc3e3b560839bd4b324dfda8; // string | The hash of the file, considering its byte content, and encoded in hexadecimal
+$algorithm = sha512; // string | The algorithm of the hash
+$version_id = ["IIJJKKLL"]; // string | Version ID to delete the version from, if multiple files of the same hash exist
 
 try {
     $apiInstance->deleteFileFromHash($hash, $algorithm, $version_id);
@@ -53,9 +53,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **hash** | [**mixed**](../Model/.md)| The hash of the file, considering its byte content, and encoded in hexadecimal | |
-| **algorithm** | [**mixed**](../Model/.md)| The algorithm of the hash | [optional] |
-| **version_id** | [**mixed**](../Model/.md)| Version ID to delete the version from, if multiple files of the same hash exist | [optional] |
+| **hash** | **string**| The hash of the file, considering its byte content, and encoded in hexadecimal | |
+| **algorithm** | **string**| The algorithm of the hash | [default to &#39;sha1&#39;] |
+| **version_id** | **string**| Version ID to delete the version from, if multiple files of the same hash exist | [optional] |
 
 ### Return type
 
@@ -77,7 +77,7 @@ void (empty response body)
 ## `getLatestVersionFromHash()`
 
 ```php
-getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_request): mixed
+getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_body): \Aternos\ModrinthApi\Model\Version
 ```
 
 Latest version of a project from a hash, loader(s), and game version(s)
@@ -95,12 +95,12 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionFilesApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$hash = 619e250c133106bacc3e3b560839bd4b324dfda8; // mixed | The hash of the file, considering its byte content, and encoded in hexadecimal
-$algorithm = sha512; // mixed | The algorithm of the hash
-$get_latest_version_from_hash_request = new \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest(); // \Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest | Parameters of the updated version requested
+$hash = 619e250c133106bacc3e3b560839bd4b324dfda8; // string | The hash of the file, considering its byte content, and encoded in hexadecimal
+$algorithm = sha512; // string | The algorithm of the hash
+$get_latest_version_from_hash_body = new \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody(); // \Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody | Parameters of the updated version requested
 
 try {
-    $result = $apiInstance->getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_request);
+    $result = $apiInstance->getLatestVersionFromHash($hash, $algorithm, $get_latest_version_from_hash_body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling VersionFilesApi->getLatestVersionFromHash: ', $e->getMessage(), PHP_EOL;
@@ -111,13 +111,13 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **hash** | [**mixed**](../Model/.md)| The hash of the file, considering its byte content, and encoded in hexadecimal | |
-| **algorithm** | [**mixed**](../Model/.md)| The algorithm of the hash | [optional] |
-| **get_latest_version_from_hash_request** | [**\Aternos\ModrinthApi\Model\GetLatestVersionFromHashRequest**](../Model/GetLatestVersionFromHashRequest.md)| Parameters of the updated version requested | [optional] |
+| **hash** | **string**| The hash of the file, considering its byte content, and encoded in hexadecimal | |
+| **algorithm** | **string**| The algorithm of the hash | [default to &#39;sha1&#39;] |
+| **get_latest_version_from_hash_body** | [**\Aternos\ModrinthApi\Model\GetLatestVersionFromHashBody**](../Model/GetLatestVersionFromHashBody.md)| Parameters of the updated version requested | [optional] |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Version**](../Model/Version.md)
 
 ### Authorization
 
@@ -135,7 +135,7 @@ No authorization required
 ## `getLatestVersionsFromHashes()`
 
 ```php
-getLatestVersionsFromHashes($get_latest_versions_from_hashes_request): \Aternos\ModrinthApi\Model\VersionsFromHashes200Response
+getLatestVersionsFromHashes($get_latest_versions_from_hashes_body): array<string,\Aternos\ModrinthApi\Model\Version>
 ```
 
 Latest versions of multiple project from hashes, loader(s), and game version(s)
@@ -155,10 +155,10 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionFilesApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$get_latest_versions_from_hashes_request = new \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest(); // \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest | Parameters of the updated version requested
+$get_latest_versions_from_hashes_body = new \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody(); // \Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody | Parameters of the updated version requested
 
 try {
-    $result = $apiInstance->getLatestVersionsFromHashes($get_latest_versions_from_hashes_request);
+    $result = $apiInstance->getLatestVersionsFromHashes($get_latest_versions_from_hashes_body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling VersionFilesApi->getLatestVersionsFromHashes: ', $e->getMessage(), PHP_EOL;
@@ -169,11 +169,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **get_latest_versions_from_hashes_request** | [**\Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesRequest**](../Model/GetLatestVersionsFromHashesRequest.md)| Parameters of the updated version requested | [optional] |
+| **get_latest_versions_from_hashes_body** | [**\Aternos\ModrinthApi\Model\GetLatestVersionsFromHashesBody**](../Model/GetLatestVersionsFromHashesBody.md)| Parameters of the updated version requested | [optional] |
 
 ### Return type
 
-[**\Aternos\ModrinthApi\Model\VersionsFromHashes200Response**](../Model/VersionsFromHashes200Response.md)
+[**array<string,\Aternos\ModrinthApi\Model\Version>**](../Model/Version.md)
 
 ### Authorization
 
@@ -191,7 +191,7 @@ No authorization required
 ## `versionFromHash()`
 
 ```php
-versionFromHash($hash, $algorithm, $multiple): mixed
+versionFromHash($hash, $algorithm, $multiple): \Aternos\ModrinthApi\Model\Version
 ```
 
 Get version from hash
@@ -209,9 +209,9 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionFilesApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$hash = 619e250c133106bacc3e3b560839bd4b324dfda8; // mixed | The hash of the file, considering its byte content, and encoded in hexadecimal
-$algorithm = sha512; // mixed | The algorithm of the hash
-$multiple = NULL; // mixed | Whether to return multiple results when looking for this hash
+$hash = 619e250c133106bacc3e3b560839bd4b324dfda8; // string | The hash of the file, considering its byte content, and encoded in hexadecimal
+$algorithm = sha512; // string | The algorithm of the hash
+$multiple = false; // bool | Whether to return multiple results when looking for this hash
 
 try {
     $result = $apiInstance->versionFromHash($hash, $algorithm, $multiple);
@@ -225,13 +225,13 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **hash** | [**mixed**](../Model/.md)| The hash of the file, considering its byte content, and encoded in hexadecimal | |
-| **algorithm** | [**mixed**](../Model/.md)| The algorithm of the hash | [optional] |
-| **multiple** | [**mixed**](../Model/.md)| Whether to return multiple results when looking for this hash | [optional] |
+| **hash** | **string**| The hash of the file, considering its byte content, and encoded in hexadecimal | |
+| **algorithm** | **string**| The algorithm of the hash | [default to &#39;sha1&#39;] |
+| **multiple** | **bool**| Whether to return multiple results when looking for this hash | [optional] [default to false] |
 
 ### Return type
 
-**mixed**
+[**\Aternos\ModrinthApi\Model\Version**](../Model/Version.md)
 
 ### Authorization
 
@@ -249,7 +249,7 @@ No authorization required
 ## `versionsFromHashes()`
 
 ```php
-versionsFromHashes($versions_from_hashes_request): \Aternos\ModrinthApi\Model\VersionsFromHashes200Response
+versionsFromHashes($hash_list): array<string,\Aternos\ModrinthApi\Model\Version>
 ```
 
 Get versions from hashes
@@ -269,10 +269,10 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionFilesApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$versions_from_hashes_request = new \Aternos\ModrinthApi\Model\VersionsFromHashesRequest(); // \Aternos\ModrinthApi\Model\VersionsFromHashesRequest | Hashes and algorithm of the versions requested
+$hash_list = new \Aternos\ModrinthApi\Model\HashList(); // \Aternos\ModrinthApi\Model\HashList | Hashes and algorithm of the versions requested
 
 try {
-    $result = $apiInstance->versionsFromHashes($versions_from_hashes_request);
+    $result = $apiInstance->versionsFromHashes($hash_list);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling VersionFilesApi->versionsFromHashes: ', $e->getMessage(), PHP_EOL;
@@ -283,11 +283,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **versions_from_hashes_request** | [**\Aternos\ModrinthApi\Model\VersionsFromHashesRequest**](../Model/VersionsFromHashesRequest.md)| Hashes and algorithm of the versions requested | [optional] |
+| **hash_list** | [**\Aternos\ModrinthApi\Model\HashList**](../Model/HashList.md)| Hashes and algorithm of the versions requested | [optional] |
 
 ### Return type
 
-[**\Aternos\ModrinthApi\Model\VersionsFromHashes200Response**](../Model/VersionsFromHashes200Response.md)
+[**array<string,\Aternos\ModrinthApi\Model\Version>**](../Model/Version.md)
 
 ### Authorization
 

@@ -12,9 +12,10 @@
 /**
  * Labrinth
  *
- * **Remember to join our [Discord](https://discord.gg/EUHuJHt) if you need any support!**  ## Authentication This API uses GitHub tokens for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: gho_pJ9dGXVKpfzZp4PUHSxYEq9hjk0h288Gwj4S ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects and notifications)  Applications interacting with the authenticated API should either retrieve the Modrinth GitHub token through the site or create a personal app token for use with Modrinth. The API provides a couple routes for auth -- don't implement this flow in your application! Instead, use a personal access token or create your own GitHub OAuth2 application. This system will be revisited and allow easier interaction with the authenticated subset of the API once we roll out our own authentication system.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`
+ * ## Authentication This API uses personal access tokens tied to a user account for authentication. The token is in the `Authorization` header of the request.  Example: ``` Authorization: mrp_RNtLRSPmGj2pd1v1ubi52nX7TJJM9sznrmwhAuj511oe4t1jAqAQ3D6Wc8Ic ```  You do not need a token for most requests. Generally speaking, only the following types of requests require a token: - those which create data (such as version creation) - those which modify data (such as editing a project) - those which access private data (such as draft projects, notifications, emails, and payout data)  Applications interacting with the authenticated API should have the user generate a personal access token from [their user settings](https://modrinth.com/settings/account). Each request requiring authentication has a certain scope. For example, to view the email of the user being requested, the token must have the `USER_READ_EMAIL` scope. You can find the list of available scopes [on GitHub](https://github.com/modrinth/labrinth/blob/master/src/models/pats.rs#L15). Making a request with an invalid scope will return a 401 error.  Please note that certain scopes and requests cannot be completed with a personal access token. For example, deleting a user account can only be done through Modrinth's frontend.  For backwards compatibility purposes, some types of GitHub tokens also work for authenticating a user with Modrinth's API, granting all scopes. **We urge any application still using GitHub tokens to start using personal access tokens for security and reliability purposes.** GitHub tokens will cease to function to authenticate with Modrinth's API as soon as version 3 of the API is made generally available.  ## Cross-Origin Resource Sharing This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with the [W3C spec](https://www.w3.org/TR/cors/). This allows for cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.  ## Identifiers The majority of items you can interact with in the API have a unique eight-digit base62 ID. Projects, versions, users, threads, teams, and reports all use this same way of identifying themselves. Version files use the sha1 or sha512 file hashes as identifiers.  Each project and user has a friendlier way of identifying them; slugs and usernames, respectively. While unique IDs are constant, slugs and usernames can change at any moment. If you want to store something in the long term, it is recommended to use the unique ID.  ## Ratelimits The API has a ratelimit defined per IP. Limits and remaining amounts are given in the response headers. - `X-Ratelimit-Limit`: the maximum number of requests that can be made in a minute - `X-Ratelimit-Remaining`: the number of requests remaining in the current ratelimit window - `X-Ratelimit-Reset`: the time in seconds until the ratelimit window resets  Ratelimits are the same no matter whether you use a token or not. The ratelimit is currently 300 requests per minute. If you have a use case requiring a higher limit, please [contact us](mailto:admin@modrinth.com).  ## User Agents To access the Modrinth API, you **must** use provide a uniquely-identifying `User-Agent` header. Providing a user agent that only identifies your HTTP client library (such as \"okhttp/4.9.3\") increases the likelihood that we will block your traffic. It is recommended, but not required, to include contact information in your user agent. This allows us to contact you if we would like a change in your application's behavior without having to block your traffic. - Bad: `User-Agent: okhttp/4.9.3` - Good: `User-Agent: project_name` - Better: `User-Agent: github_username/project_name/1.56.0` - Best: `User-Agent: github_username/project_name/1.56.0 (launcher.com)` or `User-Agent: github_username/project_name/1.56.0 (contact@launcher.com)`  ## Versioning Modrinth follows a simple pattern for its API versioning. In the event of a breaking API change, the API version in the URL path is bumped, and migration steps will be published [on the migrations page](/docs/migrations/information).  When an API is no longer the current one, it will immediately be considered deprecated. No more support will be provided for API versions older than the current one. It will be kept for some time, but this amount of time is not certain.  We will exercise various tactics to get people to update their implementation of our API. One example is by adding something like `STOP USING THIS API` to various data returned by the API.  Once an API version is completely deprecated, it will permanently return a 410 error. Please ensure your application handles these 410 errors.
  *
- * The version of the OpenAPI document: v2.7.0/3b22f59
+ * The version of the OpenAPI document: v2.7.0/ec80c2b
+ * Contact: support@modrinth.com
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 6.6.0
  */
@@ -3896,7 +3897,7 @@ class ProjectsApi
     /**
      * Operation patchProjects
      *
-     * Edit multiple projects
+     * Bulk-edit multiple projects
      *
      * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
@@ -3914,7 +3915,7 @@ class ProjectsApi
     /**
      * Operation patchProjectsWithHttpInfo
      *
-     * Edit multiple projects
+     * Bulk-edit multiple projects
      *
      * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
@@ -3991,7 +3992,7 @@ class ProjectsApi
     /**
      * Operation patchProjectsAsync
      *
-     * Edit multiple projects
+     * Bulk-edit multiple projects
      *
      * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
@@ -4013,7 +4014,7 @@ class ProjectsApi
     /**
      * Operation patchProjectsAsyncWithHttpInfo
      *
-     * Edit multiple projects
+     * Bulk-edit multiple projects
      *
      * @param  string $ids The IDs of the projects (required)
      * @param  \Aternos\ModrinthApi\Model\PatchProjectsBody $patch_projects_body Fields to edit on all projects specified (optional)
@@ -4130,6 +4131,11 @@ class ProjectsApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -4384,7 +4390,13 @@ class ProjectsApi
                 'Missing the required parameter $count when calling randomProjects'
             );
         }
-
+        if ($count > 100) {
+            throw new \InvalidArgumentException('invalid value for "$count" when calling ProjectsApi.randomProjects, must be smaller than or equal to 100.');
+        }
+        if ($count < 0) {
+            throw new \InvalidArgumentException('invalid value for "$count" when calling ProjectsApi.randomProjects, must be bigger than or equal to 0.');
+        }
+        
 
         $resourcePath = '/projects_random';
         $formParams = [];
@@ -4728,11 +4740,11 @@ class ProjectsApi
      * Search projects
      *
      * @param  string $query The query to search for (optional)
-     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string[][] $facets Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - &#x60;project_type&#x60; - &#x60;categories&#x60; (loaders are lumped in with categories in search) - &#x60;versions&#x60; - &#x60;client_side&#x60; - &#x60;server_side&#x60; - &#x60;open_source&#x60;  Several others are also available for use, though these should not be used outside very specific use cases. - &#x60;title&#x60; - &#x60;author&#x60; - &#x60;date_modified&#x60; - &#x60;follows&#x60; - &#x60;project_id&#x60; - &#x60;license&#x60; - &#x60;date_created&#x60; - &#x60;downloads&#x60; - &#x60;color&#x60;  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is &#x60;:&#x60; (same as &#x60;&#x3D;&#x60;), though you can also use &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&lt;&#x3D;&#x60;, and &#x60;&lt;&#x60;. Join together the type, operation, and value, and you&#39;ve got your string. &#x60;&#x60;&#x60; {type} {operation} {value} &#x60;&#x60;&#x60;  Examples: &#x60;&#x60;&#x60; categories &#x3D; adventure versions !&#x3D; 1.20.1 downloads &lt;&#x3D; 100 &#x60;&#x60;&#x60;  You then join these strings together in arrays to signal &#x60;AND&#x60; and &#x60;OR&#x60; operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;, \&quot;versions:1.17.1\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 OR 1.17.1&#x60;.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;], [\&quot;project_type:modpack\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 AND are modpacks&#x60;. (optional)
      * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
      * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
      * @param  int $limit The number of results returned by the search (optional, default to 10)
-     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $filters A list of filters relating to the properties of a project. Facets are generally recommended over filters. (optional)
      * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
@@ -4752,11 +4764,11 @@ class ProjectsApi
      * Search projects
      *
      * @param  string $query The query to search for (optional)
-     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string[][] $facets Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - &#x60;project_type&#x60; - &#x60;categories&#x60; (loaders are lumped in with categories in search) - &#x60;versions&#x60; - &#x60;client_side&#x60; - &#x60;server_side&#x60; - &#x60;open_source&#x60;  Several others are also available for use, though these should not be used outside very specific use cases. - &#x60;title&#x60; - &#x60;author&#x60; - &#x60;date_modified&#x60; - &#x60;follows&#x60; - &#x60;project_id&#x60; - &#x60;license&#x60; - &#x60;date_created&#x60; - &#x60;downloads&#x60; - &#x60;color&#x60;  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is &#x60;:&#x60; (same as &#x60;&#x3D;&#x60;), though you can also use &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&lt;&#x3D;&#x60;, and &#x60;&lt;&#x60;. Join together the type, operation, and value, and you&#39;ve got your string. &#x60;&#x60;&#x60; {type} {operation} {value} &#x60;&#x60;&#x60;  Examples: &#x60;&#x60;&#x60; categories &#x3D; adventure versions !&#x3D; 1.20.1 downloads &lt;&#x3D; 100 &#x60;&#x60;&#x60;  You then join these strings together in arrays to signal &#x60;AND&#x60; and &#x60;OR&#x60; operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;, \&quot;versions:1.17.1\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 OR 1.17.1&#x60;.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;], [\&quot;project_type:modpack\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 AND are modpacks&#x60;. (optional)
      * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
      * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
      * @param  int $limit The number of results returned by the search (optional, default to 10)
-     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $filters A list of filters relating to the properties of a project. Facets are generally recommended over filters. (optional)
      * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
@@ -4881,11 +4893,11 @@ class ProjectsApi
      * Search projects
      *
      * @param  string $query The query to search for (optional)
-     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string[][] $facets Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - &#x60;project_type&#x60; - &#x60;categories&#x60; (loaders are lumped in with categories in search) - &#x60;versions&#x60; - &#x60;client_side&#x60; - &#x60;server_side&#x60; - &#x60;open_source&#x60;  Several others are also available for use, though these should not be used outside very specific use cases. - &#x60;title&#x60; - &#x60;author&#x60; - &#x60;date_modified&#x60; - &#x60;follows&#x60; - &#x60;project_id&#x60; - &#x60;license&#x60; - &#x60;date_created&#x60; - &#x60;downloads&#x60; - &#x60;color&#x60;  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is &#x60;:&#x60; (same as &#x60;&#x3D;&#x60;), though you can also use &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&lt;&#x3D;&#x60;, and &#x60;&lt;&#x60;. Join together the type, operation, and value, and you&#39;ve got your string. &#x60;&#x60;&#x60; {type} {operation} {value} &#x60;&#x60;&#x60;  Examples: &#x60;&#x60;&#x60; categories &#x3D; adventure versions !&#x3D; 1.20.1 downloads &lt;&#x3D; 100 &#x60;&#x60;&#x60;  You then join these strings together in arrays to signal &#x60;AND&#x60; and &#x60;OR&#x60; operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;, \&quot;versions:1.17.1\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 OR 1.17.1&#x60;.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;], [\&quot;project_type:modpack\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 AND are modpacks&#x60;. (optional)
      * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
      * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
      * @param  int $limit The number of results returned by the search (optional, default to 10)
-     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $filters A list of filters relating to the properties of a project. Facets are generally recommended over filters. (optional)
      * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
@@ -4908,11 +4920,11 @@ class ProjectsApi
      * Search projects
      *
      * @param  string $query The query to search for (optional)
-     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string[][] $facets Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - &#x60;project_type&#x60; - &#x60;categories&#x60; (loaders are lumped in with categories in search) - &#x60;versions&#x60; - &#x60;client_side&#x60; - &#x60;server_side&#x60; - &#x60;open_source&#x60;  Several others are also available for use, though these should not be used outside very specific use cases. - &#x60;title&#x60; - &#x60;author&#x60; - &#x60;date_modified&#x60; - &#x60;follows&#x60; - &#x60;project_id&#x60; - &#x60;license&#x60; - &#x60;date_created&#x60; - &#x60;downloads&#x60; - &#x60;color&#x60;  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is &#x60;:&#x60; (same as &#x60;&#x3D;&#x60;), though you can also use &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&lt;&#x3D;&#x60;, and &#x60;&lt;&#x60;. Join together the type, operation, and value, and you&#39;ve got your string. &#x60;&#x60;&#x60; {type} {operation} {value} &#x60;&#x60;&#x60;  Examples: &#x60;&#x60;&#x60; categories &#x3D; adventure versions !&#x3D; 1.20.1 downloads &lt;&#x3D; 100 &#x60;&#x60;&#x60;  You then join these strings together in arrays to signal &#x60;AND&#x60; and &#x60;OR&#x60; operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;, \&quot;versions:1.17.1\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 OR 1.17.1&#x60;.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;], [\&quot;project_type:modpack\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 AND are modpacks&#x60;. (optional)
      * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
      * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
      * @param  int $limit The number of results returned by the search (optional, default to 10)
-     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $filters A list of filters relating to the properties of a project. Facets are generally recommended over filters. (optional)
      * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
@@ -4964,11 +4976,11 @@ class ProjectsApi
      * Create request for operation 'searchProjects'
      *
      * @param  string $query The query to search for (optional)
-     * @param  string[][] $facets The recommended way of filtering search results. [Learn more about using facets.](/docs/tutorials/api_search) (optional)
+     * @param  string[][] $facets Facets are an essential concept for understanding how to filter out results.  These are the most commonly used facet types: - &#x60;project_type&#x60; - &#x60;categories&#x60; (loaders are lumped in with categories in search) - &#x60;versions&#x60; - &#x60;client_side&#x60; - &#x60;server_side&#x60; - &#x60;open_source&#x60;  Several others are also available for use, though these should not be used outside very specific use cases. - &#x60;title&#x60; - &#x60;author&#x60; - &#x60;date_modified&#x60; - &#x60;follows&#x60; - &#x60;project_id&#x60; - &#x60;license&#x60; - &#x60;date_created&#x60; - &#x60;downloads&#x60; - &#x60;color&#x60;  In order to then use these facets, you need a value to filter by, as well as an operation to perform on this value. The most common operation is &#x60;:&#x60; (same as &#x60;&#x3D;&#x60;), though you can also use &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&lt;&#x3D;&#x60;, and &#x60;&lt;&#x60;. Join together the type, operation, and value, and you&#39;ve got your string. &#x60;&#x60;&#x60; {type} {operation} {value} &#x60;&#x60;&#x60;  Examples: &#x60;&#x60;&#x60; categories &#x3D; adventure versions !&#x3D; 1.20.1 downloads &lt;&#x3D; 100 &#x60;&#x60;&#x60;  You then join these strings together in arrays to signal &#x60;AND&#x60; and &#x60;OR&#x60; operators.  ##### OR All elements in a single array are considered to be joined by OR statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;, \&quot;versions:1.17.1\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 OR 1.17.1&#x60;.  ##### AND Separate arrays are considered to be joined by AND statements.   For example, the search &#x60;[[\&quot;versions:1.16.5\&quot;], [\&quot;project_type:modpack\&quot;]]&#x60; translates to &#x60;Projects that support 1.16.5 AND are modpacks&#x60;. (optional)
      * @param  string $index The sorting method used for sorting search results (optional, default to 'relevance')
      * @param  int $offset The offset into the search. Skips this number of results (optional, default to 0)
      * @param  int $limit The number of results returned by the search (optional, default to 10)
-     * @param  string $filters A list of filters relating to the properties of a project. Use filters when there isn&#39;t an available facet for your needs. [More information](https://docs.meilisearch.com/reference/features/filtering.html) (optional)
+     * @param  string $filters A list of filters relating to the properties of a project. Facets are generally recommended over filters. (optional)
      * @param  string $version A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended (optional) (deprecated)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchProjects'] to see the possible values for this operation
      *
@@ -4982,7 +4994,13 @@ class ProjectsApi
 
 
 
-
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ProjectsApi.searchProjects, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 0) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling ProjectsApi.searchProjects, must be bigger than or equal to 0.');
+        }
+        
 
 
 
