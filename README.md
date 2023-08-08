@@ -103,6 +103,13 @@ $options->setFacets($facetAndGroup);
 $projects = $modrinthClient->getProjects($options);
 ```
 
+By default facets are checked using the equals operator. There are several other operators available:
+```php
+use \Aternos\ModrinthApi\Client\Options\Facets\FacetOperator;
+
+$facet = new Facet(FacetType::DOWNLOADS, "1.20.1", FacetOperator::GREATER_THAN);
+```
+
 ## Getting Additional Project Data
 The Project wrapper provides methods to fetch additional data about the project.
 ```php

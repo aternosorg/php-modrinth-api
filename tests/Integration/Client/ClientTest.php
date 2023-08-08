@@ -115,6 +115,49 @@ class ClientTest extends TestCase
         $this->assertFalse($projectList->hasPreviousPage());
     }
 
+    public function testSearchProjectsByDownloadCount() {
+        $options = new ProjectSearchOptions();
+        $options->setFacets(new FacetANDGroup([
+            new FacetORGroup([
+                new Facet(FacetType::DOWNLOADS, 5000, FacetOperation::LESS_THAN),
+            ])
+        ]));
+        $projectList = $this->apiClient->searchProjects($options);
+        $this->assertFalse($projectList->hasPreviousPage());
+
+        $firstProjectOfPages = [];
+        for ($i = 0; $i < 3; $i++) {
+            $this->assertValidProjectList($projectList);
+            $firstProjectOfPages[$i] = $projectList[0];
+
+            foreach ($projectList as $project) {
+                $this->assertNotNull($project);
+                $this->assertInstanceOf(SearchProject::class, $project);
+                $this->assertLessThanOrEqual(5000, $project->getData()->getDownloads());
+            }
+
+            $this->assertTrue($projectList->hasNextPage());
+            $projectList = $projectList->getNextPage();
+        }
+
+        for ($i = 2; $i >= 0; $i--) {
+            $this->assertTrue($projectList->hasPreviousPage());
+            $projectList = $projectList->getPreviousPage();
+
+            $this->assertValidProjectList($projectList);
+            $this->assertEquals($firstProjectOfPages[$i]->getData()->getProjectId(),
+                $projectList[0]->getData()->getProjectId());
+
+            foreach ($projectList as $project) {
+                $this->assertNotNull($project);
+                $this->assertInstanceOf(SearchProject::class, $project);
+                $this->assertLessThanOrEqual(5000, $project->getData()->getDownloads());
+            }
+            $this->assertTrue($projectList->hasNextPage());
+        }
+        $this->assertFalse($projectList->hasPreviousPage());
+    }
+
     public function testGetProject(): void
     {
         foreach (["mclogs", "6DdCzpTL"] as $idOrSlug) {

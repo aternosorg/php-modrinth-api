@@ -17,6 +17,7 @@ class Facet
     public function __construct(
         protected FacetType $type,
         protected string $value,
+        protected FacetOperation $operation = FacetOperation::EQUALS
     )
     {
     }
@@ -55,6 +56,6 @@ class Facet
 
     public function serialize(): string
     {
-        return $this->type->value . ":" . $this->value;
+        return $this->type->value . " " . $this->operation->value . " " . $this->value;
     }
 }
