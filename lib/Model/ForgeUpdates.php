@@ -1,6 +1,6 @@
 <?php
 /**
- * ForgeUpdates200Response
+ * ForgeUpdates
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Aternos\ModrinthApi\ObjectSerializer;
 
 /**
- * ForgeUpdates200Response Class Doc Comment
+ * ForgeUpdates Class Doc Comment
  *
  * @category Class
  * @package  Aternos\ModrinthApi
@@ -41,7 +41,7 @@ use \Aternos\ModrinthApi\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ForgeUpdates200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ForgeUpdates implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ForgeUpdates200Response implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'forgeUpdates_200_response';
+    protected static $openAPIModelName = 'ForgeUpdates';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,7 @@ class ForgeUpdates200Response implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'homepage' => 'string',
-        'promos' => '\Aternos\ModrinthApi\Model\ForgeUpdates200ResponsePromos'
+        'promos' => '\Aternos\ModrinthApi\Model\ForgeUpdatesPromos'
     ];
 
     /**
@@ -327,7 +327,7 @@ class ForgeUpdates200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets promos
      *
-     * @return \Aternos\ModrinthApi\Model\ForgeUpdates200ResponsePromos|null
+     * @return \Aternos\ModrinthApi\Model\ForgeUpdatesPromos|null
      */
     public function getPromos()
     {
@@ -337,7 +337,7 @@ class ForgeUpdates200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets promos
      *
-     * @param \Aternos\ModrinthApi\Model\ForgeUpdates200ResponsePromos|null $promos promos
+     * @param \Aternos\ModrinthApi\Model\ForgeUpdatesPromos|null $promos promos
      *
      * @return self
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * ForgeUpdates200ResponsePromos
+ * ForgeUpdatesPromos
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Aternos\ModrinthApi\ObjectSerializer;
 
 /**
- * ForgeUpdates200ResponsePromos Class Doc Comment
+ * ForgeUpdatesPromos Class Doc Comment
  *
  * @category Class
  * @description A list of the recommended and latest versions for each Minecraft release
@@ -42,7 +42,7 @@ use \Aternos\ModrinthApi\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ForgeUpdates200ResponsePromos implements ModelInterface, ArrayAccess, \JsonSerializable
+class ForgeUpdatesPromos implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ForgeUpdates200ResponsePromos implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'forgeUpdates_200_response_promos';
+    protected static $openAPIModelName = 'ForgeUpdates_promos';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

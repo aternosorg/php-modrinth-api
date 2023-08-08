@@ -146,7 +146,7 @@ class MiscApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aternos\ModrinthApi\Model\ForgeUpdates200Response|\Aternos\ModrinthApi\Model\InvalidInputError
+     * @return \Aternos\ModrinthApi\Model\ForgeUpdates|\Aternos\ModrinthApi\Model\InvalidInputError
      */
     public function forgeUpdates($id_slug, ?int $hostIndex = null, array $variables = [], string $contentType = self::contentTypes['forgeUpdates'][0])
     {
@@ -171,7 +171,7 @@ class MiscApi
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aternos\ModrinthApi\Model\ForgeUpdates200Response|\Aternos\ModrinthApi\Model\InvalidInputError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aternos\ModrinthApi\Model\ForgeUpdates|\Aternos\ModrinthApi\Model\InvalidInputError, HTTP status code, HTTP response headers (array of strings)
      */
     public function forgeUpdatesWithHttpInfo($id_slug, ?int $hostIndex = null, array $variables = [], string $contentType = self::contentTypes['forgeUpdates'][0])
     {
@@ -214,17 +214,17 @@ class MiscApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Aternos\ModrinthApi\Model\ForgeUpdates200Response' === '\SplFileObject') {
+                    if ('\Aternos\ModrinthApi\Model\ForgeUpdates' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Aternos\ModrinthApi\Model\ForgeUpdates200Response' !== 'string') {
+                        if ('\Aternos\ModrinthApi\Model\ForgeUpdates' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\ForgeUpdates200Response', []),
+                        ObjectSerializer::deserialize($content, '\Aternos\ModrinthApi\Model\ForgeUpdates', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -245,7 +245,7 @@ class MiscApi
                     ];
             }
 
-            $returnType = '\Aternos\ModrinthApi\Model\ForgeUpdates200Response';
+            $returnType = '\Aternos\ModrinthApi\Model\ForgeUpdates';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -266,7 +266,7 @@ class MiscApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aternos\ModrinthApi\Model\ForgeUpdates200Response',
+                        '\Aternos\ModrinthApi\Model\ForgeUpdates',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -332,7 +332,7 @@ class MiscApi
      */
     public function forgeUpdatesAsyncWithHttpInfo($id_slug, ?int $hostIndex = null, array $variables = [], string $contentType = self::contentTypes['forgeUpdates'][0])
     {
-        $returnType = '\Aternos\ModrinthApi\Model\ForgeUpdates200Response';
+        $returnType = '\Aternos\ModrinthApi\Model\ForgeUpdates';
         $request = $this->forgeUpdatesRequest($id_slug, $hostIndex, $variables, $contentType);
 
         return $this->client
