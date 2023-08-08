@@ -388,7 +388,7 @@ class NotificationsApi
      *
      * Delete multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -405,7 +405,7 @@ class NotificationsApi
      *
      * Delete multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -473,7 +473,7 @@ class NotificationsApi
      *
      * Delete multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -494,7 +494,7 @@ class NotificationsApi
      *
      * Delete multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -531,7 +531,7 @@ class NotificationsApi
     /**
      * Create request for operation 'deleteNotifications'
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -559,7 +559,7 @@ class NotificationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -942,7 +942,7 @@ class NotificationsApi
      *
      * Get multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -960,7 +960,7 @@ class NotificationsApi
      *
      * Get multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1083,7 +1083,7 @@ class NotificationsApi
      *
      * Get multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1104,7 +1104,7 @@ class NotificationsApi
      *
      * Get multiple notifications
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1154,7 +1154,7 @@ class NotificationsApi
     /**
      * Create request for operation 'getNotifications'
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1182,7 +1182,7 @@ class NotificationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required
@@ -1807,7 +1807,7 @@ class NotificationsApi
      *
      * Mark multiple notifications as read
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['readNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1824,7 +1824,7 @@ class NotificationsApi
      *
      * Mark multiple notifications as read
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['readNotifications'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1892,7 +1892,7 @@ class NotificationsApi
      *
      * Mark multiple notifications as read
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['readNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1913,7 +1913,7 @@ class NotificationsApi
      *
      * Mark multiple notifications as read
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['readNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1950,7 +1950,7 @@ class NotificationsApi
     /**
      * Create request for operation 'readNotifications'
      *
-     * @param  string[] $ids The IDs of the notifications (required)
+     * @param  string $ids The IDs of the notifications (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['readNotifications'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1978,7 +1978,7 @@ class NotificationsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required

@@ -99,7 +99,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\NotificationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string[] | The IDs of the notifications
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the notifications
 
 try {
     $apiInstance->deleteNotifications($ids);
@@ -112,7 +112,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**string[]**](../Model/string.md)| The IDs of the notifications | |
+| **ids** | **string**| The IDs of the notifications | |
 
 ### Return type
 
@@ -218,7 +218,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\NotificationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string[] | The IDs of the notifications
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the notifications
 
 try {
     $result = $apiInstance->getNotifications($ids);
@@ -232,7 +232,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**string[]**](../Model/string.md)| The IDs of the notifications | |
+| **ids** | **string**| The IDs of the notifications | |
 
 ### Return type
 
@@ -397,7 +397,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\NotificationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string[] | The IDs of the notifications
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the notifications
 
 try {
     $apiInstance->readNotifications($ids);
@@ -410,7 +410,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**string[]**](../Model/string.md)| The IDs of the notifications | |
+| **ids** | **string**| The IDs of the notifications | |
 
 ### Return type
 

@@ -390,23 +390,6 @@ class ModrinthAPIClient
     }
 
     /**
-     * Get a user's notifications (project updates or team invites) (requires authentication)
-     * @param string $idOrUsername
-     * @return Notification[]
-     * @throws ApiException
-     */
-    public function getUserNotifications(string $idOrUsername): array
-    {
-        if ($this->apiToken === null) {
-            throw new ApiException("No API token set");
-        }
-
-        return array_map(function (NotificationModel $notification): Notification {
-            return new Notification($this, $notification);
-        }, $this->notifications->getUserNotifications($idOrUsername));
-    }
-
-    /**
      * Get a user's followed projects (requires authentication)
      * @param string $idOrUsername
      * @return Project[]
@@ -561,5 +544,86 @@ class ModrinthAPIClient
     public function getStatistics(): Statistics
     {
         return $this->misc->statistics();
+    }
+
+    /**
+     * Get a notification by ID (requires authentication)
+     * @param string $id notification ID
+     * @return Notification
+     * @throws ApiException
+     */
+    public function getNotification(string $id): Notification
+    {
+        return new Notification($this, $this->notifications->getNotification($id));
+    }
+
+    /**
+     * Get multiple notifications by ID (requires authentication)
+     * @param string[] $ids notification IDs
+     * @return Notification[]
+     * @throws ApiException
+     */
+    public function getNotifications(array $ids): array
+    {
+        return array_map(function (NotificationModel $notification): Notification {
+            return new Notification($this, $notification);
+        }, $this->notifications->getNotifications(json_encode($ids)));
+    }
+
+    /**
+     * Delete a notification by ID (requires authentication)
+     * @param string $id notification ID
+     * @throws ApiException
+     */
+    public function deleteNotification(string $id): void
+    {
+        $this->notifications->deleteNotification($id);
+    }
+
+    /**
+     * Delete multiple notifications by ID (requires authentication)
+     * @param string[] $ids notification IDs
+     * @throws ApiException
+     */
+    public function deleteNotifications(array $ids): void
+    {
+        $this->notifications->deleteNotifications(json_encode($ids));
+    }
+
+    /**
+     * Get a user's notifications (project updates or team invites) (requires authentication)
+     * @param string $idOrUsername
+     * @return Notification[]
+     * @throws ApiException
+     */
+    public function getUserNotifications(string $idOrUsername): array
+    {
+        if ($this->apiToken === null) {
+            throw new ApiException("No API token set");
+        }
+
+        return array_map(function (NotificationModel $notification): Notification {
+            return new Notification($this, $notification);
+        }, $this->notifications->getUserNotifications($idOrUsername));
+    }
+
+    /**
+     * Mark a notification as read (requires authentication)
+     * @param string $id notification ID
+     * @throws ApiException
+     */
+    public function readNotification(string $id): void
+    {
+        $this->notifications->readNotification($id);
+    }
+
+    /**
+     * Mark multiple notifications as read (requires authentication)
+     * @param string[] $ids notification IDs
+     * @throws ApiException
+     */
+    public function readNotifications(array $ids): void
+    {
+        $this->notifications->readNotifications(json_encode($ids));
     }
 }
