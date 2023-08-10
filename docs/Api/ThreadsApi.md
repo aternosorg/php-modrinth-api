@@ -341,7 +341,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ThreadsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string[] | The IDs of the threads
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the threads
 
 try {
     $result = $apiInstance->getThreads($ids);
@@ -355,7 +355,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**string[]**](../Model/string.md)| The IDs of the threads | |
+| **ids** | **string**| The IDs of the threads | |
 
 ### Return type
 
