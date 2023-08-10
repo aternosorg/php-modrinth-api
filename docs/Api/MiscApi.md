@@ -12,7 +12,7 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 ## `forgeUpdates()`
 
 ```php
-forgeUpdates($id_slug): \Aternos\ModrinthApi\Model\ForgeUpdates200Response
+forgeUpdates($id_slug): \Aternos\ModrinthApi\Model\ForgeUpdates
 ```
 ### URI(s):
 - https://api.modrinth.com Production server- https://staging-api.modrinth.com Staging server
@@ -58,7 +58,7 @@ try {
 
 ### Return type
 
-[**\Aternos\ModrinthApi\Model\ForgeUpdates200Response**](../Model/ForgeUpdates200Response.md)
+[**\Aternos\ModrinthApi\Model\ForgeUpdates**](../Model/ForgeUpdates.md)
 
 ### Authorization
 
