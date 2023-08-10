@@ -58,6 +58,7 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'id' => 'string',
         'reporter' => 'string',
         'created' => 'string',
         'closed' => 'bool',
@@ -72,6 +73,7 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => null,
         'reporter' => null,
         'created' => 'ISO-8601',
         'closed' => null,
@@ -84,7 +86,8 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'reporter' => false,
+        'id' => false,
+		'reporter' => false,
 		'created' => false,
 		'closed' => false,
 		'thread_id' => false
@@ -176,6 +179,7 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
         'reporter' => 'reporter',
         'created' => 'created',
         'closed' => 'closed',
@@ -188,6 +192,7 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
         'reporter' => 'setReporter',
         'created' => 'setCreated',
         'closed' => 'setClosed',
@@ -200,6 +205,7 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
         'reporter' => 'getReporter',
         'created' => 'getCreated',
         'closed' => 'getClosed',
@@ -263,6 +269,7 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('reporter', $data ?? [], null);
         $this->setIfExists('created', $data ?? [], null);
         $this->setIfExists('closed', $data ?? [], null);
@@ -322,6 +329,33 @@ class ReportAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets id
+     *
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string|null $id The ID of the report
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
 
     /**
      * Gets reporter

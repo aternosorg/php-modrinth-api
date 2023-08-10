@@ -1011,7 +1011,7 @@ class ThreadsApi
      *
      * Get multiple reports
      *
-     * @param  string[] $ids The IDs of the reports (required)
+     * @param  string $ids The IDs of the reports (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReports'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1029,7 +1029,7 @@ class ThreadsApi
      *
      * Get multiple reports
      *
-     * @param  string[] $ids The IDs of the reports (required)
+     * @param  string $ids The IDs of the reports (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReports'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response
@@ -1152,7 +1152,7 @@ class ThreadsApi
      *
      * Get multiple reports
      *
-     * @param  string[] $ids The IDs of the reports (required)
+     * @param  string $ids The IDs of the reports (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReports'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1173,7 +1173,7 @@ class ThreadsApi
      *
      * Get multiple reports
      *
-     * @param  string[] $ids The IDs of the reports (required)
+     * @param  string $ids The IDs of the reports (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReports'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1223,7 +1223,7 @@ class ThreadsApi
     /**
      * Create request for operation 'getReports'
      *
-     * @param  string[] $ids The IDs of the reports (required)
+     * @param  string $ids The IDs of the reports (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getReports'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1251,7 +1251,7 @@ class ThreadsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $ids,
             'ids', // param base name
-            'array', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             true // required

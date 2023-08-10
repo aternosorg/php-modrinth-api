@@ -221,7 +221,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ThreadsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string[] | The IDs of the reports
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the reports
 
 try {
     $result = $apiInstance->getReports($ids);
@@ -235,7 +235,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | [**string[]**](../Model/string.md)| The IDs of the reports | |
+| **ids** | **string**| The IDs of the reports | |
 
 ### Return type
 

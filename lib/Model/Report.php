@@ -62,6 +62,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_id' => 'string',
         'item_type' => 'string',
         'body' => 'string',
+        'id' => 'string',
         'reporter' => 'string',
         'created' => 'string',
         'closed' => 'bool',
@@ -80,6 +81,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_id' => null,
         'item_type' => null,
         'body' => null,
+        'id' => null,
         'reporter' => null,
         'created' => 'ISO-8601',
         'closed' => null,
@@ -96,6 +98,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
 		'item_id' => false,
 		'item_type' => false,
 		'body' => false,
+		'id' => false,
 		'reporter' => false,
 		'created' => false,
 		'closed' => false,
@@ -192,6 +195,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_id' => 'item_id',
         'item_type' => 'item_type',
         'body' => 'body',
+        'id' => 'id',
         'reporter' => 'reporter',
         'created' => 'created',
         'closed' => 'closed',
@@ -208,6 +212,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_id' => 'setItemId',
         'item_type' => 'setItemType',
         'body' => 'setBody',
+        'id' => 'setId',
         'reporter' => 'setReporter',
         'created' => 'setCreated',
         'closed' => 'setClosed',
@@ -224,6 +229,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_id' => 'getItemId',
         'item_type' => 'getItemType',
         'body' => 'getBody',
+        'id' => 'getId',
         'reporter' => 'getReporter',
         'created' => 'getCreated',
         'closed' => 'getClosed',
@@ -308,6 +314,7 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('item_id', $data ?? [], null);
         $this->setIfExists('item_type', $data ?? [], null);
         $this->setIfExists('body', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('reporter', $data ?? [], null);
         $this->setIfExists('created', $data ?? [], null);
         $this->setIfExists('closed', $data ?? [], null);
@@ -503,6 +510,33 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable body cannot be null');
         }
         $this->container['body'] = $body;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string|null $id The ID of the report
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
 
         return $this;
     }

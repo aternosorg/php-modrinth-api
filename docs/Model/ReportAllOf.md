@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **string** | The ID of the report | [optional]
 **reporter** | **string** | The ID of the user who reported the item |
 **created** | **string** | The time at which the report was created |
 **closed** | **bool** | Whether the report is resolved |
