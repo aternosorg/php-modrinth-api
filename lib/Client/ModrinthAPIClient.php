@@ -228,6 +228,18 @@ class ModrinthAPIClient
     }
 
     /**
+     * Get a project's version by ID or number
+     * @param string $idOrSlug
+     * @param string $version
+     * @return Version
+     * @throws ApiException
+     */
+    public function getProjectVersionFromIdOrNumber(string $idOrSlug, string $version): Version
+    {
+        return new Version($this, $this->versions->getVersionFromIdOrNumber($idOrSlug, $version));
+    }
+
+    /**
      * Get all versions of a project
      * @param string $idOrSlug Project ID or slug
      * @param string[]|null $loaders only show versions for any of these loaders // TODO: enum??
