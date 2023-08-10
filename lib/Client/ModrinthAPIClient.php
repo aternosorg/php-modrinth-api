@@ -7,6 +7,7 @@ use Aternos\ModrinthApi\Api\NotificationsApi;
 use Aternos\ModrinthApi\Api\ProjectsApi;
 use Aternos\ModrinthApi\Api\TagsApi;
 use Aternos\ModrinthApi\Api\TeamsApi;
+use Aternos\ModrinthApi\Api\ThreadsApi;
 use Aternos\ModrinthApi\Api\UsersApi;
 use Aternos\ModrinthApi\Api\VersionFilesApi;
 use Aternos\ModrinthApi\Api\VersionsApi;
@@ -19,8 +20,13 @@ use Aternos\ModrinthApi\Client\Tags\GameVersion;
 use Aternos\ModrinthApi\Client\Tags\License;
 use Aternos\ModrinthApi\Client\Tags\Loader;
 use Aternos\ModrinthApi\Client\Tags\ProjectType;
+use Aternos\ModrinthApi\Client\Threads\Report;
+use Aternos\ModrinthApi\Client\Threads\ReportItemType;
+use Aternos\ModrinthApi\Client\Threads\Thread;
+use Aternos\ModrinthApi\Client\Threads\ThreadMessageType;
 use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\CategoryTag;
+use Aternos\ModrinthApi\Model\CreatableReport;
 use Aternos\ModrinthApi\Model\DonationPlatformTag;
 use Aternos\ModrinthApi\Model\ForgeUpdates;
 use Aternos\ModrinthApi\Model\GameVersionTag;
@@ -30,13 +36,18 @@ use Aternos\ModrinthApi\Model\HashList;
 use Aternos\ModrinthApi\Model\InvalidInputError;
 use Aternos\ModrinthApi\Model\LicenseTag;
 use Aternos\ModrinthApi\Model\LoaderTag;
+use Aternos\ModrinthApi\Model\ModifyReportRequest;
 use Aternos\ModrinthApi\Model\Notification as NotificationModel;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
+use Aternos\ModrinthApi\Model\Report as ReportModel;
 use Aternos\ModrinthApi\Model\Statistics;
 use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
+use Aternos\ModrinthApi\Model\ThreadMessageBody;
 use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
+use Aternos\ModrinthApi\Model\Thread as ThreadModel;
+
 
 /**
  * Class ModrinthAPIClient
@@ -65,6 +76,8 @@ class ModrinthAPIClient
     protected MiscApi $misc;
 
     protected NotificationsApi $notifications;
+
+    protected ThreadsApi $threads;
 
     /**
      * ModrinthAPIClient constructor.
@@ -95,6 +108,7 @@ class ModrinthAPIClient
         $this->tags = new TagsApi(null, $this->configuration);
         $this->misc = new MiscApi(null, $this->configuration);
         $this->notifications = new NotificationsApi(null, $this->configuration);
+        $this->threads = new ThreadsApi(null, $this->configuration);
 
         return $this;
     }
@@ -672,5 +686,145 @@ class ModrinthAPIClient
     public function readNotifications(array $ids): void
     {
         $this->notifications->readNotifications(json_encode($ids));
+    }
+
+    /**
+     * Report a project, user, or version (requires authentication)
+     * @param string $reportType The type of the report being sent
+     * @param string $itemId The ID of the item (project, version, or user) being reported
+     * @param ReportItemType $itemType The type of the item being reported
+     * @param string $body
+     * @return Report
+     * @throws ApiException
+     */
+    public function submitReport(string $reportType, string $itemId, ReportItemType $itemType, string $body): Report
+    {
+        $report = new CreatableReport();
+        $report->setReportType($reportType);
+        $report->setItemId($itemId);
+        $report->setItemType($itemType->value);
+        $report->setBody($body);
+
+        return new Report($this, $this->threads->submitReport($report));
+    }
+
+    /**
+     * Get your open reports (requires authentication)
+     * @return Report[]
+     * @throws ApiException
+     */
+    public function getOpenReports(): array
+    {
+        return array_map(function (ReportModel $report): Report {
+            return new Report($this, $report);
+        }, $this->threads->getOpenReports());
+    }
+
+    /**
+     * Get a report by ID (requires authentication)
+     * @param string $id report ID
+     * @return Report
+     * @throws ApiException
+     */
+    public function getReport(string $id): Report
+    {
+        return new Report($this, $this->threads->getReport($id));
+    }
+
+    /**
+     * @param string $id
+     * @param string|null $body
+     * @param boolean|null $closed
+     * @return void
+     * @throws ApiException
+     */
+    public function modifyReport(string $id, ?string $body, ?bool $closed): void
+    {
+        $report = new ModifyReportRequest();
+        $report->setBody($body);
+        $report->setClosed($closed);
+
+        $this->threads->modifyReport($id, $report);
+    }
+
+    /**
+     * Get multiple reports by ID (requires authentication)
+     * @param string[] $ids
+     * @return Report[]
+     * @throws ApiException
+     */
+    public function getReports(array $ids): array
+    {
+        return array_map(function (ReportModel $report): Report {
+            return new Report($this, $report);
+        }, $this->threads->getReports(json_encode($ids)));
+    }
+
+    /**
+     * Get a thread (requires authentication)
+     * @param string $id
+     * @return Thread
+     * @throws ApiException
+     */
+    public function getThread(string $id): Thread
+    {
+        return new Thread($this, $this->threads->getThread($id));
+    }
+
+    /**
+     * Get multiple threads by ID (requires authentication)
+     * @param string[] $ids
+     * @return Thread[]
+     * @throws ApiException
+     */
+    public function getThreads(array $ids): array
+    {
+        return array_map(function (ThreadModel $thread): Thread {
+            return new Thread($this, $thread);
+        }, $this->threads->getThreads(json_encode($ids)));
+    }
+
+    /**
+     * Send a message to a thread (requires authentication)
+     * @param string $threadId
+     * @param ThreadMessageType $messageType
+     * @param string|null $body
+     * @param bool|null $private
+     * @param string|null $replyingTo
+     * @param string|null $oldStatus
+     * @param string|null $newStatus
+     * @return Thread
+     * @throws ApiException
+     */
+    public function sendThreadMessage(
+        string            $threadId,
+        ThreadMessageType $messageType,
+        ?string           $body = null,
+        ?bool             $private = null,
+        ?string           $replyingTo = null,
+        ?string           $oldStatus = null,
+        ?string           $newStatus = null,
+    ): Thread
+    {
+        $message = new ThreadMessageBody();
+        $message->setType($messageType->value);
+        $message->setBody($body);
+        $message->setPrivate($private);
+        $message->setReplyingTo($replyingTo);
+        $message->setOldStatus($oldStatus);
+        $message->setNewStatus($newStatus);
+        return new Thread($this, $this->threads->sendThreadMessage($threadId, $message));
+    }
+
+    /**
+     * Delete a thread message (requires authentication)
+     * @param string $threadId
+     * @param string $messageId
+     * @return void
+     * @throws ApiException
+     */
+    public function deleteThreadMessage(string $threadId, string $messageId): void
+    {
+        $this->threads->deleteThreadMessage($threadId, $messageId);
     }
 }
