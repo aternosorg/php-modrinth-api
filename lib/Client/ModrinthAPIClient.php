@@ -47,6 +47,7 @@ use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
 use Aternos\ModrinthApi\Model\Thread as ThreadModel;
+use Psr\Http\Client\ClientInterface;
 
 
 /**
@@ -57,6 +58,8 @@ use Aternos\ModrinthApi\Model\Thread as ThreadModel;
  */
 class ModrinthAPIClient
 {
+    protected ?ClientInterface $httpClient;
+
     protected Configuration $configuration;
 
     protected ?string $apiToken = null;
@@ -83,9 +86,11 @@ class ModrinthAPIClient
      * ModrinthAPIClient constructor.
      * @param string|null $apiToken API token used for authentication
      * @param Configuration|null $configuration
+     * @param ClientInterface|null $httpClient
      */
-    public function __construct(?string $apiToken = null, ?Configuration $configuration = null)
+    public function __construct(?string $apiToken = null, ?Configuration $configuration = null, ClientInterface $httpClient = null)
     {
+        $this->httpClient = $httpClient;
         $this->configuration = $configuration ?? (Configuration::getDefaultConfiguration())
             ->setUserAgent("php-modrinth-api/1.0.0");
         $this->setApiToken($apiToken);
@@ -100,15 +105,15 @@ class ModrinthAPIClient
         $this->configuration = $configuration;
         $this->configuration->setBooleanFormatForQueryString(Configuration::BOOLEAN_FORMAT_STRING);
 
-        $this->projects = new ProjectsApi(null, $this->configuration);
-        $this->versions = new VersionsApi(null, $this->configuration);
-        $this->versionFiles = new VersionFilesApi(null, $this->configuration);
-        $this->users = new UsersApi(null, $this->configuration);
-        $this->teams = new TeamsApi(null, $this->configuration);
-        $this->tags = new TagsApi(null, $this->configuration);
-        $this->misc = new MiscApi(null, $this->configuration);
-        $this->notifications = new NotificationsApi(null, $this->configuration);
-        $this->threads = new ThreadsApi(null, $this->configuration);
+        $this->projects = new ProjectsApi($this->httpClient, $this->configuration);
+        $this->versions = new VersionsApi($this->httpClient, $this->configuration);
+        $this->versionFiles = new VersionFilesApi($this->httpClient, $this->configuration);
+        $this->users = new UsersApi($this->httpClient, $this->configuration);
+        $this->teams = new TeamsApi($this->httpClient, $this->configuration);
+        $this->tags = new TagsApi($this->httpClient, $this->configuration);
+        $this->misc = new MiscApi($this->httpClient, $this->configuration);
+        $this->notifications = new NotificationsApi($this->httpClient, $this->configuration);
+        $this->threads = new ThreadsApi($this->httpClient, $this->configuration);
 
         return $this;
     }
@@ -133,6 +138,18 @@ class ModrinthAPIClient
     {
         $this->apiToken = $token;
         $this->configuration->setApiKey("Authorization", $token);
+        return $this->setConfiguration($this->configuration);
+    }
+
+    /**
+     * Set the HTTP client used for all requests.
+     * When null, the default HTTP client from Guzzle will be used.
+     * @param ClientInterface|null $httpClient
+     * @return $this
+     */
+    public function setHttpClient(?ClientInterface $httpClient): static
+    {
+        $this->httpClient = $httpClient;
         return $this->setConfiguration($this->configuration);
     }
 
