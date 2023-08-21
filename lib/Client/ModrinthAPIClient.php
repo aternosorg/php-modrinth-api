@@ -142,6 +142,18 @@ class ModrinthAPIClient
     }
 
     /**
+     * Set the HTTP client used for all requests.
+     * When null, the default HTTP client from Guzzle will be used.
+     * @param ClientInterface|null $httpClient
+     * @return $this
+     */
+    public function setHttpClient(?ClientInterface $httpClient): static
+    {
+        $this->httpClient = $httpClient;
+        return $this->setConfiguration($this->configuration);
+    }
+
+    /**
      * Search projects
      * @param ProjectSearchOptions|null $options
      * @return PaginatedProjectSearchList
