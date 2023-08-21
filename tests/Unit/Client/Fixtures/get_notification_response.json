@@ -1,0 +1,19 @@
+{
+  "id": "UUVVWWXX",
+  "user_id": "Dc7EYhxG",
+  "type": "project_update",
+  "title": "**My Project** has been updated!",
+  "text": "The project, My Project, has released a new version: 1.0.0",
+  "link": "mod/AABBCCDD/version/IIJJKKLL",
+  "read": false,
+  "created": "string",
+  "actions": [
+    {
+      "title": "Accept",
+      "action_route": [
+        "POST",
+        "team/{id}/join"
+      ]
+    }
+  ]
+}
