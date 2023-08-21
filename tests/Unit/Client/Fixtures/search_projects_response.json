@@ -1,0 +1,141 @@
+{
+  "hits": [
+    {
+      "project_id": "P7dR8mSH",
+      "project_type": "mod",
+      "slug": "fabric-api",
+      "author": "modmuss50",
+      "title": "Fabric API",
+      "description": "Lightweight and modular API providing common hooks and intercompatibility measures utilized by mods using the Fabric toolchain.",
+      "categories": [
+        "library",
+        "fabric"
+      ],
+      "display_categories": [
+        "library",
+        "fabric"
+      ],
+      "versions": [
+        "1.14",
+        "1.14.1"
+      ],
+      "downloads": 3495309,
+      "follows": 4394,
+      "icon_url": "https://cdn.modrinth.com/data/P7dR8mSH/icon.png",
+      "date_created": "2021-01-22T11:04:41.419169Z",
+      "date_modified": "2023-07-03T13:58:41.940812Z",
+      "latest_version": "1.14.1",
+      "license": "Apache-2.0",
+      "client_side": "optional",
+      "server_side": "optional",
+      "gallery": [],
+      "featured_gallery": null,
+      "color": 12367004
+    },
+    {
+      "project_id": "AANobbMI",
+      "project_type": "mod",
+      "slug": "sodium",
+      "author": "jellysquid3",
+      "title": "Sodium",
+      "description": "A modern rendering engine for Minecraft which greatly improves frame rates and micro-stutter, while fixing graphical issues",
+      "categories": [
+        "optimization",
+        "fabric",
+        "quilt"
+      ],
+      "display_categories": [
+        "optimization",
+        "fabric",
+        "quilt"
+      ],
+      "versions": [
+        "1.16.3",
+        "1.16.4",
+        "1.16.5",
+        "1.17.1",
+        "1.18",
+        "1.18.1",
+        "1.18.2",
+        "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
+        "1.19.4",
+        "1.20",
+        "1.20.1"
+      ],
+      "downloads": 2661759,
+      "follows": 6503,
+      "icon_url": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
+      "date_created": "2021-01-03T00:53:34.185936Z",
+      "date_modified": "2023-06-07T00:18:42.924130Z",
+      "latest_version": "1.20.1",
+      "license": "LGPL-3.0-only",
+      "client_side": "required",
+      "server_side": "unsupported",
+      "gallery": [
+        "https://cdn.modrinth.com/data/AANobbMI/images/56c4599efcb529a19aed0e118caad4178d7fd540.webp",
+        "https://cdn.modrinth.com/data/AANobbMI/images/6b0e58705156ba67a6d97a74b9f9ac05da69f502.webp",
+        "https://cdn.modrinth.com/data/AANobbMI/images/b681a9e87daa53a0e85336a894db70427007149b.webp",
+        "https://cdn.modrinth.com/data/AANobbMI/images/c39debea7fc623306e9c45148084585399fc59ee.webp",
+        "https://cdn.modrinth.com/data/AANobbMI/images/d84313e6f57dc9e7896961dbd2dfc2689d482758.webp"
+      ],
+      "featured_gallery": null,
+      "color": 8703084
+    },
+    {
+      "project_id": "YL57xq9U",
+      "project_type": "mod",
+      "slug": "iris",
+      "author": "coderbot",
+      "title": "Iris Shaders",
+      "description": "A modern shaders mod for Minecraft intended to be compatible with existing OptiFine shader packs",
+      "categories": [
+        "decoration",
+        "optimization",
+        "fabric",
+        "quilt"
+      ],
+      "display_categories": [
+        "decoration",
+        "optimization",
+        "fabric",
+        "quilt"
+      ],
+      "versions": [
+        "1.16.5",
+        "1.17",
+        "1.17.1",
+        "1.18",
+        "1.18.1",
+        "1.18.2",
+        "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
+        "1.19.4",
+        "1.20",
+        "1.20.1"
+      ],
+      "downloads": 1752965,
+      "follows": 4535,
+      "icon_url": "https://cdn.modrinth.com/data/YL57xq9U/dc558eece920db435f9823ce86de0c4cde89800b.png",
+      "date_created": "2021-05-27T05:11:15.690120Z",
+      "date_modified": "2023-06-07T00:35:19.290236Z",
+      "latest_version": "1.20.1",
+      "license": "LGPL-3.0-only",
+      "client_side": "required",
+      "server_side": "unsupported",
+      "gallery": [
+        "https://cdn.modrinth.com/data/YL57xq9U/images/1c3d0dfbedf31dbee4e30e20c5329e5db9a881ae.png",
+        "https://cdn.modrinth.com/data/YL57xq9U/images/2fbd04f5d123577696e29b28bb7981a2bc95a0c8.png"
+      ],
+      "featured_gallery": "https://cdn.modrinth.com/data/YL57xq9U/images/d382106b9a2b943d06107c31c139c77849f1a0e8.png",
+      "color": 263172
+    }
+  ],
+  "offset": 0,
+  "limit": 3,
+  "total_hits": 13560
+}
