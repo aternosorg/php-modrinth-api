@@ -344,7 +344,7 @@ class UserPayoutHistoryEntry implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets amount
      *
-     * @param int|null $amount The amount of this transaction
+     * @param int|null $amount The amount of this transaction in USD
      *
      * @return self
      */

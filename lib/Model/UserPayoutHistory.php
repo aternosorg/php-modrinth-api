@@ -58,8 +58,8 @@ class UserPayoutHistory implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'all_time' => 'int',
-        'last_month' => 'int',
+        'all_time' => 'string',
+        'last_month' => 'string',
         'payouts' => '\Aternos\ModrinthApi\Model\UserPayoutHistoryEntry[]'
     ];
 
@@ -307,7 +307,7 @@ class UserPayoutHistory implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets all_time
      *
-     * @return int|null
+     * @return string|null
      */
     public function getAllTime()
     {
@@ -317,7 +317,7 @@ class UserPayoutHistory implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets all_time
      *
-     * @param int|null $all_time The all-time balance accrued by this user
+     * @param string|null $all_time The all-time balance accrued by this user in USD
      *
      * @return self
      */
@@ -334,7 +334,7 @@ class UserPayoutHistory implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets last_month
      *
-     * @return int|null
+     * @return string|null
      */
     public function getLastMonth()
     {
@@ -344,7 +344,7 @@ class UserPayoutHistory implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets last_month
      *
-     * @param int|null $last_month The amount made by the user in the previous 30 days
+     * @param string|null $last_month The amount in USD made by the user in the previous 30 days
      *
      * @return self
      */
