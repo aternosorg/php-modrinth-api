@@ -17,7 +17,6 @@ class ProjectDependenciesTest extends TestCase
 
     public function testGetUserReturnsCorrectUser(): void
     {
-        // Here we must mock the client, because it requests the user from the API to get all details
         $handler = new MockHandler([
             new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_project_dependencies_response.json"))
         ]);
