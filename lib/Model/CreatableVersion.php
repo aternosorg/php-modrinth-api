@@ -1,6 +1,6 @@
 <?php
 /**
- * ServerRenderedProject
+ * CreatableVersion
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Aternos\ModrinthApi\ObjectSerializer;
 
 /**
- * ServerRenderedProject Class Doc Comment
+ * CreatableVersion Class Doc Comment
  *
  * @category Class
  * @package  Aternos\ModrinthApi
@@ -41,7 +41,7 @@ use \Aternos\ModrinthApi\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreatableVersion implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ServerRenderedProject';
+    protected static $openAPIModelName = 'CreatableVersion';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,18 +58,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'slug' => 'string',
-        'title' => 'string',
-        'description' => 'string',
-        'categories' => 'string[]',
-        'client_side' => 'string',
-        'server_side' => 'string',
-        'project_type' => 'string',
-        'downloads' => 'int',
-        'icon_url' => 'string',
-        'color' => 'int',
-        'thread_id' => 'string',
-        'monetization_status' => 'string'
+        'name' => 'string',
+        'version_number' => 'string',
+        'changelog' => 'string',
+        'dependencies' => '\Aternos\ModrinthApi\Model\VersionDependency[]',
+        'game_versions' => 'string[]',
+        'version_type' => 'string',
+        'loaders' => 'string[]',
+        'featured' => 'bool',
+        'status' => 'string',
+        'requested_status' => 'string',
+        'project_id' => 'string',
+        'file_parts' => 'string[]',
+        'primary_file' => 'string'
     ];
 
     /**
@@ -80,18 +81,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'slug' => null,
-        'title' => null,
-        'description' => null,
-        'categories' => null,
-        'client_side' => null,
-        'server_side' => null,
-        'project_type' => null,
-        'downloads' => null,
-        'icon_url' => null,
-        'color' => null,
-        'thread_id' => null,
-        'monetization_status' => null
+        'name' => null,
+        'version_number' => null,
+        'changelog' => null,
+        'dependencies' => null,
+        'game_versions' => null,
+        'version_type' => null,
+        'loaders' => null,
+        'featured' => null,
+        'status' => null,
+        'requested_status' => null,
+        'project_id' => null,
+        'file_parts' => null,
+        'primary_file' => null
     ];
 
     /**
@@ -100,18 +102,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'slug' => false,
-		'title' => false,
-		'description' => false,
-		'categories' => false,
-		'client_side' => false,
-		'server_side' => false,
-		'project_type' => false,
-		'downloads' => false,
-		'icon_url' => true,
-		'color' => true,
-		'thread_id' => false,
-		'monetization_status' => false
+        'name' => false,
+		'version_number' => false,
+		'changelog' => true,
+		'dependencies' => false,
+		'game_versions' => false,
+		'version_type' => false,
+		'loaders' => false,
+		'featured' => false,
+		'status' => false,
+		'requested_status' => true,
+		'project_id' => false,
+		'file_parts' => false,
+		'primary_file' => false
     ];
 
     /**
@@ -200,18 +203,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'slug' => 'slug',
-        'title' => 'title',
-        'description' => 'description',
-        'categories' => 'categories',
-        'client_side' => 'client_side',
-        'server_side' => 'server_side',
-        'project_type' => 'project_type',
-        'downloads' => 'downloads',
-        'icon_url' => 'icon_url',
-        'color' => 'color',
-        'thread_id' => 'thread_id',
-        'monetization_status' => 'monetization_status'
+        'name' => 'name',
+        'version_number' => 'version_number',
+        'changelog' => 'changelog',
+        'dependencies' => 'dependencies',
+        'game_versions' => 'game_versions',
+        'version_type' => 'version_type',
+        'loaders' => 'loaders',
+        'featured' => 'featured',
+        'status' => 'status',
+        'requested_status' => 'requested_status',
+        'project_id' => 'project_id',
+        'file_parts' => 'file_parts',
+        'primary_file' => 'primary_file'
     ];
 
     /**
@@ -220,18 +224,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'slug' => 'setSlug',
-        'title' => 'setTitle',
-        'description' => 'setDescription',
-        'categories' => 'setCategories',
-        'client_side' => 'setClientSide',
-        'server_side' => 'setServerSide',
-        'project_type' => 'setProjectType',
-        'downloads' => 'setDownloads',
-        'icon_url' => 'setIconUrl',
-        'color' => 'setColor',
-        'thread_id' => 'setThreadId',
-        'monetization_status' => 'setMonetizationStatus'
+        'name' => 'setName',
+        'version_number' => 'setVersionNumber',
+        'changelog' => 'setChangelog',
+        'dependencies' => 'setDependencies',
+        'game_versions' => 'setGameVersions',
+        'version_type' => 'setVersionType',
+        'loaders' => 'setLoaders',
+        'featured' => 'setFeatured',
+        'status' => 'setStatus',
+        'requested_status' => 'setRequestedStatus',
+        'project_id' => 'setProjectId',
+        'file_parts' => 'setFileParts',
+        'primary_file' => 'setPrimaryFile'
     ];
 
     /**
@@ -240,18 +245,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'slug' => 'getSlug',
-        'title' => 'getTitle',
-        'description' => 'getDescription',
-        'categories' => 'getCategories',
-        'client_side' => 'getClientSide',
-        'server_side' => 'getServerSide',
-        'project_type' => 'getProjectType',
-        'downloads' => 'getDownloads',
-        'icon_url' => 'getIconUrl',
-        'color' => 'getColor',
-        'thread_id' => 'getThreadId',
-        'monetization_status' => 'getMonetizationStatus'
+        'name' => 'getName',
+        'version_number' => 'getVersionNumber',
+        'changelog' => 'getChangelog',
+        'dependencies' => 'getDependencies',
+        'game_versions' => 'getGameVersions',
+        'version_type' => 'getVersionType',
+        'loaders' => 'getLoaders',
+        'featured' => 'getFeatured',
+        'status' => 'getStatus',
+        'requested_status' => 'getRequestedStatus',
+        'project_id' => 'getProjectId',
+        'file_parts' => 'getFileParts',
+        'primary_file' => 'getPrimaryFile'
     ];
 
     /**
@@ -295,31 +301,31 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
-    public const CLIENT_SIDE_REQUIRED = 'required';
-    public const CLIENT_SIDE_OPTIONAL = 'optional';
-    public const CLIENT_SIDE_UNSUPPORTED = 'unsupported';
-    public const SERVER_SIDE_REQUIRED = 'required';
-    public const SERVER_SIDE_OPTIONAL = 'optional';
-    public const SERVER_SIDE_UNSUPPORTED = 'unsupported';
-    public const PROJECT_TYPE_MOD = 'mod';
-    public const PROJECT_TYPE_MODPACK = 'modpack';
-    public const PROJECT_TYPE_RESOURCEPACK = 'resourcepack';
-    public const PROJECT_TYPE_SHADER = 'shader';
-    public const MONETIZATION_STATUS_MONETIZED = 'monetized';
-    public const MONETIZATION_STATUS_DEMONETIZED = 'demonetized';
-    public const MONETIZATION_STATUS_FORCE_DEMONETIZED = 'force-demonetized';
+    public const VERSION_TYPE_RELEASE = 'release';
+    public const VERSION_TYPE_BETA = 'beta';
+    public const VERSION_TYPE_ALPHA = 'alpha';
+    public const STATUS_LISTED = 'listed';
+    public const STATUS_ARCHIVED = 'archived';
+    public const STATUS_DRAFT = 'draft';
+    public const STATUS_UNLISTED = 'unlisted';
+    public const STATUS_SCHEDULED = 'scheduled';
+    public const STATUS_UNKNOWN = 'unknown';
+    public const REQUESTED_STATUS_LISTED = 'listed';
+    public const REQUESTED_STATUS_ARCHIVED = 'archived';
+    public const REQUESTED_STATUS_DRAFT = 'draft';
+    public const REQUESTED_STATUS_UNLISTED = 'unlisted';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getClientSideAllowableValues()
+    public function getVersionTypeAllowableValues()
     {
         return [
-            self::CLIENT_SIDE_REQUIRED,
-            self::CLIENT_SIDE_OPTIONAL,
-            self::CLIENT_SIDE_UNSUPPORTED,
+            self::VERSION_TYPE_RELEASE,
+            self::VERSION_TYPE_BETA,
+            self::VERSION_TYPE_ALPHA,
         ];
     }
 
@@ -328,12 +334,15 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return string[]
      */
-    public function getServerSideAllowableValues()
+    public function getStatusAllowableValues()
     {
         return [
-            self::SERVER_SIDE_REQUIRED,
-            self::SERVER_SIDE_OPTIONAL,
-            self::SERVER_SIDE_UNSUPPORTED,
+            self::STATUS_LISTED,
+            self::STATUS_ARCHIVED,
+            self::STATUS_DRAFT,
+            self::STATUS_UNLISTED,
+            self::STATUS_SCHEDULED,
+            self::STATUS_UNKNOWN,
         ];
     }
 
@@ -342,27 +351,13 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return string[]
      */
-    public function getProjectTypeAllowableValues()
+    public function getRequestedStatusAllowableValues()
     {
         return [
-            self::PROJECT_TYPE_MOD,
-            self::PROJECT_TYPE_MODPACK,
-            self::PROJECT_TYPE_RESOURCEPACK,
-            self::PROJECT_TYPE_SHADER,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMonetizationStatusAllowableValues()
-    {
-        return [
-            self::MONETIZATION_STATUS_MONETIZED,
-            self::MONETIZATION_STATUS_DEMONETIZED,
-            self::MONETIZATION_STATUS_FORCE_DEMONETIZED,
+            self::REQUESTED_STATUS_LISTED,
+            self::REQUESTED_STATUS_ARCHIVED,
+            self::REQUESTED_STATUS_DRAFT,
+            self::REQUESTED_STATUS_UNLISTED,
         ];
     }
 
@@ -381,18 +376,19 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('slug', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('categories', $data ?? [], null);
-        $this->setIfExists('client_side', $data ?? [], null);
-        $this->setIfExists('server_side', $data ?? [], null);
-        $this->setIfExists('project_type', $data ?? [], null);
-        $this->setIfExists('downloads', $data ?? [], null);
-        $this->setIfExists('icon_url', $data ?? [], null);
-        $this->setIfExists('color', $data ?? [], null);
-        $this->setIfExists('thread_id', $data ?? [], null);
-        $this->setIfExists('monetization_status', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('version_number', $data ?? [], null);
+        $this->setIfExists('changelog', $data ?? [], null);
+        $this->setIfExists('dependencies', $data ?? [], null);
+        $this->setIfExists('game_versions', $data ?? [], null);
+        $this->setIfExists('version_type', $data ?? [], null);
+        $this->setIfExists('loaders', $data ?? [], null);
+        $this->setIfExists('featured', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('requested_status', $data ?? [], null);
+        $this->setIfExists('project_id', $data ?? [], null);
+        $this->setIfExists('file_parts', $data ?? [], null);
+        $this->setIfExists('primary_file', $data ?? [], null);
     }
 
     /**
@@ -422,48 +418,60 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getClientSideAllowableValues();
-        if (!is_null($this->container['client_side']) && !in_array($this->container['client_side'], $allowedValues, true)) {
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['version_number'] === null) {
+            $invalidProperties[] = "'version_number' can't be null";
+        }
+        if ($this->container['dependencies'] === null) {
+            $invalidProperties[] = "'dependencies' can't be null";
+        }
+        if ($this->container['game_versions'] === null) {
+            $invalidProperties[] = "'game_versions' can't be null";
+        }
+        if ($this->container['version_type'] === null) {
+            $invalidProperties[] = "'version_type' can't be null";
+        }
+        $allowedValues = $this->getVersionTypeAllowableValues();
+        if (!is_null($this->container['version_type']) && !in_array($this->container['version_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'client_side', must be one of '%s'",
-                $this->container['client_side'],
+                "invalid value '%s' for 'version_type', must be one of '%s'",
+                $this->container['version_type'],
                 implode("', '", $allowedValues)
             );
         }
 
-        $allowedValues = $this->getServerSideAllowableValues();
-        if (!is_null($this->container['server_side']) && !in_array($this->container['server_side'], $allowedValues, true)) {
+        if ($this->container['loaders'] === null) {
+            $invalidProperties[] = "'loaders' can't be null";
+        }
+        if ($this->container['featured'] === null) {
+            $invalidProperties[] = "'featured' can't be null";
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'server_side', must be one of '%s'",
-                $this->container['server_side'],
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['project_type'] === null) {
-            $invalidProperties[] = "'project_type' can't be null";
-        }
-        $allowedValues = $this->getProjectTypeAllowableValues();
-        if (!is_null($this->container['project_type']) && !in_array($this->container['project_type'], $allowedValues, true)) {
+        $allowedValues = $this->getRequestedStatusAllowableValues();
+        if (!is_null($this->container['requested_status']) && !in_array($this->container['requested_status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'project_type', must be one of '%s'",
-                $this->container['project_type'],
+                "invalid value '%s' for 'requested_status', must be one of '%s'",
+                $this->container['requested_status'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['downloads'] === null) {
-            $invalidProperties[] = "'downloads' can't be null";
+        if ($this->container['project_id'] === null) {
+            $invalidProperties[] = "'project_id' can't be null";
         }
-        $allowedValues = $this->getMonetizationStatusAllowableValues();
-        if (!is_null($this->container['monetization_status']) && !in_array($this->container['monetization_status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'monetization_status', must be one of '%s'",
-                $this->container['monetization_status'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['file_parts'] === null) {
+            $invalidProperties[] = "'file_parts' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -480,379 +488,396 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets slug
-     *
-     * @return string|null
-     */
-    public function getSlug()
-    {
-        return $this->container['slug'];
-    }
-
-    /**
-     * Sets slug
-     *
-     * @param string|null $slug The slug of a project, used for vanity URLs. Regex: ```^[\\w!@$()`.+,\"\\-']{3,64}$```
-     *
-     * @return self
-     */
-    public function setSlug($slug)
-    {
-        if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
-        }
-        $this->container['slug'] = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string|null
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string|null $title The title or name of the project
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
-        }
-        $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description A short description of the project
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets categories
-     *
-     * @return string[]|null
-     */
-    public function getCategories()
-    {
-        return $this->container['categories'];
-    }
-
-    /**
-     * Sets categories
-     *
-     * @param string[]|null $categories A list of the categories that the project has
-     *
-     * @return self
-     */
-    public function setCategories($categories)
-    {
-        if (is_null($categories)) {
-            throw new \InvalidArgumentException('non-nullable categories cannot be null');
-        }
-        $this->container['categories'] = $categories;
-
-        return $this;
-    }
-
-    /**
-     * Gets client_side
-     *
-     * @return string|null
-     */
-    public function getClientSide()
-    {
-        return $this->container['client_side'];
-    }
-
-    /**
-     * Sets client_side
-     *
-     * @param string|null $client_side The client side support of the project
-     *
-     * @return self
-     */
-    public function setClientSide($client_side)
-    {
-        if (is_null($client_side)) {
-            throw new \InvalidArgumentException('non-nullable client_side cannot be null');
-        }
-        $allowedValues = $this->getClientSideAllowableValues();
-        if (!in_array($client_side, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'client_side', must be one of '%s'",
-                    $client_side,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['client_side'] = $client_side;
-
-        return $this;
-    }
-
-    /**
-     * Gets server_side
-     *
-     * @return string|null
-     */
-    public function getServerSide()
-    {
-        return $this->container['server_side'];
-    }
-
-    /**
-     * Sets server_side
-     *
-     * @param string|null $server_side The server side support of the project
-     *
-     * @return self
-     */
-    public function setServerSide($server_side)
-    {
-        if (is_null($server_side)) {
-            throw new \InvalidArgumentException('non-nullable server_side cannot be null');
-        }
-        $allowedValues = $this->getServerSideAllowableValues();
-        if (!in_array($server_side, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'server_side', must be one of '%s'",
-                    $server_side,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['server_side'] = $server_side;
-
-        return $this;
-    }
-
-    /**
-     * Gets project_type
+     * Gets name
      *
      * @return string
      */
-    public function getProjectType()
+    public function getName()
     {
-        return $this->container['project_type'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets project_type
+     * Sets name
      *
-     * @param string $project_type The project type of the project
+     * @param string $name The name of this version
      *
      * @return self
      */
-    public function setProjectType($project_type)
+    public function setName($name)
     {
-        if (is_null($project_type)) {
-            throw new \InvalidArgumentException('non-nullable project_type cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $allowedValues = $this->getProjectTypeAllowableValues();
-        if (!in_array($project_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'project_type', must be one of '%s'",
-                    $project_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['project_type'] = $project_type;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets downloads
+     * Gets version_number
      *
-     * @return int
+     * @return string
      */
-    public function getDownloads()
+    public function getVersionNumber()
     {
-        return $this->container['downloads'];
+        return $this->container['version_number'];
     }
 
     /**
-     * Sets downloads
+     * Sets version_number
      *
-     * @param int $downloads The total number of downloads of the project
+     * @param string $version_number The version number. Ideally will follow semantic versioning
      *
      * @return self
      */
-    public function setDownloads($downloads)
+    public function setVersionNumber($version_number)
     {
-        if (is_null($downloads)) {
-            throw new \InvalidArgumentException('non-nullable downloads cannot be null');
+        if (is_null($version_number)) {
+            throw new \InvalidArgumentException('non-nullable version_number cannot be null');
         }
-        $this->container['downloads'] = $downloads;
+        $this->container['version_number'] = $version_number;
 
         return $this;
     }
 
     /**
-     * Gets icon_url
+     * Gets changelog
      *
      * @return string|null
      */
-    public function getIconUrl()
+    public function getChangelog()
     {
-        return $this->container['icon_url'];
+        return $this->container['changelog'];
     }
 
     /**
-     * Sets icon_url
+     * Sets changelog
      *
-     * @param string|null $icon_url The URL of the project's icon
+     * @param string|null $changelog The changelog for this version
      *
      * @return self
      */
-    public function setIconUrl($icon_url)
+    public function setChangelog($changelog)
     {
-        if (is_null($icon_url)) {
-            array_push($this->openAPINullablesSetToNull, 'icon_url');
+        if (is_null($changelog)) {
+            array_push($this->openAPINullablesSetToNull, 'changelog');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('icon_url', $nullablesSetToNull);
+            $index = array_search('changelog', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['icon_url'] = $icon_url;
+        $this->container['changelog'] = $changelog;
 
         return $this;
     }
 
     /**
-     * Gets color
+     * Gets dependencies
      *
-     * @return int|null
+     * @return \Aternos\ModrinthApi\Model\VersionDependency[]
      */
-    public function getColor()
+    public function getDependencies()
     {
-        return $this->container['color'];
+        return $this->container['dependencies'];
     }
 
     /**
-     * Sets color
+     * Sets dependencies
      *
-     * @param int|null $color The RGB color of the project, automatically generated from the project icon
+     * @param \Aternos\ModrinthApi\Model\VersionDependency[] $dependencies A list of specific versions of projects that this version depends on
      *
      * @return self
      */
-    public function setColor($color)
+    public function setDependencies($dependencies)
     {
-        if (is_null($color)) {
-            array_push($this->openAPINullablesSetToNull, 'color');
+        if (is_null($dependencies)) {
+            throw new \InvalidArgumentException('non-nullable dependencies cannot be null');
+        }
+        $this->container['dependencies'] = $dependencies;
+
+        return $this;
+    }
+
+    /**
+     * Gets game_versions
+     *
+     * @return string[]
+     */
+    public function getGameVersions()
+    {
+        return $this->container['game_versions'];
+    }
+
+    /**
+     * Sets game_versions
+     *
+     * @param string[] $game_versions A list of versions of Minecraft that this version supports
+     *
+     * @return self
+     */
+    public function setGameVersions($game_versions)
+    {
+        if (is_null($game_versions)) {
+            throw new \InvalidArgumentException('non-nullable game_versions cannot be null');
+        }
+        $this->container['game_versions'] = $game_versions;
+
+        return $this;
+    }
+
+    /**
+     * Gets version_type
+     *
+     * @return string
+     */
+    public function getVersionType()
+    {
+        return $this->container['version_type'];
+    }
+
+    /**
+     * Sets version_type
+     *
+     * @param string $version_type The release channel for this version
+     *
+     * @return self
+     */
+    public function setVersionType($version_type)
+    {
+        if (is_null($version_type)) {
+            throw new \InvalidArgumentException('non-nullable version_type cannot be null');
+        }
+        $allowedValues = $this->getVersionTypeAllowableValues();
+        if (!in_array($version_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'version_type', must be one of '%s'",
+                    $version_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['version_type'] = $version_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets loaders
+     *
+     * @return string[]
+     */
+    public function getLoaders()
+    {
+        return $this->container['loaders'];
+    }
+
+    /**
+     * Sets loaders
+     *
+     * @param string[] $loaders The mod loaders that this version supports
+     *
+     * @return self
+     */
+    public function setLoaders($loaders)
+    {
+        if (is_null($loaders)) {
+            throw new \InvalidArgumentException('non-nullable loaders cannot be null');
+        }
+        $this->container['loaders'] = $loaders;
+
+        return $this;
+    }
+
+    /**
+     * Gets featured
+     *
+     * @return bool
+     */
+    public function getFeatured()
+    {
+        return $this->container['featured'];
+    }
+
+    /**
+     * Sets featured
+     *
+     * @param bool $featured Whether the version is featured or not
+     *
+     * @return self
+     */
+    public function setFeatured($featured)
+    {
+        if (is_null($featured)) {
+            throw new \InvalidArgumentException('non-nullable featured cannot be null');
+        }
+        $this->container['featured'] = $featured;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets requested_status
+     *
+     * @return string|null
+     */
+    public function getRequestedStatus()
+    {
+        return $this->container['requested_status'];
+    }
+
+    /**
+     * Sets requested_status
+     *
+     * @param string|null $requested_status requested_status
+     *
+     * @return self
+     */
+    public function setRequestedStatus($requested_status)
+    {
+        if (is_null($requested_status)) {
+            array_push($this->openAPINullablesSetToNull, 'requested_status');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('color', $nullablesSetToNull);
+            $index = array_search('requested_status', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['color'] = $color;
-
-        return $this;
-    }
-
-    /**
-     * Gets thread_id
-     *
-     * @return string|null
-     */
-    public function getThreadId()
-    {
-        return $this->container['thread_id'];
-    }
-
-    /**
-     * Sets thread_id
-     *
-     * @param string|null $thread_id The ID of the moderation thread associated with this project
-     *
-     * @return self
-     */
-    public function setThreadId($thread_id)
-    {
-        if (is_null($thread_id)) {
-            throw new \InvalidArgumentException('non-nullable thread_id cannot be null');
-        }
-        $this->container['thread_id'] = $thread_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets monetization_status
-     *
-     * @return string|null
-     */
-    public function getMonetizationStatus()
-    {
-        return $this->container['monetization_status'];
-    }
-
-    /**
-     * Sets monetization_status
-     *
-     * @param string|null $monetization_status monetization_status
-     *
-     * @return self
-     */
-    public function setMonetizationStatus($monetization_status)
-    {
-        if (is_null($monetization_status)) {
-            throw new \InvalidArgumentException('non-nullable monetization_status cannot be null');
-        }
-        $allowedValues = $this->getMonetizationStatusAllowableValues();
-        if (!in_array($monetization_status, $allowedValues, true)) {
+        $allowedValues = $this->getRequestedStatusAllowableValues();
+        if (!is_null($requested_status) && !in_array($requested_status, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'monetization_status', must be one of '%s'",
-                    $monetization_status,
+                    "Invalid value '%s' for 'requested_status', must be one of '%s'",
+                    $requested_status,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['monetization_status'] = $monetization_status;
+        $this->container['requested_status'] = $requested_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets project_id
+     *
+     * @return string
+     */
+    public function getProjectId()
+    {
+        return $this->container['project_id'];
+    }
+
+    /**
+     * Sets project_id
+     *
+     * @param string $project_id The ID of the project this version is for
+     *
+     * @return self
+     */
+    public function setProjectId($project_id)
+    {
+        if (is_null($project_id)) {
+            throw new \InvalidArgumentException('non-nullable project_id cannot be null');
+        }
+        $this->container['project_id'] = $project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_parts
+     *
+     * @return string[]
+     */
+    public function getFileParts()
+    {
+        return $this->container['file_parts'];
+    }
+
+    /**
+     * Sets file_parts
+     *
+     * @param string[] $file_parts An array of the multipart field names of each file that goes with this version
+     *
+     * @return self
+     */
+    public function setFileParts($file_parts)
+    {
+        if (is_null($file_parts)) {
+            throw new \InvalidArgumentException('non-nullable file_parts cannot be null');
+        }
+        $this->container['file_parts'] = $file_parts;
+
+        return $this;
+    }
+
+    /**
+     * Gets primary_file
+     *
+     * @return string|null
+     */
+    public function getPrimaryFile()
+    {
+        return $this->container['primary_file'];
+    }
+
+    /**
+     * Sets primary_file
+     *
+     * @param string|null $primary_file The multipart field name of the primary file
+     *
+     * @return self
+     */
+    public function setPrimaryFile($primary_file)
+    {
+        if (is_null($primary_file)) {
+            throw new \InvalidArgumentException('non-nullable primary_file cannot be null');
+        }
+        $this->container['primary_file'] = $primary_file;
 
         return $this;
     }

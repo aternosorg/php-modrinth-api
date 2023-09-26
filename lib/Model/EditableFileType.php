@@ -1,6 +1,6 @@
 <?php
 /**
- * HashList
+ * EditableFileType
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Aternos\ModrinthApi\ObjectSerializer;
 
 /**
- * HashList Class Doc Comment
+ * EditableFileType Class Doc Comment
  *
  * @category Class
- * @description A list of hashes and the algorithm used to create them
  * @package  Aternos\ModrinthApi
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
+class EditableFileType implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'HashList';
+    protected static $openAPIModelName = 'EditableFileType';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'hashes' => 'string[]',
-        'algorithm' => 'string'
+        'algorithm' => 'string',
+        'hash' => 'string',
+        'file_type' => 'string'
     ];
 
     /**
@@ -71,8 +71,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'hashes' => null,
-        'algorithm' => null
+        'algorithm' => null,
+        'hash' => null,
+        'file_type' => null
     ];
 
     /**
@@ -81,8 +82,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'hashes' => false,
-		'algorithm' => false
+        'algorithm' => false,
+		'hash' => false,
+		'file_type' => true
     ];
 
     /**
@@ -171,8 +173,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'hashes' => 'hashes',
-        'algorithm' => 'algorithm'
+        'algorithm' => 'algorithm',
+        'hash' => 'hash',
+        'file_type' => 'file_type'
     ];
 
     /**
@@ -181,8 +184,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'hashes' => 'setHashes',
-        'algorithm' => 'setAlgorithm'
+        'algorithm' => 'setAlgorithm',
+        'hash' => 'setHash',
+        'file_type' => 'setFileType'
     ];
 
     /**
@@ -191,8 +195,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'hashes' => 'getHashes',
-        'algorithm' => 'getAlgorithm'
+        'algorithm' => 'getAlgorithm',
+        'hash' => 'getHash',
+        'file_type' => 'getFileType'
     ];
 
     /**
@@ -236,19 +241,19 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const ALGORITHM_SHA1 = 'sha1';
-    public const ALGORITHM_SHA512 = 'sha512';
+    public const FILE_TYPE_REQUIRED_RESOURCE_PACK = 'required-resource-pack';
+    public const FILE_TYPE_OPTIONAL_RESOURCE_PACK = 'optional-resource-pack';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getAlgorithmAllowableValues()
+    public function getFileTypeAllowableValues()
     {
         return [
-            self::ALGORITHM_SHA1,
-            self::ALGORITHM_SHA512,
+            self::FILE_TYPE_REQUIRED_RESOURCE_PACK,
+            self::FILE_TYPE_OPTIONAL_RESOURCE_PACK,
         ];
     }
 
@@ -267,8 +272,9 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('hashes', $data ?? [], null);
         $this->setIfExists('algorithm', $data ?? [], null);
+        $this->setIfExists('hash', $data ?? [], null);
+        $this->setIfExists('file_type', $data ?? [], null);
     }
 
     /**
@@ -298,17 +304,20 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['hashes'] === null) {
-            $invalidProperties[] = "'hashes' can't be null";
-        }
         if ($this->container['algorithm'] === null) {
             $invalidProperties[] = "'algorithm' can't be null";
         }
-        $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!is_null($this->container['algorithm']) && !in_array($this->container['algorithm'], $allowedValues, true)) {
+        if ($this->container['hash'] === null) {
+            $invalidProperties[] = "'hash' can't be null";
+        }
+        if ($this->container['file_type'] === null) {
+            $invalidProperties[] = "'file_type' can't be null";
+        }
+        $allowedValues = $this->getFileTypeAllowableValues();
+        if (!is_null($this->container['file_type']) && !in_array($this->container['file_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'algorithm', must be one of '%s'",
-                $this->container['algorithm'],
+                "invalid value '%s' for 'file_type', must be one of '%s'",
+                $this->container['file_type'],
                 implode("', '", $allowedValues)
             );
         }
@@ -329,33 +338,6 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets hashes
-     *
-     * @return string[]
-     */
-    public function getHashes()
-    {
-        return $this->container['hashes'];
-    }
-
-    /**
-     * Sets hashes
-     *
-     * @param string[] $hashes hashes
-     *
-     * @return self
-     */
-    public function setHashes($hashes)
-    {
-        if (is_null($hashes)) {
-            throw new \InvalidArgumentException('non-nullable hashes cannot be null');
-        }
-        $this->container['hashes'] = $hashes;
-
-        return $this;
-    }
-
-    /**
      * Gets algorithm
      *
      * @return string
@@ -368,7 +350,7 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets algorithm
      *
-     * @param string $algorithm algorithm
+     * @param string $algorithm The hash algorithm of the hash specified in the hash field
      *
      * @return self
      */
@@ -377,17 +359,78 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($algorithm)) {
             throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
         }
-        $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!in_array($algorithm, $allowedValues, true)) {
+        $this->container['algorithm'] = $algorithm;
+
+        return $this;
+    }
+
+    /**
+     * Gets hash
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->container['hash'];
+    }
+
+    /**
+     * Sets hash
+     *
+     * @param string $hash The hash of the file you're editing
+     *
+     * @return self
+     */
+    public function setHash($hash)
+    {
+        if (is_null($hash)) {
+            throw new \InvalidArgumentException('non-nullable hash cannot be null');
+        }
+        $this->container['hash'] = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_type
+     *
+     * @return string
+     */
+    public function getFileType()
+    {
+        return $this->container['file_type'];
+    }
+
+    /**
+     * Sets file_type
+     *
+     * @param string $file_type The hash algorithm of the file you're editing
+     *
+     * @return self
+     */
+    public function setFileType($file_type)
+    {
+        if (is_null($file_type)) {
+            array_push($this->openAPINullablesSetToNull, 'file_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getFileTypeAllowableValues();
+        if (!is_null($file_type) && !in_array($file_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'algorithm', must be one of '%s'",
-                    $algorithm,
+                    "Invalid value '%s' for 'file_type', must be one of '%s'",
+                    $file_type,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['algorithm'] = $algorithm;
+        $this->container['file_type'] = $file_type;
 
         return $this;
     }

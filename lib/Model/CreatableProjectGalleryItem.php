@@ -1,6 +1,6 @@
 <?php
 /**
- * HashList
+ * CreatableProjectGalleryItem
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Aternos\ModrinthApi\ObjectSerializer;
 
 /**
- * HashList Class Doc Comment
+ * CreatableProjectGalleryItem Class Doc Comment
  *
  * @category Class
- * @description A list of hashes and the algorithm used to create them
  * @package  Aternos\ModrinthApi
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreatableProjectGalleryItem implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'HashList';
+    protected static $openAPIModelName = 'CreatableProjectGalleryItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +58,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'hashes' => 'string[]',
-        'algorithm' => 'string'
+        'item' => 'string',
+        'featured' => 'bool',
+        'title' => 'string',
+        'description' => 'string',
+        'ordering' => 'int'
     ];
 
     /**
@@ -71,8 +73,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'hashes' => null,
-        'algorithm' => null
+        'item' => null,
+        'featured' => null,
+        'title' => null,
+        'description' => null,
+        'ordering' => null
     ];
 
     /**
@@ -81,8 +86,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'hashes' => false,
-		'algorithm' => false
+        'item' => false,
+		'featured' => false,
+		'title' => true,
+		'description' => true,
+		'ordering' => false
     ];
 
     /**
@@ -171,8 +179,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'hashes' => 'hashes',
-        'algorithm' => 'algorithm'
+        'item' => 'item',
+        'featured' => 'featured',
+        'title' => 'title',
+        'description' => 'description',
+        'ordering' => 'ordering'
     ];
 
     /**
@@ -181,8 +192,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'hashes' => 'setHashes',
-        'algorithm' => 'setAlgorithm'
+        'item' => 'setItem',
+        'featured' => 'setFeatured',
+        'title' => 'setTitle',
+        'description' => 'setDescription',
+        'ordering' => 'setOrdering'
     ];
 
     /**
@@ -191,8 +205,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'hashes' => 'getHashes',
-        'algorithm' => 'getAlgorithm'
+        'item' => 'getItem',
+        'featured' => 'getFeatured',
+        'title' => 'getTitle',
+        'description' => 'getDescription',
+        'ordering' => 'getOrdering'
     ];
 
     /**
@@ -236,21 +253,6 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const ALGORITHM_SHA1 = 'sha1';
-    public const ALGORITHM_SHA512 = 'sha512';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getAlgorithmAllowableValues()
-    {
-        return [
-            self::ALGORITHM_SHA1,
-            self::ALGORITHM_SHA512,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -267,8 +269,11 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('hashes', $data ?? [], null);
-        $this->setIfExists('algorithm', $data ?? [], null);
+        $this->setIfExists('item', $data ?? [], null);
+        $this->setIfExists('featured', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('ordering', $data ?? [], null);
     }
 
     /**
@@ -298,21 +303,6 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['hashes'] === null) {
-            $invalidProperties[] = "'hashes' can't be null";
-        }
-        if ($this->container['algorithm'] === null) {
-            $invalidProperties[] = "'algorithm' can't be null";
-        }
-        $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!is_null($this->container['algorithm']) && !in_array($this->container['algorithm'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'algorithm', must be one of '%s'",
-                $this->container['algorithm'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -329,65 +319,150 @@ class HashList implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets hashes
+     * Gets item
      *
-     * @return string[]
+     * @return string|null
      */
-    public function getHashes()
+    public function getItem()
     {
-        return $this->container['hashes'];
+        return $this->container['item'];
     }
 
     /**
-     * Sets hashes
+     * Sets item
      *
-     * @param string[] $hashes hashes
+     * @param string|null $item The name of the multipart item where the gallery media is located
      *
      * @return self
      */
-    public function setHashes($hashes)
+    public function setItem($item)
     {
-        if (is_null($hashes)) {
-            throw new \InvalidArgumentException('non-nullable hashes cannot be null');
+        if (is_null($item)) {
+            throw new \InvalidArgumentException('non-nullable item cannot be null');
         }
-        $this->container['hashes'] = $hashes;
+        $this->container['item'] = $item;
 
         return $this;
     }
 
     /**
-     * Gets algorithm
+     * Gets featured
      *
-     * @return string
+     * @return bool|null
      */
-    public function getAlgorithm()
+    public function getFeatured()
     {
-        return $this->container['algorithm'];
+        return $this->container['featured'];
     }
 
     /**
-     * Sets algorithm
+     * Sets featured
      *
-     * @param string $algorithm algorithm
+     * @param bool|null $featured Whether the image is featured in the gallery
      *
      * @return self
      */
-    public function setAlgorithm($algorithm)
+    public function setFeatured($featured)
     {
-        if (is_null($algorithm)) {
-            throw new \InvalidArgumentException('non-nullable algorithm cannot be null');
+        if (is_null($featured)) {
+            throw new \InvalidArgumentException('non-nullable featured cannot be null');
         }
-        $allowedValues = $this->getAlgorithmAllowableValues();
-        if (!in_array($algorithm, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'algorithm', must be one of '%s'",
-                    $algorithm,
-                    implode("', '", $allowedValues)
-                )
-            );
+        $this->container['featured'] = $featured;
+
+        return $this;
+    }
+
+    /**
+     * Gets title
+     *
+     * @return string|null
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string|null $title The title of the gallery image
+     *
+     * @return self
+     */
+    public function setTitle($title)
+    {
+        if (is_null($title)) {
+            array_push($this->openAPINullablesSetToNull, 'title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['algorithm'] = $algorithm;
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description The description of the gallery image
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets ordering
+     *
+     * @return int|null
+     */
+    public function getOrdering()
+    {
+        return $this->container['ordering'];
+    }
+
+    /**
+     * Sets ordering
+     *
+     * @param int|null $ordering The order of the gallery image. Gallery images are sorted by this field and then alphabetically by title.
+     *
+     * @return self
+     */
+    public function setOrdering($ordering)
+    {
+        if (is_null($ordering)) {
+            throw new \InvalidArgumentException('non-nullable ordering cannot be null');
+        }
+        $this->container['ordering'] = $ordering;
 
         return $this;
     }
