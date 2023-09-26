@@ -20,11 +20,20 @@ enum FacetType: string
 
     case TITLE = "title";
     case AUTHOR = "author";
-    case DATE_MODIFIED = "date_modified";
     case FOLLOWS = "follows";
     case PROJECT_ID = "project_id";
     case LICENSE = "license";
-    case DATE_CREATED = "date_created";
     case DOWNLOADS = "downloads";
     case COLOR = "color";
+    case CREATED_TIMESTAMP = "created_timestamp";
+    case MODIFIED_TIMESTAMP = "modified_timestamp";
+
+    /**
+     * @deprecated Use {@link FacetType::CREATED_TIMESTAMP} instead. This option doesn't work.
+     */
+    case DATE_CREATED = "date_created";
+    /**
+     * @deprecated Use {@link FacetType::MODIFIED_TIMESTAMP} instead. This option doesn't work.
+     */
+    case DATE_MODIFIED = "date_modified";
 }
