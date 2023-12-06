@@ -987,7 +987,7 @@ void (empty response body)
 ## `searchProjects()`
 
 ```php
-searchProjects($query, $facets, $index, $offset, $limit, $filters, $version): \Aternos\ModrinthApi\Model\SearchResults
+searchProjects($query, $facets, $index, $offset, $limit): \Aternos\ModrinthApi\Model\SearchResults
 ```
 
 Search projects
@@ -1010,11 +1010,9 @@ $facets = [["categories:forge"],["versions:1.17.1"],["project_type:mod"],["licen
 $index = downloads; // string | The sorting method used for sorting search results
 $offset = 20; // int | The offset into the search. Skips this number of results
 $limit = 20; // int | The number of results returned by the search
-$filters = categories="fabric" AND (categories="technology" OR categories="utility"); // string | A list of filters relating to the properties of a project. Facets are generally recommended over filters.
-$version = version="1.16.3" OR version="1.16.2" OR version="1.16.1"; // string | A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended
 
 try {
-    $result = $apiInstance->searchProjects($query, $facets, $index, $offset, $limit, $filters, $version);
+    $result = $apiInstance->searchProjects($query, $facets, $index, $offset, $limit);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProjectsApi->searchProjects: ', $e->getMessage(), PHP_EOL;
@@ -1030,8 +1028,6 @@ try {
 | **index** | **string**| The sorting method used for sorting search results | [optional] [default to &#39;relevance&#39;] |
 | **offset** | **int**| The offset into the search. Skips this number of results | [optional] [default to 0] |
 | **limit** | **int**| The number of results returned by the search | [optional] [default to 10] |
-| **filters** | **string**| A list of filters relating to the properties of a project. Facets are generally recommended over filters. | [optional] |
-| **version** | **string**| A list of filters relating to the versions of a project. Use of facets for filtering by version is recommended | [optional] |
 
 ### Return type
 

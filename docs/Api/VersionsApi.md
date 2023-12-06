@@ -221,8 +221,8 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     new GuzzleHttp\Client()
 );
 $id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
-$loaders = ["fabric"]; // string[] | The types of loaders to filter for
-$game_versions = ["1.18.1"]; // string[] | The game versions to filter for
+$loaders = ["fabric"]; // string | The types of loaders to filter for
+$game_versions = ["1.18.1"]; // string | The game versions to filter for
 $featured = True; // bool | Allows to filter for featured or non-featured versions only
 
 try {
@@ -238,8 +238,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id_slug** | **string**| The ID or slug of the project | |
-| **loaders** | [**string[]**](../Model/string.md)| The types of loaders to filter for | [optional] |
-| **game_versions** | [**string[]**](../Model/string.md)| The game versions to filter for | [optional] |
+| **loaders** | **string**| The types of loaders to filter for | [optional] |
+| **game_versions** | **string**| The game versions to filter for | [optional] |
 | **featured** | **bool**| Allows to filter for featured or non-featured versions only | [optional] |
 
 ### Return type
@@ -392,7 +392,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\VersionsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$ids = ["AABBCCDD","EEFFGGHH"]; // string | The IDs of the versions
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the versions
 
 try {
     $result = $apiInstance->getVersions($ids);
