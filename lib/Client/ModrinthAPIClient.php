@@ -168,7 +168,6 @@ class ModrinthAPIClient
             $options->getIndex()->value,
             $options->getOffset(),
             $options->getLimit(),
-            $options->getFilters(),
         );
 
         return new PaginatedProjectSearchList($this, $options, $projects);

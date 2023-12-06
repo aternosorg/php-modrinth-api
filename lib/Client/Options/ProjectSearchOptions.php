@@ -93,24 +93,6 @@ class ProjectSearchOptions
     }
 
     /**
-     * @return string|null
-     */
-    public function getFilters(): ?string
-    {
-        return $this->filters;
-    }
-
-    /**
-     * @param string|null $filters
-     * @return $this
-     */
-    public function setFilters(?string $filters): static
-    {
-        $this->filters = $filters;
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getOffset(): int
