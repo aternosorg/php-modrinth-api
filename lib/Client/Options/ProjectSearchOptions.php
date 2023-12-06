@@ -19,7 +19,6 @@ class ProjectSearchOptions
      * @param string|null $query The query to search for.
      * @param FacetANDGroup|FacetORGroup|null $facets The recommended way of filtering search results.
      * @param SearchIndex $index The sorting method used for sorting search results.
-     * @param string|null $filters A list of filters relating to the properties of a project. Use filters when there isn't an available facet for your needs.
      * @param int $offset The offset into the search. Skips this number of results.
      * @param int $limit The number of results returned by the search.
      */
@@ -27,7 +26,6 @@ class ProjectSearchOptions
         protected ?string $query = null,
         FacetANDGroup|FacetORGroup|null $facets = null,
         protected SearchIndex $index = SearchIndex::RELEVANCE,
-        protected ?string $filters = null,
         protected int $offset = 0,
         protected int $limit = 50,
     )
