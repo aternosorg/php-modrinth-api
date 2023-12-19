@@ -1,5 +1,5 @@
 invokerPackage: Aternos\ModrinthApi
-artifactVersion: 1.0.0
+artifactVersion: 2.0.0
 generatorName: php
 outputDir: .
 inputSpec: https://docs.modrinth.com/redocusaurus/plugin-redoc-0.yaml

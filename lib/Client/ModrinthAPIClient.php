@@ -92,7 +92,7 @@ class ModrinthAPIClient
     {
         $this->httpClient = $httpClient;
         $this->configuration = $configuration ?? (Configuration::getDefaultConfiguration())
-            ->setUserAgent("php-modrinth-api/1.0.0");
+            ->setUserAgent("php-modrinth-api/2.0.0");
         $this->setApiToken($apiToken);
     }
 
