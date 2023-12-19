@@ -177,7 +177,7 @@ No authorization required
 ## `licenseText()`
 
 ```php
-licenseText($id): \Aternos\ModrinthApi\Model\LicenseText200Response
+licenseText($id): \Aternos\ModrinthApi\Model\License
 ```
 
 Get the text and title of a license
@@ -213,7 +213,7 @@ try {
 
 ### Return type
 
-[**\Aternos\ModrinthApi\Model\LicenseText200Response**](../Model/LicenseText200Response.md)
+[**\Aternos\ModrinthApi\Model\License**](../Model/License.md)
 
 ### Authorization
 

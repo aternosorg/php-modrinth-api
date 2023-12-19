@@ -27,6 +27,5 @@ Name | Type | Description | Notes
 **license** | **string** | The SPDX license ID of a project |
 **gallery** | **string[]** | All gallery images attached to the project | [optional]
 **featured_gallery** | **string** | The featured gallery image of the project | [optional]
-**dependencies** | **string[]** | A list of this project&#39;s dependencies, in the format of &#x60;{project_id}-{dep_type}&#x60; | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

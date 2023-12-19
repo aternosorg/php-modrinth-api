@@ -9,7 +9,6 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 | [**getPayoutHistory()**](UsersApi.md#getPayoutHistory) | **GET** /user/{id|username}/payouts | Get user&#39;s payout history |
 | [**getUser()**](UsersApi.md#getUser) | **GET** /user/{id|username} | Get a user |
 | [**getUserFromAuth()**](UsersApi.md#getUserFromAuth) | **GET** /user | Get user from authorization header |
-| [**getUserNotifications()**](UsersApi.md#getUserNotifications) | **GET** /user/{id|username}/notifications | Get user&#39;s notifications |
 | [**getUserProjects()**](UsersApi.md#getUserProjects) | **GET** /user/{id|username}/projects | Get user&#39;s projects |
 | [**getUsers()**](UsersApi.md#getUsers) | **GET** /users | Get multiple users |
 | [**modifyUser()**](UsersApi.md#modifyUser) | **PATCH** /user/{id|username} | Modify a user |
@@ -296,66 +295,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**\Aternos\ModrinthApi\Model\User**](../Model/User.md)
-
-### Authorization
-
-[TokenAuth](../../README.md#TokenAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getUserNotifications()`
-
-```php
-getUserNotifications($id_username): \Aternos\ModrinthApi\Model\Notification[]
-```
-
-Get user's notifications
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: TokenAuth
-$config = Aternos\ModrinthApi\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Aternos\ModrinthApi\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Aternos\ModrinthApi\Api\UsersApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id_username = ["EEFFGGHH","my_user"]; // string | The ID or username of the user
-
-try {
-    $result = $apiInstance->getUserNotifications($id_username);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling UsersApi->getUserNotifications: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id_username** | **string**| The ID or username of the user | |
-
-### Return type
-
-[**\Aternos\ModrinthApi\Model\Notification[]**](../Model/Notification.md)
 
 ### Authorization
 
