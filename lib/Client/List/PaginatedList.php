@@ -114,6 +114,8 @@ abstract class PaginatedList implements Iterator, ArrayAccess, Countable
         return $this->getOffset($this->getPreviousOffset());
     }
 
+
+
     /**
      * @inheritDoc
      * @return T
