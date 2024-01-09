@@ -114,7 +114,25 @@ abstract class PaginatedList implements Iterator, ArrayAccess, Countable
         return $this->getOffset($this->getPreviousOffset());
     }
 
-
+    /**
+     * Get all results from this page and all following pages.
+     * This will request each page from the api one by one.
+     *
+     * When called on the first page this will return all results.
+     *
+     * @throws ApiException
+     * @return T[]
+     */
+    public function getResultsFromFollowingPages(): array
+    {
+        $results = $this->getResults();
+        $nextPage = $this->getNextPage();
+        while ($nextPage !== null) {
+            array_push($results, ...$nextPage->getResults());
+            $nextPage = $nextPage->getNextPage();
+        }
+        return $results;
+    }
 
     /**
      * @inheritDoc
