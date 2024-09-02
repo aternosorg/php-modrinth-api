@@ -645,7 +645,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the projects
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs and/or slugs of the projects
 
 try {
     $result = $apiInstance->getProjects($ids);
@@ -659,7 +659,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | **string**| The IDs of the projects | |
+| **ids** | **string**| The IDs and/or slugs of the projects | |
 
 ### Return type
 
@@ -835,7 +835,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\ProjectsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs of the projects
+$ids = ["AABBCCDD", "EEFFGGHH"]; // string | The IDs and/or slugs of the projects
 $patch_projects_body = new \Aternos\ModrinthApi\Model\PatchProjectsBody(); // \Aternos\ModrinthApi\Model\PatchProjectsBody | Fields to edit on all projects specified
 
 try {
@@ -849,7 +849,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ids** | **string**| The IDs of the projects | |
+| **ids** | **string**| The IDs and/or slugs of the projects | |
 | **patch_projects_body** | [**\Aternos\ModrinthApi\Model\PatchProjectsBody**](../Model/PatchProjectsBody.md)| Fields to edit on all projects specified | [optional] |
 
 ### Return type
