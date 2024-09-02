@@ -2,4 +2,4 @@ invokerPackage: Aternos\ModrinthApi
 artifactVersion: 2.1.0
 generatorName: php
 outputDir: .
-inputSpec: https://docs.modrinth.com/redocusaurus/plugin-redoc-0.yaml
+inputSpec: https://raw.githubusercontent.com/JulianVennen/modrinth-docs/master/static/openapi.yaml

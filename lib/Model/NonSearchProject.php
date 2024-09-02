@@ -316,9 +316,11 @@ class NonSearchProject implements ModelInterface, ArrayAccess, \JsonSerializable
     public const CLIENT_SIDE_REQUIRED = 'required';
     public const CLIENT_SIDE_OPTIONAL = 'optional';
     public const CLIENT_SIDE_UNSUPPORTED = 'unsupported';
+    public const CLIENT_SIDE_UNKNOWN = 'unknown';
     public const SERVER_SIDE_REQUIRED = 'required';
     public const SERVER_SIDE_OPTIONAL = 'optional';
     public const SERVER_SIDE_UNSUPPORTED = 'unsupported';
+    public const SERVER_SIDE_UNKNOWN = 'unknown';
     public const STATUS_APPROVED = 'approved';
     public const STATUS_ARCHIVED = 'archived';
     public const STATUS_REJECTED = 'rejected';
@@ -346,6 +348,7 @@ class NonSearchProject implements ModelInterface, ArrayAccess, \JsonSerializable
             self::CLIENT_SIDE_REQUIRED,
             self::CLIENT_SIDE_OPTIONAL,
             self::CLIENT_SIDE_UNSUPPORTED,
+            self::CLIENT_SIDE_UNKNOWN,
         ];
     }
 
@@ -360,6 +363,7 @@ class NonSearchProject implements ModelInterface, ArrayAccess, \JsonSerializable
             self::SERVER_SIDE_REQUIRED,
             self::SERVER_SIDE_OPTIONAL,
             self::SERVER_SIDE_UNSUPPORTED,
+            self::SERVER_SIDE_UNKNOWN,
         ];
     }
 

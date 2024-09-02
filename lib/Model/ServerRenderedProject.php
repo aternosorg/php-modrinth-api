@@ -298,9 +298,11 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
     public const CLIENT_SIDE_REQUIRED = 'required';
     public const CLIENT_SIDE_OPTIONAL = 'optional';
     public const CLIENT_SIDE_UNSUPPORTED = 'unsupported';
+    public const CLIENT_SIDE_UNKNOWN = 'unknown';
     public const SERVER_SIDE_REQUIRED = 'required';
     public const SERVER_SIDE_OPTIONAL = 'optional';
     public const SERVER_SIDE_UNSUPPORTED = 'unsupported';
+    public const SERVER_SIDE_UNKNOWN = 'unknown';
     public const PROJECT_TYPE_MOD = 'mod';
     public const PROJECT_TYPE_MODPACK = 'modpack';
     public const PROJECT_TYPE_RESOURCEPACK = 'resourcepack';
@@ -320,6 +322,7 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
             self::CLIENT_SIDE_REQUIRED,
             self::CLIENT_SIDE_OPTIONAL,
             self::CLIENT_SIDE_UNSUPPORTED,
+            self::CLIENT_SIDE_UNKNOWN,
         ];
     }
 
@@ -334,6 +337,7 @@ class ServerRenderedProject implements ModelInterface, ArrayAccess, \JsonSeriali
             self::SERVER_SIDE_REQUIRED,
             self::SERVER_SIDE_OPTIONAL,
             self::SERVER_SIDE_UNSUPPORTED,
+            self::SERVER_SIDE_UNKNOWN,
         ];
     }
 
