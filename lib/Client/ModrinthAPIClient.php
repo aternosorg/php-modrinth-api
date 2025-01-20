@@ -88,7 +88,7 @@ class ModrinthAPIClient
      * @param Configuration|null $configuration
      * @param ClientInterface|null $httpClient
      */
-    public function __construct(?string $apiToken = null, ?Configuration $configuration = null, ClientInterface $httpClient = null)
+    public function __construct(?string $apiToken = null, ?Configuration $configuration = null, ?ClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient;
         $this->configuration = $configuration ?? (Configuration::getDefaultConfiguration())
