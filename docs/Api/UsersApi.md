@@ -45,7 +45,7 @@ $apiInstance = new Aternos\ModrinthApi\Api\UsersApi(
     $config
 );
 $id_username = ["EEFFGGHH","my_user"]; // string | The ID or username of the user
-$body = "/path/to/file.txt"; // \SplFileObject
+$body = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $apiInstance->changeUserIcon($id_username, $body);
