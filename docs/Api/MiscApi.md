@@ -1,5 +1,7 @@
 # Aternos\ModrinthApi\MiscApi
 
+
+
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
@@ -11,13 +13,13 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 ## `forgeUpdates()`
 
 ```php
-forgeUpdates($id_slug): \Aternos\ModrinthApi\Model\ForgeUpdates
+forgeUpdates($id_slug, $neoforge): \Aternos\ModrinthApi\Model\ForgeUpdates
 ```
 ### URI(s):
 - https://api.modrinth.com Production server- https://staging-api.modrinth.com Staging server
 Forge Updates JSON file
 
-If you're a Forge mod developer, your Modrinth mods have an automatically generated `updates.json` using the [Forge Update Checker](https://docs.minecraftforge.net/en/latest/misc/updatechecker/).  The only setup is to insert the URL into the `[[mods]]` section of your `mods.toml` file as such:  ```toml [[mods]] # the other stuff here - ID, version, display name, etc. updateJSONURL = \"https://api.modrinth.com/updates/{slug|ID}/forge_updates.json\" ```  Replace `{slug|id}` with the slug or ID of your project.  Modrinth will handle the rest! When you update your mod, Forge will notify your users that their copy of your mod is out of date.  Make sure that the version format you use for your Modrinth releases is the same as the version format you use in your `mods.toml`. If you use a format such as `1.2.3-forge` or `1.2.3+1.19` with your Modrinth releases but your `mods.toml` only has `1.2.3`, the update checker may not function properly.
+If you're a Forge mod developer, your Modrinth mods have an automatically generated `updates.json` using the [Forge Update Checker](https://docs.minecraftforge.net/en/latest/misc/updatechecker/).  The only setup is to insert the URL into the `[[mods]]` section of your `mods.toml` file as such:  ```toml [[mods]] # the other stuff here - ID, version, display name, etc. updateJSONURL = \"https://api.modrinth.com/updates/{slug|ID}/forge_updates.json\" ```  Replace `{slug|id}` with the slug or ID of your project.  Modrinth will handle the rest! When you update your mod, Forge will notify your users that their copy of your mod is out of date.  Make sure that the version format you use for your Modrinth releases is the same as the version format you use in your `mods.toml`. If you use a format such as `1.2.3-forge` or `1.2.3+1.19` with your Modrinth releases but your `mods.toml` only has `1.2.3`, the update checker may not function properly.  If you're using NeoForge, NeoForge versions will, by default, not appear in the default URL. You will need to add `?neoforge=only` to show your NeoForge-only versions, or `?neoforge=include` for both.  ```toml [[mods]] # the other stuff here - ID, version, display name, etc. updateJSONURL = \"https://api.modrinth.com/updates/{slug|ID}/forge_updates.json?neoforge=only\" ```
 
 ### Example
 
@@ -33,13 +35,14 @@ $apiInstance = new Aternos\ModrinthApi\Api\MiscApi(
     new GuzzleHttp\Client()
 );
 $id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
+$neoforge = include; // string | Whether to include NeoForge versions. Can be `only` (NeoForge-only versions), `include` (both Forge and NeoForge versions), or omitted (Forge-only versions).
 
 $hostIndex = 0;
 $variables = [
 ];
 
 try {
-    $result = $apiInstance->forgeUpdates($id_slug, $hostIndex, $variables);
+    $result = $apiInstance->forgeUpdates($id_slug, $neoforge, $hostIndex, $variables);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MiscApi->forgeUpdates: ', $e->getMessage(), PHP_EOL;
@@ -51,6 +54,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id_slug** | **string**| The ID or slug of the project | |
+| **neoforge** | **string**| Whether to include NeoForge versions. Can be &#x60;only&#x60; (NeoForge-only versions), &#x60;include&#x60; (both Forge and NeoForge versions), or omitted (Forge-only versions). | [optional] |
 | hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
 | variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 

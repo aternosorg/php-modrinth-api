@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **projects** | **int** | Number of projects on Modrinth | [optional]
-**versions** | **int** | Number of projects on Modrinth | [optional]
+**versions** | **int** | Number of versions on Modrinth | [optional]
 **files** | **int** | Number of version files on Modrinth | [optional]
 **authors** | **int** | Number of authors (users with projects) on Modrinth | [optional]
 

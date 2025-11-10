@@ -1,5 +1,7 @@
 # Aternos\ModrinthApi\NotificationsApi
 
+Notifications are sent to users for various reasons, including for project updates, team invites, and moderation purposes.
+
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

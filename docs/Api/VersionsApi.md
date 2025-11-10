@@ -1,5 +1,7 @@
 # Aternos\ModrinthApi\VersionsApi
 
+Versions contain download links to files with additional metadata.
+
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
