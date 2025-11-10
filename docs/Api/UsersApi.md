@@ -1,10 +1,13 @@
 # Aternos\ModrinthApi\UsersApi
 
+Users can create projects, join teams, access notifications, manage settings, and follow projects. Admins and moderators have more advanced permissions such as reviewing new projects.
+
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**changeUserIcon()**](UsersApi.md#changeUserIcon) | **PATCH** /user/{id|username}/icon | Change user&#39;s avatar |
+| [**deleteUserIcon()**](UsersApi.md#deleteUserIcon) | **DELETE** /user/{id|username}/icon | Remove user&#39;s avatar |
 | [**getFollowedProjects()**](UsersApi.md#getFollowedProjects) | **GET** /user/{id|username}/follows | Get user&#39;s followed projects |
 | [**getPayoutHistory()**](UsersApi.md#getPayoutHistory) | **GET** /user/{id|username}/payouts | Get user&#39;s payout history |
 | [**getUser()**](UsersApi.md#getUser) | **GET** /user/{id|username} | Get a user |
@@ -72,6 +75,65 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: `image/png`, `image/jpeg`, `image/bmp`, `image/gif`, `image/webp`, `image/svg`, `image/svgz`, `image/rgb`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteUserIcon()`
+
+```php
+deleteUserIcon($id_username)
+```
+
+Remove user's avatar
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: TokenAuth
+$config = Aternos\ModrinthApi\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Aternos\ModrinthApi\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Aternos\ModrinthApi\Api\UsersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id_username = ["EEFFGGHH","my_user"]; // string | The ID or username of the user
+
+try {
+    $apiInstance->deleteUserIcon($id_username);
+} catch (Exception $e) {
+    echo 'Exception when calling UsersApi->deleteUserIcon: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id_username** | **string**| The ID or username of the user | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[TokenAuth](../../README.md#TokenAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

@@ -1,5 +1,7 @@
 # Aternos\ModrinthApi\TagsApi
 
+Tags are common and reusable lists of metadata types such as categories or versions. Some can be applied to projects and/or versions.
+
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

@@ -1,5 +1,7 @@
 # Aternos\ModrinthApi\ThreadsApi
 
+Threads are a way of communicating between users and moderators, for the purposes of project reviews and reports.
+
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
