@@ -627,12 +627,13 @@ class ModrinthAPIClient
     /**
      * Get the forge update data for a mod
      * @param string $idOrSlug
+     * @param NeoForgeUpdate|null $neoForgeFilter
      * @return ForgeUpdates|InvalidInputError
      * @throws ApiException
      */
-    public function getForgeUpdates(string $idOrSlug): ForgeUpdates|InvalidInputError
+    public function getForgeUpdates(string $idOrSlug, ?NeoForgeUpdate $neoForgeFilter = null): ForgeUpdates|InvalidInputError
     {
-        return $this->misc->forgeUpdates($idOrSlug);
+        return $this->misc->forgeUpdates($idOrSlug, $neoForgeFilter?->value);
     }
 
     /**
