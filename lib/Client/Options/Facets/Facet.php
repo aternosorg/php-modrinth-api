@@ -13,6 +13,7 @@ class Facet
     /**
      * @param FacetType $type
      * @param string $value
+     * @param FacetOperation $operation
      */
     public function __construct(
         protected FacetType $type,
