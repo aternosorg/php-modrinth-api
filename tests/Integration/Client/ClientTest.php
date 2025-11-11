@@ -117,7 +117,7 @@ class ClientTest extends TestCase
         $this->assertFalse($projectList->hasPreviousPage());
     }
 
-    public function testSearchProjectsByDownloadCount()
+    public function testSearchProjectsByDownloadCount(): void
     {
         $options = new ProjectSearchOptions();
         $options->setFacets(new FacetANDGroup([
@@ -170,7 +170,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetProjectVersionsAndDependencies()
+    public function testGetProjectVersionsAndDependencies(): void
     {
         $project = $this->apiClient->getProject("mclogs");
         $this->assertNotEmpty($project->getDependencies());
@@ -183,7 +183,7 @@ class ClientTest extends TestCase
 
     }
 
-    public function testGetProjects()
+    public function testGetProjects(): void
     {
         $ids = ["6DdCzpTL", "VPo0otUH"];
         $projects = $this->apiClient->getProjects($ids);
@@ -193,7 +193,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetRandomProjects()
+    public function testGetRandomProjects(): void
     {
         $this->markTestSkipped("Known issue: https://github.com/modrinth/labrinth/issues/548");
 //        $projects = $this->apiClient->getRandomProjects(5);
@@ -203,7 +203,7 @@ class ClientTest extends TestCase
 //        }
     }
 
-    public function testCheckProjectValidity()
+    public function testCheckProjectValidity(): void
     {
         foreach (["mclogs", "6DdCzpTL", "motdgg", "VPo0otUH"] as $idOrSlug) {
             $this->assertNotNull($this->apiClient->checkProjectValidity($idOrSlug));
@@ -212,7 +212,7 @@ class ClientTest extends TestCase
         $this->assertNull($this->apiClient->checkProjectValidity("i-really-hope-no-one-registers-this-slug"));
     }
 
-    public function testGetVersion()
+    public function testGetVersion(): void
     {
         $version = $this->apiClient->getVersion("moYTqMH3");
         $this->assertNotNull($version);
@@ -220,7 +220,7 @@ class ClientTest extends TestCase
         $this->assertEquals("VPo0otUH", $version->getProject()->getData()->getId());
     }
 
-    public function testGetVersions()
+    public function testGetVersions(): void
     {
         $ids = ["moYTqMH3", "gX3fbLHJ"];
         $versions = $this->apiClient->getVersions($ids);
@@ -232,7 +232,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetVersionFromHash()
+    public function testGetVersionFromHash(): void
     {
         $hashes = [
             HashAlgorithm::SHA1->value => "5952253d61e199e82eb852c5824c3981b29b209d",
@@ -247,7 +247,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetVersionsFromHashes()
+    public function testGetVersionsFromHashes(): void
     {
         $hashes = [
             "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f",
@@ -263,7 +263,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetLatestVersionFromHash()
+    public function testGetLatestVersionFromHash(): void
     {
         $version = $this->apiClient->getLatestVersionFromHash(
             "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f",
@@ -279,7 +279,7 @@ class ClientTest extends TestCase
         );
     }
 
-    public function testGetLatestVersionsFromHashes()
+    public function testGetLatestVersionsFromHashes(): void
     {
         $versions = $this->apiClient->getLatestVersionsFromHashes(
             [
@@ -300,7 +300,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetUser()
+    public function testGetUser(): void
     {
         $user = $this->apiClient->getUser("Julian");
         $this->assertNotNull($user);
@@ -309,7 +309,7 @@ class ClientTest extends TestCase
         $this->assertNotNull($projects);
     }
 
-    public function testGetUsers()
+    public function testGetUsers(): void
     {
         $ids = ["b1AIbOxO", "ySB3MPni"];
         $users = $this->apiClient->getUsers($ids);
@@ -319,7 +319,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetProjectMembers()
+    public function testGetProjectMembers(): void
     {
         $members = $this->apiClient->getProjectMembers("VPo0otUH");
         $this->assertNotNull($members);
@@ -329,7 +329,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetTeamMembers()
+    public function testGetTeamMembers(): void
     {
         $members = $this->apiClient->getTeamMembers("ThaUQrOs");
         $this->assertNotEmpty($members);
@@ -338,7 +338,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetTeams()
+    public function testGetTeams(): void
     {
         $teams = $this->apiClient->getTeams(["ThaUQrOs"]);
         $this->assertNotEmpty($teams);
@@ -349,7 +349,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetCategories()
+    public function testGetCategories(): void
     {
         $items = $this->apiClient->getCategories();
         $this->assertNotEmpty($items);
@@ -365,7 +365,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetLoaders()
+    public function testGetLoaders(): void
     {
         $items = $this->apiClient->getLoaders();
         $this->assertNotEmpty($items);
@@ -381,7 +381,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetGameVersions()
+    public function testGetGameVersions(): void
     {
         $gameVersions = $this->apiClient->getGameVersions();
         $this->assertNotEmpty($gameVersions);
@@ -401,7 +401,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetLicenses()
+    public function testGetLicenses(): void
     {
         $items = $this->apiClient->getLicenses();
         $this->assertNotEmpty($items);
@@ -417,7 +417,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetDonationPlatforms()
+    public function testGetDonationPlatforms(): void
     {
         $items = $this->apiClient->getDonationPlatforms();
         $this->assertNotEmpty($items);
@@ -427,7 +427,7 @@ class ClientTest extends TestCase
         }
     }
 
-    public function testGetReportTypes()
+    public function testGetReportTypes(): void
     {
         $items = $this->apiClient->getReportTypes();
         $this->assertNotEmpty($items);
