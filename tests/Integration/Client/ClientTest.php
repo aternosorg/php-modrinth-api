@@ -12,6 +12,7 @@ use Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Client\SearchProject;
+use Aternos\ModrinthApi\Client\Tags\GameVersion;
 use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
@@ -116,7 +117,8 @@ class ClientTest extends TestCase
         $this->assertFalse($projectList->hasPreviousPage());
     }
 
-    public function testSearchProjectsByDownloadCount() {
+    public function testSearchProjectsByDownloadCount()
+    {
         $options = new ProjectSearchOptions();
         $options->setFacets(new FacetANDGroup([
             new FacetORGroup([
@@ -381,14 +383,18 @@ class ClientTest extends TestCase
 
     public function testGetGameVersions()
     {
-        $items = $this->apiClient->getGameVersions();
-        $this->assertNotEmpty($items);
+        $gameVersions = $this->apiClient->getGameVersions();
+        $this->assertNotEmpty($gameVersions);
 
-        foreach ($items as $item) {
-            $this->assertNotNull($item);
+        foreach ($gameVersions as $gameVersion) {
+            $this->assertNotNull($gameVersion);
         }
 
-        $projects = $items[0]->searchProjects();
+        $latestRelease = array_find($gameVersions, function (GameVersion $gameVersion) {
+            return $gameVersion->getData()->getVersionType() === "release";
+        });
+
+        $projects = $latestRelease->searchProjects();
         $this->assertNotEmpty($projects);
         foreach ($projects as $project) {
             $this->assertNotNull($project);
