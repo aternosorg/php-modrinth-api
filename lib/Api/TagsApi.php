@@ -39,6 +39,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Configuration;
+use Aternos\ModrinthApi\FormDataProcessor;
 use Aternos\ModrinthApi\HeaderSelector;
 use Aternos\ModrinthApi\ObjectSerializer;
 

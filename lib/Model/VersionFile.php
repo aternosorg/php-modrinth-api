@@ -63,7 +63,7 @@ class VersionFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'filename' => 'string',
         'primary' => 'bool',
         'size' => 'int',
-        'file_type' => 'string'
+        'file_type' => '\Aternos\ModrinthApi\Model\FileTypeEnum'
     ];
 
     /**
@@ -259,21 +259,6 @@ class VersionFile implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const FILE_TYPE_REQUIRED_RESOURCE_PACK = 'required-resource-pack';
-    public const FILE_TYPE_OPTIONAL_RESOURCE_PACK = 'optional-resource-pack';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getFileTypeAllowableValues()
-    {
-        return [
-            self::FILE_TYPE_REQUIRED_RESOURCE_PACK,
-            self::FILE_TYPE_OPTIONAL_RESOURCE_PACK,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -340,15 +325,6 @@ class VersionFile implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['size'] === null) {
             $invalidProperties[] = "'size' can't be null";
         }
-        $allowedValues = $this->getFileTypeAllowableValues();
-        if (!is_null($this->container['file_type']) && !in_array($this->container['file_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'file_type', must be one of '%s'",
-                $this->container['file_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -502,7 +478,7 @@ class VersionFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_type
      *
-     * @return string|null
+     * @return \Aternos\ModrinthApi\Model\FileTypeEnum|null
      */
     public function getFileType()
     {
@@ -512,7 +488,7 @@ class VersionFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_type
      *
-     * @param string|null $file_type The type of the additional file, used mainly for adding resource packs to datapacks
+     * @param \Aternos\ModrinthApi\Model\FileTypeEnum|null $file_type The type of the additional file, used mainly for adding resource packs to datapacks
      *
      * @return self
      */
@@ -527,16 +503,6 @@ class VersionFile implements ModelInterface, ArrayAccess, \JsonSerializable
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
-        }
-        $allowedValues = $this->getFileTypeAllowableValues();
-        if (!is_null($file_type) && !in_array($file_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'file_type', must be one of '%s'",
-                    $file_type,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['file_type'] = $file_type;
 
