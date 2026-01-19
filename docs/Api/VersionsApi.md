@@ -204,7 +204,7 @@ void (empty response body)
 ## `getProjectVersions()`
 
 ```php
-getProjectVersions($id_slug, $loaders, $game_versions, $featured): \Aternos\ModrinthApi\Model\Version[]
+getProjectVersions($id_slug, $loaders, $game_versions, $featured, $include_changelog): \Aternos\ModrinthApi\Model\Version[]
 ```
 
 List project's versions
@@ -226,9 +226,10 @@ $id_slug = ["AABBCCDD","my_project"]; // string | The ID or slug of the project
 $loaders = ["fabric"]; // string | The types of loaders to filter for
 $game_versions = ["1.18.1"]; // string | The game versions to filter for
 $featured = True; // bool | Allows to filter for featured or non-featured versions only
+$include_changelog = true; // bool | Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog=false in most cases unless you specifically need the changelog for all versions.
 
 try {
-    $result = $apiInstance->getProjectVersions($id_slug, $loaders, $game_versions, $featured);
+    $result = $apiInstance->getProjectVersions($id_slug, $loaders, $game_versions, $featured, $include_changelog);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling VersionsApi->getProjectVersions: ', $e->getMessage(), PHP_EOL;
@@ -243,6 +244,7 @@ try {
 | **loaders** | **string**| The types of loaders to filter for | [optional] |
 | **game_versions** | **string**| The game versions to filter for | [optional] |
 | **featured** | **bool**| Allows to filter for featured or non-featured versions only | [optional] |
+| **include_changelog** | **bool**| Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog&#x3D;false in most cases unless you specifically need the changelog for all versions. | [optional] [default to true] |
 
 ### Return type
 

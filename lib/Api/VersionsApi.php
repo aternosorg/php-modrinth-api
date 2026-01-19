@@ -940,15 +940,16 @@ class VersionsApi
      * @param  string|null $loaders The types of loaders to filter for (optional)
      * @param  string|null $game_versions The game versions to filter for (optional)
      * @param  bool|null $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  bool|null $include_changelog Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog&#x3D;false in most cases unless you specifically need the changelog for all versions. (optional, default to true)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Aternos\ModrinthApi\Model\Version[]
      */
-    public function getProjectVersions($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
+    public function getProjectVersions($id_slug, $loaders = null, $game_versions = null, $featured = null, $include_changelog = true, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
-        list($response) = $this->getProjectVersionsWithHttpInfo($id_slug, $loaders, $game_versions, $featured, $contentType);
+        list($response) = $this->getProjectVersionsWithHttpInfo($id_slug, $loaders, $game_versions, $featured, $include_changelog, $contentType);
         return $response;
     }
 
@@ -961,15 +962,16 @@ class VersionsApi
      * @param  string|null $loaders The types of loaders to filter for (optional)
      * @param  string|null $game_versions The game versions to filter for (optional)
      * @param  bool|null $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  bool|null $include_changelog Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog&#x3D;false in most cases unless you specifically need the changelog for all versions. (optional, default to true)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \Aternos\ModrinthApi\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Aternos\ModrinthApi\Model\Version[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function getProjectVersionsWithHttpInfo($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
+    public function getProjectVersionsWithHttpInfo($id_slug, $loaders = null, $game_versions = null, $featured = null, $include_changelog = true, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
-        $request = $this->getProjectVersionsRequest($id_slug, $loaders, $game_versions, $featured, $contentType);
+        $request = $this->getProjectVersionsRequest($id_slug, $loaders, $game_versions, $featured, $include_changelog, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1049,14 +1051,15 @@ class VersionsApi
      * @param  string|null $loaders The types of loaders to filter for (optional)
      * @param  string|null $game_versions The game versions to filter for (optional)
      * @param  bool|null $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  bool|null $include_changelog Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog&#x3D;false in most cases unless you specifically need the changelog for all versions. (optional, default to true)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getProjectVersionsAsync($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
+    public function getProjectVersionsAsync($id_slug, $loaders = null, $game_versions = null, $featured = null, $include_changelog = true, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
-        return $this->getProjectVersionsAsyncWithHttpInfo($id_slug, $loaders, $game_versions, $featured, $contentType)
+        return $this->getProjectVersionsAsyncWithHttpInfo($id_slug, $loaders, $game_versions, $featured, $include_changelog, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1073,15 +1076,16 @@ class VersionsApi
      * @param  string|null $loaders The types of loaders to filter for (optional)
      * @param  string|null $game_versions The game versions to filter for (optional)
      * @param  bool|null $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  bool|null $include_changelog Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog&#x3D;false in most cases unless you specifically need the changelog for all versions. (optional, default to true)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getProjectVersionsAsyncWithHttpInfo($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
+    public function getProjectVersionsAsyncWithHttpInfo($id_slug, $loaders = null, $game_versions = null, $featured = null, $include_changelog = true, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
         $returnType = '\Aternos\ModrinthApi\Model\Version[]';
-        $request = $this->getProjectVersionsRequest($id_slug, $loaders, $game_versions, $featured, $contentType);
+        $request = $this->getProjectVersionsRequest($id_slug, $loaders, $game_versions, $featured, $include_changelog, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1126,12 +1130,13 @@ class VersionsApi
      * @param  string|null $loaders The types of loaders to filter for (optional)
      * @param  string|null $game_versions The game versions to filter for (optional)
      * @param  bool|null $featured Allows to filter for featured or non-featured versions only (optional)
+     * @param  bool|null $include_changelog Allows you to toggle the inclusion of the changelog field in the response. It is highly recommended to use include_changelog&#x3D;false in most cases unless you specifically need the changelog for all versions. (optional, default to true)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getProjectVersionsRequest($id_slug, $loaders = null, $game_versions = null, $featured = null, string $contentType = self::contentTypes['getProjectVersions'][0])
+    public function getProjectVersionsRequest($id_slug, $loaders = null, $game_versions = null, $featured = null, $include_changelog = true, string $contentType = self::contentTypes['getProjectVersions'][0])
     {
 
         // verify the required parameter 'id_slug' is set
@@ -1140,6 +1145,7 @@ class VersionsApi
                 'Missing the required parameter $id_slug when calling getProjectVersions'
             );
         }
+
 
 
 
@@ -1174,6 +1180,15 @@ class VersionsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $featured,
             'featured', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_changelog,
+            'include_changelog', // param base name
             'boolean', // openApiType
             'form', // style
             true, // explode

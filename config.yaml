@@ -1,5 +1,5 @@
 invokerPackage: Aternos\ModrinthApi
-artifactVersion: 2.1.4
+artifactVersion: 3.2.0
 generatorName: php
 outputDir: .
 inputSpec: https://raw.githubusercontent.com/modrinth/code/refs/heads/main/apps/docs/public/openapi.yaml
