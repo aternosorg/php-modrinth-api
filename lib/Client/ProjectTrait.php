@@ -30,19 +30,21 @@ trait ProjectTrait
 
     /**
      * Get all versions of this project
-     * @param string[]|null $loaders
+     * @param string[]|null $loaders only show versions for any of these loaders
      * @param string[]|null $gameVersions
      * @param bool|null $featured
+     * @param bool|null $include_changelog whether to include changelogs in the response. Currently defaults to true on modrinth side.
      * @return Version[]
      * @throws ApiException
      */
     public function getVersions(
         ?array $loaders = null,
         ?array $gameVersions = null,
-        ?bool  $featured = null
+        ?bool  $featured = null,
+        ?bool  $include_changelog = null,
     ): array
     {
-        return $this->getClient()->getProjectVersions($this->getId(), $loaders, $gameVersions, $featured);
+        return $this->getClient()->getProjectVersions($this->getId(), $loaders, $gameVersions, $featured, $include_changelog);
     }
 
     /**

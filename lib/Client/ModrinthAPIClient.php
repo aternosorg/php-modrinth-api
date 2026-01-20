@@ -223,8 +223,7 @@ class ModrinthAPIClient
     {
         try {
             return $this->projects->checkProjectValidity($idOrSlug)->getId();
-        }
-        catch (ApiException $exception) {
+        } catch (ApiException $exception) {
             if ($exception->getCode() === 404) {
                 return null;
             }
@@ -258,9 +257,10 @@ class ModrinthAPIClient
     /**
      * Get all versions of a project
      * @param string $idOrSlug Project ID or slug
-     * @param string[]|null $loaders only show versions for any of these loaders // TODO: enum??
+     * @param string[]|null $loaders only show versions for any of these loaders
      * @param string[]|null $gameVersions
      * @param bool|null $featured
+     * @param bool|null $include_changelog whether to include changelogs in the response. Currently defaults to true on modrinth side.
      * @return Version[]
      * @throws ApiException
      */
@@ -268,7 +268,8 @@ class ModrinthAPIClient
         string $idOrSlug,
         ?array $loaders = null,
         ?array $gameVersions = null,
-        ?bool  $featured = null
+        ?bool  $featured = null,
+        ?bool  $include_changelog = null,
     ): array
     {
         return array_map(function (VersionModel $version): Version {
@@ -277,7 +278,8 @@ class ModrinthAPIClient
             $idOrSlug,
             $loaders ? json_encode($loaders) : null,
             $gameVersions ? json_encode($gameVersions) : null,
-            $featured
+            $featured,
+            $include_changelog,
         ));
     }
 
@@ -366,9 +368,9 @@ class ModrinthAPIClient
      * @throws ApiException
      */
     public function getLatestVersionsFromHashes(
-        array $hashes,
-        array $loaders,
-        array $gameVersions,
+        array         $hashes,
+        array         $loaders,
+        array         $gameVersions,
         HashAlgorithm $algorithm = HashAlgorithm::SHA1
     ): array
     {
