@@ -1,4 +1,4 @@
-# # VersionFile
+# VersionFile
 
 ## Properties
 

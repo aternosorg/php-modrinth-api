@@ -1,4 +1,4 @@
-# # UserPayoutHistoryEntry
+# UserPayoutHistoryEntry
 
 ## Properties
 

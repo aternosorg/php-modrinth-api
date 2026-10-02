@@ -1,4 +1,4 @@
-# # AuthError
+# AuthError
 
 ## Properties
 

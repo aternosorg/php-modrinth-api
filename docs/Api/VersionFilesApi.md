@@ -8,7 +8,7 @@ All URIs are relative to https://api.modrinth.com/v2, except if the operation de
 | ------------- | ------------- | ------------- |
 | [**deleteFileFromHash()**](VersionFilesApi.md#deleteFileFromHash) | **DELETE** /version_file/{hash} | Delete a file from its hash |
 | [**getLatestVersionFromHash()**](VersionFilesApi.md#getLatestVersionFromHash) | **POST** /version_file/{hash}/update | Latest version of a project from a hash, loader(s), and game version(s) |
-| [**getLatestVersionsFromHashes()**](VersionFilesApi.md#getLatestVersionsFromHashes) | **POST** /version_files/update | Latest versions of multiple project from hashes, loader(s), and game version(s) |
+| [**getLatestVersionsFromHashes()**](VersionFilesApi.md#getLatestVersionsFromHashes) | **POST** /version_files/update | Latest versions of multiple projects from hashes, loader(s), and game version(s) |
 | [**versionFromHash()**](VersionFilesApi.md#versionFromHash) | **GET** /version_file/{hash} | Get version from hash |
 | [**versionsFromHashes()**](VersionFilesApi.md#versionsFromHashes) | **POST** /version_files | Get versions from hashes |
 
@@ -140,7 +140,7 @@ No authorization required
 getLatestVersionsFromHashes($get_latest_versions_from_hashes_body): array<string,\Aternos\ModrinthApi\Model\Version>
 ```
 
-Latest versions of multiple project from hashes, loader(s), and game version(s)
+Latest versions of multiple projects from hashes, loader(s), and game version(s)
 
 This is the same as [`/version_file/{hash}/update`](#operation/getLatestVersionFromHash) except it accepts multiple hashes.
 

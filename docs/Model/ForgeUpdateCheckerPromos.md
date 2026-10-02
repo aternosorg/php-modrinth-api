@@ -1,4 +1,4 @@
-# # ForgeUpdateCheckerPromos
+# ForgeUpdateCheckerPromos
 
 ## Properties
 

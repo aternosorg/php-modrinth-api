@@ -1,4 +1,4 @@
-# # DonationPlatformTag
+# DonationPlatformTag
 
 ## Properties
 

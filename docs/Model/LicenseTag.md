@@ -1,4 +1,4 @@
-# # LicenseTag
+# LicenseTag
 
 ## Properties
 

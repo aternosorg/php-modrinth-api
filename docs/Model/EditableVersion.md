@@ -1,4 +1,4 @@
-# # EditableVersion
+# EditableVersion
 
 ## Properties
 

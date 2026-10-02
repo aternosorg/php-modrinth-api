@@ -1,4 +1,4 @@
-# # ThreadMessageBody
+# ThreadMessageBody
 
 ## Properties
 

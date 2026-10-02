@@ -1,4 +1,4 @@
-# # ProjectDependencyList
+# ProjectDependencyList
 
 ## Properties
 

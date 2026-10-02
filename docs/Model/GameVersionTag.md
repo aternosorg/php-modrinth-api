@@ -1,4 +1,4 @@
-# # GameVersionTag
+# GameVersionTag
 
 ## Properties
 

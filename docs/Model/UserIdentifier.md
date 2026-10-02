@@ -1,4 +1,4 @@
-# # UserIdentifier
+# UserIdentifier
 
 ## Properties
 

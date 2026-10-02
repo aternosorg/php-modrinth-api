@@ -1,4 +1,4 @@
-# # ThreadMessage
+# ThreadMessage
 
 ## Properties
 

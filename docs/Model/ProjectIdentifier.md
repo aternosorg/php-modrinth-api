@@ -1,4 +1,4 @@
-# # ProjectIdentifier
+# ProjectIdentifier
 
 ## Properties
 

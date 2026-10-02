@@ -1,4 +1,4 @@
-# # ModeratorMessage
+# ModeratorMessage
 
 ## Properties
 

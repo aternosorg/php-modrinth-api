@@ -1,4 +1,4 @@
-# # EditableUser
+# EditableUser
 
 ## Properties
 

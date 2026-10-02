@@ -1,4 +1,4 @@
-# # CreatableProjectGalleryItem
+# CreatableProjectGalleryItem
 
 ## Properties
 

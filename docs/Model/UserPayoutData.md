@@ -1,4 +1,4 @@
-# # UserPayoutData
+# UserPayoutData
 
 ## Properties
 

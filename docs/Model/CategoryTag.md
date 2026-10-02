@@ -1,4 +1,4 @@
-# # CategoryTag
+# CategoryTag
 
 ## Properties
 

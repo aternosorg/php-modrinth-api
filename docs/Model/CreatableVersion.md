@@ -1,4 +1,4 @@
-# # CreatableVersion
+# CreatableVersion
 
 ## Properties
 
@@ -17,5 +17,7 @@ Name | Type | Description | Notes
 **project_id** | **string** | The ID of the project this version is for |
 **file_parts** | **string[]** | An array of the multipart field names of each file that goes with this version |
 **primary_file** | **string** | The multipart field name of the primary file | [optional]
+**environment** | [**\Aternos\ModrinthApi\Model\EnvironmentInputEnum**](EnvironmentInputEnum.md) |  | [optional]
+**file_types** | [**array<string,\Aternos\ModrinthApi\Model\FileTypeEnum>**](FileTypeEnum.md) | A map of file parts to their associated file type, a file type is used for additional files such as sources jars. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

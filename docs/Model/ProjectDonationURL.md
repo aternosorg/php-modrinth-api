@@ -1,4 +1,4 @@
-# # ProjectDonationURL
+# ProjectDonationURL
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # BaseVersion
+# BaseVersion
 
 ## Properties
 

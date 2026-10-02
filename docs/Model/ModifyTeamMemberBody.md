@@ -1,4 +1,4 @@
-# # ModifyTeamMemberBody
+# ModifyTeamMemberBody
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # VersionDependency
+# VersionDependency
 
 ## Properties
 

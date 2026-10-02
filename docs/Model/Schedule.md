@@ -1,4 +1,4 @@
-# # Schedule
+# Schedule
 
 ## Properties
 

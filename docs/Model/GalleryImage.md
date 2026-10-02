@@ -1,4 +1,4 @@
-# # GalleryImage
+# GalleryImage
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # ProjectLicense
+# ProjectLicense
 
 ## Properties
 

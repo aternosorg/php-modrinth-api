@@ -1,4 +1,4 @@
-# # Version
+# Version
 
 ## Properties
 
@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **date_published** | **string** |  |
 **downloads** | **int** | The number of times this version has been downloaded |
 **changelog_url** | **string** | A link to the changelog for this version. Always null, only kept for legacy compatibility. | [optional]
+**environment** | [**\Aternos\ModrinthApi\Model\EnvironmentEnum**](EnvironmentEnum.md) |  |
 **files** | [**\Aternos\ModrinthApi\Model\VersionFile[]**](VersionFile.md) | A list of files available for download for this version |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

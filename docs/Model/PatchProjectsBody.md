@@ -1,4 +1,4 @@
-# # PatchProjectsBody
+# PatchProjectsBody
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# # EditableFileType
+# EditableFileType
 
 ## Properties
 

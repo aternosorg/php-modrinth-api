@@ -1,4 +1,4 @@
-# # NotificationAction
+# NotificationAction
 
 ## Properties
 
