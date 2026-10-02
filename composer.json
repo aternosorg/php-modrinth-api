@@ -30,6 +30,9 @@
         "friendsofphp/php-cs-fixer": "^3.5",
         "phpunit/phpunit": "^12.4"
     },
+    "scripts": {
+        "generate": "rm -rf src/Api src/Model docs/Api docs/Model && openapi-generator-cli generate -c config.yaml && rm -rf test"
+    },
     "autoload": {
         "psr-4": {
             "Aternos\\ModrinthApi\\": "lib/"
