@@ -1,0 +1,48 @@
+{
+  "id": "moYTqMH3",
+  "project_id": "VPo0otUH",
+  "author_id": "b1AIbOxO",
+  "featured": true,
+  "name": "MOTD.gg 1.0.0",
+  "version_number": "1.0.0",
+  "changelog": "Initial release.",
+  "changelog_url": null,
+  "date_published": "2023-07-18T12:00:00.000000Z",
+  "downloads": 1234,
+  "version_type": "release",
+  "status": "listed",
+  "requested_status": null,
+  "files": [
+    {
+      "hashes": {
+        "sha1": "5952253d61e199e82eb852c5824c3981b29b209d",
+        "sha512": "6800de4cf254fd74e0e9b06b34dc87b16624ea838edc795321fb9d6777356d366b47bb1dc736bb6a700861f3619810bd190b10987a32f64dfd261a5d69a2bd8f"
+      },
+      "url": "https://cdn.modrinth.com/data/VPo0otUH/versions/moYTqMH3/motdgg-1.0.0.jar",
+      "filename": "motdgg-1.0.0.jar",
+      "primary": true,
+      "size": 42000,
+      "file_type": null
+    }
+  ],
+  "dependencies": [
+    {
+      "version_id": "vgceLbdH",
+      "project_id": "AANobbMI",
+      "file_name": null,
+      "dependency_type": "required"
+    },
+    {
+      "version_id": null,
+      "project_id": null,
+      "file_name": "some-bundled-library.jar",
+      "dependency_type": "embedded"
+    }
+  ],
+  "game_versions": [
+    "1.20.1"
+  ],
+  "loaders": [
+    "spigot"
+  ]
+}

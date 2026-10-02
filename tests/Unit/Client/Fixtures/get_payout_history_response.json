@@ -1,0 +1,11 @@
+{
+  "all_time": "1234.56",
+  "last_month": "78.90",
+  "payouts": [
+    {
+      "created": "2023-07-01T00:00:00.000000Z",
+      "amount": 7890,
+      "status": "success"
+    }
+  ]
+}

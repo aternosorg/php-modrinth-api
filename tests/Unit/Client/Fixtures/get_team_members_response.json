@@ -1,0 +1,20 @@
+[
+  {
+    "team_id": "ThaUQrOs",
+    "user": {
+      "id": "Dc7EYhxG",
+      "username": "Prospector",
+      "name": null,
+      "avatar_url": "https://cdn.modrinth.com/user/Dc7EYhxG/64d0b4c4cdcb33f3b7d4b31b140e83b199b00f3c.png",
+      "bio": "Lead Frontend Developer/Designer and Archivist at Modrinth.",
+      "created": "2020-11-06T04:56:05.014379Z",
+      "role": "admin",
+      "badges": 0
+    },
+    "role": "Owner",
+    "permissions": 1023,
+    "accepted": true,
+    "payouts_split": 100,
+    "ordering": 0
+  }
+]

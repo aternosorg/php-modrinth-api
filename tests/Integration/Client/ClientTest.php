@@ -10,9 +10,16 @@ use Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetOperation;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
+use Aternos\ModrinthApi\Client\NeoForgeUpdate;
 use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
+use Aternos\ModrinthApi\Client\ProjectDependencies;
 use Aternos\ModrinthApi\Client\SearchProject;
 use Aternos\ModrinthApi\Client\Tags\GameVersion;
+use Aternos\ModrinthApi\Client\Tags\ProjectType;
+use Aternos\ModrinthApi\Client\TeamMember;
+use Aternos\ModrinthApi\Client\Version;
+use Aternos\ModrinthApi\Model\ForgeUpdates;
+use Aternos\ModrinthApi\Model\Statistics;
 use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
@@ -418,5 +425,141 @@ class ClientTest extends TestCase
         foreach ($items as $item) {
             $this->assertNotNull($item);
         }
+    }
+
+    public function testGetProjectDependencies(): void
+    {
+        $dependencies = $this->apiClient->getProjectDependencies("mclogs");
+        $this->assertInstanceOf(ProjectDependencies::class, $dependencies);
+        $this->assertIsArray($dependencies->getProjects());
+        $this->assertIsArray($dependencies->getVersions());
+    }
+
+    public function testGetProjectVersions(): void
+    {
+        $versions = $this->apiClient->getProjectVersions("mclogs");
+        $this->assertNotEmpty($versions);
+
+        foreach ($versions as $version) {
+            $this->assertInstanceOf(Version::class, $version);
+            $this->assertEquals("6DdCzpTL", $version->getProjectId());
+        }
+    }
+
+    public function testGetProjectVersionFromIdOrNumber(): void
+    {
+        $versions = $this->apiClient->getProjectVersions("mclogs");
+        $this->assertNotEmpty($versions);
+        $expected = $versions[0];
+
+        $byId = $this->apiClient->getProjectVersionFromIdOrNumber("mclogs", $expected->getId());
+        $this->assertInstanceOf(Version::class, $byId);
+        $this->assertEquals($expected->getId(), $byId->getId());
+        $this->assertEquals("6DdCzpTL", $byId->getProjectId());
+
+        // version numbers are not unique across loaders, so this may resolve to another version
+        $byNumber = $this->apiClient->getProjectVersionFromIdOrNumber("mclogs", $expected->getVersionNumber());
+        $this->assertInstanceOf(Version::class, $byNumber);
+        $this->assertEquals($expected->getVersionNumber(), $byNumber->getVersionNumber());
+        $this->assertEquals("6DdCzpTL", $byNumber->getProjectId());
+    }
+
+    public function testGetLicenseText(): void
+    {
+        $text = $this->apiClient->getLicenseText("MIT");
+        $this->assertNotEmpty($text);
+        $this->assertStringContainsString("MIT License", $text);
+    }
+
+    public function testGetProjectTypes(): void
+    {
+        $projectTypes = $this->apiClient->getProjectTypes();
+        $this->assertNotEmpty($projectTypes);
+
+        foreach ($projectTypes as $projectType) {
+            $this->assertInstanceOf(ProjectType::class, $projectType);
+            $this->assertNotEmpty($projectType->getName());
+        }
+
+        $names = array_map(fn(ProjectType $type) => $type->getName(), $projectTypes);
+        $this->assertContains("mod", $names);
+    }
+
+    public function testProjectTypeSearchProjects(): void
+    {
+        $projectType = array_find(
+            $this->apiClient->getProjectTypes(),
+            fn(ProjectType $type) => $type->getName() === "mod"
+        );
+        $this->assertNotNull($projectType);
+
+        $projects = $projectType->searchProjects(new ProjectSearchOptions(limit: 5));
+        $this->assertValidProjectList($projects);
+        foreach ($projects as $project) {
+            $this->assertEquals("mod", $project->getProjectType());
+        }
+    }
+
+    public function testGetSideTypes(): void
+    {
+        $sideTypes = $this->apiClient->getSideTypes();
+        $this->assertNotEmpty($sideTypes);
+
+        foreach ($sideTypes as $sideType) {
+            $this->assertIsString($sideType);
+        }
+        $this->assertContains("required", $sideTypes);
+        $this->assertContains("optional", $sideTypes);
+        $this->assertContains("unsupported", $sideTypes);
+    }
+
+    public function testGetStatistics(): void
+    {
+        $statistics = $this->apiClient->getStatistics();
+        $this->assertInstanceOf(Statistics::class, $statistics);
+        $this->assertGreaterThan(0, $statistics->getProjects());
+        $this->assertGreaterThan(0, $statistics->getVersions());
+        $this->assertGreaterThan(0, $statistics->getFiles());
+        $this->assertGreaterThan(0, $statistics->getAuthors());
+    }
+
+    public function testGetForgeUpdates(): void
+    {
+        $updates = $this->apiClient->getForgeUpdates("mclogs");
+        $this->assertInstanceOf(ForgeUpdates::class, $updates);
+        $this->assertEquals("https://modrinth.com/mod/mclogs", $updates->getHomepage());
+    }
+
+    public function testGetForgeUpdatesWithNeoForgeFilter(): void
+    {
+        foreach (NeoForgeUpdate::cases() as $filter) {
+            $updates = $this->apiClient->getForgeUpdates("mclogs", $filter);
+            $this->assertInstanceOf(ForgeUpdates::class, $updates);
+            $this->assertEquals("https://modrinth.com/mod/mclogs", $updates->getHomepage());
+        }
+    }
+
+    public function testProjectMembersAndDependenciesFromProject(): void
+    {
+        $project = $this->apiClient->getProject("mclogs");
+
+        $members = $project->getMembers();
+        $this->assertNotEmpty($members);
+        foreach ($members as $member) {
+            $this->assertInstanceOf(TeamMember::class, $member);
+            $this->assertNotEmpty($member->getUser()->getUsername());
+        }
+
+        $this->assertInstanceOf(ProjectDependencies::class, $project->getDependencies());
+    }
+
+    public function testSearchProjectResultsCanBeExpanded(): void
+    {
+        $projects = $this->apiClient->searchProjects(new ProjectSearchOptions(limit: 1));
+        $this->assertValidProjectList($projects);
+
+        $searchProject = $projects[0];
+        $fullProject = $searchProject->getFullProject();
+        $this->assertEquals($searchProject->getProjectId(), $fullProject->getId());
     }
 }

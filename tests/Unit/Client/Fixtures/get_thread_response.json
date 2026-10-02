@@ -1,0 +1,51 @@
+{
+  "id": "Ba1AaBbC",
+  "type": "project",
+  "project_id": "VPo0otUH",
+  "report_id": "RepOrt01",
+  "messages": [
+    {
+      "id": "MsG00001",
+      "author_id": "b1AIbOxO",
+      "body": {
+        "type": "text",
+        "body": "Could you explain what this project does?",
+        "private": false,
+        "replying_to": null
+      },
+      "created": "2023-07-18T12:00:00.000000Z"
+    },
+    {
+      "id": "MsG00002",
+      "author_id": "Dc7EYhxG",
+      "body": {
+        "type": "status_change",
+        "old_status": "processing",
+        "new_status": "approved"
+      },
+      "created": "2023-07-18T13:00:00.000000Z"
+    }
+  ],
+  "members": [
+    {
+      "id": "b1AIbOxO",
+      "username": "Julian",
+      "name": null,
+      "avatar_url": "https://cdn.modrinth.com/user/b1AIbOxO/avatar.png",
+      "bio": null,
+      "created": "2021-01-01T00:00:00.000000Z",
+      "role": "developer",
+      "badges": 0
+    },
+    {
+      "id": "Dc7EYhxG",
+      "username": "Prospector",
+      "name": null,
+      "avatar_url": "https://cdn.modrinth.com/user/Dc7EYhxG/avatar.png",
+      "bio": null,
+      "created": "2020-11-06T04:56:05.014379Z",
+      "role": "admin",
+      "badges": 0
+    }
+  ]
+}
