@@ -14,14 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 class SearchProjectTest extends TestCase
 {
-
-    public function testGetDataReturnsCorrectProjectModel(): void
-    {
-        $projectResultModel = $this->getExampleProjectResultModel();
-        $searchProject = new SearchProject(new ModrinthAPIClient(), $projectResultModel);
-        $this->assertEquals($projectResultModel, $searchProject->getData());
-    }
-
     public function testGetFullProjectReturnsInstanceOfProject(): void
     {
         $projectResultModel = $this->getExampleProjectResultModel();

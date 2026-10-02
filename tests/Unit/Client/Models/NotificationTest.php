@@ -12,14 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 class NotificationTest extends TestCase
 {
-
-    public function testGetDataReturnsCorrectNotificationModel(): void
-    {
-        $notificationModel = $this->getExampleNotificationModel();
-        $notification = new Notification(new ModrinthAPIClient(), $notificationModel);
-        $this->assertEquals($notificationModel, $notification->getData());
-    }
-
     public function testGetUserReturnsCorrectUser(): void
     {
         // Here we must mock the client, because it requests the user from the API to get all details

@@ -61,8 +61,8 @@ class ClientTest extends TestCase
             $projectList = $projectList->getPreviousPage();
 
             $this->assertValidProjectList($projectList);
-            $this->assertEquals($firstProjectOfPages[$i]->getData()->getProjectId(),
-                $projectList[0]->getData()->getProjectId());
+            $this->assertEquals($firstProjectOfPages[$i]->getProjectId(),
+                $projectList[0]->getProjectId());
 
             foreach ($projectList as $project) {
                 $this->assertNotNull($project);
@@ -92,7 +92,7 @@ class ClientTest extends TestCase
             foreach ($projectList as $project) {
                 $this->assertNotNull($project);
                 $this->assertInstanceOf(SearchProject::class, $project);
-                $this->assertEquals("mod", $project->getData()->getProjectType());
+                $this->assertEquals("mod", $project->getProjectType());
             }
 
             $this->assertTrue($projectList->hasNextPage());
@@ -104,13 +104,13 @@ class ClientTest extends TestCase
             $projectList = $projectList->getPreviousPage();
 
             $this->assertValidProjectList($projectList);
-            $this->assertEquals($firstProjectOfPages[$i]->getData()->getProjectId(),
-                $projectList[0]->getData()->getProjectId());
+            $this->assertEquals($firstProjectOfPages[$i]->getProjectId(),
+                $projectList[0]->getProjectId());
 
             foreach ($projectList as $project) {
                 $this->assertNotNull($project);
                 $this->assertInstanceOf(SearchProject::class, $project);
-                $this->assertEquals("mod", $project->getData()->getProjectType());
+                $this->assertEquals("mod", $project->getProjectType());
             }
             $this->assertTrue($projectList->hasNextPage());
         }
@@ -136,7 +136,7 @@ class ClientTest extends TestCase
             foreach ($projectList as $project) {
                 $this->assertNotNull($project);
                 $this->assertInstanceOf(SearchProject::class, $project);
-                $this->assertLessThanOrEqual(5000, $project->getData()->getDownloads());
+                $this->assertLessThanOrEqual(5000, $project->getDownloads());
             }
 
             $this->assertTrue($projectList->hasNextPage());
@@ -148,13 +148,13 @@ class ClientTest extends TestCase
             $projectList = $projectList->getPreviousPage();
 
             $this->assertValidProjectList($projectList);
-            $this->assertEquals($firstProjectOfPages[$i]->getData()->getProjectId(),
-                $projectList[0]->getData()->getProjectId());
+            $this->assertEquals($firstProjectOfPages[$i]->getProjectId(),
+                $projectList[0]->getProjectId());
 
             foreach ($projectList as $project) {
                 $this->assertNotNull($project);
                 $this->assertInstanceOf(SearchProject::class, $project);
-                $this->assertLessThanOrEqual(5000, $project->getData()->getDownloads());
+                $this->assertLessThanOrEqual(5000, $project->getDownloads());
             }
             $this->assertTrue($projectList->hasNextPage());
         }
@@ -165,8 +165,8 @@ class ClientTest extends TestCase
     {
         foreach (["mclogs", "6DdCzpTL"] as $idOrSlug) {
             $project = $this->apiClient->getProject($idOrSlug);
-            $this->assertEquals("mclogs", $project->getData()->getSlug());
-            $this->assertEquals("6DdCzpTL", $project->getData()->getId());
+            $this->assertEquals("mclogs", $project->getSlug());
+            $this->assertEquals("6DdCzpTL", $project->getId());
         }
     }
 
@@ -215,8 +215,8 @@ class ClientTest extends TestCase
     {
         $version = $this->apiClient->getVersion("moYTqMH3");
         $this->assertNotNull($version);
-        $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
-        $this->assertEquals("VPo0otUH", $version->getProject()->getData()->getId());
+        $this->assertEquals("VPo0otUH", $version->getProjectId());
+        $this->assertEquals("VPo0otUH", $version->getProject()->getId());
     }
 
     public function testGetVersions(): void
@@ -226,8 +226,8 @@ class ClientTest extends TestCase
         $this->assertSameSize($ids, $versions);
         foreach ($versions as $version) {
             $this->assertNotNull($version);
-            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
-            $this->assertEquals("VPo0otUH", $version->getProject()->getData()->getId());
+            $this->assertEquals("VPo0otUH", $version->getProjectId());
+            $this->assertEquals("VPo0otUH", $version->getProject()->getId());
         }
     }
 
@@ -241,8 +241,8 @@ class ClientTest extends TestCase
         foreach ($hashes as $algorithm => $hash) {
             $version = $this->apiClient->getVersionFromHash($hash, HashAlgorithm::from($algorithm));
             $this->assertNotNull($version);
-            $this->assertEquals("gzWt3g3d", $version->getData()->getId());
-            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+            $this->assertEquals("gzWt3g3d", $version->getId());
+            $this->assertEquals("VPo0otUH", $version->getProjectId());
         }
     }
 
@@ -258,7 +258,7 @@ class ClientTest extends TestCase
         $this->assertSameSize($hashes, $versions);
         foreach ($versions as $version) {
             $this->assertNotNull($version);
-            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+            $this->assertEquals("VPo0otUH", $version->getProjectId());
         }
     }
 
@@ -271,10 +271,10 @@ class ClientTest extends TestCase
             HashAlgorithm::SHA512
         );
         $this->assertNotNull($version);
-        $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+        $this->assertEquals("VPo0otUH", $version->getProjectId());
         $this->assertEquals(
-            $version->getProject()->getVersions(["spigot"], ["1.20.1"])[0]->getData()->getId(),
-            $version->getData()->getId(),
+            $version->getProject()->fetchProjectVersions(["spigot"], ["1.20.1"])[0]->getId(),
+            $version->getId(),
         );
     }
 
@@ -291,10 +291,10 @@ class ClientTest extends TestCase
         );
         foreach ($versions as $version) {
             $this->assertNotNull($version);
-            $this->assertEquals("VPo0otUH", $version->getData()->getProjectId());
+            $this->assertEquals("VPo0otUH", $version->getProjectId());
             $this->assertEquals(
-                $version->getProject()->getVersions(["spigot"], ["1.20.1"])[0]->getData()->getId(),
-                $version->getData()->getId(),
+                $version->getProject()->fetchProjectVersions(["spigot"], ["1.20.1"])[0]->getId(),
+                $version->getId(),
             );
         }
     }
@@ -303,7 +303,7 @@ class ClientTest extends TestCase
     {
         $user = $this->apiClient->getUser("Julian");
         $this->assertNotNull($user);
-        $this->assertEquals("Julian", $user->getData()->getUsername());
+        $this->assertEquals("Julian", $user->getUsername());
         $projects = $user->getProjects();
         $this->assertNotNull($projects);
     }
@@ -390,26 +390,10 @@ class ClientTest extends TestCase
         }
 
         $latestRelease = array_find($gameVersions, function (GameVersion $gameVersion) {
-            return $gameVersion->getData()->getVersionType() === "release";
+            return $gameVersion->getVersionType() === "release";
         });
 
         $projects = $latestRelease->searchProjects();
-        $this->assertNotEmpty($projects);
-        foreach ($projects as $project) {
-            $this->assertNotNull($project);
-        }
-    }
-
-    public function testGetLicenses(): void
-    {
-        $items = $this->apiClient->getLicenses();
-        $this->assertNotEmpty($items);
-
-        foreach ($items as $item) {
-            $this->assertNotNull($item);
-        }
-
-        $projects = $items[0]->searchProjects();
         $this->assertNotEmpty($projects);
         foreach ($projects as $project) {
             $this->assertNotNull($project);

@@ -26,12 +26,12 @@ class ProjectDependenciesTest extends TestCase
         $dependencies = $client->getProjectDependencies("YL57xq9U");
 
         $firstProject = $dependencies->getProjects()[0];
-        $this->assertEquals("AANobbMI", $firstProject->getData()->getId());
-        $this->assertEquals("sodium", $firstProject->getData()->getSlug());
+        $this->assertEquals("AANobbMI", $firstProject->getId());
+        $this->assertEquals("sodium", $firstProject->getSlug());
 
         $firstVersion = $dependencies->getVersions()[0];
-        $this->assertEquals("vgceLbdH", $firstVersion->getData()->getId());
-        $this->assertEquals("Sodium 0.4.10", $firstVersion->getData()->getName());
+        $this->assertEquals("vgceLbdH", $firstVersion->getId());
+        $this->assertEquals("Sodium 0.4.10", $firstVersion->getName());
     }
 
     public function testGetDataReturnsCorrectProjectModel(): void

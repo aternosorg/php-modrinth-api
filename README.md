@@ -43,13 +43,13 @@ $projects = $modrinthClient->searchProjects();
 foreach ($project as $project) {
     // like most other methods, this method returns a wrapper
     // you can use the getData() method to get the project data
-    echo $project->getData()->getTitle() . PHP_EOL;
+    echo $project->getTitle() . PHP_EOL;
 }
 
 $projects = $projects->getNextPage();
 
 foreach ($projects as $project) {
-    echo $project->getData()->getTitle() . PHP_EOL;
+    echo $project->getTitle() . PHP_EOL;
 }
 ```
 
