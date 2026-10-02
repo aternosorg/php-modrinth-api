@@ -5,6 +5,7 @@ namespace Aternos\ModrinthApi\Tests\Unit\Client\Threads;
 use Aternos\ModrinthApi\Client\Project;
 use Aternos\ModrinthApi\Client\Threads\Report;
 use Aternos\ModrinthApi\Client\Threads\ReportItemType;
+use Aternos\ModrinthApi\Client\Threads\Thread;
 use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Client\Version;
 use Aternos\ModrinthApi\Model\Report as ReportModel;
@@ -107,6 +108,18 @@ class ReportTest extends ClientTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Report is not a version report");
         $report->getVersion();
+    }
+
+    public function testGetThread(): void
+    {
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $report = new Report($client, $this->getExampleReportModel());
+
+        $thread = $report->getThread();
+        $this->assertInstanceOf(Thread::class, $thread);
+        $this->assertEquals("Ba1AaBbC", $thread->getId());
+        $this->assertRequest("GET", "/v2/thread/Ba1AaBbC");
+        $this->assertRequestAuthenticated();
     }
 
     public function testModify(): void

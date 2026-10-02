@@ -2,6 +2,7 @@
 
 namespace Aternos\ModrinthApi\Client;
 
+use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
 
 class TeamMember extends TeamMemberModel
@@ -21,5 +22,15 @@ class TeamMember extends TeamMemberModel
     public function getUser(): User
     {
         return new User($this->client, parent::getUser());
+    }
+
+    /**
+     * Fetch all members of the team this member belongs to from the API
+     * @return TeamMember[]
+     * @throws ApiException
+     */
+    public function getTeamMembers(): array
+    {
+        return $this->client->getTeamMembers($this->getTeamId());
     }
 }

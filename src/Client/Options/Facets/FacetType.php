@@ -11,12 +11,30 @@ namespace Aternos\ModrinthApi\Client\Options\Facets;
 enum FacetType: string
 {
     case PROJECT_TYPE = "project_type";
+    /**
+     * loaders are lumped in with categories in search
+     */
     case CATEGORIES = "categories";
     case VERSIONS = "versions";
-    case CLIENT_SIDE = "client_side";
-    case SERVER_SIDE = "server_side";
     case OPEN_SOURCE = "open_source";
 
+    /**
+     * The environments a project supports, e.g. "client_and_server" or "server_only".
+     * Replaces the previous {@code CLIENT_SIDE} and {@code SERVER_SIDE}.
+     * @see \Aternos\ModrinthApi\Model\EnvironmentEnum
+     */
+    case ENVIRONMENT = "environment";
+
+    /**
+     * Matches against every project type across all of the project’s versions, not just the primary/version-specific type
+     */
+    case ALL_PROJECT_TYPES = "all_project_types";
+
+    /**
+     * Disclosures listed on a project, e.g. "ai_content" or "telemetry".
+     * @see \Aternos\ModrinthApi\Model\DisclosureTypeEnum
+     */
+    case DISCLOSURE_TYPES = "disclosure_types";
 
     case TITLE = "title";
     case AUTHOR = "author";
@@ -27,13 +45,4 @@ enum FacetType: string
     case COLOR = "color";
     case CREATED_TIMESTAMP = "created_timestamp";
     case MODIFIED_TIMESTAMP = "modified_timestamp";
-
-    /**
-     * @deprecated Use {@link FacetType::CREATED_TIMESTAMP} instead. This option doesn't work.
-     */
-    case DATE_CREATED = "date_created";
-    /**
-     * @deprecated Use {@link FacetType::MODIFIED_TIMESTAMP} instead. This option doesn't work.
-     */
-    case DATE_MODIFIED = "date_modified";
 }

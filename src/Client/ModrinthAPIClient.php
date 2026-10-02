@@ -349,6 +349,7 @@ class ModrinthAPIClient
      * @param string[] $loaders
      * @param string[] $gameVersions
      * @param HashAlgorithm $algorithm
+     * @param string[]|null $versionTypes only consider versions of these types ("release", "beta" and/or "alpha")
      * @return Version
      * @throws ApiException
      */
@@ -356,12 +357,14 @@ class ModrinthAPIClient
         string        $hash,
         array         $loaders,
         array         $gameVersions,
-        HashAlgorithm $algorithm = HashAlgorithm::SHA1
+        HashAlgorithm $algorithm = HashAlgorithm::SHA1,
+        ?array        $versionTypes = null,
     ): Version
     {
         $body = new GetLatestVersionFromHashBody();
         $body->setGameVersions($gameVersions);
         $body->setLoaders($loaders);
+        $this->setVersionTypes($body, $versionTypes);
         return new Version($this, $this->versionFiles->getLatestVersionFromHash($hash, $algorithm->value, $body));
     }
 
@@ -371,6 +374,7 @@ class ModrinthAPIClient
      * @param string[] $loaders
      * @param string[] $gameVersions
      * @param HashAlgorithm $algorithm
+     * @param string[]|null $versionTypes only consider versions of these types ("release", "beta" and/or "alpha")
      * @return Version[]
      * @throws ApiException
      */
@@ -378,7 +382,8 @@ class ModrinthAPIClient
         array         $hashes,
         array         $loaders,
         array         $gameVersions,
-        HashAlgorithm $algorithm = HashAlgorithm::SHA1
+        HashAlgorithm $algorithm = HashAlgorithm::SHA1,
+        ?array        $versionTypes = null,
     ): array
     {
         $body = new GetLatestVersionsFromHashesBody();
@@ -386,10 +391,34 @@ class ModrinthAPIClient
         $body->setAlgorithm($algorithm->value);
         $body->setLoaders($loaders);
         $body->setGameVersions($gameVersions);
-        $body->setLoaders($loaders);
+        $this->setVersionTypes($body, $versionTypes);
         return array_map(function (VersionModel $version): Version {
             return new Version($this, $version);
         }, $this->versionFiles->getLatestVersionsFromHashes($body));
+    }
+
+    /**
+     * Set the version_types filter on a request body.
+     *
+     * The OpenAPI spec declares the enum on the array instead of on its items, so the
+     * generator produced an empty list of allowed values and the generated setter
+     * rejects every non-empty value. The property is therefore set directly.
+     *
+     * @param GetLatestVersionFromHashBody|GetLatestVersionsFromHashesBody $body
+     * @param string[]|null $versionTypes
+     * @return void
+     * @internal this will be removed when the modrinth spec is fixed
+     */
+    private function setVersionTypes(
+        GetLatestVersionFromHashBody|GetLatestVersionsFromHashesBody $body,
+        ?array                                                       $versionTypes,
+    ): void
+    {
+        if ($versionTypes === null) {
+            return;
+        }
+
+        $body["version_types"] = array_values($versionTypes);
     }
 
     /**

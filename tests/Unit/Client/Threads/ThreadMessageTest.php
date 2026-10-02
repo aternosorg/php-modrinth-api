@@ -5,6 +5,7 @@ namespace Aternos\ModrinthApi\Tests\Unit\Client\Threads;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Client\Threads\Thread;
 use Aternos\ModrinthApi\Client\Threads\ThreadMessage;
+use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Model\Thread as ThreadModel;
 use Aternos\ModrinthApi\Tests\Unit\Client\ClientTestCase;
 use GuzzleHttp\Psr7\Response;
@@ -34,6 +35,27 @@ class ThreadMessageTest extends ClientTestCase
         $thread = $this->getExampleThread($client);
 
         $this->assertSame($thread, $thread->getMessages()[0]->getThread());
+    }
+
+    public function testGetAuthor(): void
+    {
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_user_response")]);
+        $message = $this->getExampleThread($client)->getMessages()[0];
+
+        $author = $message->getAuthor();
+        $this->assertInstanceOf(User::class, $author);
+        $this->assertEquals("Prospector", $author->getUsername());
+        $this->assertRequest("GET", "/v2/user/b1AIbOxO");
+    }
+
+    public function testGetAuthorReturnsNullWithoutAuthorId(): void
+    {
+        $client = $this->createAuthenticatedClient();
+        $message = $this->getExampleThread($client)->getMessages()[0];
+        $message->setAuthorId(null);
+
+        $this->assertNull($message->getAuthor());
+        $this->assertRequestCount(0);
     }
 
     public function testReply(): void

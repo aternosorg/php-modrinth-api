@@ -36,6 +36,18 @@ class TeamMemberTest extends ClientTestCase
         $this->assertRequestCount(0);
     }
 
+    public function testGetTeamMembers(): void
+    {
+        $client = $this->createClient([$this->fixtureResponse("get_team_members_response")]);
+        $member = new TeamMember($client, $this->getExampleTeamMemberModel());
+
+        $members = $member->getTeamMembers();
+        $this->assertCount(1, $members);
+        $this->assertInstanceOf(TeamMember::class, $members[0]);
+        $this->assertEquals("Owner", $members[0]->getRole());
+        $this->assertRequest("GET", "/v2/team/ThaUQrOs/members");
+    }
+
     public function testGetUserCanRequestTheUsersProjects(): void
     {
         $client = $this->createClient([

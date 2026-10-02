@@ -5,6 +5,7 @@ namespace Aternos\ModrinthApi\Tests\Unit\Client\Models;
 use Aternos\ModrinthApi\Client\Project;
 use Aternos\ModrinthApi\Client\ProjectDependencies;
 use Aternos\ModrinthApi\Client\TeamMember;
+use Aternos\ModrinthApi\Client\Threads\Thread;
 use Aternos\ModrinthApi\Client\Version;
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
 use Aternos\ModrinthApi\Tests\Unit\Client\ClientTestCase;
@@ -71,6 +72,18 @@ class ProjectTest extends ClientTestCase
         $this->assertEquals('["1.20.1"]', $query["game_versions"]);
         $this->assertEquals("true", $query["featured"]);
         $this->assertEquals("false", $query["include_changelog"]);
+    }
+
+    public function testGetThread(): void
+    {
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $project = new Project($client, $this->getExampleProjectModel());
+
+        $thread = $project->getThread();
+        $this->assertInstanceOf(Thread::class, $thread);
+        $this->assertEquals("Ba1AaBbC", $thread->getId());
+        $this->assertRequest("GET", "/v2/thread/" . $this->getExampleProjectModel()->getThreadId());
+        $this->assertRequestAuthenticated();
     }
 
     public function testGetMembers(): void

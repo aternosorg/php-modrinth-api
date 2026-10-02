@@ -4,6 +4,7 @@ namespace Aternos\ModrinthApi\Client\Threads;
 
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
+use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Model\ThreadMessage as ThreadMessageModel;
 
 
@@ -24,6 +25,21 @@ class ThreadMessage extends ThreadMessageModel
     public function getThread(): Thread
     {
         return $this->thread;
+    }
+
+    /**
+     * Fetch the user that wrote this message from the API.
+     * Returns null if the message has no author, e.g. for system messages.
+     * @return User|null
+     * @throws ApiException
+     */
+    public function getAuthor(): ?User
+    {
+        if ($this->getAuthorId() === null) {
+            return null;
+        }
+
+        return $this->client->getUser($this->getAuthorId());
     }
 
     /**

@@ -26,6 +26,16 @@ class Version extends VersionModel
         return $this->client->getProject($this->getProjectId());
     }
 
+    /**
+     * Fetch the user that published this version from the API
+     * @return User
+     * @throws ApiException
+     */
+    public function getAuthor(): User
+    {
+        return $this->client->getUser($this->getAuthorId());
+    }
+
 
     /**
      * Get the dependencies of this version

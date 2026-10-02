@@ -3,6 +3,7 @@
 namespace Aternos\ModrinthApi\Tests\Unit\Client;
 
 use Aternos\ModrinthApi\ApiException;
+use Aternos\ModrinthApi\Client\HashAlgorithm;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Client\Notification;
 use Aternos\ModrinthApi\Client\Project;
@@ -179,6 +180,80 @@ class ModrinthAPIClientTest extends ClientTestCase
         }
 
         $this->assertRequestCount(0);
+    }
+
+    public function testGetLatestVersionFromHashSendsVersionTypes(): void
+    {
+        $client = $this->createClient([$this->fixtureResponse("get_version_response")]);
+
+        $client->getLatestVersionFromHash(
+            "5952253d61e199e82eb852c5824c3981b29b209d",
+            ["spigot"],
+            ["1.20.1"],
+            HashAlgorithm::SHA1,
+            ["release", "beta"],
+        );
+
+        $this->assertRequest("POST", "/v2/version_file/5952253d61e199e82eb852c5824c3981b29b209d/update");
+        $this->assertEquals([
+            "loaders" => ["spigot"],
+            "game_versions" => ["1.20.1"],
+            "version_types" => ["release", "beta"],
+        ], json_decode((string)$this->getRequest()->getBody(), true));
+    }
+
+    public function testGetLatestVersionFromHashOmitsVersionTypesByDefault(): void
+    {
+        $client = $this->createClient([$this->fixtureResponse("get_version_response")]);
+
+        $client->getLatestVersionFromHash("abc", ["spigot"], ["1.20.1"]);
+
+        $body = json_decode((string)$this->getRequest()->getBody(), true);
+        $this->assertArrayNotHasKey("version_types", $body);
+    }
+
+    public function testGetLatestVersionsFromHashesSendsVersionTypes(): void
+    {
+        $client = $this->createClient([$this->jsonResponse([])]);
+
+        $client->getLatestVersionsFromHashes(
+            ["abc", "def"],
+            ["spigot"],
+            ["1.20.1"],
+            HashAlgorithm::SHA512,
+            ["release"],
+        );
+
+        $this->assertRequest("POST", "/v2/version_files/update");
+        $this->assertEquals([
+            "hashes" => ["abc", "def"],
+            "algorithm" => "sha512",
+            "loaders" => ["spigot"],
+            "game_versions" => ["1.20.1"],
+            "version_types" => ["release"],
+        ], json_decode((string)$this->getRequest()->getBody(), true));
+    }
+
+    public function testGetLatestVersionsFromHashesOmitsVersionTypesByDefault(): void
+    {
+        $client = $this->createClient([$this->jsonResponse([])]);
+
+        $client->getLatestVersionsFromHashes(["abc"], ["spigot"], ["1.20.1"]);
+
+        $body = json_decode((string)$this->getRequest()->getBody(), true);
+        $this->assertArrayNotHasKey("version_types", $body);
+    }
+
+    public function testVersionTypesAreReindexed(): void
+    {
+        $client = $this->createClient([$this->jsonResponse([])]);
+
+        // a filtered array keeps its original keys and would serialize as an object
+        $versionTypes = array_filter(["release", "alpha", "beta"], fn(string $type) => $type !== "alpha");
+        $client->getLatestVersionsFromHashes(["abc"], ["spigot"], ["1.20.1"], HashAlgorithm::SHA1, $versionTypes);
+
+        $body = json_decode((string)$this->getRequest()->getBody(), true);
+        $this->assertSame(["release", "beta"], $body["version_types"]);
     }
 
     public function testGetCurrentUser(): void

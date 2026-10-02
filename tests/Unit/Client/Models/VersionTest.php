@@ -4,6 +4,7 @@ namespace Aternos\ModrinthApi\Tests\Unit\Client\Models;
 
 use Aternos\ModrinthApi\Client\Project;
 use Aternos\ModrinthApi\Client\Version;
+use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Client\VersionDependency;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
 use Aternos\ModrinthApi\Tests\Unit\Client\ClientTestCase;
@@ -33,6 +34,17 @@ class VersionTest extends ClientTestCase
         $this->assertInstanceOf(Project::class, $project);
         $this->assertEquals("modmenu", $project->getSlug());
         $this->assertRequest("GET", "/v2/project/VPo0otUH");
+    }
+
+    public function testGetAuthor(): void
+    {
+        $client = $this->createClient([$this->fixtureResponse("get_user_response")]);
+        $version = new Version($client, $this->getExampleVersionModel());
+
+        $author = $version->getAuthor();
+        $this->assertInstanceOf(User::class, $author);
+        $this->assertEquals("Prospector", $author->getUsername());
+        $this->assertRequest("GET", "/v2/user/b1AIbOxO");
     }
 
     public function testGetDependenciesWrapsEveryDependency(): void

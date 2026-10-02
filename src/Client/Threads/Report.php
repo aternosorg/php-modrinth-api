@@ -74,6 +74,16 @@ class Report extends ReportModel
     }
 
     /**
+     * Fetch the thread of this report from the API (requires authentication)
+     * @return Thread
+     * @throws ApiException
+     */
+    public function getThread(): Thread
+    {
+        return $this->client->getThread($this->getThreadId());
+    }
+
+    /**
      * Modify the report
      * @param string|null $body
      * @param bool|null $closed

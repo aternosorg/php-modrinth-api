@@ -33,6 +33,28 @@ class SearchProject extends ProjectResult
         return $this->client->getProject($this->getProjectId());
     }
 
+    /**
+     * Fetch the author of this project from the API.
+     *
+     * Named differently from the inherited {@link ProjectResult::getAuthor()}, which
+     * returns the author's username without requesting anything.
+     *
+     * Returns null if the search result has no author id. The author is always a user,
+     * even for projects owned by an organization, which are identified separately by
+     * {@link ProjectResult::getOrganizationId()}.
+     *
+     * @return User|null
+     * @throws ApiException
+     */
+    public function fetchAuthor(): ?User
+    {
+        if ($this->getAuthorId() === null) {
+            return null;
+        }
+
+        return $this->client->getUser($this->getAuthorId());
+    }
+
     protected function getId(): string
     {
         return $this->getProjectId();

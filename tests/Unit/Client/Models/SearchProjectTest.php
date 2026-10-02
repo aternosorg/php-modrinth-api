@@ -5,6 +5,7 @@ namespace Aternos\ModrinthApi\Tests\Unit\Client\Models;
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Client\Project;
 use Aternos\ModrinthApi\Client\SearchProject;
+use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Model\ProjectResult;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -59,6 +60,47 @@ class SearchProjectTest extends TestCase
         $this->assertNotEmpty($searchProject->getDependencies()->getProjects());
 
         $this->assertEquals("/v2/project/P7dR8mSH/dependencies", $requests[0]["request"]->getUri()->getPath());
+    }
+
+    public function testFetchAuthor(): void
+    {
+        $handler = new MockHandler([
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_user_response.json"))
+        ]);
+        $requests = [];
+        $stack = HandlerStack::create($handler);
+        $stack->push(Middleware::history($requests));
+        $client = new ModrinthAPIClient(null, null, new Client(['handler' => $stack]));
+
+        $model = $this->getExampleProjectResultModel();
+        $model->setAuthorId("Dc7EYhxG");
+
+        $author = (new SearchProject($client, $model))->fetchAuthor();
+        $this->assertInstanceOf(User::class, $author);
+        $this->assertEquals("Prospector", $author->getUsername());
+        $this->assertEquals("/v2/user/Dc7EYhxG", $requests[0]["request"]->getUri()->getPath());
+    }
+
+    public function testFetchAuthorReturnsNullWithoutAuthorId(): void
+    {
+        $client = new ModrinthAPIClient(null, null, new Client([
+            'handler' => HandlerStack::create(new MockHandler([]))
+        ]));
+
+        $model = $this->getExampleProjectResultModel();
+        $model->setAuthorId(null);
+
+        $this->assertNull((new SearchProject($client, $model))->fetchAuthor());
+    }
+
+    public function testGetAuthorStillReturnsTheUsername(): void
+    {
+        $client = new ModrinthAPIClient(null, null, new Client([
+            'handler' => HandlerStack::create(new MockHandler([]))
+        ]));
+
+        $searchProject = new SearchProject($client, $this->getExampleProjectResultModel());
+        $this->assertEquals("modmuss50", $searchProject->getAuthor());
     }
 
     protected function getExampleProjectResultModel(): ProjectResult
