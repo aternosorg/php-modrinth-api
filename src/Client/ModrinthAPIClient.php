@@ -549,19 +549,6 @@ class ModrinthAPIClient
     }
 
     /**
-     * Get all licenses
-     * @return License[]
-     * @throws ApiException
-     * @deprecated simply use SPDX IDs
-     */
-    public function getLicenses(): array
-    {
-        return array_map(function (LicenseTag $license): License {
-            return new License($this, $license);
-        }, $this->tags->licenseList());
-    }
-
-    /**
      * Get a license by its SPDX ID
      * @param string $spdxId SPDX ID
      * @return string
