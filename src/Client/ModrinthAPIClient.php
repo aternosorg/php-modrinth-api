@@ -105,6 +105,13 @@ class ModrinthAPIClient
         $this->configuration = $configuration;
         $this->configuration->setBooleanFormatForQueryString(Configuration::BOOLEAN_FORMAT_STRING);
 
+        // ObjectSerializer reads the boolean query string format from the default
+        // configuration instead of the one used for the request, so it has to be set
+        // there as well. Without this the API rejects every boolean query parameter
+        // with a 400 whenever a custom configuration is used.
+        Configuration::getDefaultConfiguration()
+            ->setBooleanFormatForQueryString(Configuration::BOOLEAN_FORMAT_STRING);
+
         $this->projects = new ProjectsApi($this->httpClient, $this->configuration);
         $this->versions = new VersionsApi($this->httpClient, $this->configuration);
         $this->versionFiles = new VersionFilesApi($this->httpClient, $this->configuration);
@@ -759,8 +766,15 @@ class ModrinthAPIClient
     public function modifyReport(string $id, ?string $body, ?bool $closed): void
     {
         $report = new ModifyReportRequest();
-        $report->setBody($body);
-        $report->setClosed($closed);
+
+        // the generated setters reject null for non-nullable properties,
+        // so only the options that were actually passed may be set
+        if ($body !== null) {
+            $report->setBody($body);
+        }
+        if ($closed !== null) {
+            $report->setClosed($closed);
+        }
 
         $this->threads->modifyReport($id, $report);
     }
@@ -826,11 +840,25 @@ class ModrinthAPIClient
     {
         $message = new ThreadMessageBody();
         $message->setType($messageType->value);
-        $message->setBody($body);
-        $message->setPrivate($private);
-        $message->setReplyingTo($replyingTo);
-        $message->setOldStatus($oldStatus);
-        $message->setNewStatus($newStatus);
+
+        // the generated setters reject null for non-nullable properties,
+        // so only the options that were actually passed may be set
+        if ($body !== null) {
+            $message->setBody($body);
+        }
+        if ($private !== null) {
+            $message->setPrivate($private);
+        }
+        if ($replyingTo !== null) {
+            $message->setReplyingTo($replyingTo);
+        }
+        if ($oldStatus !== null) {
+            $message->setOldStatus($oldStatus);
+        }
+        if ($newStatus !== null) {
+            $message->setNewStatus($newStatus);
+        }
+
         return new Thread($this, $this->threads->sendThreadMessage($threadId, $message));
     }
 
@@ -843,6 +871,6 @@ class ModrinthAPIClient
      */
     public function deleteThreadMessage(string $threadId, string $messageId): void
     {
-        $this->threads->deleteThreadMessage($threadId, $messageId);
+        $this->threads->deleteThreadMessage($messageId);
     }
 }
