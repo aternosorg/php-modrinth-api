@@ -1,7 +1,5 @@
 # Aternos\ModrinthApi\ProjectsApi
 
-Projects are what Modrinth is centered around, be it mods, modpacks, resource packs, etc.
-
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

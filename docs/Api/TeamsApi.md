@@ -1,7 +1,5 @@
 # Aternos\ModrinthApi\TeamsApi
 
-Through teams, user permissions limit how team members can modify projects.
-
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |

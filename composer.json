@@ -31,7 +31,7 @@
         "phpunit/phpunit": "^12.4"
     },
     "scripts": {
-        "generate": "rm -rf src/Api src/Model docs/Api docs/Model && openapi-generator-cli generate -c config.yaml && rm -rf test"
+        "generate": "rm -rf src/Api src/Model docs/Api docs/Model && openapi-generator-cli generate -c config.yaml && rm -rf tests/Api tests/Model"
     },
     "autoload": {
         "psr-4": {

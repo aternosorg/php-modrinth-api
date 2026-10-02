@@ -1,7 +1,5 @@
 # Aternos\ModrinthApi\UsersApi
 
-Users can create projects, join teams, access notifications, manage settings, and follow projects. Admins and moderators have more advanced permissions such as reviewing new projects.
-
 All URIs are relative to https://api.modrinth.com/v2, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
