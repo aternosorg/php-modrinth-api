@@ -7,23 +7,16 @@ use Aternos\ModrinthApi\Client\Options\Facets\Facet;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Model\GameVersionTag;
 
-class GameVersion
+class GameVersion extends GameVersionTag
 {
     use SearchableTag;
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected GameVersionTag $data,
+        GameVersionTag $data,
     )
     {
-    }
-
-    /**
-     * @return GameVersionTag
-     */
-    public function getData(): GameVersionTag
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -32,7 +25,7 @@ class GameVersion
      */
     public function toFacet(): Facet
     {
-        return new Facet(FacetType::VERSIONS, $this->data->getVersion());
+        return new Facet(FacetType::VERSIONS, $this->getVersion());
     }
 
     function getClient(): ModrinthAPIClient

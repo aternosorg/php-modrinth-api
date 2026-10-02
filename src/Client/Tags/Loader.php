@@ -7,23 +7,16 @@ use Aternos\ModrinthApi\Client\Options\Facets\Facet;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Model\LoaderTag;
 
-class Loader
+class Loader extends LoaderTag
 {
     use SearchableTag;
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected LoaderTag $data,
+        LoaderTag $data,
     )
     {
-    }
-
-    /**
-     * @return LoaderTag
-     */
-    public function getData(): LoaderTag
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -32,7 +25,7 @@ class Loader
      */
     public function toFacet(): Facet
     {
-        return new Facet(FacetType::CATEGORIES, $this->data->getName());
+        return new Facet(FacetType::CATEGORIES, $this->getName());
     }
 
     function getClient(): ModrinthAPIClient

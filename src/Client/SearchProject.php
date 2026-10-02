@@ -11,23 +11,16 @@ use Aternos\ModrinthApi\Model\ProjectResult;
  * @description A project as a result of a search
  * @package Aternos\ModrinthApi\Client
  */
-class SearchProject
+class SearchProject extends ProjectResult
 {
     use ProjectTrait;
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected ProjectResult $data,
+        ProjectResult $data,
     )
     {
-    }
-
-    /**
-     * @return ProjectResult
-     */
-    public function getData(): ProjectResult
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -37,12 +30,12 @@ class SearchProject
      */
     public function getFullProject(): Project
     {
-        return $this->client->getProject($this->data->getProjectId());
+        return $this->client->getProject($this->getProjectId());
     }
 
     protected function getId(): string
     {
-        return $this->data->getProjectId();
+        return $this->getProjectId();
     }
 
     protected function getClient(): ModrinthAPIClient

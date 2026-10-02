@@ -7,23 +7,16 @@ use Aternos\ModrinthApi\Client\Options\Facets\Facet;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Model\LicenseTag;
 
-class License
+class License extends LicenseTag
 {
     use SearchableTag;
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected LicenseTag $data,
+        LicenseTag $data,
     )
     {
-    }
-
-    /**
-     * @return LicenseTag
-     */
-    public function getData(): LicenseTag
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -32,7 +25,7 @@ class License
      */
     public function toFacet(): Facet
     {
-        return new Facet(FacetType::LICENSE, $this->data->getShort());
+        return new Facet(FacetType::LICENSE, $this->getShort());
     }
 
     function getClient(): ModrinthAPIClient

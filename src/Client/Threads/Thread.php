@@ -8,21 +8,14 @@ use Aternos\ModrinthApi\Client\Project;
 use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Model\Thread as ThreadModel;
 
-class Thread
+class Thread extends ThreadModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected ThreadModel $thread,
+        ThreadModel $thread,
     )
     {
-    }
-
-    /**
-     * @return ThreadModel
-     */
-    public function getData(): ThreadModel
-    {
-        return $this->thread;
+        parent::__construct($thread->container);
     }
 
     /**
@@ -32,7 +25,7 @@ class Thread
      */
     public function getProject(): ?Project
     {
-        if ($id = $this->thread->getProjectId()) {
+        if ($id = $this->getProjectId()) {
             return $this->client->getProject($id);
         }
 
@@ -46,7 +39,7 @@ class Thread
      */
     public function getReport(): ?Report
     {
-        if ($id = $this->thread->getReportId()) {
+        if ($id = $this->getReportId()) {
             return $this->client->getReport($id);
         }
 
@@ -61,7 +54,7 @@ class Thread
     {
         return array_map(function ($message) {
             return new ThreadMessage($this->client, $this, $message);
-        }, $this->thread->getMessages());
+        }, parent::getMessages());
     }
 
     /**
@@ -72,7 +65,7 @@ class Thread
     {
         return array_map(function ($member) {
             return new User($this->client, $member);
-        }, $this->thread->getMembers());
+        }, parent::getMembers());
     }
 
     /**
@@ -96,7 +89,7 @@ class Thread
     ): Thread
     {
         return $this->client->sendThreadMessage(
-            $this->thread->getId(),
+            $this->getId(),
             $messageType,
             $body,
             $private,
@@ -114,6 +107,6 @@ class Thread
      */
     public function deleteMessage(string $messageId): void
     {
-        $this->client->deleteThreadMessage($this->thread->getId(), $messageId);
+        $this->client->deleteThreadMessage($this->getId(), $messageId);
     }
 }

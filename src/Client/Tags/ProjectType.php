@@ -12,7 +12,7 @@ class ProjectType
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected string $data,
+        protected string            $name,
     )
     {
     }
@@ -20,9 +20,9 @@ class ProjectType
     /**
      * @return string
      */
-    public function getData(): string
+    public function getName(): string
     {
-        return $this->data;
+        return $this->name;
     }
 
     /**
@@ -31,7 +31,7 @@ class ProjectType
      */
     public function toFacet(): Facet
     {
-        return new Facet(FacetType::PROJECT_TYPE, $this->data);
+        return new Facet(FacetType::PROJECT_TYPE, $this->name);
     }
 
     function getClient(): ModrinthAPIClient

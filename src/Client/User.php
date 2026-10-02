@@ -6,21 +6,14 @@ use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 
-class User
+class User extends UserModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected UserModel         $data,
+        UserModel         $data,
     )
     {
-    }
-
-    /**
-     * @return UserModel
-     */
-    public function getData(): UserModel
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -30,7 +23,7 @@ class User
      */
     public function getProjects(): array
     {
-        return $this->client->getUserProjects($this->data->getId());
+        return $this->client->getUserProjects($this->getId());
     }
 
     /**
@@ -40,7 +33,7 @@ class User
      */
     public function getNotifications(): array
     {
-        return $this->client->getUserNotifications($this->data->getId());
+        return $this->client->getUserNotifications($this->getId());
     }
 
     /**
@@ -50,7 +43,7 @@ class User
      */
     public function getFollowedProjects(): array
     {
-        return $this->client->getFollowedProjects($this->data->getId());
+        return $this->client->getFollowedProjects($this->getId());
     }
 
     /**
@@ -60,6 +53,6 @@ class User
      */
     public function getPayoutHistory(): UserPayoutHistory
     {
-        return $this->client->getPayoutHistory($this->data->getId());
+        return $this->client->getPayoutHistory($this->getId());
     }
 }

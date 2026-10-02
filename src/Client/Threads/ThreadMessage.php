@@ -7,22 +7,15 @@ use Aternos\ModrinthApi\Client\ModrinthAPIClient;
 use Aternos\ModrinthApi\Model\ThreadMessage as ThreadMessageModel;
 
 
-class ThreadMessage
+class ThreadMessage extends ThreadMessageModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
         protected Thread $thread,
-        protected ThreadMessageModel $threadMessage,
+        ThreadMessageModel $threadMessage,
     )
     {
-    }
-
-    /**
-     * @return ThreadMessageModel
-     */
-    public function getData(): ThreadMessageModel
-    {
-        return $this->threadMessage;
+        parent::__construct($threadMessage->container);
     }
 
     /**
@@ -52,6 +45,6 @@ class ThreadMessage
      */
     public function delete(): void
     {
-        $this->thread->deleteMessage($this->threadMessage->getId());
+        $this->thread->deleteMessage($this->getId());
     }
 }

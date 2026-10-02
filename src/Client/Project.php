@@ -4,28 +4,16 @@ namespace Aternos\ModrinthApi\Client;
 
 use Aternos\ModrinthApi\Model\Project as ProjectModel;
 
-class Project
+class Project extends ProjectModel
 {
     use ProjectTrait;
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected ProjectModel $data
+        ProjectModel $data
     )
     {
-    }
-
-    /**
-     * @return ProjectModel
-     */
-    public function getData(): ProjectModel
-    {
-        return $this->data;
-    }
-
-    protected function getId(): string
-    {
-        return $this->data->getId();
+        parent::__construct($data->container);
     }
 
     protected function getClient(): ModrinthAPIClient

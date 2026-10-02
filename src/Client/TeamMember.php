@@ -4,21 +4,14 @@ namespace Aternos\ModrinthApi\Client;
 
 use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
 
-class TeamMember
+class TeamMember extends TeamMemberModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected TeamMemberModel   $data,
+        TeamMemberModel   $data,
     )
     {
-    }
-
-    /**
-     * @return TeamMemberModel
-     */
-    public function getData(): TeamMemberModel
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -27,6 +20,6 @@ class TeamMember
      */
     public function getUser(): User
     {
-        return new User($this->client, $this->data->getUser());
+        return new User($this->client, parent::getUser());
     }
 }

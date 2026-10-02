@@ -5,21 +5,14 @@ namespace Aternos\ModrinthApi\Client;
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\VersionDependency as VersionDependencyModel;
 
-class VersionDependency
+class VersionDependency extends VersionDependencyModel
 {
     public function __construct(
         protected ModrinthAPIClient      $client,
-        protected VersionDependencyModel $data
+        VersionDependencyModel $data
     )
     {
-    }
-
-    /**
-     * @return VersionDependencyModel
-     */
-    public function getData(): VersionDependencyModel
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -29,11 +22,11 @@ class VersionDependency
      */
     public function getProject(): ?Project
     {
-        if ($this->data->getProjectId() === null) {
+        if ($this->getProjectId() === null) {
             return null;
         }
 
-        return $this->client->getProject($this->data->getProjectId());
+        return $this->client->getProject($this->getProjectId());
     }
 
     /**
@@ -43,10 +36,10 @@ class VersionDependency
      */
     public function getVersion(): ?Version
     {
-        if ($this->data->getVersionId() === null) {
+        if ($this->getVersionId() === null) {
             return null;
         }
 
-        return $this->client->getVersion($this->data->getVersionId());
+        return $this->client->getVersion($this->getVersionId());
     }
 }

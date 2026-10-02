@@ -6,21 +6,14 @@ use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
 use Aternos\ModrinthApi\Model\VersionDependency as VersionDependencyModel;
 
-class Version
+class Version extends VersionModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected VersionModel $data
+        VersionModel $data
     )
     {
-    }
-
-    /**
-     * @return VersionModel
-     */
-    public function getData(): VersionModel
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -30,7 +23,7 @@ class Version
      */
     public function getProject(): Project
     {
-        return $this->client->getProject($this->data->getProjectId());
+        return $this->client->getProject($this->getProjectId());
     }
 
 
@@ -42,6 +35,6 @@ class Version
     {
         return array_map(function (VersionDependencyModel $dependency) {
             return new VersionDependency($this->client, $dependency);
-        }, $this->data->getDependencies() ?? []);
+        }, parent::getDependencies() ?? []);
     }
 }

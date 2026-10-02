@@ -10,29 +10,22 @@ use Aternos\ModrinthApi\Client\Version;
 use Aternos\ModrinthApi\Model\Report as ReportModel;
 use Exception;
 
-class Report
+class Report extends ReportModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected ReportModel $report,
+        ReportModel $report,
     )
     {
-    }
-
-    /**
-     * @return ReportModel
-     */
-    public function getData(): ReportModel
-    {
-        return $this->report;
+        parent::__construct($report->container);
     }
 
     /**
      * @return ReportItemType
      */
-    public function getItemType(): ReportItemType
+    public function getItemTypeEnum(): ReportItemType
     {
-        return ReportItemType::from($this->report->getItemType());
+        return ReportItemType::from($this->getItemType());
     }
 
     /**
@@ -43,11 +36,11 @@ class Report
      */
     public function getProject(): Project
     {
-        if ($this->getItemType() !== ReportItemType::PROJECT) {
+        if ($this->getItemTypeEnum() !== ReportItemType::PROJECT) {
             throw new Exception("Report is not a project report");
         }
 
-        return $this->client->getProject($this->report->getItemId());
+        return $this->client->getProject($this->getItemId());
     }
 
     /**
@@ -58,11 +51,11 @@ class Report
      */
     public function getUser(): User
     {
-        if ($this->getItemType() !== ReportItemType::USER) {
+        if ($this->getItemTypeEnum() !== ReportItemType::USER) {
             throw new Exception("Report is not a user report");
         }
 
-        return $this->client->getUser($this->report->getItemId());
+        return $this->client->getUser($this->getItemId());
     }
 
     /**
@@ -73,11 +66,11 @@ class Report
      */
     public function getVersion(): Version
     {
-        if ($this->getItemType() !== ReportItemType::VERSION) {
+        if ($this->getItemTypeEnum() !== ReportItemType::VERSION) {
             throw new Exception("Report is not a version report");
         }
 
-        return $this->client->getVersion($this->report->getItemId());
+        return $this->client->getVersion($this->getItemId());
     }
 
     /**
@@ -89,9 +82,7 @@ class Report
      */
     public function modify(?string $body, ?bool $closed): static
     {
-        $this->client->modifyReport($this->report->getId(), $body, $closed);
+        $this->client->modifyReport($this->getId(), $body, $closed);
         return $this;
     }
-
-
 }

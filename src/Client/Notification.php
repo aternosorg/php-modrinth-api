@@ -5,21 +5,14 @@ namespace Aternos\ModrinthApi\Client;
 use Aternos\ModrinthApi\ApiException;
 use Aternos\ModrinthApi\Model\Notification as NotificationModel;
 
-class Notification
+class Notification extends NotificationModel
 {
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected NotificationModel $data,
+        NotificationModel $data,
     )
     {
-    }
-
-    /**
-     * @return NotificationModel
-     */
-    public function getData(): NotificationModel
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -29,6 +22,6 @@ class Notification
      */
     public function getUser(): User
     {
-        return $this->client->getUser($this->data->getUserId());
+        return $this->client->getUser($this->getUserId());
     }
 }

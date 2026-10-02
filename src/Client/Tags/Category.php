@@ -7,23 +7,16 @@ use Aternos\ModrinthApi\Client\Options\Facets\Facet;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Model\CategoryTag;
 
-class Category
+class Category extends CategoryTag
 {
     use SearchableTag;
 
     public function __construct(
         protected ModrinthAPIClient $client,
-        protected CategoryTag $data,
+        CategoryTag $data,
     )
     {
-    }
-
-    /**
-     * @return CategoryTag
-     */
-    public function getData(): CategoryTag
-    {
-        return $this->data;
+        parent::__construct($data->container);
     }
 
     /**
@@ -32,7 +25,7 @@ class Category
      */
     public function toFacet(): Facet
     {
-        return new Facet(FacetType::CATEGORIES, $this->data->getName());
+        return new Facet(FacetType::CATEGORIES, $this->getName());
     }
 
     function getClient(): ModrinthAPIClient

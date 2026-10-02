@@ -37,7 +37,7 @@ trait ProjectTrait
      * @return Version[]
      * @throws ApiException
      */
-    public function getVersions(
+    public function fetchProjectVersions(
         ?array $loaders = null,
         ?array $gameVersions = null,
         ?bool  $featured = null,
