@@ -19,23 +19,22 @@
     ],
     "homepage": "https://github.com/aternosorg/php-modrinth-api",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4.1",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^7.10",
-        "guzzlehttp/psr7": "^1.7 || ^2.0"
+        "guzzlehttp/psr7": "^2.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.5",
-        "phpunit/phpunit": "^12.4"
+        "phpunit/phpunit": "^13.4"
     },
     "scripts": {
         "generate": "rm -rf src/Api src/Model docs/Api docs/Model && openapi-generator-cli generate -c config.yaml && rm -rf tests/Api tests/Model"
     },
     "autoload": {
         "psr-4": {
-            "Aternos\\ModrinthApi\\": "lib/"
+            "Aternos\\ModrinthApi\\": "src/"
         }
     },
     "autoload-dev": {

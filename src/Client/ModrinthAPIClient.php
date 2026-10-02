@@ -42,11 +42,11 @@ use Aternos\ModrinthApi\Model\Project as ProjectModel;
 use Aternos\ModrinthApi\Model\Report as ReportModel;
 use Aternos\ModrinthApi\Model\Statistics;
 use Aternos\ModrinthApi\Model\TeamMember as TeamMemberModel;
+use Aternos\ModrinthApi\Model\Thread as ThreadModel;
 use Aternos\ModrinthApi\Model\ThreadMessageBody;
 use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
-use Aternos\ModrinthApi\Model\Thread as ThreadModel;
 use Psr\Http\Client\ClientInterface;
 
 

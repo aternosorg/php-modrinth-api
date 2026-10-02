@@ -142,11 +142,12 @@ class Configuration
      * Sets API key
      *
      * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     * @param string $key              API key or token
+     * @param string|null $key API key or token
      *
      * @return $this
      */
-    public function setApiKey(string $apiKeyIdentifier, string $key): static
+    // Temporary override until openapi-generator makes this nullable again. Do not remove.
+    public function setApiKey(string $apiKeyIdentifier, ?string $key): static
     {
         $this->apiKeys[$apiKeyIdentifier] = $key;
         return $this;

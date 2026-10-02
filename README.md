@@ -15,6 +15,7 @@ composer require aternos/modrinth-api
 ## Usage
 
 The main entry point for the API is the `ModrinthAPIClient` class.
+
 ```php
 <?php
 use Aternos\ModrinthApi\Client\ModrinthAPIClient;
@@ -55,9 +56,9 @@ foreach ($projects as $project) {
 ### Search for Projects with Options
 You can apply filters and change the sort order when searching for projects.
 All options are optional and can be combined.
+
 ```php
-use \Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
-use \Aternos\ModrinthApi\Client\Options\SearchIndex;
+use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;use Aternos\ModrinthApi\Client\Options\SearchIndex;
 
 $options = new ProjectSearchOptions();
 $options->setQuery("mclogs");
@@ -67,12 +68,10 @@ $projects = $modrinthClient->getProjects($options);
 
 #### Facets
 One way to filter search results are facets. Facets specify which loader, category, game version or license to filter for.
-You need to provide exactly one AND group which can consist of multiple OR groups: 
+You need to provide exactly one AND group which can consist of multiple OR groups:
+
 ```php
-use \Aternos\ModrinthApi\Client\Options\Facets\Facet;
-use \Aternos\ModrinthApi\Client\Options\Facets\FacetType;
-use \Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;
-use \Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;
+use Aternos\ModrinthApi\Client\Options\Facets\Facet;use Aternos\ModrinthApi\Client\Options\Facets\FacetANDGroup;use Aternos\ModrinthApi\Client\Options\Facets\FacetORGroup;use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 
 $facetOrGroup = new FacetORGroup();
 $facetOrGroup->addFacet(new Facet(FacetType::VERSIONS, "1.20.1"))
@@ -177,8 +176,9 @@ $versions = $modrinthClient->getVersions(["xzRGr4AC", "EwNN8uNA"]);
 
 ## Hashes
 The modrinth API also allows you to find a version by its SHA1 or SHA512 hash:
+
 ```php
-use \Aternos\ModrinthApi\Client\HashAlgorithm;
+use Aternos\ModrinthApi\Client\HashAlgorithm;
 
 $hash = "5952253d61e199e82eb852c5824c3981b29b209d";
 

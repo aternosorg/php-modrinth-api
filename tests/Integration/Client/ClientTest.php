@@ -195,12 +195,11 @@ class ClientTest extends TestCase
 
     public function testGetRandomProjects(): void
     {
-        $this->markTestSkipped("Known issue: https://github.com/modrinth/labrinth/issues/548");
-//        $projects = $this->apiClient->getRandomProjects(5);
-//        $this->assertEquals(5, sizeof($projects));
-//        foreach ($projects as $project) {
-//            $this->assertNotNull($project);
-//        }
+        $projects = $this->apiClient->getRandomProjects(5);
+        $this->assertEquals(5, sizeof($projects));
+        foreach ($projects as $project) {
+            $this->assertNotNull($project);
+        }
     }
 
     public function testCheckProjectValidity(): void
