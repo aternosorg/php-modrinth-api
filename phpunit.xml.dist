@@ -5,10 +5,6 @@
          colors="true">
     <testsuites>
         <testsuite name="integration">
-            <!--
-            <directory>tests/Integration/Api</directory>
-            <directory>tests/Integration/Model</directory>
-            -->
             <directory>tests/Integration/Client</directory>
         </testsuite>
         <testsuite name="unit">
