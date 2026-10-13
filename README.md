@@ -223,7 +223,7 @@ $teams = $modrinthClient->getTeams(["ThaUQrOs"]);
 ```
 
 ## Tags
-You can fetch all available categories, loaders, game versions and licenses from the API.
+You can fetch all available categories, loaders and game versions from the API.
 Our library provides methods to search projects by these directly:
 ```php
 $categories = $modrinthClient->getCategories();
@@ -232,8 +232,6 @@ $loaders = $modrinthClient->getLoaders();
 $loaders[0]->searchProjects();
 $gameVersions = $modrinthClient->getGameVersions();
 $gameVersions[0]->searchProjects();
-$licenses = $modrinthClient->getLicenses();
-$licenses[0]->searchProjects();
 ```
 
 You can also fetch donation platforms and report types:
