@@ -7,6 +7,9 @@ use Aternos\ModrinthApi\Client\Options\Facets\Facet;
 use Aternos\ModrinthApi\Client\Options\Facets\FacetType;
 use Aternos\ModrinthApi\Model\LicenseTag;
 
+/**
+ * @deprecated Will be removed in next major release
+ */
 class License extends LicenseTag
 {
     use SearchableTag;
