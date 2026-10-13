@@ -30,9 +30,6 @@
     "require-dev": {
         "phpunit/phpunit": "^13.4"
     },
-    "scripts": {
-        "generate": "rm -rf src/Api src/Model docs/Api docs/Model && openapi-generator-cli generate -c config.yaml && rm -rf tests/Api tests/Model"
-    },
     "autoload": {
         "psr-4": {
             "Aternos\\ModrinthApi\\": "src/"
