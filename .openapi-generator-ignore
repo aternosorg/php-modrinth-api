@@ -24,11 +24,10 @@
 
 .gitignore
 .php-cs-fixer.dist.php
-.travis.yml
 .phplint.yml
+.travis.yml
 git_push.sh
 README.md
 composer.json
 phpunit.xml.dist
-tests/Api/*
-tests/Model/*
+tests/**
