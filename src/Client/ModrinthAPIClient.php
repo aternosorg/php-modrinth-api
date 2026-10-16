@@ -48,8 +48,8 @@ use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
 use Composer\InstalledVersions;
+use GuzzleHttp\ClientInterface;
 use OutOfBoundsException;
-use Psr\Http\Client\ClientInterface;
 
 
 /**
