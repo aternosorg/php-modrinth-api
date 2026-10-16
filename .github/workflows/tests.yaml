@@ -8,7 +8,7 @@ on:
       - master
 
 jobs:
-  tests:
+  unit-tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,7 +16,7 @@ jobs:
       matrix:
         php-version: [ '8.4', '8.5' ]
 
-    name: Run tests on PHP v${{ matrix.php-version }}
+    name: Run unit tests on PHP v${{ matrix.php-version }}
 
     steps:
       - name: Checkout code
@@ -27,7 +27,8 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           extensions: curl, json, mbstring
-          coverage: none
+          coverage: pcov
+          tools: composer:v2
 
       - name: Set composer cache directory
         id: composer-cache
@@ -45,5 +46,44 @@ jobs:
       - name: Install composer dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
-      - name: Run phpunit tests
-        run: vendor/bin/phpunit --colors=always --testdox
+      - name: Run phpunit unit tests with coverage
+        run: vendor/bin/phpunit --testsuite=unit --colors=always --testdox --coverage-clover=coverage.xml
+
+  # integration tests send requests to the live Modrinth API,
+  # so they only run on the master branch and when started manually
+  integration-tests:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    name: Run integration tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: curl, json, mbstring
+          coverage: none
+          tools: composer:v2
+
+      - name: Set composer cache directory
+        id: composer-cache
+        run: echo "COMPOSER_CACHE_DIRECTORY=$(composer config cache-files-dir)" >> $GITHUB_ENV
+
+      - name: Restore composer from cache
+        uses: actions/cache@v6
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIRECTORY }}
+          key: ${{ runner.os }}-composer-8.5-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-8.5-
+            ${{ runner.os }}-composer-
+
+      - name: Install composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Run phpunit integration tests
+        run: vendor/bin/phpunit --testsuite=integration --colors=always --testdox
