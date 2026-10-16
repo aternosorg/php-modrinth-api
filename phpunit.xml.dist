@@ -9,16 +9,16 @@
          displayDetailsOnTestsThatTriggerNotices="true"
          displayDetailsOnTestsThatTriggerWarnings="true">
     <testsuites>
-        <testsuite name="integration">
-            <directory>tests/Integration/Client</directory>
-        </testsuite>
         <testsuite name="unit">
             <directory>tests/Unit/Client</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory>tests/Integration/Client</directory>
         </testsuite>
     </testsuites>
     <source>
         <include>
-            <directory>src</directory>
+            <directory>src/Client</directory>
         </include>
     </source>
     <php>
