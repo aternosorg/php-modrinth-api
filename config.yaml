@@ -1,5 +1,5 @@
 invokerPackage: Aternos\ModrinthApi
-artifactVersion: 4.0.0
+artifactVersion: 4.1.0
 generatorName: php-nextgen
 outputDir: .
 sourceFolder: src
