@@ -96,7 +96,7 @@ class ModrinthAPIClient
     public function __construct(?string $apiToken = null, ?Configuration $configuration = null, ?ClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient;
-        $this->configuration = $configuration ?? (Configuration::getDefaultConfiguration())
+        $this->configuration = $configuration ?? new Configuration()
             ->setUserAgent(static::getDefaultUserAgent());
         $this->setApiToken($apiToken);
     }
