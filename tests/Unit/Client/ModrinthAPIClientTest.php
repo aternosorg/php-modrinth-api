@@ -14,9 +14,11 @@ use Aternos\ModrinthApi\Client\Threads\ThreadMessageType;
 use Aternos\ModrinthApi\Client\User;
 use Aternos\ModrinthApi\Configuration;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
+use Composer\InstalledVersions;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -31,7 +33,35 @@ class ModrinthAPIClientTest extends ClientTestCase
         $client = new ModrinthAPIClient();
 
         $this->assertInstanceOf(ModrinthAPIClient::class, $client);
-        $this->assertStringStartsWith("php-modrinth-api/", Configuration::getDefaultConfiguration()->getUserAgent());
+        $this->assertEquals(ModrinthAPIClient::getDefaultUserAgent(), Configuration::getDefaultConfiguration()->getUserAgent());
+    }
+
+    public function testGetLibraryVersionReturnsInstalledVersion(): void
+    {
+        $this->assertEquals(
+            InstalledVersions::getPrettyVersion(ModrinthAPIClient::PACKAGE_NAME),
+            ModrinthAPIClient::getLibraryVersion()
+        );
+        $this->assertNotEquals("unknown", ModrinthAPIClient::getLibraryVersion());
+    }
+
+    public function testDefaultUserAgentContainsPackageAndVersion(): void
+    {
+        $this->assertEquals(
+            "aternos/php-modrinth-api/" . ModrinthAPIClient::getLibraryVersion(),
+            ModrinthAPIClient::getDefaultUserAgent()
+        );
+    }
+
+    public function testDefaultUserAgentIsSentWithRequests(): void
+    {
+        $responses = [$this->fixtureResponse("get_project_response")];
+        $stack = HandlerStack::create(new MockHandler($responses));
+        $stack->push(Middleware::history($this->requests));
+        $client = new ModrinthAPIClient(null, null, new Client(['handler' => $stack]));
+
+        $client->getProject("modmenu");
+        $this->assertEquals(ModrinthAPIClient::getDefaultUserAgent(), $this->getRequest()->getHeaderLine("User-Agent"));
     }
 
     /**
@@ -52,7 +82,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
         // reset the shared configuration so that it cannot affect other tests
         Configuration::getDefaultConfiguration()
-            ->setUserAgent("php-modrinth-api/2.0.0")
+            ->setUserAgent(ModrinthAPIClient::getDefaultUserAgent())
             ->setApiKey("Authorization", null);
     }
 

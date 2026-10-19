@@ -45,7 +45,9 @@ use Aternos\ModrinthApi\Model\ThreadMessageBody;
 use Aternos\ModrinthApi\Model\User as UserModel;
 use Aternos\ModrinthApi\Model\UserPayoutHistory;
 use Aternos\ModrinthApi\Model\Version as VersionModel;
-use Psr\Http\Client\ClientInterface;
+use Composer\InstalledVersions;
+use GuzzleHttp\ClientInterface;
+use OutOfBoundsException;
 
 
 /**
@@ -56,6 +58,11 @@ use Psr\Http\Client\ClientInterface;
  */
 class ModrinthAPIClient
 {
+    /**
+     * Name of this package on packagist, used to look up the installed version
+     */
+    public const string PACKAGE_NAME = "aternos/modrinth-api";
+
     protected ?ClientInterface $httpClient;
 
     protected Configuration $configuration;
@@ -90,8 +97,32 @@ class ModrinthAPIClient
     {
         $this->httpClient = $httpClient;
         $this->configuration = $configuration ?? (Configuration::getDefaultConfiguration())
-            ->setUserAgent("php-modrinth-api/2.0.0");
+            ->setUserAgent(static::getDefaultUserAgent());
         $this->setApiToken($apiToken);
+    }
+
+    /**
+     * Get the installed version of this library, e.g. "4.0.0" or "dev-master"
+     * Returns "unknown" if the version cannot be determined, e.g. if the library was not installed using composer.
+     * @return string
+     */
+    public static function getLibraryVersion(): string
+    {
+        try {
+            return InstalledVersions::getPrettyVersion(static::PACKAGE_NAME) ?? "unknown";
+        } catch (OutOfBoundsException) {
+            return "unknown";
+        }
+    }
+
+    /**
+     * Get the user agent that identifies this library, e.g. "aternos/php-modrinth-api/4.0.0"
+     * It is used unless a different user agent is set with {@see setUserAgent()}.
+     * @return string
+     */
+    public static function getDefaultUserAgent(): string
+    {
+        return "aternos/php-modrinth-api/" . static::getLibraryVersion();
     }
 
     /**

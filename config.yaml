@@ -1,6 +1,7 @@
 invokerPackage: Aternos\ModrinthApi
-artifactVersion: 3.2.2
+artifactVersion: 4.1.0
 generatorName: php-nextgen
 outputDir: .
+sourceFolder: src
 inputSpec: https://raw.githubusercontent.com/modrinth/code/refs/heads/main/apps/docs/public/openapi.yaml
 enumUnknownDefaultCase: true

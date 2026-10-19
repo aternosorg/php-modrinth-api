@@ -37,7 +37,7 @@ class ClientTest extends TestCase
     public function setUp(): void
     {
         $this->apiClient = new ModrinthAPIClient();
-        $this->apiClient->setUserAgent("aternos/php-modrinth-api@2.0.0 (contact@aternos.org)");
+        $this->apiClient->setUserAgent(ModrinthAPIClient::getDefaultUserAgent() . " (contact@aternos.org)");
     }
 
     protected function assertValidProjectList($list): void
