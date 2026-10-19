@@ -12,13 +12,11 @@ use Aternos\ModrinthApi\Client\Options\ProjectSearchOptions;
 use Aternos\ModrinthApi\Client\Tags\Category;
 use Aternos\ModrinthApi\Client\Tags\DonationPlatform;
 use Aternos\ModrinthApi\Client\Tags\GameVersion;
-use Aternos\ModrinthApi\Client\Tags\License;
 use Aternos\ModrinthApi\Client\Tags\Loader;
 use Aternos\ModrinthApi\Client\Tags\ProjectType;
 use Aternos\ModrinthApi\Model\CategoryTag;
 use Aternos\ModrinthApi\Model\DonationPlatformTag;
 use Aternos\ModrinthApi\Model\GameVersionTag;
-use Aternos\ModrinthApi\Model\LicenseTag;
 use Aternos\ModrinthApi\Model\LoaderTag;
 use Aternos\ModrinthApi\Tests\Unit\Client\ClientTestCase;
 
@@ -66,14 +64,6 @@ class TagsTest extends ClientTestCase
         ]));
     }
 
-    protected function license(ModrinthAPIClient $client): License
-    {
-        return new License($client, new LicenseTag([
-            "short" => "MIT",
-            "name" => "MIT License",
-        ]));
-    }
-
     public function testCategoryToFacet(): void
     {
         $facet = $this->category($this->createClient())->toFacet();
@@ -98,14 +88,6 @@ class TagsTest extends ClientTestCase
 
         $this->assertEquals(FacetType::VERSIONS, $facet->getType());
         $this->assertEquals("1.20.1", $facet->getValue());
-    }
-
-    public function testLicenseToFacet(): void
-    {
-        $facet = $this->license($this->createClient())->toFacet();
-
-        $this->assertEquals(FacetType::LICENSE, $facet->getType());
-        $this->assertEquals("MIT", $facet->getValue());
     }
 
     public function testProjectTypeGetNameAndToFacet(): void
@@ -173,15 +155,5 @@ class TagsTest extends ClientTestCase
 
         parse_str($this->getRequest()->getUri()->getQuery(), $query);
         $this->assertEquals('[["project_type = shader"]]', $query["facets"]);
-    }
-
-    public function testLicenseSearchProjects(): void
-    {
-        $client = $this->createClient([$this->emptySearchResponse()]);
-
-        $this->license($client)->searchProjects();
-
-        parse_str($this->getRequest()->getUri()->getQuery(), $query);
-        $this->assertEquals('[["license = MIT"]]', $query["facets"]);
     }
 }

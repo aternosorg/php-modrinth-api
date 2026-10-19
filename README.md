@@ -331,9 +331,6 @@ Other tags:
 $sideTypes = $modrinthClient->getSideTypes();
 $donationPlatforms = $modrinthClient->getDonationPlatforms();
 $reportTypes = $modrinthClient->getReportTypes();
-
-// get the full text of a license by its SPDX id
-$licenseText = $modrinthClient->getLicenseText("MIT");
 ```
 
 ## Updating the generated code
