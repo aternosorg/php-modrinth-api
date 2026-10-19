@@ -20,41 +20,41 @@ class VersionDependencyTest extends ClientTestCase
         return $this->fixtureModel("get_version_response", VersionModel::class)->getDependencies()[$index];
     }
 
-    public function testGetProject(): void
+    public function testFetchProject(): void
     {
         $client = $this->createClient([$this->fixtureResponse("get_project_response")]);
         $dependency = new VersionDependency($client, $this->getExampleDependencyModel());
 
-        $project = $dependency->getProject();
+        $project = $dependency->fetchProject();
         $this->assertInstanceOf(Project::class, $project);
         $this->assertRequest("GET", "/v2/project/AANobbMI");
     }
 
-    public function testGetProjectReturnsNullWithoutProjectId(): void
+    public function testFetchProjectReturnsNullWithoutProjectId(): void
     {
         $client = $this->createClient();
         $dependency = new VersionDependency($client, $this->getExampleDependencyModel(1));
 
-        $this->assertNull($dependency->getProject());
+        $this->assertNull($dependency->fetchProject());
         $this->assertRequestCount(0);
     }
 
-    public function testGetVersion(): void
+    public function testFetchVersion(): void
     {
         $client = $this->createClient([$this->fixtureResponse("get_version_response")]);
         $dependency = new VersionDependency($client, $this->getExampleDependencyModel());
 
-        $version = $dependency->getVersion();
+        $version = $dependency->fetchVersion();
         $this->assertInstanceOf(Version::class, $version);
         $this->assertRequest("GET", "/v2/version/vgceLbdH");
     }
 
-    public function testGetVersionReturnsNullWithoutVersionId(): void
+    public function testFetchVersionReturnsNullWithoutVersionId(): void
     {
         $client = $this->createClient();
         $dependency = new VersionDependency($client, $this->getExampleDependencyModel(1));
 
-        $this->assertNull($dependency->getVersion());
+        $this->assertNull($dependency->fetchVersion());
         $this->assertRequestCount(0);
     }
 }

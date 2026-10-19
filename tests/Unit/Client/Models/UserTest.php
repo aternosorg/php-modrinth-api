@@ -25,53 +25,53 @@ class UserTest extends ClientTestCase
         $this->assertEquals($model->getUsername(), $user->getUsername());
     }
 
-    public function testGetProjects(): void
+    public function testFetchProjects(): void
     {
         $client = $this->createClient([
             $this->jsonResponse([$this->fixtureData("get_project_response")]),
         ]);
         $user = new User($client, $this->getExampleUserModel());
 
-        $projects = $user->getProjects();
+        $projects = $user->fetchProjects();
         $this->assertCount(1, $projects);
         $this->assertInstanceOf(Project::class, $projects[0]);
         $this->assertRequest("GET", "/v2/user/Dc7EYhxG/projects");
     }
 
-    public function testGetNotifications(): void
+    public function testFetchNotifications(): void
     {
         $client = $this->createAuthenticatedClient([
             $this->jsonResponse([$this->fixtureData("get_notification_response")]),
         ]);
         $user = new User($client, $this->getExampleUserModel());
 
-        $notifications = $user->getNotifications();
+        $notifications = $user->fetchNotifications();
         $this->assertCount(1, $notifications);
         $this->assertInstanceOf(Notification::class, $notifications[0]);
         $this->assertRequest("GET", "/v2/user/Dc7EYhxG/notifications");
         $this->assertRequestAuthenticated();
     }
 
-    public function testGetFollowedProjects(): void
+    public function testFetchFollowedProjects(): void
     {
         $client = $this->createAuthenticatedClient([
             $this->jsonResponse([$this->fixtureData("get_project_response")]),
         ]);
         $user = new User($client, $this->getExampleUserModel());
 
-        $projects = $user->getFollowedProjects();
+        $projects = $user->fetchFollowedProjects();
         $this->assertCount(1, $projects);
         $this->assertInstanceOf(Project::class, $projects[0]);
         $this->assertRequest("GET", "/v2/user/Dc7EYhxG/follows");
         $this->assertRequestAuthenticated();
     }
 
-    public function testGetPayoutHistory(): void
+    public function testFetchPayoutHistory(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_payout_history_response")]);
         $user = new User($client, $this->getExampleUserModel());
 
-        $history = $user->getPayoutHistory();
+        $history = $user->fetchPayoutHistory();
         $this->assertInstanceOf(UserPayoutHistory::class, $history);
         $this->assertEquals("78.90", $history->getLastMonth());
         $this->assertRequest("GET", "/v2/user/Dc7EYhxG/payouts");

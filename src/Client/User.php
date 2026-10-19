@@ -17,41 +17,45 @@ class User extends UserModel
     }
 
     /**
-     * Get the user's projects
+     * Fetch the user's projects
+     * This sends a request to the Modrinth API every time it is called.
      * @return Project[]
      * @throws ApiException
      */
-    public function getProjects(): array
+    public function fetchProjects(): array
     {
         return $this->client->getUserProjects($this->getId());
     }
 
     /**
-     * Get the user's notifications (requires authentication)
+     * Fetch the user's notifications (requires authentication)
+     * This sends a request to the Modrinth API every time it is called.
      * @return Notification[]
      * @throws ApiException
      */
-    public function getNotifications(): array
+    public function fetchNotifications(): array
     {
         return $this->client->getUserNotifications($this->getId());
     }
 
     /**
-     * Get the user projects this user follows (requires authentication)
+     * Fetch the projects this user follows (requires authentication)
+     * This sends a request to the Modrinth API every time it is called.
      * @return Project[]
      * @throws ApiException
      */
-    public function getFollowedProjects(): array
+    public function fetchFollowedProjects(): array
     {
         return $this->client->getFollowedProjects($this->getId());
     }
 
     /**
-     * Get the user's payout history (requires authentication)
+     * Fetch the user's payout history (requires authentication)
+     * This sends a request to the Modrinth API every time it is called.
      * @return UserPayoutHistory
      * @throws ApiException
      */
-    public function getPayoutHistory(): UserPayoutHistory
+    public function fetchPayoutHistory(): UserPayoutHistory
     {
         return $this->client->getPayoutHistory($this->getId());
     }

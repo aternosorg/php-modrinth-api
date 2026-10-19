@@ -28,12 +28,13 @@ class ThreadMessage extends ThreadMessageModel
     }
 
     /**
-     * Fetch the user that wrote this message from the API.
+     * Fetch the user that wrote this message
+     * This sends a request to the Modrinth API every time it is called.
      * Returns null if the message has no author, e.g. for system messages.
      * @return User|null
      * @throws ApiException
      */
-    public function getAuthor(): ?User
+    public function fetchAuthor(): ?User
     {
         if ($this->getAuthorId() === null) {
             return null;

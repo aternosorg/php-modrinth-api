@@ -16,11 +16,13 @@ class VersionDependency extends VersionDependencyModel
     }
 
     /**
-     * Get the project of this dependency (if available)
+     * Fetch the project of this dependency
+     * This sends a request to the Modrinth API every time it is called.
+     * Returns null if the dependency has no project id.
      * @return Project|null
      * @throws ApiException
      */
-    public function getProject(): ?Project
+    public function fetchProject(): ?Project
     {
         if ($this->getProjectId() === null) {
             return null;
@@ -30,11 +32,13 @@ class VersionDependency extends VersionDependencyModel
     }
 
     /**
-     * Get the version of this dependency (if available)
+     * Fetch the version of this dependency
+     * This sends a request to the Modrinth API every time it is called.
+     * Returns null if the dependency has no version id.
      * @return Version|null
      * @throws ApiException
      */
-    public function getVersion(): ?Version
+    public function fetchVersion(): ?Version
     {
         if ($this->getVersionId() === null) {
             return null;

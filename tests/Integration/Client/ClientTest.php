@@ -185,7 +185,7 @@ class ClientTest extends TestCase
     public function testGetProjectVersionsAndDependencies(): void
     {
         $project = $this->apiClient->getProject("mclogs");
-        $this->assertNotEmpty($project->getDependencies());
+        $this->assertNotEmpty($project->fetchDependencies());
         $this->assertNotEmpty($project->getVersions());
         $this->assertNotEmpty($project->getVersions(
             ["forge"],
@@ -228,7 +228,7 @@ class ClientTest extends TestCase
         $version = $this->apiClient->getVersion("moYTqMH3");
         $this->assertNotNull($version);
         $this->assertEquals("VPo0otUH", $version->getProjectId());
-        $this->assertEquals("VPo0otUH", $version->getProject()->getId());
+        $this->assertEquals("VPo0otUH", $version->fetchProject()->getId());
     }
 
     public function testGetVersions(): void
@@ -239,7 +239,7 @@ class ClientTest extends TestCase
         foreach ($versions as $version) {
             $this->assertNotNull($version);
             $this->assertEquals("VPo0otUH", $version->getProjectId());
-            $this->assertEquals("VPo0otUH", $version->getProject()->getId());
+            $this->assertEquals("VPo0otUH", $version->fetchProject()->getId());
         }
     }
 
@@ -285,7 +285,7 @@ class ClientTest extends TestCase
         $this->assertNotNull($version);
         $this->assertEquals("VPo0otUH", $version->getProjectId());
         $this->assertEquals(
-            $version->getProject()->fetchProjectVersions(["spigot"], ["1.20.1"])[0]->getId(),
+            $version->fetchProject()->fetchProjectVersions(["spigot"], ["1.20.1"])[0]->getId(),
             $version->getId(),
         );
     }
@@ -305,7 +305,7 @@ class ClientTest extends TestCase
             $this->assertNotNull($version);
             $this->assertEquals("VPo0otUH", $version->getProjectId());
             $this->assertEquals(
-                $version->getProject()->fetchProjectVersions(["spigot"], ["1.20.1"])[0]->getId(),
+                $version->fetchProject()->fetchProjectVersions(["spigot"], ["1.20.1"])[0]->getId(),
                 $version->getId(),
             );
         }
@@ -316,7 +316,7 @@ class ClientTest extends TestCase
         $user = $this->apiClient->getUser("Julian");
         $this->assertNotNull($user);
         $this->assertEquals("Julian", $user->getUsername());
-        $projects = $user->getProjects();
+        $projects = $user->fetchProjects();
         $this->assertNotNull($projects);
     }
 
@@ -548,14 +548,14 @@ class ClientTest extends TestCase
     {
         $project = $this->apiClient->getProject("mclogs");
 
-        $members = $project->getMembers();
+        $members = $project->fetchMembers();
         $this->assertNotEmpty($members);
         foreach ($members as $member) {
             $this->assertInstanceOf(TeamMember::class, $member);
             $this->assertNotEmpty($member->getUser()->getUsername());
         }
 
-        $this->assertInstanceOf(ProjectDependencies::class, $project->getDependencies());
+        $this->assertInstanceOf(ProjectDependencies::class, $project->fetchDependencies());
     }
 
     public function testGetLatestVersionFromHashWithVersionTypes(): void
@@ -741,7 +741,7 @@ class ClientTest extends TestCase
     {
         $version = $this->apiClient->getVersion("moYTqMH3");
 
-        $author = $version->getAuthor();
+        $author = $version->fetchAuthor();
         $this->assertInstanceOf(User::class, $author);
         $this->assertEquals($version->getAuthorId(), $author->getId());
         $this->assertNotEmpty($author->getUsername());
@@ -790,7 +790,7 @@ class ClientTest extends TestCase
         $members = $this->apiClient->getProjectMembers("VPo0otUH");
         $this->assertNotEmpty($members);
 
-        $teamMembers = $members[0]->getTeamMembers();
+        $teamMembers = $members[0]->fetchTeamMembers();
         $this->assertNotEmpty($teamMembers);
         foreach ($teamMembers as $teamMember) {
             $this->assertInstanceOf(TeamMember::class, $teamMember);
@@ -804,7 +804,7 @@ class ClientTest extends TestCase
         $this->assertValidProjectList($projects);
 
         $searchProject = $projects[0];
-        $fullProject = $searchProject->getFullProject();
+        $fullProject = $searchProject->fetchFullProject();
         $this->assertEquals($searchProject->getProjectId(), $fullProject->getId());
     }
 }

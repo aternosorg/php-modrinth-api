@@ -25,11 +25,12 @@ class TeamMember extends TeamMemberModel
     }
 
     /**
-     * Fetch all members of the team this member belongs to from the API
+     * Fetch all members of the team this member belongs to
+     * This sends a request to the Modrinth API every time it is called.
      * @return TeamMember[]
      * @throws ApiException
      */
-    public function getTeamMembers(): array
+    public function fetchTeamMembers(): array
     {
         return $this->client->getTeamMembers($this->getTeamId());
     }

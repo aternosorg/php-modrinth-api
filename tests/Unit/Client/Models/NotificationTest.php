@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class NotificationTest extends TestCase
 {
-    public function testGetUserReturnsCorrectUser(): void
+    public function testFetchUserReturnsCorrectUser(): void
     {
         // Here we must mock the client, because it requests the user from the API to get all details
         $handler = new MockHandler([
@@ -24,7 +24,7 @@ class NotificationTest extends TestCase
         $notification = new Notification($client, $this->getExampleNotificationModel());
         // Dc7EYhxG -> https://modrinth.com/user/Prospector
         $user = $client->getUser("Dc7EYhxG");
-        $this->assertEquals($user, $notification->getUser());
+        $this->assertEquals($user, $notification->fetchUser());
     }
 
     protected function getExampleNotificationModel(): \Aternos\ModrinthApi\Model\Notification

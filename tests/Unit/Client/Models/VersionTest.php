@@ -25,23 +25,23 @@ class VersionTest extends ClientTestCase
         $this->assertEquals($model->getVersionNumber(), $version->getVersionNumber());
     }
 
-    public function testGetProject(): void
+    public function testFetchProject(): void
     {
         $client = $this->createClient([$this->fixtureResponse("get_project_response")]);
         $version = new Version($client, $this->getExampleVersionModel());
 
-        $project = $version->getProject();
+        $project = $version->fetchProject();
         $this->assertInstanceOf(Project::class, $project);
         $this->assertEquals("modmenu", $project->getSlug());
         $this->assertRequest("GET", "/v2/project/VPo0otUH");
     }
 
-    public function testGetAuthor(): void
+    public function testFetchAuthor(): void
     {
         $client = $this->createClient([$this->fixtureResponse("get_user_response")]);
         $version = new Version($client, $this->getExampleVersionModel());
 
-        $author = $version->getAuthor();
+        $author = $version->fetchAuthor();
         $this->assertInstanceOf(User::class, $author);
         $this->assertEquals("Prospector", $author->getUsername());
         $this->assertRequest("GET", "/v2/user/b1AIbOxO");
