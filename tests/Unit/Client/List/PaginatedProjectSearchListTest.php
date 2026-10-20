@@ -28,7 +28,7 @@ class PaginatedProjectSearchListTest extends ClientTestCase
      */
     protected function searchPage(int $offset, int $limit = self::LIMIT, int $totalHits = self::TOTAL_HITS): Response
     {
-        $template = $this->fixtureData("search_projects_response")["hits"][0];
+        $template = $this->fixtureData("searchProjects")["hits"][0];
 
         $hits = [];
         for ($i = $offset; $i < min($offset + $limit, $totalHits); $i++) {

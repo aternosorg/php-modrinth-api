@@ -13,7 +13,7 @@ class UserTest extends ClientTestCase
 {
     protected function getExampleUserModel(): UserModel
     {
-        return $this->fixtureModel("get_user_response", UserModel::class);
+        return $this->fixtureModel("getUser", UserModel::class);
     }
 
     public function testConstructorCopiesTheModelData(): void
@@ -28,7 +28,7 @@ class UserTest extends ClientTestCase
     public function testFetchProjects(): void
     {
         $client = $this->createClient([
-            $this->jsonResponse([$this->fixtureData("get_project_response")]),
+            $this->jsonResponse([$this->fixtureData("getProject")]),
         ]);
         $user = new User($client, $this->getExampleUserModel());
 
@@ -41,7 +41,7 @@ class UserTest extends ClientTestCase
     public function testFetchNotifications(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_notification_response")]),
+            $this->jsonResponse([$this->fixtureData("getNotification")]),
         ]);
         $user = new User($client, $this->getExampleUserModel());
 
@@ -55,7 +55,7 @@ class UserTest extends ClientTestCase
     public function testFetchFollowedProjects(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_project_response")]),
+            $this->jsonResponse([$this->fixtureData("getProject")]),
         ]);
         $user = new User($client, $this->getExampleUserModel());
 
@@ -68,7 +68,7 @@ class UserTest extends ClientTestCase
 
     public function testFetchPayoutHistory(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_payout_history_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getPayoutHistory")]);
         $user = new User($client, $this->getExampleUserModel());
 
         $history = $user->fetchPayoutHistory();

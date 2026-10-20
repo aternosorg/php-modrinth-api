@@ -17,12 +17,12 @@ class VersionDependencyTest extends ClientTestCase
      */
     protected function getExampleDependencyModel(int $index = 0): VersionDependencyModel
     {
-        return $this->fixtureModel("get_version_response", VersionModel::class)->getDependencies()[$index];
+        return $this->fixtureModel("getVersion", VersionModel::class)->getDependencies()[$index];
     }
 
     public function testFetchProject(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_project_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getProject")]);
         $dependency = new VersionDependency($client, $this->getExampleDependencyModel());
 
         $project = $dependency->fetchProject();
@@ -41,7 +41,7 @@ class VersionDependencyTest extends ClientTestCase
 
     public function testFetchVersion(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_version_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getVersion")]);
         $dependency = new VersionDependency($client, $this->getExampleDependencyModel());
 
         $version = $dependency->fetchVersion();

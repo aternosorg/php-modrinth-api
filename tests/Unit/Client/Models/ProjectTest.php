@@ -17,7 +17,7 @@ class ProjectTest extends ClientTestCase
 {
     protected function getExampleProjectModel(): ProjectModel
     {
-        return $this->fixtureModel("get_project_response", ProjectModel::class);
+        return $this->fixtureModel("getProject", ProjectModel::class);
     }
 
     public function testConstructorCopiesTheModelData(): void
@@ -33,7 +33,7 @@ class ProjectTest extends ClientTestCase
 
     public function testFetchDependencies(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_project_dependencies_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getDependencies")]);
         $project = new Project($client, $this->getExampleProjectModel());
 
         $dependencies = $project->fetchDependencies();
@@ -46,7 +46,7 @@ class ProjectTest extends ClientTestCase
     public function testFetchProjectVersions(): void
     {
         $client = $this->createClient([
-            $this->jsonResponse([$this->fixtureData("get_version_response")]),
+            $this->jsonResponse([$this->fixtureData("getVersion")]),
         ]);
         $project = new Project($client, $this->getExampleProjectModel());
 
@@ -61,7 +61,7 @@ class ProjectTest extends ClientTestCase
     public function testFetchProjectVersionsPassesFilters(): void
     {
         $client = $this->createClient([
-            $this->jsonResponse([$this->fixtureData("get_version_response")]),
+            $this->jsonResponse([$this->fixtureData("getVersion")]),
         ]);
         $project = new Project($client, $this->getExampleProjectModel());
 
@@ -76,7 +76,7 @@ class ProjectTest extends ClientTestCase
 
     public function testFetchThread(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
         $project = new Project($client, $this->getExampleProjectModel());
 
         $thread = $project->fetchThread();
@@ -88,7 +88,7 @@ class ProjectTest extends ClientTestCase
 
     public function testFetchMembers(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_team_members_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getTeamMembers")]);
         $project = new Project($client, $this->getExampleProjectModel());
 
         $members = $project->fetchMembers();

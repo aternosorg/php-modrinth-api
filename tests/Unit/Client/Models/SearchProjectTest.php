@@ -21,7 +21,7 @@ class SearchProjectTest extends TestCase
         $projectResultModel = $this->getExampleProjectResultModel();
         // Here we must mock the client, because it requests the user from the API to get all details
         $handler = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_project_response.json"))
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getProject.json"))
         ]);
         $client = new ModrinthAPIClient(null, null, new Client(['handler' => HandlerStack::create($handler)]));
 
@@ -32,7 +32,7 @@ class SearchProjectTest extends TestCase
     public function testFetchFullProjectRequestsTheProjectId(): void
     {
         $handler = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_project_response.json"))
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getProject.json"))
         ]);
         $requests = [];
         $stack = HandlerStack::create($handler);
@@ -49,7 +49,7 @@ class SearchProjectTest extends TestCase
     public function testFetchDependenciesUsesTheProjectId(): void
     {
         $handler = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_project_dependencies_response.json"))
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getDependencies.json"))
         ]);
         $requests = [];
         $stack = HandlerStack::create($handler);
@@ -65,7 +65,7 @@ class SearchProjectTest extends TestCase
     public function testFetchAuthor(): void
     {
         $handler = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_user_response.json"))
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getUser.json"))
         ]);
         $requests = [];
         $stack = HandlerStack::create($handler);
@@ -105,7 +105,7 @@ class SearchProjectTest extends TestCase
 
     protected function getExampleProjectResultModel(): ProjectResult
     {
-        $json = json_decode(file_get_contents(__DIR__ . "/../Fixtures/search_projects_response.json"), true);
+        $json = json_decode(file_get_contents(__DIR__ . "/../Fixtures/searchProjects.json"), true);
         $modelJson = $json["hits"][0];
         return new ProjectResult($modelJson);
     }

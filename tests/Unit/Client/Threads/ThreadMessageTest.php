@@ -14,7 +14,7 @@ class ThreadMessageTest extends ClientTestCase
 {
     protected function getExampleThread(ModrinthAPIClient $client): Thread
     {
-        return new Thread($client, $this->fixtureModel("get_thread_response", ThreadModel::class));
+        return new Thread($client, $this->fixtureModel("getThread", ThreadModel::class));
     }
 
     public function testConstructorCopiesTheModelData(): void
@@ -39,7 +39,7 @@ class ThreadMessageTest extends ClientTestCase
 
     public function testFetchAuthor(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_user_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getUser")]);
         $message = $this->getExampleThread($client)->getMessages()[0];
 
         $author = $message->fetchAuthor();
@@ -60,7 +60,7 @@ class ThreadMessageTest extends ClientTestCase
 
     public function testReply(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
         $message = $this->getExampleThread($client)->getMessages()[0];
 
         $updated = $message->reply("Sure, it does X.");
@@ -76,7 +76,7 @@ class ThreadMessageTest extends ClientTestCase
 
     public function testReplyPrivately(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
         $message = $this->getExampleThread($client)->getMessages()[0];
 
         $message->reply("Internal note", true);

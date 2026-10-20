@@ -11,7 +11,7 @@ use Aternos\ModrinthApi\Tests\Unit\Client\ClientTestCase;
 
 class VersionTest extends ClientTestCase
 {
-    protected function getExampleVersionModel(string $fixture = "get_version_response"): VersionModel
+    protected function getExampleVersionModel(string $fixture = "getVersion"): VersionModel
     {
         return $this->fixtureModel($fixture, VersionModel::class);
     }
@@ -27,7 +27,7 @@ class VersionTest extends ClientTestCase
 
     public function testFetchProject(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_project_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getProject")]);
         $version = new Version($client, $this->getExampleVersionModel());
 
         $project = $version->fetchProject();
@@ -38,7 +38,7 @@ class VersionTest extends ClientTestCase
 
     public function testFetchAuthor(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_user_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getUser")]);
         $version = new Version($client, $this->getExampleVersionModel());
 
         $author = $version->fetchAuthor();
@@ -67,7 +67,7 @@ class VersionTest extends ClientTestCase
     {
         $version = new Version(
             $this->createClient(),
-            $this->getExampleVersionModel("get_version_without_dependencies_response")
+            $this->getExampleVersionModel("getVersionWithoutDependencies")
         );
 
         $this->assertSame([], $version->getDependencies());

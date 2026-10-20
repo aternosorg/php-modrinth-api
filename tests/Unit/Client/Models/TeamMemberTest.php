@@ -11,7 +11,7 @@ class TeamMemberTest extends ClientTestCase
 {
     protected function getExampleTeamMemberModel(): TeamMemberModel
     {
-        return $this->fixtureModel("get_team_members_response", TeamMemberModel::class . "[]")[0];
+        return $this->fixtureModel("getTeamMembers", TeamMemberModel::class . "[]")[0];
     }
 
     public function testConstructorCopiesTheModelData(): void
@@ -38,7 +38,7 @@ class TeamMemberTest extends ClientTestCase
 
     public function testFetchTeamMembers(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_team_members_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getTeamMembers")]);
         $member = new TeamMember($client, $this->getExampleTeamMemberModel());
 
         $members = $member->fetchTeamMembers();
@@ -51,7 +51,7 @@ class TeamMemberTest extends ClientTestCase
     public function testGetUserCanFetchTheUsersProjects(): void
     {
         $client = $this->createClient([
-            $this->jsonResponse([$this->fixtureData("get_project_response")]),
+            $this->jsonResponse([$this->fixtureData("getProject")]),
         ]);
         $member = new TeamMember($client, $this->getExampleTeamMemberModel());
 
