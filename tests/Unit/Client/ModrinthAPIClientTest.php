@@ -28,12 +28,17 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 class ModrinthAPIClientTest extends ClientTestCase
 {
-    public function testConstructorUsesDefaultConfiguration(): void
+    public function testConstructorDoesNotChangeDefaultConfiguration(): void
     {
-        $client = new ModrinthAPIClient();
+        $defaultConfiguration = Configuration::getDefaultConfiguration();
+        $defaultApiKey = $defaultConfiguration->getApiKey("Authorization");
+        $defaultUserAgent = $defaultConfiguration->getUserAgent();
 
-        $this->assertInstanceOf(ModrinthAPIClient::class, $client);
-        $this->assertEquals(ModrinthAPIClient::getDefaultUserAgent(), Configuration::getDefaultConfiguration()->getUserAgent());
+        $client = new ModrinthAPIClient(static::API_TOKEN);
+        $client->setUserAgent("test-agent/1.0");
+
+        $this->assertSame($defaultApiKey, $defaultConfiguration->getApiKey("Authorization"));
+        $this->assertSame($defaultUserAgent, $defaultConfiguration->getUserAgent());
     }
 
     public function testGetLibraryVersionReturnsInstalledVersion(): void
@@ -65,25 +70,41 @@ class ModrinthAPIClientTest extends ClientTestCase
     }
 
     /**
-     * Configuration::getDefaultConfiguration() is a process wide singleton, so clients
-     * created without an explicit configuration share one. Changing the token or user
-     * agent of one of them therefore also changes it for the others.
+     * Clients created without an explicit configuration must not share one,
+     * otherwise setting the API token or user agent of one client would change it for all others.
+     * A client without a token would even remove the token of every other client.
+     *
+     * @throws ApiException
      */
-    public function testClientsWithoutExplicitConfigurationShareOne(): void
+    public function testClientsWithoutExplicitConfigurationDoNotShareOne(): void
     {
-        $first = new ModrinthAPIClient();
-        $second = new ModrinthAPIClient();
-
+        $firstRequests = [];
+        $secondRequests = [];
+        $first = new ModrinthAPIClient("first-api-token", null, $this->createHttpClient($firstRequests));
+        $second = new ModrinthAPIClient("second-api-token", null, $this->createHttpClient($secondRequests));
+        // with a shared configuration, this would remove the token of both clients above
+        new ModrinthAPIClient();
         $first->setUserAgent("first-agent/1.0");
-        $this->assertEquals("first-agent/1.0", Configuration::getDefaultConfiguration()->getUserAgent());
 
-        $second->setUserAgent("second-agent/1.0");
-        $this->assertEquals("second-agent/1.0", Configuration::getDefaultConfiguration()->getUserAgent());
+        $first->getCurrentUser();
+        $second->getCurrentUser();
 
-        // reset the shared configuration so that it cannot affect other tests
-        Configuration::getDefaultConfiguration()
-            ->setUserAgent(ModrinthAPIClient::getDefaultUserAgent())
-            ->setApiKey("Authorization", null);
+        $this->assertEquals("first-api-token", $firstRequests[0]['request']->getHeaderLine("Authorization"));
+        $this->assertEquals("first-agent/1.0", $firstRequests[0]['request']->getHeaderLine("User-Agent"));
+        $this->assertEquals("second-api-token", $secondRequests[0]['request']->getHeaderLine("Authorization"));
+        $this->assertEquals(ModrinthAPIClient::getDefaultUserAgent(), $secondRequests[0]['request']->getHeaderLine("User-Agent"));
+    }
+
+    /**
+     * Create an HTTP client that answers with the user fixture and records its requests in $requests
+     * @param array $requests
+     * @return Client
+     */
+    private function createHttpClient(array &$requests): Client
+    {
+        $stack = HandlerStack::create(new MockHandler([$this->fixtureResponse("get_user_response")]));
+        $stack->push(Middleware::history($requests));
+        return new Client(['handler' => $stack]);
     }
 
     public function testExplicitConfigurationIsNotShared(): void
