@@ -23,7 +23,7 @@ class ReportTest extends ClientTestCase
     protected function getExampleReportModel(string $itemType = "project", string $itemId = "VPo0otUH"): ReportModel
     {
         return new ReportModel(array_merge(
-            $this->fixtureData("get_report_response"),
+            $this->fixtureData("getReport"),
             ["item_type" => $itemType, "item_id" => $itemId],
         ));
     }
@@ -58,7 +58,7 @@ class ReportTest extends ClientTestCase
 
     public function testFetchProject(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_project_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getProject")]);
         $report = new Report($client, $this->getExampleReportModel("project", "mOgUt4GM"));
 
         $this->assertInstanceOf(Project::class, $report->fetchProject());
@@ -76,7 +76,7 @@ class ReportTest extends ClientTestCase
 
     public function testFetchUser(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_user_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getUser")]);
         $report = new Report($client, $this->getExampleReportModel("user", "Dc7EYhxG"));
 
         $this->assertInstanceOf(User::class, $report->fetchUser());
@@ -94,7 +94,7 @@ class ReportTest extends ClientTestCase
 
     public function testFetchVersion(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_version_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getVersion")]);
         $report = new Report($client, $this->getExampleReportModel("version", "moYTqMH3"));
 
         $this->assertInstanceOf(Version::class, $report->fetchVersion());
@@ -112,7 +112,7 @@ class ReportTest extends ClientTestCase
 
     public function testFetchThread(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
         $report = new Report($client, $this->getExampleReportModel());
 
         $thread = $report->fetchThread();

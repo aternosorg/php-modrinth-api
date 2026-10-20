@@ -18,7 +18,7 @@ class ProjectDependenciesTest extends TestCase
     public function testGetUserReturnsCorrectUser(): void
     {
         $handler = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_project_dependencies_response.json"))
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getDependencies.json"))
         ]);
         $client = new ModrinthAPIClient(null, null, new Client(['handler' => HandlerStack::create($handler)]));
 
@@ -56,7 +56,7 @@ class ProjectDependenciesTest extends TestCase
 
     protected function getExampleProjectDependencyListModel(): \Aternos\ModrinthApi\Model\ProjectDependencyList
     {
-        $json = json_decode(file_get_contents(__DIR__ . "/../Fixtures/get_project_dependencies_response.json"), true);
+        $json = json_decode(file_get_contents(__DIR__ . "/../Fixtures/getDependencies.json"), true);
         $projects = array_map(fn($element) => new \Aternos\ModrinthApi\Model\Project($element), $json["projects"]);
         $versions = array_map(fn($element) => new \Aternos\ModrinthApi\Model\Version($element), $json["versions"]);
         return (new \Aternos\ModrinthApi\Model\ProjectDependencyList())

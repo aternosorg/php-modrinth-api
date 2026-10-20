@@ -14,7 +14,7 @@ use GuzzleHttp\Psr7\Response;
 
 class ThreadTest extends ClientTestCase
 {
-    protected function getExampleThreadModel(string $fixture = "get_thread_response"): ThreadModel
+    protected function getExampleThreadModel(string $fixture = "getThread"): ThreadModel
     {
         return $this->fixtureModel($fixture, ThreadModel::class);
     }
@@ -31,7 +31,7 @@ class ThreadTest extends ClientTestCase
 
     public function testFetchProject(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_project_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getProject")]);
         $thread = new Thread($client, $this->getExampleThreadModel());
 
         $this->assertInstanceOf(Project::class, $thread->fetchProject());
@@ -41,7 +41,7 @@ class ThreadTest extends ClientTestCase
     public function testFetchProjectReturnsNullWithoutProjectId(): void
     {
         $client = $this->createAuthenticatedClient();
-        $thread = new Thread($client, $this->getExampleThreadModel("get_thread_without_references_response"));
+        $thread = new Thread($client, $this->getExampleThreadModel("getThreadWithoutReferences"));
 
         $this->assertNull($thread->fetchProject());
         $this->assertRequestCount(0);
@@ -49,7 +49,7 @@ class ThreadTest extends ClientTestCase
 
     public function testFetchReport(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_report_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getReport")]);
         $thread = new Thread($client, $this->getExampleThreadModel());
 
         $report = $thread->fetchReport();
@@ -61,7 +61,7 @@ class ThreadTest extends ClientTestCase
     public function testFetchReportReturnsNullWithoutReportId(): void
     {
         $client = $this->createAuthenticatedClient();
-        $thread = new Thread($client, $this->getExampleThreadModel("get_thread_without_references_response"));
+        $thread = new Thread($client, $this->getExampleThreadModel("getThreadWithoutReferences"));
 
         $this->assertNull($thread->fetchReport());
         $this->assertRequestCount(0);
@@ -85,7 +85,7 @@ class ThreadTest extends ClientTestCase
     {
         $thread = new Thread(
             $this->createClient(),
-            $this->getExampleThreadModel("get_thread_without_references_response")
+            $this->getExampleThreadModel("getThreadWithoutReferences")
         );
 
         $this->assertSame([], $thread->getMessages());
@@ -108,7 +108,7 @@ class ThreadTest extends ClientTestCase
     {
         $thread = new Thread(
             $this->createClient(),
-            $this->getExampleThreadModel("get_thread_without_references_response")
+            $this->getExampleThreadModel("getThreadWithoutReferences")
         );
 
         $this->assertSame([], $thread->getMembers());
@@ -116,7 +116,7 @@ class ThreadTest extends ClientTestCase
 
     public function testSendMessage(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
         $thread = new Thread($client, $this->getExampleThreadModel());
 
         $updated = $thread->sendMessage(

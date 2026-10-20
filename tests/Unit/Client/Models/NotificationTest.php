@@ -16,8 +16,8 @@ class NotificationTest extends TestCase
     {
         // Here we must mock the client, because it requests the user from the API to get all details
         $handler = new MockHandler([
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_user_response.json")),
-            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/get_user_response.json"))
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getUser.json")),
+            new Response(200, [], file_get_contents(__DIR__ . "/../Fixtures/getUser.json"))
         ]);
         $client = new ModrinthAPIClient(null, null, new Client(['handler' => HandlerStack::create($handler)]));
 
@@ -29,7 +29,7 @@ class NotificationTest extends TestCase
 
     protected function getExampleNotificationModel(): \Aternos\ModrinthApi\Model\Notification
     {
-        $json = json_decode(file_get_contents(__DIR__ . "/../Fixtures/get_notification_response.json"), true);
+        $json = json_decode(file_get_contents(__DIR__ . "/../Fixtures/getNotification.json"), true);
         return new \Aternos\ModrinthApi\Model\Notification($json);
     }
 }

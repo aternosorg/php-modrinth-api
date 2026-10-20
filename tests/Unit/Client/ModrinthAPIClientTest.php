@@ -60,7 +60,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testDefaultUserAgentIsSentWithRequests(): void
     {
-        $responses = [$this->fixtureResponse("get_project_response")];
+        $responses = [$this->fixtureResponse("getProject")];
         $stack = HandlerStack::create(new MockHandler($responses));
         $stack->push(Middleware::history($this->requests));
         $client = new ModrinthAPIClient(null, null, new Client(['handler' => $stack]));
@@ -102,7 +102,7 @@ class ModrinthAPIClientTest extends ClientTestCase
      */
     private function createHttpClient(array &$requests): Client
     {
-        $stack = HandlerStack::create(new MockHandler([$this->fixtureResponse("get_user_response")]));
+        $stack = HandlerStack::create(new MockHandler([$this->fixtureResponse("getUser")]));
         $stack->push(Middleware::history($requests));
         return new Client(['handler' => $stack]);
     }
@@ -152,7 +152,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSetUserAgentIsSentWithRequests(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_project_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getProject")]);
         $this->assertSame($client, $client->setUserAgent("test-agent/1.0"));
 
         $client->getProject("modmenu");
@@ -161,7 +161,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSetApiTokenIsSentWithRequests(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_user_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getUser")]);
         $this->assertSame($client, $client->setApiToken(static::API_TOKEN));
 
         $client->getCurrentUser();
@@ -170,7 +170,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSetApiTokenToNullRemovesAuthentication(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_project_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getProject")]);
         $this->assertSame($client, $client->setApiToken(null));
 
         $client->getProject("modmenu");
@@ -180,7 +180,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testSetHttpClientReplacesTheHttpClient(): void
     {
         $client = new ModrinthAPIClient(null, new Configuration());
-        $handler = new MockHandler([$this->fixtureResponse("get_project_response")]);
+        $handler = new MockHandler([$this->fixtureResponse("getProject")]);
         $stack = HandlerStack::create($handler);
 
         $this->assertSame($client, $client->setHttpClient(new Client(["handler" => $stack])));
@@ -235,7 +235,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetLatestVersionFromHashSendsVersionTypes(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_version_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getVersion")]);
 
         $client->getLatestVersionFromHash(
             "5952253d61e199e82eb852c5824c3981b29b209d",
@@ -255,7 +255,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetLatestVersionFromHashOmitsVersionTypesByDefault(): void
     {
-        $client = $this->createClient([$this->fixtureResponse("get_version_response")]);
+        $client = $this->createClient([$this->fixtureResponse("getVersion")]);
 
         $client->getLatestVersionFromHash("abc", ["spigot"], ["1.20.1"]);
 
@@ -309,7 +309,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetCurrentUser(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_user_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getUser")]);
 
         $user = $client->getCurrentUser();
         $this->assertInstanceOf(User::class, $user);
@@ -321,7 +321,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testGetFollowedProjects(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_project_response")]),
+            $this->jsonResponse([$this->fixtureData("getProject")]),
         ]);
 
         $projects = $client->getFollowedProjects("b1AIbOxO");
@@ -334,7 +334,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetPayoutHistory(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_payout_history_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getPayoutHistory")]);
 
         $history = $client->getPayoutHistory("b1AIbOxO");
         $this->assertInstanceOf(UserPayoutHistory::class, $history);
@@ -346,7 +346,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetNotification(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_notification_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getNotification")]);
 
         $notification = $client->getNotification("UUVVWWXX");
         $this->assertInstanceOf(Notification::class, $notification);
@@ -358,7 +358,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testGetNotifications(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_notification_response")]),
+            $this->jsonResponse([$this->fixtureData("getNotification")]),
         ]);
 
         $notifications = $client->getNotifications(["UUVVWWXX"]);
@@ -371,7 +371,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testGetUserNotifications(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_notification_response")]),
+            $this->jsonResponse([$this->fixtureData("getNotification")]),
         ]);
 
         $notifications = $client->getUserNotifications("b1AIbOxO");
@@ -419,7 +419,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSubmitReport(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_report_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getReport")]);
 
         $report = $client->submitReport("spam", "VPo0otUH", ReportItemType::PROJECT, "This project is spam.");
         $this->assertInstanceOf(Report::class, $report);
@@ -438,7 +438,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testGetOpenReports(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_report_response")]),
+            $this->jsonResponse([$this->fixtureData("getReport")]),
         ]);
 
         $reports = $client->getOpenReports();
@@ -450,7 +450,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetReport(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_report_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getReport")]);
 
         $report = $client->getReport("RepOrt01");
         $this->assertInstanceOf(Report::class, $report);
@@ -462,7 +462,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testGetReports(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_report_response")]),
+            $this->jsonResponse([$this->fixtureData("getReport")]),
         ]);
 
         $reports = $client->getReports(["RepOrt01"]);
@@ -486,7 +486,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testGetThread(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
 
         $thread = $client->getThread("Ba1AaBbC");
         $this->assertInstanceOf(Thread::class, $thread);
@@ -498,7 +498,7 @@ class ModrinthAPIClientTest extends ClientTestCase
     public function testGetThreads(): void
     {
         $client = $this->createAuthenticatedClient([
-            $this->jsonResponse([$this->fixtureData("get_thread_response")]),
+            $this->jsonResponse([$this->fixtureData("getThread")]),
         ]);
 
         $threads = $client->getThreads(["Ba1AaBbC"]);
@@ -509,7 +509,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSendThreadMessage(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
 
         $thread = $client->sendThreadMessage(
             "Ba1AaBbC",
@@ -536,7 +536,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSendThreadMessageOmitsOptionsThatWereNotPassed(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
 
         $client->sendThreadMessage("Ba1AaBbC", ThreadMessageType::TEXT, "Hello there");
 
@@ -548,7 +548,7 @@ class ModrinthAPIClientTest extends ClientTestCase
 
     public function testSendThreadMessageWithoutAnyOptions(): void
     {
-        $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
+        $client = $this->createAuthenticatedClient([$this->fixtureResponse("getThread")]);
 
         $client->sendThreadMessage("Ba1AaBbC", ThreadMessageType::THREAD_CLOSURE);
 
