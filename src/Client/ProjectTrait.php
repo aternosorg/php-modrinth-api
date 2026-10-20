@@ -19,17 +19,19 @@ trait ProjectTrait
     abstract protected function getClient(): ModrinthAPIClient;
 
     /**
-     * Get all dependencies of this project
+     * Fetch all dependencies of this project
+     * This sends a request to the Modrinth API every time it is called.
      * @return ProjectDependencies
      * @throws ApiException
      */
-    public function getDependencies(): ProjectDependencies
+    public function fetchDependencies(): ProjectDependencies
     {
         return $this->getClient()->getProjectDependencies($this->getId());
     }
 
     /**
-     * Get all versions of this project
+     * Fetch all versions of this project
+     * This sends a request to the Modrinth API every time it is called.
      * @param string[]|null $loaders only show versions for any of these loaders
      * @param string[]|null $gameVersions
      * @param bool|null $featured
@@ -48,11 +50,12 @@ trait ProjectTrait
     }
 
     /**
-     * Get the members of this project
+     * Fetch the members of this project
+     * This sends a request to the Modrinth API every time it is called.
      * @return TeamMember[]
      * @throws ApiException
      */
-    public function getMembers(): array
+    public function fetchMembers(): array
     {
         return $this->getClient()->getProjectMembers($this->getId());
     }

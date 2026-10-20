@@ -24,17 +24,19 @@ class SearchProject extends ProjectResult
     }
 
     /**
-     * Fetch the full project from the API
+     * Fetch the full project
+     * This sends a request to the Modrinth API every time it is called.
      * @return Project
      * @throws ApiException
      */
-    public function getFullProject(): Project
+    public function fetchFullProject(): Project
     {
         return $this->client->getProject($this->getProjectId());
     }
 
     /**
-     * Fetch the author of this project from the API.
+     * Fetch the author of this project
+     * This sends a request to the Modrinth API every time it is called.
      *
      * Named differently from the inherited {@link ProjectResult::getAuthor()}, which
      * returns the author's username without requesting anything.

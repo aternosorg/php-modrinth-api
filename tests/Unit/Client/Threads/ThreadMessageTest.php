@@ -37,24 +37,24 @@ class ThreadMessageTest extends ClientTestCase
         $this->assertSame($thread, $thread->getMessages()[0]->getThread());
     }
 
-    public function testGetAuthor(): void
+    public function testFetchAuthor(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_user_response")]);
         $message = $this->getExampleThread($client)->getMessages()[0];
 
-        $author = $message->getAuthor();
+        $author = $message->fetchAuthor();
         $this->assertInstanceOf(User::class, $author);
         $this->assertEquals("Prospector", $author->getUsername());
         $this->assertRequest("GET", "/v2/user/b1AIbOxO");
     }
 
-    public function testGetAuthorReturnsNullWithoutAuthorId(): void
+    public function testFetchAuthorReturnsNullWithoutAuthorId(): void
     {
         $client = $this->createAuthenticatedClient();
         $message = $this->getExampleThread($client)->getMessages()[0];
         $message->setAuthorId(null);
 
-        $this->assertNull($message->getAuthor());
+        $this->assertNull($message->fetchAuthor());
         $this->assertRequestCount(0);
     }
 

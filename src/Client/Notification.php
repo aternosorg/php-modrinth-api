@@ -16,11 +16,12 @@ class Notification extends NotificationModel
     }
 
     /**
-     * Get the user that received the notification
+     * Fetch the user that received the notification
+     * This sends a request to the Modrinth API every time it is called.
      * @return User
      * @throws ApiException
      */
-    public function getUser(): User
+    public function fetchUser(): User
     {
         return $this->client->getUser($this->getUserId());
     }

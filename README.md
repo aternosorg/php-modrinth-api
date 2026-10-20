@@ -8,6 +8,10 @@ and some wrappers around it to improve the usability.
 The generated code can be found in `src/Api` and `src/Model`. It is recommended to use the wrappers in
 `src/Client` instead.
 
+The wrappers like `Project`, `Version` or `User` extend the generated models, so all getters of the models
+can be used directly, e.g. `$project->getTitle()`.
+Methods of the wrappers that send a request to the API start with `fetch`, e.g. `$project->fetchMembers()`.
+
 ## Requirements
 - PHP 8.4.1 or newer
 - PHP extensions: curl, json, mbstring
@@ -88,7 +92,7 @@ $allProjects = $projects->getResultsFromFollowingPages();
 Search results are `SearchProject` objects. They only contain the data returned by the search,
 but you can fetch the full project or the author:
 ```php
-$project = $projects[0]->getFullProject();
+$project = $projects[0]->fetchFullProject();
 $author = $projects[0]->fetchAuthor();
 ```
 
@@ -188,16 +192,16 @@ $versions = $project->fetchProjectVersions();
 $versions = $project->fetchProjectVersions(["paper"], ["1.21"]);
 
 // the members of the project team
-$members = $project->getMembers();
+$members = $project->fetchMembers();
 
 // the dependencies of the project
 // projects can depend on other projects or directly on specific versions
-$dependencies = $project->getDependencies();
+$dependencies = $project->fetchDependencies();
 $dependencyProjects = $dependencies->getProjects();
 $dependencyVersions = $dependencies->getVersions();
 
 // the moderation thread of the project (requires authentication, not available for search results)
-$thread = $project->getThread();
+$thread = $project->fetchThread();
 ```
 
 Note that `$project->getVersions()` is the getter of the generated model and only returns the version ids.
@@ -221,13 +225,13 @@ $versions = $modrinthClient->getVersions(["xzRGr4AC", "EwNN8uNA"]);
 
 The `Version` wrapper provides methods to fetch related data:
 ```php
-$project = $version->getProject();
-$author = $version->getAuthor();
+$project = $version->fetchProject();
+$author = $version->fetchAuthor();
 
 foreach ($version->getDependencies() as $dependency) {
     // a dependency can point to a project, a specific version or both
-    $dependencyProject = $dependency->getProject();
-    $dependencyVersion = $dependency->getVersion();
+    $dependencyProject = $dependency->fetchProject();
+    $dependencyVersion = $dependency->fetchVersion();
 }
 
 // get the download url of the primary file
@@ -275,16 +279,16 @@ $users = $modrinthClient->getUsers(["MpxzqsyW", "Dc7EYhxG"]);
 $user = $modrinthClient->getCurrentUser();
 
 // get the projects of a user
-$projects = $user->getProjects();
+$projects = $user->fetchProjects();
 
 // get the projects a user follows (requires authentication)
-$projects = $user->getFollowedProjects();
+$projects = $user->fetchFollowedProjects();
 
 // get the notifications of a user (requires authentication)
-$notifications = $user->getNotifications();
+$notifications = $user->fetchNotifications();
 
 // get the payout history of a user (requires authentication)
-$history = $user->getPayoutHistory();
+$history = $user->fetchPayoutHistory();
 ```
 
 ## Teams

@@ -17,21 +17,23 @@ class Version extends VersionModel
     }
 
     /**
-     * Fetch the full project from the API
+     * Fetch the project of this version
+     * This sends a request to the Modrinth API every time it is called.
      * @return Project
      * @throws ApiException
      */
-    public function getProject(): Project
+    public function fetchProject(): Project
     {
         return $this->client->getProject($this->getProjectId());
     }
 
     /**
-     * Fetch the user that published this version from the API
+     * Fetch the user that published this version
+     * This sends a request to the Modrinth API every time it is called.
      * @return User
      * @throws ApiException
      */
-    public function getAuthor(): User
+    public function fetchAuthor(): User
     {
         return $this->client->getUser($this->getAuthorId());
     }

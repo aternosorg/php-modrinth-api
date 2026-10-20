@@ -19,11 +19,13 @@ class Thread extends ThreadModel
     }
 
     /**
-     * Fetch the full project from the API if the thread has a project id
+     * Fetch the project of this thread
+     * This sends a request to the Modrinth API every time it is called.
+     * Returns null if the thread has no project id.
      * @return Project|null
      * @throws ApiException
      */
-    public function getProject(): ?Project
+    public function fetchProject(): ?Project
     {
         if ($id = $this->getProjectId()) {
             return $this->client->getProject($id);
@@ -33,11 +35,13 @@ class Thread extends ThreadModel
     }
 
     /**
-     * Fetch the full report from the API if the thread has a report id
+     * Fetch the report of this thread
+     * This sends a request to the Modrinth API every time it is called.
+     * Returns null if the thread has no report id.
      * @return Report|null
      * @throws ApiException
      */
-    public function getReport(): ?Report
+    public function fetchReport(): ?Report
     {
         if ($id = $this->getReportId()) {
             return $this->client->getReport($id);

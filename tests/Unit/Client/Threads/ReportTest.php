@@ -56,66 +56,66 @@ class ReportTest extends ClientTestCase
         );
     }
 
-    public function testGetProject(): void
+    public function testFetchProject(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_project_response")]);
         $report = new Report($client, $this->getExampleReportModel("project", "mOgUt4GM"));
 
-        $this->assertInstanceOf(Project::class, $report->getProject());
+        $this->assertInstanceOf(Project::class, $report->fetchProject());
         $this->assertRequest("GET", "/v2/project/mOgUt4GM");
     }
 
-    public function testGetProjectThrowsForOtherReportTypes(): void
+    public function testFetchProjectThrowsForOtherReportTypes(): void
     {
         $report = new Report($this->createClient(), $this->getExampleReportModel("user"));
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Report is not a project report");
-        $report->getProject();
+        $report->fetchProject();
     }
 
-    public function testGetUser(): void
+    public function testFetchUser(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_user_response")]);
         $report = new Report($client, $this->getExampleReportModel("user", "Dc7EYhxG"));
 
-        $this->assertInstanceOf(User::class, $report->getUser());
+        $this->assertInstanceOf(User::class, $report->fetchUser());
         $this->assertRequest("GET", "/v2/user/Dc7EYhxG");
     }
 
-    public function testGetUserThrowsForOtherReportTypes(): void
+    public function testFetchUserThrowsForOtherReportTypes(): void
     {
         $report = new Report($this->createClient(), $this->getExampleReportModel("project"));
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Report is not a user report");
-        $report->getUser();
+        $report->fetchUser();
     }
 
-    public function testGetVersion(): void
+    public function testFetchVersion(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_version_response")]);
         $report = new Report($client, $this->getExampleReportModel("version", "moYTqMH3"));
 
-        $this->assertInstanceOf(Version::class, $report->getVersion());
+        $this->assertInstanceOf(Version::class, $report->fetchVersion());
         $this->assertRequest("GET", "/v2/version/moYTqMH3");
     }
 
-    public function testGetVersionThrowsForOtherReportTypes(): void
+    public function testFetchVersionThrowsForOtherReportTypes(): void
     {
         $report = new Report($this->createClient(), $this->getExampleReportModel("project"));
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage("Report is not a version report");
-        $report->getVersion();
+        $report->fetchVersion();
     }
 
-    public function testGetThread(): void
+    public function testFetchThread(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
         $report = new Report($client, $this->getExampleReportModel());
 
-        $thread = $report->getThread();
+        $thread = $report->fetchThread();
         $this->assertInstanceOf(Thread::class, $thread);
         $this->assertEquals("Ba1AaBbC", $thread->getId());
         $this->assertRequest("GET", "/v2/thread/Ba1AaBbC");

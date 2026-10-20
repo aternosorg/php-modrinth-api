@@ -31,12 +31,12 @@ class ProjectTest extends ClientTestCase
         $this->assertEquals($model->getTitle(), $project->getTitle());
     }
 
-    public function testGetDependencies(): void
+    public function testFetchDependencies(): void
     {
         $client = $this->createClient([$this->fixtureResponse("get_project_dependencies_response")]);
         $project = new Project($client, $this->getExampleProjectModel());
 
-        $dependencies = $project->getDependencies();
+        $dependencies = $project->fetchDependencies();
         $this->assertInstanceOf(ProjectDependencies::class, $dependencies);
         $this->assertNotEmpty($dependencies->getProjects());
         $this->assertNotEmpty($dependencies->getVersions());
@@ -74,24 +74,24 @@ class ProjectTest extends ClientTestCase
         $this->assertEquals("false", $query["include_changelog"]);
     }
 
-    public function testGetThread(): void
+    public function testFetchThread(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_thread_response")]);
         $project = new Project($client, $this->getExampleProjectModel());
 
-        $thread = $project->getThread();
+        $thread = $project->fetchThread();
         $this->assertInstanceOf(Thread::class, $thread);
         $this->assertEquals("Ba1AaBbC", $thread->getId());
         $this->assertRequest("GET", "/v2/thread/" . $this->getExampleProjectModel()->getThreadId());
         $this->assertRequestAuthenticated();
     }
 
-    public function testGetMembers(): void
+    public function testFetchMembers(): void
     {
         $client = $this->createClient([$this->fixtureResponse("get_team_members_response")]);
         $project = new Project($client, $this->getExampleProjectModel());
 
-        $members = $project->getMembers();
+        $members = $project->fetchMembers();
         $this->assertCount(1, $members);
         $this->assertInstanceOf(TeamMember::class, $members[0]);
         $this->assertEquals("Owner", $members[0]->getRole());

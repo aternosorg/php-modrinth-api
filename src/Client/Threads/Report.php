@@ -29,12 +29,13 @@ class Report extends ReportModel
     }
 
     /**
-     * Fetch the full project from the API if the report is a project report
+     * Fetch the reported project if the report is a project report
+     * This sends a request to the Modrinth API every time it is called.
      * @return Project
      * @throws ApiException
      * @throws Exception
      */
-    public function getProject(): Project
+    public function fetchProject(): Project
     {
         if ($this->getItemTypeEnum() !== ReportItemType::PROJECT) {
             throw new Exception("Report is not a project report");
@@ -44,12 +45,13 @@ class Report extends ReportModel
     }
 
     /**
-     * Fetch the full user from the API if the report is a user report
+     * Fetch the reported user if the report is a user report
+     * This sends a request to the Modrinth API every time it is called.
      * @return User
      * @throws ApiException
      * @throws Exception
      */
-    public function getUser(): User
+    public function fetchUser(): User
     {
         if ($this->getItemTypeEnum() !== ReportItemType::USER) {
             throw new Exception("Report is not a user report");
@@ -59,12 +61,13 @@ class Report extends ReportModel
     }
 
     /**
-     * Fetch the full version from the API if the report is a version report
+     * Fetch the reported version if the report is a version report
+     * This sends a request to the Modrinth API every time it is called.
      * @return Version
      * @throws ApiException
      * @throws Exception
      */
-    public function getVersion(): Version
+    public function fetchVersion(): Version
     {
         if ($this->getItemTypeEnum() !== ReportItemType::VERSION) {
             throw new Exception("Report is not a version report");
@@ -74,11 +77,12 @@ class Report extends ReportModel
     }
 
     /**
-     * Fetch the thread of this report from the API (requires authentication)
+     * Fetch the thread of this report (requires authentication)
+     * This sends a request to the Modrinth API every time it is called.
      * @return Thread
      * @throws ApiException
      */
-    public function getThread(): Thread
+    public function fetchThread(): Thread
     {
         return $this->client->getThread($this->getThreadId());
     }

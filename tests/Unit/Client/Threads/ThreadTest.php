@@ -29,41 +29,41 @@ class ThreadTest extends ClientTestCase
         $this->assertEquals($model->getProjectId(), $thread->getProjectId());
     }
 
-    public function testGetProject(): void
+    public function testFetchProject(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_project_response")]);
         $thread = new Thread($client, $this->getExampleThreadModel());
 
-        $this->assertInstanceOf(Project::class, $thread->getProject());
+        $this->assertInstanceOf(Project::class, $thread->fetchProject());
         $this->assertRequest("GET", "/v2/project/VPo0otUH");
     }
 
-    public function testGetProjectReturnsNullWithoutProjectId(): void
+    public function testFetchProjectReturnsNullWithoutProjectId(): void
     {
         $client = $this->createAuthenticatedClient();
         $thread = new Thread($client, $this->getExampleThreadModel("get_thread_without_references_response"));
 
-        $this->assertNull($thread->getProject());
+        $this->assertNull($thread->fetchProject());
         $this->assertRequestCount(0);
     }
 
-    public function testGetReport(): void
+    public function testFetchReport(): void
     {
         $client = $this->createAuthenticatedClient([$this->fixtureResponse("get_report_response")]);
         $thread = new Thread($client, $this->getExampleThreadModel());
 
-        $report = $thread->getReport();
+        $report = $thread->fetchReport();
         $this->assertInstanceOf(Report::class, $report);
         $this->assertEquals("RepOrt01", $report->getId());
         $this->assertRequest("GET", "/v2/report/RepOrt01");
     }
 
-    public function testGetReportReturnsNullWithoutReportId(): void
+    public function testFetchReportReturnsNullWithoutReportId(): void
     {
         $client = $this->createAuthenticatedClient();
         $thread = new Thread($client, $this->getExampleThreadModel("get_thread_without_references_response"));
 
-        $this->assertNull($thread->getReport());
+        $this->assertNull($thread->fetchReport());
         $this->assertRequestCount(0);
     }
 

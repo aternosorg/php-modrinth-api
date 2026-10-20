@@ -19,14 +19,15 @@ class Project extends ProjectModel
     }
 
     /**
-     * Fetch the moderation thread of this project from the API (requires authentication)
+     * Fetch the moderation thread of this project (requires authentication)
+     * This sends a request to the Modrinth API every time it is called.
      *
      * Not part of {@link ProjectTrait} because search results do not carry a thread id.
      *
      * @return Thread
      * @throws ApiException
      */
-    public function getThread(): Thread
+    public function fetchThread(): Thread
     {
         return $this->client->getThread($this->getThreadId());
     }
